@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/views/home_view.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/theme/retip_theme.dart';
 
 class RetipApp extends StatelessWidget {
@@ -12,7 +14,9 @@ class RetipApp extends StatelessWidget {
       darkTheme: RetipTheme.dark,
       highContrastTheme: RetipTheme.contrastLight,
       highContrastDarkTheme: RetipTheme.contrastDark,
-      home: const Placeholder(),
+      localizationsDelegates: RetipL10n.localizationsDelegates,
+      supportedLocales: RetipL10n.supportedLocales,
+      home: const HomeView(),
     );
   }
 }
