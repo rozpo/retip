@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  go_router: ^14.2.7
   on_audio_query: ^2.9.0
 
 dev_dependencies:
