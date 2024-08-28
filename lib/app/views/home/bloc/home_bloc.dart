@@ -30,8 +30,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final tracks = await GetAllTracks(repository).call();
     final audio = GetIt.instance.get<RetipAudio>();
 
-    await audio.playlistClear();
-    await audio.playlistAddAll(tracks);
+    audio.playlistAddAll(tracks);
 
     emit(HomeIdleState(tracks));
   }
@@ -85,8 +84,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     final audio = GetIt.instance.get<RetipAudio>();
 
-    await audio.playlistClear();
-    await audio.playlistAddAll(tracks);
+    audio.playlistAddAll(tracks);
 
     emit(HomeIdleState(tracks, nextSortType));
   }
