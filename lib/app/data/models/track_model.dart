@@ -6,13 +6,19 @@ class TrackModel extends TrackEntity {
     required super.title,
     required super.album,
     required super.artist,
+    required super.uri,
   });
 
   factory TrackModel.fromSongModel(SongModel data) {
-    return TrackModel._(
-      title: data.title,
-      album: data.album ?? "",
-      artist: data.artist ?? "",
-    );
+    try {
+      return TrackModel._(
+        title: data.title,
+        album: data.album!,
+        artist: data.artist!,
+        uri: Uri.parse(data.uri!),
+      );
+    } catch (e) {
+      throw ArgumentError();
+    }
   }
 }

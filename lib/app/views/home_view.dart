@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:retip/app/data/repositories/on_audio_query_repository.dart';
 import 'package:retip/app/services/cases/get_all_tracks.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/services/repositories/track_repository.dart';
+import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class HomeView extends StatefulWidget {
@@ -56,12 +58,23 @@ class _HomeViewState extends State<HomeView> {
 
           final data = snapshot.requireData;
 
+          final urls = data.map((e) => e.uri).toList();
+
+          final audio = GetIt.instance.get<RetipAudio>();
+
+          audio.playlistAddAll(urls);
+
           return ListView.builder(
             itemCount: data.length,
             itemBuilder: (context, index) {
               final track = data[index];
 
               return ListTile(
+                onTap: () {
+                  audio.stop();
+                  audio.seekToIndex(index);
+                  audio.play();
+                },
                 leading: CircleAvatar(
                   child: Text(track.title[0]),
                 ),
