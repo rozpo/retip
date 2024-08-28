@@ -13,9 +13,9 @@ class TrackModel extends TrackEntity {
     try {
       return TrackModel._(
         title: data.title,
-        album: data.album!,
-        artist: data.artist!,
-        uri: Uri.parse(data.uri!),
+        album: data.album ?? '',
+        artist: data.artist ?? '',
+        uri: Uri.parse(data.uri ?? ''),
       );
     } catch (e) {
       throw ArgumentError();
