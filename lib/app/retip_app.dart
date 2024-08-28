@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
@@ -9,6 +10,7 @@ class RetipApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      showPerformanceOverlay: kProfileMode,
       themeMode: ThemeMode.system,
       theme: RetipTheme.light,
       darkTheme: RetipTheme.dark,

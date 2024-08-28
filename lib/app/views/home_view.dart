@@ -57,12 +57,9 @@ class _HomeViewState extends State<HomeView> {
           }
 
           final data = snapshot.requireData;
-
-          final urls = data.map((e) => e.uri).toList();
-
           final audio = GetIt.instance.get<RetipAudio>();
 
-          audio.playlistAddAll(urls);
+          audio.playlistAddAll(data);
 
           return ListView.builder(
             itemCount: data.length,
@@ -70,10 +67,10 @@ class _HomeViewState extends State<HomeView> {
               final track = data[index];
 
               return ListTile(
-                onTap: () {
-                  audio.stop();
-                  audio.seekToIndex(index);
-                  audio.play();
+                onTap: () async {
+                  await audio.stop();
+                  await audio.seekToIndex(index);
+                  await audio.play();
                 },
                 leading: CircleAvatar(
                   child: Text(track.title[0]),
