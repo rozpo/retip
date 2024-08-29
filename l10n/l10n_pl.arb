@@ -1,7 +1,10 @@
 {
     "@@locale": "pl",
     "@_GLOBAL": {},
+    "allow": "Zezwól",
+    "grantPermission": "Przyznaj uprawnienia dostępu do pamięci, aby zapewnić płynne odtwarzanie muzyki",
+    "openAppSettings": "Otwórz ustawienia aplikacji",
     "retip": "Retip",
-    "helloWorld": "Witaj Świecie!",
+    "storagePermission": "Dostęp do pamięci",
     "@_END": {}
 }

@@ -1,7 +1,10 @@
 {
     "@@locale": "en",
     "@_GLOBAL": {},
+    "allow": "Allow",
+    "grantPermission": "Grant permission to access storage for a seamless music playback experience",
+    "openAppSettings": "Open app settings",
     "retip": "Retip",
-    "helloWorld": "Hello World!",
+    "storagePermission": "Storage access",
     "@_END": {}
 }
