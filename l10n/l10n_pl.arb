@@ -3,8 +3,11 @@
     "@_GLOBAL": {},
     "allow": "Zezwól",
     "grantPermission": "Przyznaj uprawnienia dostępu do pamięci, aby zapewnić płynne odtwarzanie muzyki",
+    "home": "Start",
+    "library": "Biblioteka",
     "openAppSettings": "Otwórz ustawienia aplikacji",
     "retip": "Retip",
+    "search": "Wyszukaj",
     "storagePermission": "Dostęp do pamięci",
     "@_END": {}
 }

@@ -3,8 +3,11 @@
     "@_GLOBAL": {},
     "allow": "Allow",
     "grantPermission": "Grant permission to access storage for a seamless music playback experience",
+    "home": "Home",
+    "library": "Library",
     "openAppSettings": "Open app settings",
     "retip": "Retip",
+    "search": "Search",
     "storagePermission": "Storage access",
     "@_END": {}
 }
