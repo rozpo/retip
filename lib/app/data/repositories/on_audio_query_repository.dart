@@ -12,7 +12,8 @@ class OnAudioQueryRepository implements TrackRepository {
     final tracks = <TrackModel>[];
 
     for (final element in data) {
-      tracks.add(TrackModel.fromSongModel(element));
+      final artwork = await _onAudioQueryProvider.getArtwork(element.id);
+      tracks.add(TrackModel.fromSongModel(element, artwork));
     }
 
     return tracks;

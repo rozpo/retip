@@ -64,13 +64,24 @@ class _HomeViewState extends State<_HomeView> {
                       MaterialPageRoute(
                         builder: (context) => PlayerView(
                           player: GetIt.instance.get<RetipAudio>().player,
+                          track: track,
                         ),
                       ),
                     );
                   },
-                  leading: CircleAvatar(
-                    child: Text(track.title[0]),
-                  ),
+                  leading: track.artwork != null
+                      ? SizedBox.square(
+                          dimension: 50,
+                          child: Image.memory(
+                            track.artwork!,
+                            cacheHeight: 50,
+                            cacheWidth: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : CircleAvatar(
+                          child: Text(track.title[0]),
+                        ),
                   title: Text(track.title),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

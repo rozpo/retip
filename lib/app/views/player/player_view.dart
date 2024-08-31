@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 
 class PlayerView extends StatelessWidget {
+  final TrackEntity track;
+
   final AudioPlayer player;
 
-  const PlayerView({required this.player, super.key});
+  const PlayerView({
+    required this.player,
+    required this.track,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +34,32 @@ class PlayerView extends StatelessWidget {
               dimension: MediaQuery.of(context).size.width / 1.25,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: SvgPicture.asset(
-                  RetipAsset.logo,
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+                child: track.artwork != null
+                    ? Image.memory(
+                        track.artwork!,
+                        width: 500,
+                        height: 500,
+                        fit: BoxFit.cover,
+                      )
+                    : SvgPicture.asset(
+                        RetipAsset.logo,
+                        width: 500,
+                        height: 500,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
             Column(
               children: [
                 Text(
-                  'Comeback Kid',
+                  track.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
-                  'Endless Summer',
+                  track.album,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                const Text('The Midnight'),
+                Text(track.artist),
                 ProgressBar(player: player),
                 const PlaybackButtons(),
               ],
@@ -229,6 +243,7 @@ class _PlayPauseIconState extends State<PlayPauseIcon>
         return IconButton.filled(
           onPressed: () => player.playing ? player.pause() : player.play(),
           icon: AnimatedIcon(
+            size: 32,
             icon: AnimatedIcons.play_pause,
             progress: animation,
           ),

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:on_audio_query/on_audio_query.dart';
 
 class OnAudioQueryProvider {
@@ -9,5 +11,14 @@ class OnAudioQueryProvider {
     }
 
     return await _onAudioQuery.querySongs();
+  }
+
+  Future<Uint8List?> getArtwork(int id) async {
+    return await _onAudioQuery.queryArtwork(
+      id,
+      ArtworkType.AUDIO,
+      size: 500,
+      format: ArtworkFormat.JPEG,
+    );
   }
 }
