@@ -5,6 +5,8 @@ import 'package:retip/app/services/entities/track_entity.dart';
 class RetipAudio {
   final _audioPlayer = AudioPlayer();
 
+  AudioPlayer get player => _audioPlayer;
+
   ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(
     children: [],
   );

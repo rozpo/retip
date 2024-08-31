@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:retip/app/data/repositories/on_audio_query_repository.dart';
+import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'bloc/home_bloc.dart';
@@ -55,7 +58,16 @@ class _HomeViewState extends State<_HomeView> {
                 final track = tracks[index];
 
                 return ListTile(
-                  onTap: () async => bloc.add(HomePlayTrackEvent(index)),
+                  onTap: () async {
+                    bloc.add(HomePlayTrackEvent(index));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PlayerView(
+                          player: GetIt.instance.get<RetipAudio>().player,
+                        ),
+                      ),
+                    );
+                  },
                   leading: CircleAvatar(
                     child: Text(track.title[0]),
                   ),
