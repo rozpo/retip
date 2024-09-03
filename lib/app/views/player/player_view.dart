@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 
 class PlayerView extends StatelessWidget {
-  final TrackEntity track;
 
   final RetipAudio player;
 
   const PlayerView({
     required this.player,
-    required this.track,
     super.key,
   });
 
@@ -247,7 +244,10 @@ class PlaybackButtons extends StatelessWidget {
 }
 
 class PlayPauseIcon extends StatefulWidget {
+  final double size;
+
   const PlayPauseIcon({
+    this.size = 32,
     super.key,
   });
 
@@ -286,7 +286,7 @@ class _PlayPauseIconState extends State<PlayPauseIcon>
         return IconButton.filled(
           onPressed: () => player.playing ? player.pause() : player.play(),
           icon: AnimatedIcon(
-            size: 32,
+            size: widget.size,
             icon: AnimatedIcons.play_pause,
             progress: animation,
           ),
