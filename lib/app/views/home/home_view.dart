@@ -51,6 +51,7 @@ class _HomeViewState extends State<_HomeView> {
         builder: (context, state) {
           if (state is HomeIdleState) {
             final tracks = state.tracks;
+            final player = GetIt.instance.get<RetipAudio>();
 
             return ListView.builder(
               itemCount: tracks.length,
@@ -63,7 +64,7 @@ class _HomeViewState extends State<_HomeView> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => PlayerView(
-                          player: GetIt.instance.get<RetipAudio>().player,
+                          player: GetIt.instance.get<RetipAudio>(),
                           track: track,
                         ),
                       ),
@@ -90,7 +91,19 @@ class _HomeViewState extends State<_HomeView> {
                       Text(track.artist),
                     ],
                   ),
-                  trailing: const Icon(Icons.more_vert),
+                  trailing: StreamBuilder<int?>(
+                    stream: player.currentIndexStream,
+                    builder: (context, snapshot) {
+                      final audioIndex = snapshot.data ?? 0;
+
+                      return index == audioIndex
+                          ?  Icon(
+                              Icons.music_note,
+                              color: Theme.of(context).colorScheme.primary,
+                            )
+                          : const Icon(Icons.more_vert);
+                    },
+                  ),
                 );
               },
             );

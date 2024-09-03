@@ -1,46 +1,55 @@
+import 'dart:io';
+
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 
-class RetipAudio {
-  final _audioPlayer = AudioPlayer();
-
-  AudioPlayer get player => _audioPlayer;
-
+class RetipAudio extends AudioPlayer {
   ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(
     children: [],
   );
 
-  Future<void> play() async => await _audioPlayer.play();
+  List<TrackEntity> tracks = [];
 
-  Future<void> pause() async => await _audioPlayer.pause();
+  ConcatenatingAudioSource get playlist => _playlist;
 
-  Future<void> stop() async => await _audioPlayer.stop();
+  Future<void> next() async => await seekToNext();
 
-  Future<void> next() async => await _audioPlayer.seekToNext();
-
-  Future<void> previous() async => await _audioPlayer.seekToPrevious();
+  Future<void> previous() async => await seekToPrevious();
 
   Future<void> seekToIndex(int index) async {
-    await _audioPlayer.seek(
+    await seek(
       Duration.zero,
       index: index,
     );
   }
 
   Future<Duration?> playlistAddAll(List<TrackEntity> tracks) async {
+    final tmpDir = await getTemporaryDirectory();
     final children = <AudioSource>[];
 
     for (final track in tracks) {
+      String artworkUrl = '';
+
+      if (track.artwork != null) {
+        final file = File('${tmpDir.path}/${track.hashCode}.png');
+        await file.writeAsBytes(track.artwork!);
+        artworkUrl = file.path;
+      }
+
       final mediaItem = MediaItem(
         id: track.hashCode.toString(),
         title: track.title,
         album: track.album,
         artist: track.artist,
+        artUri: artworkUrl.isNotEmpty ? Uri.parse('file://$artworkUrl') : null,
       );
 
       children.add(AudioSource.uri(track.uri, tag: mediaItem));
     }
+
+    this.tracks = tracks;
 
     _playlist = ConcatenatingAudioSource(
       useLazyPreparation: true,
@@ -48,14 +57,15 @@ class RetipAudio {
       children: children,
     );
 
-    return await _audioPlayer.setAudioSource(_playlist);
+    return await setAudioSource(_playlist);
   }
 
   Future<void> playlistClear() async {
     await _playlist.clear();
+    tracks.clear();
   }
 
   Future<void> setShuffleMode(bool enabled) async {
-    await _audioPlayer.setShuffleModeEnabled(enabled);
+    await setShuffleModeEnabled(enabled);
   }
 }

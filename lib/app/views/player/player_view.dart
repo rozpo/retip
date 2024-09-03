@@ -9,7 +9,7 @@ import 'package:retip/core/audio/retip_audio.dart';
 class PlayerView extends StatelessWidget {
   final TrackEntity track;
 
-  final AudioPlayer player;
+  final RetipAudio player;
 
   const PlayerView({
     required this.player,
@@ -30,40 +30,8 @@ class PlayerView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox.square(
-              dimension: MediaQuery.of(context).size.width / 1.25,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: track.artwork != null
-                    ? Image.memory(
-                        track.artwork!,
-                        width: 500,
-                        height: 500,
-                        fit: BoxFit.cover,
-                      )
-                    : SvgPicture.asset(
-                        RetipAsset.logo,
-                        width: 500,
-                        height: 500,
-                        fit: BoxFit.cover,
-                      ),
-              ),
-            ),
-            Column(
-              children: [
-                Text(
-                  track.title,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                Text(
-                  track.album,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Text(track.artist),
-                ProgressBar(player: player),
-                const PlaybackButtons(),
-              ],
-            ),
+            ArtworkWidget(player: player),
+            AudioInfoWidget(player: player),
           ],
         ),
       ),
@@ -71,8 +39,83 @@ class PlayerView extends StatelessWidget {
   }
 }
 
+class ArtworkWidget extends StatelessWidget {
+  const ArtworkWidget({
+    required this.player,
+    super.key,
+  });
+
+  final RetipAudio player;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<int?>(
+      stream: player.currentIndexStream,
+      builder: (context, snapshot) {
+        final index = snapshot.data ?? 0;
+        final track = player.tracks[index];
+
+        return SizedBox.square(
+          dimension: MediaQuery.of(context).size.width / 1.25,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: track.artwork != null
+                ? Image.memory(
+                    track.artwork!,
+                    width: 500,
+                    height: 500,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    RetipAsset.logo,
+                    width: 500,
+                    height: 500,
+                    fit: BoxFit.cover,
+                  ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class AudioInfoWidget extends StatelessWidget {
+  const AudioInfoWidget({
+    super.key,
+    required this.player,
+  });
+
+  final RetipAudio player;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<int?>(
+        stream: player.currentIndexStream,
+        builder: (context, snapshot) {
+          final index = snapshot.data ?? 0;
+          final track = player.tracks[index];
+
+          return Column(
+            children: [
+              Text(
+                track.title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Text(
+                track.album,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(track.artist),
+              ProgressBar(player: player),
+              const PlaybackButtons(),
+            ],
+          );
+        });
+  }
+}
+
 class ProgressBar extends StatelessWidget {
-  final AudioPlayer player;
+  final RetipAudio player;
 
   const ProgressBar({required this.player, super.key});
 
@@ -133,7 +176,7 @@ class PlaybackButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final player = GetIt.instance.get<RetipAudio>().player;
+    final player = GetIt.instance.get<RetipAudio>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -214,7 +257,7 @@ class PlayPauseIcon extends StatefulWidget {
 
 class _PlayPauseIconState extends State<PlayPauseIcon>
     with SingleTickerProviderStateMixin {
-  final player = GetIt.instance.get<RetipAudio>().player;
+  final player = GetIt.instance.get<RetipAudio>();
 
   late AnimationController controller;
   late Animation<double> animation;
