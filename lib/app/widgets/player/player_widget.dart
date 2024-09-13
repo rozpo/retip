@@ -36,13 +36,13 @@ class PlayerWidget extends StatelessWidget {
             Row(
               children: [
                 ArtworkWidget(player: player),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 AudioInfoWidget(player: player),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: const PlayPauseIcon(
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: PlayPauseIcon(
                 size: 24,
               ),
             ),
@@ -67,15 +67,15 @@ class AudioInfoWidget extends StatelessWidget {
         stream: player.currentIndexStream,
         builder: (context, snapshot) {
           final index = snapshot.data ?? 0;
-          final track = player.tracks[index];
+          final track = (index >= 0 && index < player.tracks.length) ? player.tracks[index] : null;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                track.title,
+                track?.title ?? 'Unknown Title',
               ),
-              Text(track.artist),
+              Text(track?.artist ?? 'Unknown Artist'),
             ],
           );
         });
@@ -92,19 +92,19 @@ class ArtworkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = 60.0;
+    const size = 60.0;
 
     return StreamBuilder<int?>(
       stream: player.currentIndexStream,
       builder: (context, snapshot) {
         final index = snapshot.data ?? 0;
-        final track = player.tracks[index];
+        final track = (index >= 0 && index < player.tracks.length) ? player.tracks[index] : null;
 
         return SizedBox.square(
           dimension: size,
-          child: track.artwork != null
+          child: track?.artwork != null
               ? Image.memory(
-                  track.artwork!,
+                  track!.artwork!,
                   width: size,
                   height: size,
                   fit: BoxFit.cover,
