@@ -90,19 +90,19 @@ class AudioInfoWidget extends StatelessWidget {
         stream: player.currentIndexStream,
         builder: (context, snapshot) {
           final index = snapshot.data ?? 0;
-          final track = player.tracks[index];
+          final track = (index >= 0 && index < player.tracks.length) ? player.tracks[index] : null;
 
           return Column(
             children: [
               Text(
-                track.title,
+                track?.title ?? 'Unknown Title',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               Text(
-                track.album,
+                track?.artist ?? 'Unknown Artist',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
-              Text(track.artist),
+              Text(track?.artist ?? 'Unknown Artist'),
               ProgressBar(player: player),
               const PlaybackButtons(),
             ],
