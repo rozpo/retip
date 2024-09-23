@@ -9,5 +9,8 @@
     "retip": "Retip",
     "search": "Search",
     "storagePermission": "Storage access",
+    "unknownTitle": "Unknown Title",
+    "unknownAlbum": "Unknown Album",
+    "unknownArtist": "Unknown Artist",
     "@_END": {}
 }
