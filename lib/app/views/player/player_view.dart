@@ -4,9 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 
 class PlayerView extends StatelessWidget {
-
   final RetipAudio player;
 
   const PlayerView({
@@ -90,19 +90,21 @@ class AudioInfoWidget extends StatelessWidget {
         stream: player.currentIndexStream,
         builder: (context, snapshot) {
           final index = snapshot.data ?? 0;
-          final track = (index >= 0 && index < player.tracks.length) ? player.tracks[index] : null;
+          final track = (index >= 0 && index < player.tracks.length)
+              ? player.tracks[index]
+              : null;
 
           return Column(
             children: [
               Text(
-                track?.title ?? 'Unknown Title',
+                track?.title ?? RetipL10n.of(context).unknownTitle,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               Text(
-                track?.artist ?? 'Unknown Artist',
+                track?.album ?? RetipL10n.of(context).unknownAlbum,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
-              Text(track?.artist ?? 'Unknown Artist'),
+              Text(track?.artist ?? RetipL10n.of(context).unknownArtist),
               ProgressBar(player: player),
               const PlaybackButtons(),
             ],

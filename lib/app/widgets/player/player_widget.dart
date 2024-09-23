@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 
 class PlayerWidget extends StatelessWidget {
   const PlayerWidget({super.key});
@@ -73,9 +74,9 @@ class AudioInfoWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                track?.title ?? 'Unknown Title',
+                track?.title ?? RetipL10n.of(context).unknownTitle,
               ),
-              Text(track?.artist ?? 'Unknown Artist'),
+              Text(track?.artist ?? RetipL10n.of(context).unknownArtist),
             ],
           );
         });
