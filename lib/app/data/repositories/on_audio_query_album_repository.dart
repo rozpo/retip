@@ -12,8 +12,8 @@ class OnAudioQueryAlbumRepository implements AlbumRepository {
     final albums = <AlbumModel>[];
 
     for (final element in data) {
-      final artwork = await _onAudioQueryProvider.getAudioArtwork(element.id);
-      albums.add(AlbumModel.fromSongModel(element, artwork));
+      final artwork = await _onAudioQueryProvider.getAlbumArtwork(element.id);
+      albums.add(AlbumModel.fromAlbumModel(element, artwork));
     }
 
     return albums;

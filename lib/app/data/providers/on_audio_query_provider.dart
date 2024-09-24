@@ -38,4 +38,21 @@ class OnAudioQueryProvider {
       format: ArtworkFormat.JPEG,
     );
   }
+
+  Future<List<ArtistModel>> getAllArtists() async {
+    if (await _onAudioQuery.checkAndRequest() == false) {
+      return [];
+    }
+
+    return await _onAudioQuery.queryArtists();
+  }
+
+  Future<Uint8List?> getArtistArtwork(int id) async {
+    return await _onAudioQuery.queryArtwork(
+      id,
+      ArtworkType.ARTIST,
+      size: 500,
+      format: ArtworkFormat.JPEG,
+    );
+  }
 }

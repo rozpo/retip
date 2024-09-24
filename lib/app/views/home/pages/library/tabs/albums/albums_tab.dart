@@ -30,6 +30,8 @@ class AlbumsTab extends StatelessWidget {
               final album = data[index];
 
               return ListTile(
+                leading:
+                    album.artwork != null ? Image.memory(album.artwork!) : null,
                 title: Text(album.title),
                 subtitle: Text(album.artist),
               );

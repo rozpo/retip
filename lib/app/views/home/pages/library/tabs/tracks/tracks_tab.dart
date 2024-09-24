@@ -30,6 +30,8 @@ class TracksTab extends StatelessWidget {
               final track = data[index];
 
               return ListTile(
+                leading:
+                    track.artwork != null ? Image.memory(track.artwork!) : null,
                 title: Text(track.title),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

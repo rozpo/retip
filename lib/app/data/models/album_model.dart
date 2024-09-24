@@ -10,7 +10,7 @@ class AlbumModel extends AlbumEntity {
     required super.artwork,
   });
 
-  factory AlbumModel.fromSongModel(
+  factory AlbumModel.fromAlbumModel(
     on_audio_query.AlbumModel data,
     Uint8List? artwork,
   ) {
