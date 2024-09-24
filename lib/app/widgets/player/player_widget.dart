@@ -68,7 +68,9 @@ class AudioInfoWidget extends StatelessWidget {
         stream: player.currentIndexStream,
         builder: (context, snapshot) {
           final index = snapshot.data ?? 0;
-          final track = (index >= 0 && index < player.tracks.length) ? player.tracks[index] : null;
+          final track = (index >= 0 && index < player.tracks.length)
+              ? player.tracks[index]
+              : null;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +101,9 @@ class ArtworkWidget extends StatelessWidget {
       stream: player.currentIndexStream,
       builder: (context, snapshot) {
         final index = snapshot.data ?? 0;
-        final track = (index >= 0 && index < player.tracks.length) ? player.tracks[index] : null;
+        final track = (index >= 0 && index < player.tracks.length)
+            ? player.tracks[index]
+            : null;
 
         return SizedBox.square(
           dimension: size,

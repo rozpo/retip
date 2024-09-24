@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:retip/app/data/repositories/on_audio_query_repository.dart';
 import 'package:retip/app/views/home/pages/home/home_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/home/pages/search/search_page.dart';
-import 'package:retip/app/views/player/player_view.dart';
-import 'package:retip/app/widgets/player/player_widget.dart';
-import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'bloc/home_bloc.dart';
