@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/app/data/repositories/on_audio_query_track_repository.dart';
 
 class TracksTab extends StatelessWidget {
   const TracksTab({super.key});
@@ -7,8 +7,41 @@ class TracksTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(RetipL10n.of(context).tracks),
+      body: FutureBuilder(
+        future: OnAudioQueryTrackRepository().getAll(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          }
+
+          final data = snapshot.requireData;
+
+          return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final track = data[index];
+
+              return ListTile(
+                title: Text(track.title),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(track.album),
+                    Text(track.artist),
+                  ],
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

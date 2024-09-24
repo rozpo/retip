@@ -21,6 +21,7 @@ class LibraryPage extends StatelessWidget {
       length: tabs.length,
       child: Scaffold(
         appBar: AppBar(
+          title: Text(RetipL10n.of(context).library),
           bottom: TabBar(tabs: [
             Tab(text: RetipL10n.of(context).artists),
             Tab(text: RetipL10n.of(context).albums),
