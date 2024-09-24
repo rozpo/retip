@@ -76,12 +76,24 @@ class _HomePage extends StatelessWidget {
                             : CircleAvatar(
                                 child: Text(track.title[0]),
                               ),
-                        title: Text(track.title),
+                        title: Text(
+                          track.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(track.album),
-                            Text(track.artist),
+                            Text(
+                              track.album,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              track.artist,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         ),
                         trailing: StreamBuilder<int?>(

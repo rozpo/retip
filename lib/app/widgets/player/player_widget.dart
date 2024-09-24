@@ -34,12 +34,14 @@ class PlayerWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                ArtworkWidget(player: player),
-                const SizedBox(width: 16),
-                AudioInfoWidget(player: player),
-              ],
+            Expanded(
+              child: Row(
+                children: [
+                  ArtworkWidget(player: player),
+                  const SizedBox(width: 16),
+                  Expanded(child: AudioInfoWidget(player: player)),
+                ],
+              ),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -77,8 +79,14 @@ class AudioInfoWidget extends StatelessWidget {
             children: [
               Text(
                 track?.title ?? RetipL10n.of(context).unknownTitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              Text(track?.artist ?? RetipL10n.of(context).unknownArtist),
+              Text(
+                track?.artist ?? RetipL10n.of(context).unknownArtist,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           );
         });

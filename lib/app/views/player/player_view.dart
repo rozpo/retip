@@ -99,12 +99,20 @@ class AudioInfoWidget extends StatelessWidget {
               Text(
                 track?.title ?? RetipL10n.of(context).unknownTitle,
                 style: Theme.of(context).textTheme.titleLarge,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 track?.album ?? RetipL10n.of(context).unknownAlbum,
                 style: Theme.of(context).textTheme.titleMedium,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              Text(track?.artist ?? RetipL10n.of(context).unknownArtist),
+              Text(
+                track?.artist ?? RetipL10n.of(context).unknownArtist,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
               ProgressBar(player: player),
               const PlaybackButtons(),
             ],
