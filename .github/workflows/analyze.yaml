@@ -17,11 +17,11 @@ jobs:
         with:
           channel: stable
 
-      - name: Install dependencies
-        run: dart pub get
-
       - name: Generate l10n
         run: flutter gen-l10n
+
+      - name: Install dependencies
+        run: dart pub get
 
       - name: Check code format
         run: dart format --output=none --set-exit-if-changed .
