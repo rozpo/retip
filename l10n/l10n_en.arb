@@ -12,5 +12,9 @@
     "unknownTitle": "Unknown Title",
     "unknownAlbum": "Unknown Album",
     "unknownArtist": "Unknown Artist",
+    "@_LIBRARY_PAGE": {},
+    "albums": "Albums",
+    "artists": "Artists",
+    "tracks": "Tracks",
     "@_END": {}
 }

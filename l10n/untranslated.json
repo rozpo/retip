@@ -2,6 +2,9 @@
   "pl": [
     "unknownTitle",
     "unknownAlbum",
-    "unknownArtist"
+    "unknownArtist",
+    "albums",
+    "artists",
+    "tracks"
   ]
 }
