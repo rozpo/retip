@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:retip/app/data/repositories/on_audio_query_repository.dart';
 import 'package:retip/app/views/home/bloc/home_bloc.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage2 extends StatelessWidget {
+  const HomePage2({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        final bloc = HomeBloc(repository: OnAudioQueryRepository());
+        return bloc..add(HomeGetTracksEvent());
+      },
+      child: _HomePage(),
+    );
+  }
+}
+
+class _HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<HomeBloc>();
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(RetipL10n.of(context).retip),
+        actions: [
+          IconButton(
+            onPressed: () => bloc.add(HomeSortTracksEvent()),
+            icon: const Icon(Icons.sort),
+          ),
+        ],
+      ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is HomeIdleState) {

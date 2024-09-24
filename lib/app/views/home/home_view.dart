@@ -1,35 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/data/repositories/on_audio_query_repository.dart';
 import 'package:retip/app/views/home/pages/home/home_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/home/pages/search/search_page.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
-import 'bloc/home_bloc.dart';
 import 'widgets/retip_icon.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        final bloc = HomeBloc(repository: OnAudioQueryRepository());
-        return bloc..add(HomeGetTracksEvent());
-      },
-      child: _HomeView(),
-    );
-  }
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeView extends StatefulWidget {
-  @override
-  State<_HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<_HomeView> {
+class _HomeViewState extends State<HomeView> {
   final PageController pageController = PageController();
   int index = 0;
 
@@ -41,24 +25,14 @@ class _HomeViewState extends State<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<HomeBloc>();
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(RetipL10n.of(context).retip),
-        actions: [
-          IconButton(
-            onPressed: () => bloc.add(HomeSortTracksEvent()),
-            icon: const Icon(Icons.sort),
-          ),
-        ],
-      ),
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: const [
-          HomePage(),
+          HomePage2(),
           SearchPage(),
           LibraryPage(),
         ],
