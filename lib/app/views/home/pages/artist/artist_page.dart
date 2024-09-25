@@ -16,12 +16,15 @@ class ArtistPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(artist.name),
       ),
-      body: ListView(
+      body: GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
         children: artist.albums
             .map(
-              (album) => ListTile(
-                title: Text(album.title),
-                subtitle: Text(album.artist),
+              (album) => GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -31,6 +34,29 @@ class ArtistPage extends StatelessWidget {
                     ),
                   );
                 },
+                child: LayoutBuilder(
+                  builder: (context, constraints) => Column(
+                    children: [
+                      SizedBox.square(
+                        child: album.artwork != null
+                            ? Image.memory(
+                                album.artwork!,
+                                fit: BoxFit.cover,
+                              )
+                            : Container(
+                                color: Theme.of(context).colorScheme.primary,
+                                child: Text(
+                                  album.title,
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                ),
+                              ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             )
             .toList(),
