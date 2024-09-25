@@ -15,6 +15,16 @@ class ArtistPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(artist.name),
       ),
+      body: ListView(
+        children: artist.albums
+            .map(
+              (album) => ListTile(
+                title: Text(album.title),
+                subtitle: Text(album.artist),
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }
