@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/data/repositories/on_audio_query_track_repository.dart';
+import 'package:retip/app/views/dev/dev_menu.dart';
 import 'package:retip/app/views/home/bloc/home_bloc.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
@@ -36,6 +38,17 @@ class _HomePage extends StatelessWidget {
             onPressed: () => bloc.add(HomeSortTracksEvent()),
             icon: const Icon(Icons.sort),
           ),
+          const VerticalDivider(),
+          if (kReleaseMode == false) ...[
+            IconButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DevMenu(),
+                ),
+              ),
+              icon: const Icon(Icons.developer_board),
+            ),
+          ]
         ],
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
