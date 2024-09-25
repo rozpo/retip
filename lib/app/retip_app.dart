@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/theme/retip_theme.dart';
@@ -9,6 +10,10 @@ class RetipApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Show additional debug info about UI
+    debugRepaintRainbowEnabled = true;
+    debugInvertOversizedImages = true;
+
     return MaterialApp.router(
       showPerformanceOverlay: kProfileMode,
       themeMode: ThemeMode.system,
