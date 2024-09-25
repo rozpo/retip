@@ -1,0 +1,5 @@
+#!/bin/sh
+
+dart format --output=none --set-exit-if-changed .
+
+dart analyze --fatal-infos --fatal-warnings
