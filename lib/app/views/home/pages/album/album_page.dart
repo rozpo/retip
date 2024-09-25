@@ -28,21 +28,19 @@ class AlbumPage extends StatelessWidget {
             subtitle: Text(track.artist),
             onTap: () async {
               final audio = GetIt.instance.get<RetipAudio>();
-              await audio.playlistAddAll(album.tracks);
 
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PlayerView(
+                    player: audio,
+                  ),
+                ),
+              );
+
+              await audio.playlistAddAll(album.tracks);
               await audio.stop();
               await audio.seekToIndex(index);
               await audio.play();
-
-              if (context.mounted) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PlayerView(
-                      player: audio,
-                    ),
-                  ),
-                );
-              }
             },
           );
         },
