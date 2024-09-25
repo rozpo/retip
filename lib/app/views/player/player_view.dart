@@ -17,7 +17,6 @@ class PlayerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const Drawer(),
       appBar: AppBar(
         centerTitle: true,
       ),
