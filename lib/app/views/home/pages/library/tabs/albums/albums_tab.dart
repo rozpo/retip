@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/repositories/on_audio_query_album_repository.dart';
+import 'package:retip/app/views/home/pages/album/album_page.dart';
 
 class AlbumsTab extends StatelessWidget {
   const AlbumsTab({super.key});
@@ -34,6 +35,15 @@ class AlbumsTab extends StatelessWidget {
                     album.artwork != null ? Image.memory(album.artwork!) : null,
                 title: Text(album.title),
                 subtitle: Text(album.artist),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AlbumPage(album: album);
+                      },
+                    ),
+                  );
+                },
               );
             },
           );

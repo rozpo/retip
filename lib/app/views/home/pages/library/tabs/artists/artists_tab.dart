@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/repositories/on_audio_query_artist_repository.dart';
+import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 
 class ArtistsTab extends StatelessWidget {
   const ArtistsTab({super.key});
@@ -35,6 +36,15 @@ class ArtistsTab extends StatelessWidget {
                     : null,
                 title: Text(artist.name),
                 subtitle: Text(artist.name),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ArtistPage(artist: artist);
+                      },
+                    ),
+                  );
+                },
               );
             },
           );
