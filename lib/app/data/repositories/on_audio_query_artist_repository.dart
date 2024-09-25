@@ -18,23 +18,29 @@ class OnAudioQueryArtistRepository implements ArtistRepository {
     final tracks = await _onAudioQueryProvider.getAllTracks();
 
     for (final artist in artists) {
-      final artistAlbums = albums.where((album) => album.artist == artist.artist);
-      final artistArtwork = await _onAudioQueryProvider.getArtistArtwork(artist.id);
+      final artistAlbums =
+          albums.where((album) => album.artist == artist.artist);
+      final artistArtwork =
+          await _onAudioQueryProvider.getArtistArtwork(artist.id);
       final albumsToAdd = <AlbumModel>[];
 
       for (final artistAlbum in artistAlbums) {
-        final albumTracks = tracks.where((track) => track.album == artistAlbum.album);
-        final albumArtwork = await _onAudioQueryProvider.getAlbumArtwork(artistAlbum.id);
+        final albumTracks =
+            tracks.where((track) => track.album == artistAlbum.album);
+        final albumArtwork =
+            await _onAudioQueryProvider.getAlbumArtwork(artistAlbum.id);
         final tracksToAdd = <TrackModel>[];
 
         for (final albumTrack in albumTracks) {
           tracksToAdd.add(TrackModel.fromSongModel(albumTrack, albumArtwork));
         }
 
-        albumsToAdd.add(AlbumModel.fromAlbumModel(artistAlbum, albumArtwork, tracksToAdd));
+        albumsToAdd.add(
+            AlbumModel.fromAlbumModel(artistAlbum, albumArtwork, tracksToAdd));
       }
 
-      result.add(ArtistModel.fromArtistModel(artist, artistArtwork, albumsToAdd));
+      result
+          .add(ArtistModel.fromArtistModel(artist, artistArtwork, albumsToAdd));
     }
 
     return result;
