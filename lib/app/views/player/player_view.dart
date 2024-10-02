@@ -49,13 +49,15 @@ class ArtworkWidget extends StatelessWidget {
       stream: player.currentIndexStream,
       builder: (context, snapshot) {
         final index = snapshot.data ?? 0;
-        final track = player.tracks[index];
+        final track = (index >= 0 && index < player.tracks.length)
+            ? player.tracks[index]
+            : null;
 
         return SizedBox.square(
           dimension: MediaQuery.of(context).size.width / 1.25,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: track.artwork != null
+            child: track != null && track.artwork != null
                 ? Image.memory(
                     track.artwork!,
                     width: 500,
