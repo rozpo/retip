@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/repositories/on_audio_query_artist_repository.dart';
 import 'package:retip/app/views/home/pages/artist/artist_page.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 
 class ArtistsTab extends StatelessWidget {
   const ArtistsTab({super.key});
@@ -24,6 +25,12 @@ class ArtistsTab extends StatelessWidget {
           }
 
           final data = snapshot.requireData;
+
+          if (data.isEmpty) {
+            return Center(
+              child: Text(RetipL10n.of(context).noArtists),
+            );
+          }
 
           return ListView.builder(
             itemCount: data.length,

@@ -16,5 +16,8 @@
     "albums": "Albums",
     "artists": "Artists",
     "tracks": "Tracks",
+    "noAlbums": "No albums found",
+    "noArtists": "No artists found",
+    "noTracks": "No tracks found",
     "@_END": {}
 }

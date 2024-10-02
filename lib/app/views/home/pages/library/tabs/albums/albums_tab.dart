@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/repositories/on_audio_query_album_repository.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 
 class AlbumsTab extends StatelessWidget {
   const AlbumsTab({super.key});
@@ -24,6 +25,12 @@ class AlbumsTab extends StatelessWidget {
           }
 
           final data = snapshot.requireData;
+
+          if (data.isEmpty) {
+            return Center(
+              child: Text(RetipL10n.of(context).noAlbums),
+            );
+          }
 
           return ListView.builder(
             itemCount: data.length,

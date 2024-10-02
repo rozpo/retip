@@ -5,6 +5,9 @@
     "unknownArtist",
     "albums",
     "artists",
-    "tracks"
+    "tracks",
+    "noAlbums",
+    "noArtists",
+    "noTracks"
   ]
 }
