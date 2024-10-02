@@ -7,6 +7,9 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(RetipL10n.of(context).search),
+      ),
       body: Center(
         child: Text(RetipL10n.of(context).search),
       ),
