@@ -1,20 +1,22 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/data/repositories/on_audio_query_track_repository.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/views/dev/dev_menu.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class TracksTab extends StatefulWidget {
-  const TracksTab({super.key});
+class FavouritePage extends StatefulWidget {
+  const FavouritePage({super.key});
 
   @override
-  State<TracksTab> createState() => _TracksTabState();
+  State<FavouritePage> createState() => _FavouritePageState();
 }
 
-class _TracksTabState extends State<TracksTab> {
+class _FavouritePageState extends State<FavouritePage> {
   late final Future<List<TrackEntity>> future;
 
   @override
@@ -26,6 +28,21 @@ class _TracksTabState extends State<TracksTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(RetipL10n.of(context).favourite),
+        actions: [
+          if (kReleaseMode == false) ...[
+            IconButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DevMenu(),
+                ),
+              ),
+              icon: const Icon(Icons.developer_board),
+            ),
+          ]
+        ],
+      ),
       body: FutureBuilder(
         future: future,
         builder: (context, snapshot) {
@@ -52,11 +69,14 @@ class _TracksTabState extends State<TracksTab> {
           final prefs = GetIt.I.get<SharedPreferences>();
           final favouriteTracks = prefs.getStringList('favourite_tracks') ?? [];
 
+          final listOfFavouriteTracks = data.where((track) {
+            return favouriteTracks.contains(track.id.toString());
+          }).toList();
+
           return ListView.builder(
-            itemCount: data.length,
+            itemCount: listOfFavouriteTracks.length,
             itemBuilder: (context, index) {
-              final track = data[index];
-              track.isFavourite = favouriteTracks.contains(track.id.toString());
+              final track = listOfFavouriteTracks[index];
 
               return ListTile(
                 leading:
@@ -69,23 +89,6 @@ class _TracksTabState extends State<TracksTab> {
                     Text(track.artist),
                   ],
                 ),
-                trailing: IconButton(
-                  onPressed: () async {
-                    if (track.isFavourite) {
-                      favouriteTracks.remove(track.id.toString());
-                    } else {
-                      favouriteTracks.add(track.id.toString());
-                    }
-
-                    await prefs.setStringList(
-                        'favourite_tracks', favouriteTracks);
-
-                    setState(() {});
-                  },
-                  icon: Icon(
-                    track.isFavourite ? Icons.favorite : Icons.favorite_border,
-                  ),
-                ),
                 onTap: () async {
                   final audio = GetIt.instance.get<RetipAudio>();
 
@@ -97,7 +100,7 @@ class _TracksTabState extends State<TracksTab> {
                     ),
                   );
 
-                  await audio.playlistAddAll(data);
+                  await audio.playlistAddAll(listOfFavouriteTracks);
                   await audio.stop();
                   await audio.seekToIndex(index);
                   await audio.play();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/views/home/pages/home/home_page.dart';
+import 'package:retip/app/views/home/pages/favourite/favourite_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/home/pages/search/search_page.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -32,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: const [
-          HomePage2(),
+          FavouritePage(),
           SearchPage(),
           LibraryPage(),
         ],

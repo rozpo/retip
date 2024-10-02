@@ -1,13 +1,17 @@
 import 'dart:typed_data';
 
 abstract class TrackEntity {
+  final int id;
   final String title;
   final String album;
   final String artist;
   final Uri uri;
   final Uint8List? artwork;
 
+  bool isFavourite = false;
+
   TrackEntity({
+    required this.id,
     required this.title,
     required this.album,
     required this.artist,
