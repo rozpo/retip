@@ -17,13 +17,8 @@ class FavouritePage extends StatefulWidget {
 }
 
 class _FavouritePageState extends State<FavouritePage> {
-  late final Future<List<TrackEntity>> future;
-
-  @override
-  void initState() {
-    future = OnAudioQueryTrackRepository().getAll();
-    super.initState();
-  }
+  static Future<List<TrackEntity>> future =
+      OnAudioQueryTrackRepository().getAll();
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +83,17 @@ class _FavouritePageState extends State<FavouritePage> {
                     Text(track.album),
                     Text(track.artist),
                   ],
+                ),
+                trailing: IconButton(
+                  onPressed: () async {
+                    favouriteTracks.remove(track.id.toString());
+
+                    await prefs.setStringList(
+                        'favourite_tracks', favouriteTracks);
+
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.delete),
                 ),
                 onTap: () async {
                   final audio = GetIt.instance.get<RetipAudio>();

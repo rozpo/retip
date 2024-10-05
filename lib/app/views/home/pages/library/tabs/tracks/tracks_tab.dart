@@ -15,13 +15,8 @@ class TracksTab extends StatefulWidget {
 }
 
 class _TracksTabState extends State<TracksTab> {
-  late final Future<List<TrackEntity>> future;
-
-  @override
-  void initState() {
-    future = OnAudioQueryTrackRepository().getAll();
-    super.initState();
-  }
+  static Future<List<TrackEntity>> future =
+      OnAudioQueryTrackRepository().getAll();
 
   @override
   Widget build(BuildContext context) {

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/repositories/on_audio_query_album_repository.dart';
+import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class AlbumsTab extends StatelessWidget {
   const AlbumsTab({super.key});
 
+  static Future<List<AlbumEntity>> future =
+      OnAudioQueryAlbumRepository().getAll();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: OnAudioQueryAlbumRepository().getAll(),
+        future: future,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(
