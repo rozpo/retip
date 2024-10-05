@@ -22,6 +22,23 @@ class AlbumPage extends StatefulWidget {
 class _AlbumPageState extends State<AlbumPage> {
   @override
   Widget build(BuildContext context) {
+    widget.album.tracks.sort(
+      (a, b) {
+        final indexA = a.index;
+        final indexB = b.index;
+
+        if (indexA == null && indexB == null) {
+          return 0;
+        } else if (indexA == null) {
+          return -1;
+        } else if (indexB == null) {
+          return 1;
+        }
+
+        return indexA.compareTo(indexB);
+      },
+    );
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -56,6 +73,7 @@ class _AlbumPageState extends State<AlbumPage> {
               track.isFavourite = favouriteTracks.contains(track.id.toString());
 
               return ListTile(
+                leading: Text(track.index.toString().padLeft(2, '0')),
                 title: Text(track.title),
                 subtitle: Text(track.artist),
                 trailing: IconButton(

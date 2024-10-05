@@ -11,6 +11,7 @@ class TrackModel extends TrackEntity {
     required super.artist,
     required super.uri,
     required super.artwork,
+    super.index,
   });
 
   factory TrackModel.fromSongModel(SongModel data, Uint8List? artwork) {
@@ -22,6 +23,7 @@ class TrackModel extends TrackEntity {
         artist: data.artist ?? '',
         uri: Uri.parse(data.uri ?? ''),
         artwork: artwork,
+        index: data.track,
       );
     } catch (e) {
       throw ArgumentError();

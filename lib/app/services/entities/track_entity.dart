@@ -7,6 +7,7 @@ abstract class TrackEntity {
   final String artist;
   final Uri uri;
   final Uint8List? artwork;
+  final int? index;
 
   bool isFavourite = false;
 
@@ -17,5 +18,6 @@ abstract class TrackEntity {
     required this.artist,
     required this.uri,
     required this.artwork,
+    this.index,
   });
 }
