@@ -68,4 +68,8 @@ class RetipAudio extends AudioPlayer {
   Future<void> setShuffleMode(bool enabled) async {
     await setShuffleModeEnabled(enabled);
   }
+
+  bool get showMiniplayer {
+    return playerState.processingState == ProcessingState.ready;
+  }
 }

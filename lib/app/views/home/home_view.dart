@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/home/pages/favourite/favourite_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/home/pages/search/search_page.dart';
+import 'package:retip/app/widgets/player/player_widget.dart';
+import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'widgets/retip_icon.dart';
@@ -26,15 +29,32 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final player = GetIt.I.get<RetipAudio>();
 
     return Scaffold(
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: pageController,
-        children: const [
-          FavouritePage(),
-          SearchPage(),
-          LibraryPage(),
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: pageController,
+              children: const [
+                FavouritePage(),
+                SearchPage(),
+                LibraryPage(),
+              ],
+            ),
+          ),
+          StreamBuilder(
+            stream: player.playerStateStream,
+            builder: (context, snapshot) {
+              if (player.showMiniplayer) {
+                return const PlayerWidget();
+              }
+
+              return const SizedBox();
+            },
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
