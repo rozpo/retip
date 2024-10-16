@@ -41,9 +41,18 @@ dependencies:
   just_audio: ^0.9.40
   just_audio_background: ^0.0.1-beta.13
   meta: ^1.15.0
-  on_audio_query: ^2.9.0
+  on_audio_query:
+    git:
+      url: https://github.com/rozpo/on_audio_query
+      path: packages/on_audio_query
+      ref: main
   path_provider: ^2.1.4
   shared_preferences: ^2.3.2
+
+# For local development only
+# dependency_overrides:
+#   on_audio_query:
+#     path: ../on_audio_query/packages/on_audio_query
 
 dev_dependencies:
   flutter_test:
