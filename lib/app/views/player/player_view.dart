@@ -5,8 +5,9 @@ import 'package:just_audio/just_audio.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class PlayerView extends StatelessWidget {
+class PlayerView extends StatefulWidget {
   final RetipAudio player;
 
   const PlayerView({
@@ -15,10 +16,61 @@ class PlayerView extends StatelessWidget {
   });
 
   @override
+  State<PlayerView> createState() => _PlayerViewState();
+}
+
+class _PlayerViewState extends State<PlayerView> {
+  @override
   Widget build(BuildContext context) {
+    final prefs = GetIt.I.get<SharedPreferences>();
+    final favouriteTracks = prefs.getStringList('favourite_tracks') ?? [];
+
+    final currentIndex = widget.player.currentIndex;
+
+    final currentTrack =
+        currentIndex != null ? widget.player.tracks[currentIndex] : null;
+
+    if (currentTrack != null) {
+      currentTrack.isFavourite =
+          favouriteTracks.contains(currentTrack.id.toString());
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () async {
+              if (currentTrack != null) {
+                if (currentTrack.isFavourite) {
+                  favouriteTracks.remove(currentTrack.id.toString());
+                } else {
+                  favouriteTracks.add(currentTrack.id.toString());
+                }
+
+                await prefs.setStringList('favourite_tracks', favouriteTracks);
+
+                setState(() {});
+              }
+            },
+            icon: Icon(
+              currentTrack != null && currentTrack.isFavourite
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+            ),
+          ),
+          IconButton(
+            onPressed: () async {
+              await showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return PlaylistBottomSheet(player: widget.player);
+                  });
+
+              setState(() {});
+            },
+            icon: const Icon(Icons.queue_music),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -26,11 +78,68 @@ class PlayerView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ArtworkWidget(player: player),
-            AudioInfoWidget(player: player),
+            ArtworkWidget(player: widget.player),
+            AudioInfoWidget(player: widget.player),
           ],
         ),
       ),
+    );
+  }
+}
+
+class PlaylistBottomSheet extends StatefulWidget {
+  final RetipAudio player;
+  const PlaylistBottomSheet({
+    required this.player,
+    super.key,
+  });
+
+  @override
+  State<PlaylistBottomSheet> createState() => _PlaylistBottomSheetState();
+}
+
+class _PlaylistBottomSheetState extends State<PlaylistBottomSheet> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.builder(
+          itemCount: widget.player.tracks.length,
+          itemBuilder: (context, index) {
+            final prefs = GetIt.I.get<SharedPreferences>();
+            final favouriteTracks =
+                prefs.getStringList('favourite_tracks') ?? [];
+
+            final track = widget.player.tracks[index];
+            track.isFavourite = favouriteTracks.contains(track.id.toString());
+
+            return ListTile(
+              leading: Text(track.index.toString().padLeft(2, '0')),
+              title: Text(track.title),
+              subtitle: Text(track.artist),
+              trailing: IconButton(
+                onPressed: () async {
+                  if (track.isFavourite) {
+                    favouriteTracks.remove(track.id.toString());
+                  } else {
+                    favouriteTracks.add(track.id.toString());
+                  }
+
+                  await prefs.setStringList(
+                      'favourite_tracks', favouriteTracks);
+
+                  setState(() {});
+                },
+                icon: Icon(
+                  track.isFavourite ? Icons.favorite : Icons.favorite_border,
+                ),
+              ),
+              onTap: () async {
+                Navigator.of(context).pop();
+                await widget.player.seekToIndex(index);
+              },
+            );
+          }),
     );
   }
 }
