@@ -86,12 +86,34 @@ class _FavouritePageState extends State<FavouritePage> {
                 ),
                 trailing: IconButton(
                   onPressed: () async {
-                    favouriteTracks.remove(track.id.toString());
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title:
+                            Text(RetipL10n.of(context).alertRemoveFromFavTitle),
+                        content:
+                            Text(RetipL10n.of(context).alertRemoveFromFavMsg),
+                        actions: [
+                          OutlinedButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(RetipL10n.of(context).cancel),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              Navigator.pop(context);
 
-                    await prefs.setStringList(
-                        'favourite_tracks', favouriteTracks);
+                              favouriteTracks.remove(track.id.toString());
 
-                    setState(() {});
+                              await prefs.setStringList(
+                                  'favourite_tracks', favouriteTracks);
+
+                              setState(() {});
+                            },
+                            child: Text(RetipL10n.of(context).remove),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                   icon: const Icon(Icons.delete),
                 ),

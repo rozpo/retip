@@ -1,9 +1,13 @@
 {
   "pl": [
+    "cancel",
     "favourite",
+    "remove",
     "unknownTitle",
     "unknownAlbum",
     "unknownArtist",
+    "alertRemoveFromFavTitle",
+    "alertRemoveFromFavMsg",
     "albums",
     "artists",
     "tracks",
