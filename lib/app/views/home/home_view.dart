@@ -58,6 +58,7 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
         showSelectedLabels: true,
         showUnselectedLabels: true,
         unselectedItemColor: colorScheme.outline,

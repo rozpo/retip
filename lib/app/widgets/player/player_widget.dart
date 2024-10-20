@@ -29,25 +29,55 @@ class PlayerWidget extends StatelessWidget {
         }
       },
       child: Container(
-        color: Theme.of(context).colorScheme.surfaceBright,
+        color: Theme.of(context).colorScheme.surfaceContainer,
         width: double.infinity,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
           children: [
-            Expanded(
-              child: Row(
-                children: [
-                  ArtworkWidget(player: player),
-                  const SizedBox(width: 16),
-                  Expanded(child: AudioInfoWidget(player: player)),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      ArtworkWidget(player: player),
+                      const SizedBox(width: 16),
+                      Expanded(child: AudioInfoWidget(player: player)),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: PlayPauseIcon(
+                    size: 24,
+                  ),
+                ),
+              ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: PlayPauseIcon(
-                size: 24,
-              ),
+            StreamBuilder(
+              stream: player.positionStream,
+              builder: (context, snapshot) {
+                final duration = player.duration?.inSeconds;
+                final progress = player.position.inSeconds;
+
+                return Row(
+                  children: [
+                    Expanded(
+                      flex: progress,
+                      child: Container(
+                        height: 4,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    Expanded(
+                      flex: (duration ?? progress) - progress,
+                      child: Container(
+                        height: 4,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    )
+                  ],
+                );
+              },
             ),
           ],
         ),
