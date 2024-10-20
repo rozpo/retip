@@ -3,9 +3,11 @@ import 'package:retip/app/data/repositories/on_audio_query_album_repository.dart
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/utils.dart';
 
 class AlbumsTab extends StatelessWidget {
-  const AlbumsTab({super.key});
+  final String search;
+  const AlbumsTab({this.search = '', super.key});
 
   static Future<List<AlbumEntity>> future =
       OnAudioQueryAlbumRepository().getAll();
@@ -28,7 +30,10 @@ class AlbumsTab extends StatelessWidget {
             );
           }
 
-          final data = snapshot.requireData;
+          final data = snapshot.requireData
+              .where(
+                  (e) => e.title.toLowerCase().contains(search.toLowerCase()))
+              .toList();
 
           if (data.isEmpty) {
             return Center(
@@ -44,7 +49,7 @@ class AlbumsTab extends StatelessWidget {
               return ListTile(
                 leading:
                     album.artwork != null ? Image.memory(album.artwork!) : null,
-                title: Text(album.title),
+                title: RetipUtils.getQueryText(context, album.title, search),
                 subtitle: Text(album.artist),
                 onTap: () {
                   Navigator.of(context).push(

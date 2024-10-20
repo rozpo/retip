@@ -5,10 +5,12 @@ import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TracksTab extends StatefulWidget {
-  const TracksTab({super.key});
+  final String search;
+  const TracksTab({this.search = '', super.key});
 
   @override
   State<TracksTab> createState() => _TracksTabState();
@@ -36,7 +38,12 @@ class _TracksTabState extends State<TracksTab> {
             );
           }
 
-          final data = snapshot.requireData;
+          final allData = snapshot.requireData;
+
+          final data = snapshot.requireData
+              .where((e) =>
+                  e.title.toLowerCase().contains(widget.search.toLowerCase()))
+              .toList();
 
           if (data.isEmpty) {
             return Center(
@@ -56,7 +63,11 @@ class _TracksTabState extends State<TracksTab> {
               return ListTile(
                 leading:
                     track.artwork != null ? Image.memory(track.artwork!) : null,
-                title: Text(track.title),
+                title: RetipUtils.getQueryText(
+                  context,
+                  track.title,
+                  widget.search,
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -82,6 +93,7 @@ class _TracksTabState extends State<TracksTab> {
                   ),
                 ),
                 onTap: () async {
+                  final albsoluteIndex = allData.indexOf(track);
                   final audio = GetIt.instance.get<RetipAudio>();
 
                   Navigator.of(context).push(
@@ -92,9 +104,9 @@ class _TracksTabState extends State<TracksTab> {
                     ),
                   );
 
-                  await audio.playlistAddAll(data);
+                  await audio.playlistAddAll(allData);
                   await audio.stop();
-                  await audio.seekToIndex(index);
+                  await audio.seekToIndex(albsoluteIndex);
                   await audio.play();
                 },
               );
