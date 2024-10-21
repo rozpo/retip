@@ -72,7 +72,7 @@ class PlayerWidget extends StatelessWidget {
                       flex: (duration ?? progress) - progress,
                       child: Container(
                         height: 4,
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     )
                   ],

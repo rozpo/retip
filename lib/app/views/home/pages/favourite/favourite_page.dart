@@ -115,7 +115,7 @@ class _FavouritePageState extends State<FavouritePage> {
                       ),
                     );
                   },
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(Icons.more_vert),
                 ),
                 onTap: () async {
                   final audio = GetIt.instance.get<RetipAudio>();
