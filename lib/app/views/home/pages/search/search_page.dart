@@ -33,6 +33,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: SearchBar(
+          autoFocus: true,
           hintText: '${RetipL10n.of(context).search}...',
           controller: controller,
           onChanged: (value) async {

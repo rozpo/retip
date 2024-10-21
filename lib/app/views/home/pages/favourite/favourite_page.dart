@@ -17,26 +17,65 @@ class FavouritePage extends StatefulWidget {
 }
 
 class _FavouritePageState extends State<FavouritePage> {
+  final TextEditingController controller = TextEditingController();
+
   static Future<List<TrackEntity>> future =
       OnAudioQueryTrackRepository().getAll();
+
+  bool isSearching = false;
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(RetipL10n.of(context).favourite),
-        actions: [
-          if (kReleaseMode == false) ...[
-            IconButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const DevMenu(),
+        title: isSearching
+            ? SearchBar(
+                autoFocus: true,
+                onChanged: (value) {
+                  setState(() {});
+                },
+                hintText: '${RetipL10n.of(context).search}...',
+                controller: controller,
+                leading: const Icon(Icons.search),
+                trailing: [
+                  IconButton(
+                    onPressed: () {
+                      isSearching = false;
+                      controller.text = '';
+                      setState(() {});
+                    },
+                    icon: const Icon(Icons.close),
+                  )
+                ],
+              )
+            : Text(RetipL10n.of(context).favourite),
+        actions: isSearching
+            ? null
+            : [
+                IconButton(
+                  onPressed: () {
+                    isSearching = true;
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.search),
                 ),
-              ),
-              icon: const Icon(Icons.developer_board),
-            ),
-          ]
-        ],
+                if (kReleaseMode == false) ...[
+                  IconButton(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const DevMenu(),
+                      ),
+                    ),
+                    icon: const Icon(Icons.developer_board),
+                  ),
+                ]
+              ],
       ),
       body: FutureBuilder(
         future: future,
@@ -68,10 +107,15 @@ class _FavouritePageState extends State<FavouritePage> {
             return favouriteTracks.contains(track.id.toString());
           }).toList();
 
+          final displayFavouriteTracks = listOfFavouriteTracks
+              .where((e) =>
+                  e.title.toLowerCase().contains(controller.text.toLowerCase()))
+              .toList();
+
           return ListView.builder(
-            itemCount: listOfFavouriteTracks.length,
+            itemCount: displayFavouriteTracks.length,
             itemBuilder: (context, index) {
-              final track = listOfFavouriteTracks[index];
+              final track = displayFavouriteTracks[index];
 
               return ListTile(
                 leading:
@@ -118,6 +162,7 @@ class _FavouritePageState extends State<FavouritePage> {
                   icon: const Icon(Icons.more_vert),
                 ),
                 onTap: () async {
+                  final absoluteIndex = listOfFavouriteTracks.indexOf(track);
                   final audio = GetIt.instance.get<RetipAudio>();
 
                   Navigator.of(context).push(
@@ -130,7 +175,7 @@ class _FavouritePageState extends State<FavouritePage> {
 
                   await audio.playlistAddAll(listOfFavouriteTracks);
                   await audio.stop();
-                  await audio.seekToIndex(index);
+                  await audio.seekToIndex(absoluteIndex);
                   await audio.play();
                 },
               );
