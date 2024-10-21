@@ -12,4 +12,9 @@ abstract class ArtistEntity {
     required this.artwork,
     required this.albums,
   });
+
+  @override
+  String toString() {
+    return name;
+  }
 }

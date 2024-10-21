@@ -15,4 +15,9 @@ abstract class AlbumEntity {
     required this.artwork,
     required this.tracks,
   });
+
+  @override
+  String toString() {
+    return title;
+  }
 }

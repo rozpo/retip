@@ -1,8 +1,11 @@
 {
   "pl": [
+    "album",
+    "artist",
     "cancel",
     "favourite",
     "remove",
+    "track",
     "unknownTitle",
     "unknownAlbum",
     "unknownArtist",

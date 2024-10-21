@@ -20,4 +20,9 @@ abstract class TrackEntity {
     required this.artwork,
     this.index,
   });
+
+  @override
+  String toString() {
+    return title;
+  }
 }
