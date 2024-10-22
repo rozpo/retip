@@ -2,14 +2,13 @@ import 'package:retip/app/data/models/album_model.dart';
 import 'package:retip/app/data/models/artist_model.dart';
 import 'package:retip/app/data/models/track_model.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
-import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/repositories/artist_repository.dart';
 
 class OnAudioQueryArtistRepository implements ArtistRepository {
   final _onAudioQueryProvider = OnAudioQueryProvider();
 
   @override
-  Future<List<ArtistEntity>> getAll() async {
+  Future<List<ArtistModel>> getAll() async {
     final result = <ArtistModel>[];
 
     // Fetch all raw data
