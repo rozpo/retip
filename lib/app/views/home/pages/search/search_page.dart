@@ -21,11 +21,22 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController controller = TextEditingController();
+  final focusNode = FocusNode();
   final debouncer = Debouncer(const Duration(milliseconds: 500));
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 1)).then(
+      (value) => focusNode.requestFocus(),
+    );
+    super.initState();
+  }
 
   @override
   void dispose() {
     controller.dispose();
+    focusNode.unfocus();
+
     super.dispose();
   }
 
@@ -38,7 +49,8 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: SearchBar(
-          autoFocus: true,
+          focusNode: focusNode,
+          autoFocus: false,
           hintText: '${RetipL10n.of(context).search}...',
           controller: controller,
           onChanged: (value) {
