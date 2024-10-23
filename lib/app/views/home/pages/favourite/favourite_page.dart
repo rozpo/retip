@@ -5,6 +5,7 @@ import 'package:retip/app/data/repositories/on_audio_query_track_repository.dart
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/dev/dev_menu.dart';
 import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/views/search/search_view.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,6 +72,14 @@ class _FavouritePageState extends State<FavouritePage> {
                   icon: const Icon(Icons.search),
                 ),
                 if (kReleaseMode == false) ...[
+                  IconButton(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SearchView(),
+                      ),
+                    ),
+                    icon: const Icon(Icons.saved_search),
+                  ),
                   IconButton(
                     onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(
