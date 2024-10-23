@@ -32,7 +32,7 @@ class _LibraryPageState extends State<LibraryPage> {
         appBar: AppBar(
           title: isSearching
               ? SearchBar(
-                  autoFocus: true,
+                  autoFocus: false,
                   onChanged: (value) {
                     setState(() {});
                   },

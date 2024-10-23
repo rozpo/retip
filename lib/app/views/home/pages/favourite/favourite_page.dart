@@ -36,7 +36,7 @@ class _FavouritePageState extends State<FavouritePage> {
       appBar: AppBar(
         title: isSearching
             ? SearchBar(
-                autoFocus: true,
+                autoFocus: false,
                 onChanged: (value) {
                   setState(() {});
                 },
