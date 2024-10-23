@@ -15,4 +15,12 @@ class Debouncer {
 
     _timer = Timer(delay, callback);
   }
+
+  void cancel(VoidCallback callback) {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+
+    callback.call();
+  }
 }

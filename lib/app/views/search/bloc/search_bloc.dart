@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:retip/app/data/repositories/on_audio_query_artist_repository.dart';
+import 'package:retip/app/services/entities/abstract_entity.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
@@ -9,6 +10,8 @@ part 'search_event.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
+  final List<String> recentSearch = [];
+
   SearchBloc() : super(SearchIdleState()) {
     on<SearchRefreshEvent>(_search);
   }
@@ -49,6 +52,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           }
         }
       }
+    }
+
+    if (recentSearch.any((e) => e.toLowerCase() == event.text.toLowerCase()) ==
+        false) {
+      recentSearch.add(event.text);
+    }
+
+    if (recentSearch.length > 10) {
+      recentSearch.removeAt(0);
     }
 
     if (artists.isEmpty && albums.isEmpty && tracks.isEmpty) {

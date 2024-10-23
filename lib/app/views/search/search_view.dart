@@ -2,36 +2,193 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/debouncer.dart';
+import 'package:retip/core/utils/sizer.dart';
 
 import 'bloc/search_bloc.dart';
 
-class SearchView extends StatelessWidget {
-  SearchView({super.key});
+class SearchView extends StatefulWidget {
+  const SearchView({super.key});
 
-  final Debouncer _debouncer = Debouncer(const Duration(milliseconds: 500));
+  @override
+  State<SearchView> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> {
+  final _debouncer = Debouncer(const Duration(seconds: 1));
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  final bloc = SearchBloc();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SearchBloc(),
+      create: (context) => bloc,
       child: BlocBuilder<SearchBloc, SearchState>(
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
               title: SearchBar(
+                controller: _controller,
+                autoFocus: true,
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Sizer.x1),
+                  ),
+                ),
+                textInputAction: TextInputAction.search,
                 onChanged: (value) {
+                  setState(() {});
+
+                  if (value.isEmpty) {
+                    _debouncer.cancel(
+                      () => bloc.add(SearchRefreshEvent(value)),
+                    );
+                  }
+
                   _debouncer.run(() {
-                    context.read<SearchBloc>().add(SearchRefreshEvent(value));
+                    bloc.add(SearchRefreshEvent(value));
                   });
                 },
                 hintText: RetipL10n.of(context).searchForMusic,
+                trailing: [
+                  _controller.text.isEmpty
+                      ? const IconButton(
+                          onPressed: null,
+                          icon: Icon(Icons.mic),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            _controller.text = '';
+                            setState(() {});
+                            bloc.add(SearchRefreshEvent(''));
+                          },
+                          icon: const Icon(Icons.close),
+                        ),
+                ],
               ),
-              actions: const [
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.mic),
-                ),
-              ],
+            ),
+            body: BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state is SearchSearchingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (state is SearchErrorState) {
+                  return Center(
+                    child: Text(RetipL10n.of(context).noTracks),
+                  );
+                }
+
+                if (state is SearchSuccessState) {
+                  return ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
+                    itemCount: state.mediaLength,
+                    itemBuilder: (context, index) {
+                      Widget preWidget = const SizedBox();
+                      final item = state.media[index];
+
+                      if (index == 0) {
+                        preWidget = Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Sizer.x2,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(item.runtimeType.toString()),
+                              const Expanded(
+                                child: Divider(
+                                  indent: Sizer.x1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
+                        final currentType = state.media[index];
+                        final prevType = state.media[index - 1];
+
+                        if (currentType.runtimeType != prevType.runtimeType) {
+                          preWidget = Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Sizer.x2,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(item.runtimeType.toString()),
+                                const Expanded(
+                                  child: Divider(
+                                    indent: Sizer.x1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      }
+
+                      return Column(
+                        children: [
+                          preWidget,
+                          ListTile(
+                            title: Text(item.header()),
+                            subtitle: Text(item.description()),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+                final list = bloc.recentSearch
+                    .map((e) => ListTile(
+                          title: Text(e),
+                          leading: const Icon(Icons.search),
+                          onTap: () {
+                            _controller.text = e;
+
+                            setState(() {});
+
+                            _debouncer.cancel(
+                              () => bloc.add(SearchRefreshEvent(e)),
+                            );
+                          },
+                        ))
+                    .toList()
+                    .reversed
+                    .toList();
+
+                const header = Padding(
+                  padding: EdgeInsets.only(
+                    left: Sizer.x2,
+                    right: Sizer.x2,
+                    top: Sizer.x2,
+                  ),
+                  child: Row(
+                    children: [
+                      Text('Recent search'),
+                      Expanded(
+                        child: Divider(
+                          indent: Sizer.x1,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+
+                return ListView(
+                  children: [
+                    if (list.isNotEmpty) ...[header],
+                    ...list,
+                  ],
+                );
+              },
             ),
           );
         },

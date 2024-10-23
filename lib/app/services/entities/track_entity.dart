@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
-abstract class TrackEntity {
+import 'package:retip/app/services/entities/abstract_entity.dart';
+
+abstract class TrackEntity extends AbstractEntity {
   final int id;
   final String title;
   final String album;
@@ -24,5 +26,15 @@ abstract class TrackEntity {
   @override
   String toString() {
     return title;
+  }
+
+  @override
+  String header() {
+    return title;
+  }
+
+  @override
+  String description() {
+    return artist;
   }
 }
