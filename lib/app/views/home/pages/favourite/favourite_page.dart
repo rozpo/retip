@@ -75,7 +75,7 @@ class _FavouritePageState extends State<FavouritePage> {
                   IconButton(
                     onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => SearchView(),
+                        builder: (context) => const SearchView(),
                       ),
                     ),
                     icon: const Icon(Icons.saved_search),
