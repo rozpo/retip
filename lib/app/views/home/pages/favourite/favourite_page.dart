@@ -18,6 +18,7 @@ class FavouritePage extends StatefulWidget {
 
 class _FavouritePageState extends State<FavouritePage> {
   final TextEditingController controller = TextEditingController();
+  final FocusNode focusNode = FocusNode();
 
   static Future<List<TrackEntity>> future =
       OnAudioQueryTrackRepository().getAll();
@@ -27,6 +28,7 @@ class _FavouritePageState extends State<FavouritePage> {
   @override
   void dispose() {
     controller.dispose();
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -36,6 +38,7 @@ class _FavouritePageState extends State<FavouritePage> {
       appBar: AppBar(
         title: isSearching
             ? SearchBar(
+                focusNode: focusNode,
                 autoFocus: false,
                 onChanged: (value) {
                   setState(() {});
@@ -48,6 +51,7 @@ class _FavouritePageState extends State<FavouritePage> {
                     onPressed: () {
                       isSearching = false;
                       controller.text = '';
+                      focusNode.unfocus();
                       setState(() {});
                     },
                     icon: const Icon(Icons.close),
@@ -61,6 +65,7 @@ class _FavouritePageState extends State<FavouritePage> {
                 IconButton(
                   onPressed: () {
                     isSearching = true;
+                    focusNode.requestFocus();
                     setState(() {});
                   },
                   icon: const Icon(Icons.search),

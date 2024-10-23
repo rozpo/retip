@@ -9,6 +9,8 @@ import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/debouncer.dart';
+import 'package:retip/core/utils/sizer.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -19,6 +21,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController controller = TextEditingController();
+  final debouncer = Debouncer(const Duration(milliseconds: 500));
 
   @override
   void dispose() {
@@ -27,53 +30,67 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   List media = [];
+  List artists = <ArtistEntity>[];
+  bool searching = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: SearchBar(
-          autoFocus: false,
+          autoFocus: true,
           hintText: '${RetipL10n.of(context).search}...',
           controller: controller,
-          onChanged: (value) async {
-            media.clear();
+          onChanged: (value) {
+            debouncer.run(() async {
+              setState(() {
+                searching = true;
+              });
+              media.clear();
 
-            if (controller.text.isEmpty) {
-              setState(() {});
-              return;
-            }
-
-            final query = controller.text.toLowerCase();
-            final artists = await OnAudioQueryArtistRepository().getAll();
-
-            for (final artist in artists) {
-              if (artist.name.toLowerCase().contains(query)) {
-                media.add(artist);
+              if (controller.text.isEmpty) {
+                setState(() {
+                  searching = false;
+                });
+                return;
               }
 
-              for (final album in artist.albums) {
-                if (album.title.toLowerCase().contains(query)) {
-                  media.add(album);
+              final query = controller.text.toLowerCase();
+              if (artists.isEmpty) {
+                artists = await OnAudioQueryArtistRepository().getAll();
+              }
+
+              for (final artist in artists) {
+                if (artist.name.toLowerCase().contains(query)) {
+                  media.add(artist);
                 }
 
-                for (final track in album.tracks) {
-                  if (track.title.toLowerCase().contains(query)) {
-                    media.add(track);
+                for (final album in artist.albums) {
+                  if (album.title.toLowerCase().contains(query)) {
+                    media.add(album);
+                  }
+
+                  for (final track in album.tracks) {
+                    if (track.title.toLowerCase().contains(query)) {
+                      media.add(track);
+                    }
                   }
                 }
               }
-            }
 
-            setState(() {});
+              setState(() {
+                searching = false;
+              });
+            });
           },
         ),
       ),
-      body: Column(
-        children: [
-          const VerticalSpacer(),
-          Expanded(
-            child: ListView.separated(
+      body: searching
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
               separatorBuilder: (context, index) {
                 return const VerticalSpacer();
               },
@@ -131,9 +148,6 @@ class _SearchPageState extends State<SearchPage> {
                 );
               },
             ),
-          ),
-        ],
-      ),
     );
   }
 }

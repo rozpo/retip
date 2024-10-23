@@ -15,12 +15,14 @@ class LibraryPage extends StatefulWidget {
 
 class _LibraryPageState extends State<LibraryPage> {
   final TextEditingController controller = TextEditingController();
+  final FocusNode focusNode = FocusNode();
 
   bool isSearching = false;
 
   @override
   void dispose() {
     controller.dispose();
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -32,6 +34,7 @@ class _LibraryPageState extends State<LibraryPage> {
         appBar: AppBar(
           title: isSearching
               ? SearchBar(
+                  focusNode: focusNode,
                   autoFocus: false,
                   onChanged: (value) {
                     setState(() {});
@@ -44,6 +47,7 @@ class _LibraryPageState extends State<LibraryPage> {
                       onPressed: () {
                         isSearching = false;
                         controller.text = '';
+                        focusNode.unfocus();
                         setState(() {});
                       },
                       icon: const Icon(Icons.close),
@@ -57,6 +61,7 @@ class _LibraryPageState extends State<LibraryPage> {
                   IconButton(
                     onPressed: () {
                       isSearching = true;
+                      focusNode.requestFocus();
                       setState(() {});
                     },
                     icon: const Icon(Icons.search),
