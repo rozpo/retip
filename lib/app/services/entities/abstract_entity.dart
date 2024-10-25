@@ -1,9 +1,7 @@
-abstract class AbstractEntity {
-  String header() {
-    throw UnimplementedError();
-  }
+import 'package:flutter/material.dart';
 
-  String description() {
+abstract class AbstractEntity {
+  ListTile toListTile(BuildContext context) {
     throw UnimplementedError();
   }
 }

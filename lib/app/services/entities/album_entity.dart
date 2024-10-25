@@ -1,7 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:retip/app/services/entities/abstract_entity.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:flutter/material.dart';
+import 'package:retip/app/views/home/pages/album/album_page.dart';
+import 'package:retip/app/widgets/artwork_widget.dart';
+
+import 'abstract_entity.dart';
+import 'track_entity.dart';
 
 abstract class AlbumEntity extends AbstractEntity {
   final String title;
@@ -23,12 +27,21 @@ abstract class AlbumEntity extends AbstractEntity {
   }
 
   @override
-  String header() {
-    return title;
-  }
-
-  @override
-  String description() {
-    return artist;
+  ListTile toListTile(BuildContext context) {
+    return ListTile(
+      title: Text(title),
+      subtitle: Text(artist),
+      leading: artwork != null ? ArtworkWidget(bytes: artwork) : null,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return AlbumPage(album: this);
+            },
+          ),
+        );
+      },
+    );
   }
 }
