@@ -102,7 +102,7 @@ class _SearchViewState extends State<SearchView> {
                           ),
                           child: Row(
                             children: [
-                              Text(item.runtimeType.toString()),
+                              Text(item.toTypeString(context)),
                               const Expanded(
                                 child: Divider(
                                   indent: Sizer.x1,
@@ -122,7 +122,7 @@ class _SearchViewState extends State<SearchView> {
                             ),
                             child: Row(
                               children: [
-                                Text(item.runtimeType.toString()),
+                                Text(item.toTypeString(context)),
                                 const Expanded(
                                   child: Divider(
                                     indent: Sizer.x1,

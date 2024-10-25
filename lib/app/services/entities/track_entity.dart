@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/player/player_view.dart' hide ArtworkWidget;
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'abstract_entity.dart';
 
@@ -35,10 +36,15 @@ abstract class TrackEntity extends AbstractEntity {
   }
 
   @override
+  String toTypeString(BuildContext context) {
+    return RetipL10n.of(context).tracks;
+  }
+
+  @override
   ListTile toListTile(BuildContext context) {
     return ListTile(
       title: Text(title),
-      subtitle: Text(artist),
+      subtitle: Text('$album\n$artist'),
       leading: artwork != null ? ArtworkWidget(bytes: artwork) : null,
       onTap: () {
         final player = GetIt.I.get<RetipAudio>();
