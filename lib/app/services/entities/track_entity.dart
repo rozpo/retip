@@ -46,17 +46,23 @@ abstract class TrackEntity extends AbstractEntity {
       title: Text(title),
       subtitle: Text('$album\n$artist'),
       leading: artwork != null ? ArtworkWidget(bytes: artwork) : null,
-      onTap: () {
+      onTap: () async {
         final player = GetIt.I.get<RetipAudio>();
 
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return PlayerView(player: player);
-            },
-          ),
-        );
+        await player.stop();
+        await player.playlistAddAll([this]);
+        await player.play();
+
+        if (context.mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return PlayerView(player: player);
+              },
+            ),
+          );
+        }
       },
     );
   }
