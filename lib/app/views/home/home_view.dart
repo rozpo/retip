@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/home/pages/favourite/favourite_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/home/pages/search/search_page.dart';
+import 'package:retip/app/views/search/search_view.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -40,7 +41,7 @@ class _HomeViewState extends State<HomeView> {
               controller: pageController,
               children: const [
                 FavouritePage(),
-                SearchPage(),
+                SearchView(),
                 LibraryPage(),
               ],
             ),
