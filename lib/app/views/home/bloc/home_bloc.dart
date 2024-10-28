@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:retip/app/services/cases/get_all_tracks.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/services/repositories/track_repository.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 
 part 'home_event.dart';
@@ -16,9 +15,7 @@ enum SortType {
 }
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final TrackRepository repository;
-
-  HomeBloc({required this.repository}) : super(HomeInitState()) {
+  HomeBloc() : super(HomeInitState()) {
     on<HomeGetTracksEvent>(load);
     on<HomeSortTracksEvent>(sort);
     on<HomePlayTrackEvent>(play);
@@ -27,7 +24,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> load(HomeGetTracksEvent event, Emitter<HomeState> emit) async {
     emit(HomeInitState());
 
-    final tracks = await GetAllTracks(repository).call();
+    final tracks = await GetAllTracks.call();
     final audio = GetIt.instance.get<RetipAudio>();
 
     audio.playlistAddAll(tracks);

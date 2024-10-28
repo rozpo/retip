@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:retip/app/data/repositories/on_audio_query_artist_repository.dart';
+import 'package:retip/app/services/cases/get_all_artists.dart';
 import 'package:retip/app/services/entities/abstract_entity.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
@@ -29,7 +29,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     // Indicate the searching logic was invoked
     emit(SearchSearchingState());
 
-    final data = await OnAudioQueryArtistRepository().getAll();
+    final data = await GetAllArtists.call();
     final artists = <ArtistEntity>[];
     final albums = <AlbumEntity>[];
     final tracks = <TrackEntity>[];

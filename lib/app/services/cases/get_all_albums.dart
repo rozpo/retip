@@ -1,12 +1,9 @@
+import 'package:get_it/get_it.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
-import 'package:retip/app/services/repositories/album_repository.dart';
+import 'package:retip/app/services/repositories/library_repository.dart';
 
-class GetAllAlbums {
-  final AlbumRepository repository;
-
-  GetAllAlbums(this.repository);
-
-  Future<List<AlbumEntity>> call() async {
-    return repository.getAll();
+mixin GetAllAlbums {
+  static Future<List<AlbumEntity>> call() async {
+    return GetIt.I.get<LibraryRepository>().getAllAlbums();
   }
 }

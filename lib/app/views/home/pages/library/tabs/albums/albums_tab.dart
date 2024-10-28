@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/data/repositories/on_audio_query_album_repository.dart';
+import 'package:retip/app/services/cases/get_all_albums.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -9,8 +9,7 @@ class AlbumsTab extends StatelessWidget {
   final String search;
   const AlbumsTab({this.search = '', super.key});
 
-  static Future<List<AlbumEntity>> future =
-      OnAudioQueryAlbumRepository().getAll();
+  static Future<List<AlbumEntity>> future = GetAllAlbums.call();
 
   @override
   Widget build(BuildContext context) {

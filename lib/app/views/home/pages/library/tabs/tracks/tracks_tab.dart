@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/repositories/on_audio_query_track_repository.dart';
+import 'package:retip/app/services/cases/get_all_tracks.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/core/audio/retip_audio.dart';
@@ -17,8 +17,7 @@ class TracksTab extends StatefulWidget {
 }
 
 class _TracksTabState extends State<TracksTab> {
-  static Future<List<TrackEntity>> future =
-      OnAudioQueryTrackRepository().getAll();
+  static Future<List<TrackEntity>> future = GetAllTracks.call();
 
   @override
   Widget build(BuildContext context) {

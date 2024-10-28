@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/data/repositories/on_audio_query_artist_repository.dart';
+import 'package:retip/app/services/cases/get_all_artists.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -13,8 +13,7 @@ class ArtistsTab extends StatelessWidget {
     super.key,
   });
 
-  static Future<List<ArtistEntity>> future =
-      OnAudioQueryArtistRepository().getAll();
+  static Future<List<ArtistEntity>> future = GetAllArtists.call();
 
   @override
   Widget build(BuildContext context) {

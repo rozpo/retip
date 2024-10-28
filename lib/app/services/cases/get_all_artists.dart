@@ -1,12 +1,9 @@
+import 'package:get_it/get_it.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
-import 'package:retip/app/services/repositories/artist_repository.dart';
+import 'package:retip/app/services/repositories/library_repository.dart';
 
-class GetAllArtists {
-  final ArtistRepository repository;
-
-  GetAllArtists(this.repository);
-
-  Future<List<ArtistEntity>> call() async {
-    return repository.getAll();
+mixin GetAllArtists {
+  static Future<List<ArtistEntity>> call() async {
+    return GetIt.I.get<LibraryRepository>().getAllArtists();
   }
 }

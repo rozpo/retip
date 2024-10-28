@@ -1,12 +1,9 @@
+import 'package:get_it/get_it.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/services/repositories/track_repository.dart';
+import 'package:retip/app/services/repositories/library_repository.dart';
 
 class GetAllTracks {
-  final TrackRepository repository;
-
-  GetAllTracks(this.repository);
-
-  Future<List<TrackEntity>> call() async {
-    return repository.getAll();
+  static Future<List<TrackEntity>> call() async {
+    return GetIt.I.get<LibraryRepository>().getAllTracks();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/repositories/on_audio_query_artist_repository.dart';
+import 'package:retip/app/services/cases/get_all_artists.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
@@ -69,7 +69,7 @@ class _SearchPageState extends State<SearchPage> {
 
               final query = controller.text.toLowerCase();
               if (artists.isEmpty) {
-                artists = await OnAudioQueryArtistRepository().getAll();
+                artists = await GetAllArtists.call();
               }
 
               for (final artist in artists) {
