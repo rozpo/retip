@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/utils.dart';
 
 import 'abstract_entity.dart';
 import 'album_entity.dart';
@@ -30,9 +31,11 @@ abstract class ArtistEntity extends AbstractEntity {
   }
 
   @override
-  ListTile toListTile(BuildContext context) {
+  ListTile toListTile(BuildContext context, [String? query]) {
     return ListTile(
-      title: Text(name),
+      title: query != null
+          ? RetipUtils.getQueryText(context, name, query)
+          : Text(name),
       subtitle: const Text(''),
       leading: artwork != null
           ? ArtworkWidget(

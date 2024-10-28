@@ -6,6 +6,7 @@ import 'package:retip/app/views/player/player_view.dart' hide ArtworkWidget;
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/utils.dart';
 
 import 'abstract_entity.dart';
 
@@ -43,9 +44,11 @@ abstract class TrackEntity extends AbstractEntity {
   }
 
   @override
-  ListTile toListTile(BuildContext context) {
+  ListTile toListTile(BuildContext context, [String? query]) {
     return ListTile(
-      title: Text(title),
+      title: query != null
+          ? RetipUtils.getQueryText(context, title, query)
+          : Text(title),
       subtitle: Text('$album\n$artist'),
       leading: artwork != null ? ArtworkWidget(bytes: artwork) : null,
       onTap: () async {

@@ -12,6 +12,8 @@ final class SearchSuccessState extends SearchState {
   final List<AlbumEntity> albums;
   final List<TrackEntity> tracks;
 
+  final String query;
+
   int get mediaLength => artists.length + albums.length + tracks.length;
 
   List<AbstractEntity> get media => [...artists, ...albums, ...tracks];
@@ -20,6 +22,7 @@ final class SearchSuccessState extends SearchState {
     this.artists = const [],
     this.albums = const [],
     this.tracks = const [],
+    this.query = '',
   });
 }
 

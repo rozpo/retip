@@ -5,7 +5,7 @@ abstract class AbstractEntity {
     throw UnimplementedError();
   }
 
-  ListTile toListTile(BuildContext context) {
+  ListTile toListTile(BuildContext context, [String? query]) {
     throw UnimplementedError();
   }
 }

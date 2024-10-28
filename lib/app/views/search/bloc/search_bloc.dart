@@ -72,6 +72,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         artists: artists,
         albums: albums,
         tracks: tracks,
+        query: event.text,
       ));
     }
   }

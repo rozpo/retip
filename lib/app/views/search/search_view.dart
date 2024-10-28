@@ -137,7 +137,7 @@ class _SearchViewState extends State<SearchView> {
                       return Column(
                         children: [
                           preWidget,
-                          item.toListTile(context),
+                          item.toListTile(context, state.query),
                         ],
                       );
                     },
