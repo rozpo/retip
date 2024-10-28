@@ -4,6 +4,7 @@ import 'package:retip/app/data/models/album_model.dart';
 import 'package:retip/app/data/models/artist_model.dart';
 import 'package:retip/app/data/models/track_model.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
+import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
@@ -11,8 +12,12 @@ import 'package:retip/app/services/repositories/library_repository.dart';
 
 class LibraryRepositoryImplementation implements LibraryRepository {
   final OnAudioQueryProvider onAudioQueryProvider;
+  final SharedPreferencesProvider sharedPreferencesProvider;
 
-  LibraryRepositoryImplementation({required this.onAudioQueryProvider});
+  LibraryRepositoryImplementation({
+    required this.onAudioQueryProvider,
+    required this.sharedPreferencesProvider,
+  });
 
   @override
   Future<List<AlbumEntity>> getAllAlbums() async {
@@ -22,7 +27,17 @@ class LibraryRepositoryImplementation implements LibraryRepository {
     final tracks = await onAudioQueryProvider.getAllTracks();
 
     for (final album in albums) {
-      final albumArtwork = await onAudioQueryProvider.getAlbumArtwork(album.id);
+      Uint8List? albumArtwork =
+          sharedPreferencesProvider.getAlbumArtwork(album.id);
+
+      if (albumArtwork == null) {
+        albumArtwork = await onAudioQueryProvider.getAlbumArtwork(album.id);
+
+        if (albumArtwork != null) {
+          sharedPreferencesProvider.setAlbumArtwork(album.id, albumArtwork);
+        }
+      }
+
       final albumTracks = tracks
           .where((e) => e.album == album.album)
           .map((e) => TrackModel.fromSongModel(e, albumArtwork))
@@ -46,15 +61,33 @@ class LibraryRepositoryImplementation implements LibraryRepository {
     for (final artist in artists) {
       final artistAlbums =
           albums.where((album) => album.artist == artist.artist);
-      final artistArtwork =
-          await onAudioQueryProvider.getArtistArtwork(artist.id);
+      Uint8List? artistArtwork =
+          sharedPreferencesProvider.getArtistArtwork(artist.id);
+
+      if (artistArtwork == null) {
+        artistArtwork = await onAudioQueryProvider.getArtistArtwork(artist.id);
+
+        if (artistArtwork != null) {
+          sharedPreferencesProvider.setArtistArtwork(artist.id, artistArtwork);
+        }
+      }
       final albumsToAdd = <AlbumModel>[];
 
       for (final artistAlbum in artistAlbums) {
         final albumTracks =
             tracks.where((track) => track.album == artistAlbum.album);
-        final albumArtwork =
-            await onAudioQueryProvider.getAlbumArtwork(artistAlbum.id);
+        Uint8List? albumArtwork =
+            sharedPreferencesProvider.getAlbumArtwork(artistAlbum.id);
+
+        if (albumArtwork == null) {
+          albumArtwork =
+              await onAudioQueryProvider.getAlbumArtwork(artistAlbum.id);
+
+          if (albumArtwork != null) {
+            sharedPreferencesProvider.setAlbumArtwork(
+                artistAlbum.id, albumArtwork);
+          }
+        }
         final tracksToAdd = <TrackModel>[];
 
         for (final albumTrack in albumTracks) {
@@ -87,7 +120,15 @@ class LibraryRepositoryImplementation implements LibraryRepository {
         if (artworks.containsKey(albumId)) {
           artwork = artworks[albumId];
         } else {
-          artwork = await onAudioQueryProvider.getAudioArtwork(track.id);
+          artwork = sharedPreferencesProvider.getAlbumArtwork(albumId);
+
+          if (artwork == null) {
+            artwork = await onAudioQueryProvider.getAudioArtwork(track.id);
+
+            if (artwork != null) {
+              sharedPreferencesProvider.setAlbumArtwork(albumId, artwork);
+            }
+          }
 
           if (artwork != null) {
             artworks.addAll({albumId: artwork});

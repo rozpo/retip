@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
+import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/data/repositories/library_repository_implementation.dart';
 import 'package:retip/app/retip_app.dart';
 import 'package:retip/app/services/repositories/library_repository.dart';
@@ -48,6 +49,7 @@ Future<void> setup({RetipAudio? audio}) async {
   GetIt.I.registerSingleton<LibraryRepository>(
     LibraryRepositoryImplementation(
       onAudioQueryProvider: OnAudioQueryProvider(),
+      sharedPreferencesProvider: SharedPreferencesProvider(),
     ),
   );
 }

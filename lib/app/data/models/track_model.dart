@@ -6,6 +6,7 @@ import 'package:retip/app/services/entities/track_entity.dart';
 class TrackModel extends TrackEntity {
   TrackModel._({
     required super.id,
+    super.albumId,
     required super.title,
     required super.album,
     required super.artist,
@@ -19,6 +20,7 @@ class TrackModel extends TrackEntity {
       return TrackModel._(
         id: data.id,
         title: data.title,
+        albumId: data.albumId,
         album: data.album ?? '',
         artist: data.artist ?? '',
         uri: Uri.parse(data.uri ?? ''),

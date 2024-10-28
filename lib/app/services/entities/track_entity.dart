@@ -11,6 +11,7 @@ import 'abstract_entity.dart';
 
 abstract class TrackEntity extends AbstractEntity {
   final int id;
+  final int? albumId;
   final String title;
   final String album;
   final String artist;
@@ -22,6 +23,7 @@ abstract class TrackEntity extends AbstractEntity {
 
   TrackEntity({
     required this.id,
+    this.albumId,
     required this.title,
     required this.album,
     required this.artist,
