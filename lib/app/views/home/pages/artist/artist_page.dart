@@ -157,9 +157,15 @@ class _ArtistPageState extends State<ArtistPage> {
                 const SizedBox(height: Sizer.x2),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-                  child: Text(
-                    RetipL10n.of(context).albums,
-                    style: Theme.of(context).textTheme.titleLarge,
+                  child: Row(
+                    children: [
+                      const Icon(Icons.album),
+                      const HorizontalSpacer(),
+                      Text(
+                        RetipL10n.of(context).albums,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -194,7 +200,21 @@ class _ArtistPageState extends State<ArtistPage> {
                     },
                   ),
                 ),
-                const VerticalSpacer()
+                const VerticalSpacer(),
+                const VerticalSpacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.queue_music),
+                      const HorizontalSpacer(),
+                      Text(
+                        RetipL10n.of(context).tracks,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ],
+                  ),
+                ),
               ],
             );
           }

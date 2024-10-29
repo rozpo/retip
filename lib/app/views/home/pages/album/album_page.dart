@@ -143,7 +143,17 @@ class _AlbumPageState extends State<AlbumPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: Sizer.x2)
+                  const SizedBox(height: Sizer.x2),
+                  Row(
+                    children: [
+                      const Icon(Icons.queue_music),
+                      const HorizontalSpacer(),
+                      Text(
+                        RetipL10n.of(context).tracks,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             );
