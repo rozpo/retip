@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,6 +41,7 @@ class _AlbumPageState extends State<AlbumPage> {
     );
 
     return Scaffold(
+      bottomSheet: const PlayerWidget(),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

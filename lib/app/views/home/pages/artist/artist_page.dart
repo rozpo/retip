@@ -4,6 +4,7 @@ import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,6 +32,7 @@ class _ArtistPageState extends State<ArtistPage> {
     }
 
     return Scaffold(
+      bottomSheet: const PlayerWidget(),
       appBar: AppBar(
         title: Text(widget.artist.name),
       ),
