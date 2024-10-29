@@ -18,6 +18,8 @@ class _HomeViewState extends State<HomeView> {
   final PageController pageController = PageController();
   int index = 0;
 
+  bool focusSearch = false;
+
   @override
   void dispose() {
     pageController.dispose();
@@ -32,10 +34,10 @@ class _HomeViewState extends State<HomeView> {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
-        children: const [
-          FavouritePage(),
-          SearchView(),
-          LibraryPage(),
+        children: [
+          const FavouritePage(),
+          SearchView(isSelected: () => focusSearch),
+          const LibraryPage(),
         ],
       ),
       bottomSheet: const PlayerWidget(),
@@ -65,13 +67,19 @@ class _HomeViewState extends State<HomeView> {
         onTap: (value) {
           index = value;
 
+          if (index == 1) {
+            focusSearch = true;
+          } else {
+            focusSearch = false;
+          }
+
+          setState(() {});
+
           pageController.animateToPage(
             index,
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
           );
-
-          setState(() {});
         },
       ),
     );

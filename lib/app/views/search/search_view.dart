@@ -7,13 +7,19 @@ import 'package:retip/core/utils/sizer.dart';
 import 'bloc/search_bloc.dart';
 
 class SearchView extends StatefulWidget {
-  const SearchView({super.key});
+  final bool Function()? isSelected;
+
+  const SearchView({
+    this.isSelected,
+    super.key,
+  });
 
   @override
   State<SearchView> createState() => _SearchViewState();
 }
 
 class _SearchViewState extends State<SearchView> {
+  final _focus = FocusNode();
   final _debouncer = Debouncer(const Duration(seconds: 1));
   final _controller = TextEditingController();
 
@@ -25,8 +31,16 @@ class _SearchViewState extends State<SearchView> {
 
   final bloc = SearchBloc();
 
+  void requestFocus() {
+    if (widget.isSelected?.call() == true) {
+      _focus.requestFocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    requestFocus();
+
     return BlocProvider(
       create: (context) => bloc,
       child: BlocBuilder<SearchBloc, SearchState>(
@@ -34,8 +48,9 @@ class _SearchViewState extends State<SearchView> {
           return Scaffold(
             appBar: AppBar(
               title: SearchBar(
+                focusNode: _focus,
                 controller: _controller,
-                autoFocus: true,
+                autoFocus: false,
                 shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(Sizer.x1),
