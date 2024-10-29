@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/home/pages/favourite/favourite_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/search/search_view.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
-import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'widgets/retip_icon.dart';
@@ -29,7 +27,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final player = GetIt.I.get<RetipAudio>();
 
     return Scaffold(
       body: PageView(
@@ -41,21 +38,7 @@ class _HomeViewState extends State<HomeView> {
           LibraryPage(),
         ],
       ),
-      bottomSheet: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          StreamBuilder(
-            stream: player.playerStateStream,
-            builder: (context, snapshot) {
-              if (player.showMiniplayer) {
-                return const PlayerWidget();
-              }
-
-              return const SizedBox();
-            },
-          ),
-        ],
-      ),
+      bottomSheet: const PlayerWidget(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
         showSelectedLabels: true,

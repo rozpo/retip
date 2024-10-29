@@ -13,75 +13,89 @@ class PlayerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final player = GetIt.instance.get<RetipAudio>();
 
-    return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => PlayerView(player: player),
-        ),
-      ),
-      onHorizontalDragEnd: (details) {
-        if ((details.primaryVelocity ?? 0.0) > 0.0) {
-          player.previous();
-        }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        StreamBuilder(
+            stream: player.playerStateStream,
+            builder: (context, snapshot) {
+              if (player.showMiniplayer == false) {
+                return const SizedBox();
+              }
 
-        if ((details.primaryVelocity ?? 0.0) < 0.0) {
-          player.next();
-        }
-      },
-      child: Container(
-        color: Theme.of(context).colorScheme.surfaceContainer,
-        width: double.infinity,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
+              return GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PlayerView(player: player),
+                  ),
+                ),
+                onHorizontalDragEnd: (details) {
+                  if ((details.primaryVelocity ?? 0.0) > 0.0) {
+                    player.previous();
+                  }
+
+                  if ((details.primaryVelocity ?? 0.0) < 0.0) {
+                    player.next();
+                  }
+                },
+                child: Container(
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                  width: double.infinity,
+                  child: Column(
                     children: [
-                      ArtworkWidget(player: player),
-                      const SizedBox(width: 16),
-                      Expanded(child: AudioInfoWidget(player: player)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                ArtworkWidget(player: player),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                    child: AudioInfoWidget(player: player)),
+                              ],
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: PlayPauseIcon(
+                              size: 24,
+                            ),
+                          ),
+                        ],
+                      ),
+                      StreamBuilder(
+                        stream: player.positionStream,
+                        builder: (context, snapshot) {
+                          final duration = player.duration?.inSeconds;
+                          final progress = player.position.inSeconds;
+
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: progress,
+                                child: Container(
+                                  height: 4,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                              Expanded(
+                                flex: (duration ?? progress) - progress,
+                                child: Container(
+                                  height: 4,
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: PlayPauseIcon(
-                    size: 24,
-                  ),
-                ),
-              ],
-            ),
-            StreamBuilder(
-              stream: player.positionStream,
-              builder: (context, snapshot) {
-                final duration = player.duration?.inSeconds;
-                final progress = player.position.inSeconds;
-
-                return Row(
-                  children: [
-                    Expanded(
-                      flex: progress,
-                      child: Container(
-                        height: 4,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    Expanded(
-                      flex: (duration ?? progress) - progress,
-                      child: Container(
-                        height: 4,
-                        color: Theme.of(context).colorScheme.surface,
-                      ),
-                    )
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+              );
+            }),
+      ],
     );
   }
 }

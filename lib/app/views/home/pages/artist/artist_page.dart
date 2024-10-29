@@ -40,6 +40,21 @@ class _ArtistPageState extends State<ArtistPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('10 tracks * 11min'),
+                IconButton.filledTonal(
+                    onPressed: () async {
+                      final audio = GetIt.instance.get<RetipAudio>();
+
+                      await audio.playlistAddAll(tracks);
+                      await audio.stop();
+                      await audio.play();
+                    },
+                    icon: const Icon(Icons.play_arrow)),
+              ],
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.width / 3,
               child: ListView.separated(
@@ -98,7 +113,11 @@ class _ArtistPageState extends State<ArtistPage> {
                       favouriteTracks.contains(track.id.toString());
 
                   return ListTile(
-                    leading: Text(track.index.toString().padLeft(2, '0')),
+                    contentPadding: EdgeInsets.zero,
+                    leading: IconButton.filledTonal(
+                      onPressed: null,
+                      icon: Text(track.index.toString().padLeft(2, '0')),
+                    ),
                     title: Text(track.title),
                     subtitle: Text(track.artist),
                     trailing: IconButton(
