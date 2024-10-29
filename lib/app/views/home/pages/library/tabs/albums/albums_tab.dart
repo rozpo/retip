@@ -5,6 +5,8 @@ import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/utils.dart';
 
+import '../../../../../../widgets/artwork_widget.dart';
+
 class AlbumsTab extends StatelessWidget {
   final String search;
   const AlbumsTab({this.search = '', super.key});
@@ -46,8 +48,7 @@ class AlbumsTab extends StatelessWidget {
               final album = data[index];
 
               return ListTile(
-                leading:
-                    album.artwork != null ? Image.memory(album.artwork!) : null,
+                leading: ArtworkWidget(bytes: album.artwork),
                 title: RetipUtils.getQueryText(context, album.title, search),
                 subtitle: Text(album.artist),
                 onTap: () {

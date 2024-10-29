@@ -49,7 +49,7 @@ class PlayerWidget extends StatelessWidget {
                           Expanded(
                             child: Row(
                               children: [
-                                ArtworkWidget(player: player),
+                                PlayerArtworkWidget(player: player),
                                 const SizedBox(width: 16),
                                 Expanded(
                                     child: AudioInfoWidget(player: player)),
@@ -137,8 +137,8 @@ class AudioInfoWidget extends StatelessWidget {
   }
 }
 
-class ArtworkWidget extends StatelessWidget {
-  const ArtworkWidget({
+class PlayerArtworkWidget extends StatelessWidget {
+  const PlayerArtworkWidget({
     required this.player,
     super.key,
   });

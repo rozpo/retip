@@ -4,6 +4,7 @@ import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -81,21 +82,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     },
                     child: SizedBox.square(
                       dimension: MediaQuery.of(context).size.width / 3,
-                      child: album.artwork != null
-                          ? Image.memory(
-                              album.artwork!,
-                              fit: BoxFit.cover,
-                            )
-                          : Container(
-                              color: Theme.of(context).colorScheme.primary,
-                              child: Text(
-                                album.title,
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                ),
-                              ),
-                            ),
+                      child: ArtworkWidget(bytes: album.artwork),
                     ),
                   );
                 },

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/services/cases/get_all_tracks.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/views/player/player_view.dart'
+    hide PlayerArtworkWidget;
+import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/utils.dart';
@@ -60,8 +62,7 @@ class _TracksTabState extends State<TracksTab> {
               track.isFavourite = favouriteTracks.contains(track.id.toString());
 
               return ListTile(
-                leading:
-                    track.artwork != null ? Image.memory(track.artwork!) : null,
+                leading: ArtworkWidget(bytes: track.artwork),
                 title: RetipUtils.getQueryText(
                   context,
                   track.title,

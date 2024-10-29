@@ -79,7 +79,7 @@ class _PlayerViewState extends State<PlayerView> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ArtworkWidget(player: widget.player),
+            PlayerArtworkWidget(player: widget.player),
             AudioInfoWidget(player: widget.player),
           ],
         ),
@@ -145,8 +145,8 @@ class _PlaylistBottomSheetState extends State<PlaylistBottomSheet> {
   }
 }
 
-class ArtworkWidget extends StatelessWidget {
-  const ArtworkWidget({
+class PlayerArtworkWidget extends StatelessWidget {
+  const PlayerArtworkWidget({
     required this.player,
     super.key,
   });
