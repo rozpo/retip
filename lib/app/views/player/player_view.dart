@@ -208,7 +208,9 @@ class AudioInfoWidget extends StatelessWidget {
             children: [
               Text(
                 track?.title ?? RetipL10n.of(context).unknownTitle,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -315,12 +317,12 @@ class PlaybackButtons extends StatelessWidget {
             );
           },
         ),
-        IconButton(
+        IconButton.filledTonal(
           onPressed: () => player.seekToPrevious(),
           icon: const Icon(Icons.skip_previous),
         ),
         const PlayPauseIcon(),
-        IconButton(
+        IconButton.filledTonal(
           onPressed: () => player.seekToNext(),
           icon: const Icon(Icons.skip_next),
         ),
