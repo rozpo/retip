@@ -11,7 +11,8 @@ class TrackModel extends TrackEntity {
     required super.album,
     required super.artist,
     required super.uri,
-    required super.artwork,
+    required super.duration,
+    super.artwork,
     super.index,
   });
 
@@ -26,6 +27,7 @@ class TrackModel extends TrackEntity {
         uri: Uri.parse(data.uri ?? ''),
         artwork: artwork,
         index: data.track,
+        duration: Duration(milliseconds: data.duration ?? 0),
       );
     } catch (e) {
       throw ArgumentError();

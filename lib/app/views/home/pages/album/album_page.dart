@@ -9,6 +9,7 @@ import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
+import 'package:retip/core/extensions/duration_extension.dart';
 
 class AlbumPage extends StatefulWidget {
   final AlbumEntity album;
@@ -157,72 +158,78 @@ class _AlbumPageState extends State<AlbumPage> {
                 ),
               ),
             ),
-            trailing: IconButton(
-              style: Theme.of(context).iconButtonTheme.style,
-              onPressed: () {
-                showModalBottomSheet(
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only()),
-                  context: context,
-                  builder: (context) {
-                    return ListView(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: Sizer.x1, horizontal: Sizer.x1),
-                      children: [
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: IconButton.filledTonal(
-                            onPressed: () {},
-                            style: Theme.of(context).iconButtonTheme.style,
-                            icon: const Icon(Icons.favorite),
-                          ),
-                          title: const Text('Add to favourites'),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          leading: IconButton.filledTonal(
-                            onPressed: () {},
-                            style: Theme.of(context).iconButtonTheme.style,
-                            icon: const Icon(Icons.queue_music),
-                          ),
-                          title: const Text('Add to queue'),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text('Add to playlist'),
-                          leading: IconButton.filledTonal(
-                            onPressed: () {},
-                            style: Theme.of(context).iconButtonTheme.style,
-                            icon: const Icon(Icons.playlist_add),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text('Go to artist page'),
-                          leading: IconButton.filledTonal(
-                            onPressed: () {},
-                            style: Theme.of(context).iconButtonTheme.style,
-                            icon: const Icon(Icons.person),
-                          ),
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text('View album'),
-                          leading: IconButton.filledTonal(
-                            onPressed: () {},
-                            style: Theme.of(context).iconButtonTheme.style,
-                            icon: const Icon(Icons.album),
-                          ),
-                        ),
-                      ],
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(track.duration.text),
+                IconButton(
+                  style: Theme.of(context).iconButtonTheme.style,
+                  onPressed: () {
+                    showModalBottomSheet(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only()),
+                      context: context,
+                      builder: (context) {
+                        return ListView(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: Sizer.x1, horizontal: Sizer.x1),
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              leading: IconButton.filledTonal(
+                                onPressed: () {},
+                                style: Theme.of(context).iconButtonTheme.style,
+                                icon: const Icon(Icons.favorite),
+                              ),
+                              title: const Text('Add to favourites'),
+                            ),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              leading: IconButton.filledTonal(
+                                onPressed: () {},
+                                style: Theme.of(context).iconButtonTheme.style,
+                                icon: const Icon(Icons.queue_music),
+                              ),
+                              title: const Text('Add to queue'),
+                            ),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Add to playlist'),
+                              leading: IconButton.filledTonal(
+                                onPressed: () {},
+                                style: Theme.of(context).iconButtonTheme.style,
+                                icon: const Icon(Icons.playlist_add),
+                              ),
+                            ),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Go to artist page'),
+                              leading: IconButton.filledTonal(
+                                onPressed: () {},
+                                style: Theme.of(context).iconButtonTheme.style,
+                                icon: const Icon(Icons.person),
+                              ),
+                            ),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('View album'),
+                              leading: IconButton.filledTonal(
+                                onPressed: () {},
+                                style: Theme.of(context).iconButtonTheme.style,
+                                icon: const Icon(Icons.album),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     );
+                    //todo
                   },
-                );
-                //todo
-              },
-              icon: const Icon(Icons.more_vert),
+                  icon: const Icon(Icons.more_vert),
+                ),
+              ],
             ),
             title: Text(track.title, maxLines: 1),
             subtitle: Text(track.artist, maxLines: 1),

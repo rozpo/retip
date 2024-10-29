@@ -20,6 +20,7 @@ abstract class TrackEntity extends AbstractEntity {
   final Uri uri;
   final Uint8List? artwork;
   final int? index;
+  final Duration duration;
 
   bool isFavourite = false;
 
@@ -30,7 +31,8 @@ abstract class TrackEntity extends AbstractEntity {
     required this.album,
     required this.artist,
     required this.uri,
-    required this.artwork,
+    required this.duration,
+    this.artwork,
     this.index,
   });
 
