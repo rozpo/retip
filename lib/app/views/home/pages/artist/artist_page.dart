@@ -161,6 +161,7 @@ class _ArtistPageState extends State<ArtistPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.width / 3,
                   child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.all(Sizer.x1),
                     separatorBuilder: (context, index) =>
                         const HorizontalSpacer(),
