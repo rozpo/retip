@@ -10,10 +10,12 @@ enum ArtworkStyle {
 class ArtworkWidget extends StatelessWidget {
   final Uint8List? bytes;
   final ArtworkStyle style;
+  final double borderWidth;
 
   const ArtworkWidget({
     this.bytes,
     this.style = ArtworkStyle.square,
+    this.borderWidth = 4,
     super.key,
   });
 
@@ -27,13 +29,13 @@ class ArtworkWidget extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               border: Border.all(
-                width: Sizer.x0_5,
+                width: borderWidth,
                 color: Theme.of(context).colorScheme.surfaceBright,
               ),
               borderRadius: BorderRadius.circular(Sizer.x1),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(Sizer.x0_5),
+              borderRadius: BorderRadius.circular(Sizer.x1 - borderWidth),
               child: bytes != null
                   ? Image.memory(
                       bytes!,
@@ -51,14 +53,18 @@ class ArtworkWidget extends StatelessWidget {
         } else {
           return CircleAvatar(
             radius: dimension / 2,
-            backgroundImage: bytes != null
-                ? Image.memory(
-                    bytes!,
-                    cacheHeight: 3 * dimension.toInt(),
-                    cacheWidth: 3 * dimension.toInt(),
-                  ).image
-                : null,
-            child: bytes == null ? const Icon(Icons.person) : null,
+            backgroundColor: Theme.of(context).colorScheme.surfaceBright,
+            child: CircleAvatar(
+              radius: dimension / 2 - borderWidth,
+              backgroundImage: bytes != null
+                  ? Image.memory(
+                      bytes!,
+                      cacheHeight: 3 * dimension.toInt(),
+                      cacheWidth: 3 * dimension.toInt(),
+                    ).image
+                  : null,
+              child: bytes == null ? const Icon(Icons.person) : null,
+            ),
           );
         }
       },

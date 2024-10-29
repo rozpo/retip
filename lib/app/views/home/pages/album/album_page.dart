@@ -141,14 +141,20 @@ class _AlbumPageState extends State<AlbumPage> {
 
           return ListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-            leading: IconButton.filledTonal(
-              onPressed: null,
-              style: Theme.of(context).iconButtonTheme.style,
-              icon: Text(
-                track.index.toString().padLeft(2, '0'),
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+            leading: Container(
+              width: Sizer.x5,
+              height: Sizer.x5,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Sizer.x0_5),
+                color: Theme.of(context).colorScheme.surfaceBright,
+              ),
+              child: Center(
+                child: Text(
+                  track.index.toString().padLeft(2, '0'),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
               ),
             ),
             trailing: IconButton(

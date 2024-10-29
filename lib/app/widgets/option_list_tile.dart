@@ -19,11 +19,18 @@ class OptionListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-      leading: IconButton.filledTonal(
-        style: Theme.of(context).iconButtonTheme.style,
-        icon: Icon(icon),
-        onPressed: null,
+      leading: Container(
+        width: Sizer.x5,
+        height: Sizer.x5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Sizer.x0_5),
+          color: Theme.of(context).colorScheme.surfaceBright,
+        ),
+        child: Icon(icon),
       ),
+      // leading: IconButton.filledTonal(
+      //   onPressed: null,
+      // ),
       title: Text(text),
       onTap: onTap,
     );
