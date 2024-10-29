@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/sizer.dart';
 
 class PlayerWidget extends StatelessWidget {
   const PlayerWidget({super.key});
@@ -41,29 +43,9 @@ class PlayerWidget extends StatelessWidget {
                 child: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: double.infinity,
+                  // height: (24 * 2) + 16,
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                PlayerArtworkWidget(player: player),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                    child: AudioInfoWidget(player: player)),
-                              ],
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: PlayPauseIcon(
-                              size: 24,
-                            ),
-                          ),
-                        ],
-                      ),
                       StreamBuilder(
                         stream: player.positionStream,
                         builder: (context, snapshot) {
@@ -89,6 +71,30 @@ class PlayerWidget extends StatelessWidget {
                             ],
                           );
                         },
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                PlayerArtworkWidget(player: player),
+                                const SizedBox(width: Sizer.x1),
+                                Expanded(
+                                    child: AudioInfoWidget(player: player)),
+                              ],
+                            ),
+                          ),
+                          const HorizontalSpacer(),
+                          IconButton(
+                            icon: const Icon(Icons.shuffle),
+                            onPressed: () {},
+                          ),
+                          const PlayPauseIcon(
+                            size: 24,
+                          ),
+                          const HorizontalSpacer(),
+                        ],
                       ),
                     ],
                   ),
@@ -147,7 +153,7 @@ class PlayerArtworkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const size = 60.0;
+    const double size = 24 * 2 + 16;
 
     return StreamBuilder<int?>(
       stream: player.currentIndexStream,
@@ -157,22 +163,24 @@ class PlayerArtworkWidget extends StatelessWidget {
             ? player.tracks[index]
             : null;
 
-        return SizedBox.square(
-          dimension: size,
-          child: track?.artwork != null
-              ? Image.memory(
-                  track!.artwork!,
-                  width: size,
-                  height: size,
-                  fit: BoxFit.cover,
-                )
-              : SvgPicture.asset(
-                  RetipAsset.logo,
-                  width: size,
-                  height: size,
-                  fit: BoxFit.cover,
-                ),
-        );
+        return LayoutBuilder(builder: (context, constraints) {
+          return SizedBox.square(
+            dimension: size,
+            child: track?.artwork != null
+                ? Image.memory(
+                    track!.artwork!,
+                    width: size,
+                    height: size,
+                    fit: BoxFit.cover,
+                  )
+                : SvgPicture.asset(
+                    RetipAsset.logo,
+                    width: size,
+                    height: size,
+                    fit: BoxFit.cover,
+                  ),
+          );
+        });
       },
     );
   }

@@ -24,20 +24,29 @@ class ArtworkWidget extends StatelessWidget {
         final dimension = constraints.biggest.shortestSide;
 
         if (style == ArtworkStyle.square) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(Sizer.x1),
-            child: bytes != null
-                ? Image.memory(
-                    bytes!,
-                    cacheHeight: 3 * dimension.toInt(),
-                    cacheWidth: 3 * dimension.toInt(),
-                  )
-                : Container(
-                    width: dimension,
-                    height: dimension,
-                    color: Theme.of(context).colorScheme.surfaceBright,
-                    child: const Icon(Icons.music_note),
-                  ),
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: Sizer.x0_5,
+                color: Theme.of(context).colorScheme.surfaceBright,
+              ),
+              borderRadius: BorderRadius.circular(Sizer.x1),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(Sizer.x0_5),
+              child: bytes != null
+                  ? Image.memory(
+                      bytes!,
+                      cacheHeight: 3 * dimension.toInt(),
+                      cacheWidth: 3 * dimension.toInt(),
+                    )
+                  : Container(
+                      width: dimension,
+                      height: dimension,
+                      color: Theme.of(context).colorScheme.surfaceBright,
+                      child: const Icon(Icons.music_note),
+                    ),
+            ),
           );
         } else {
           return CircleAvatar(

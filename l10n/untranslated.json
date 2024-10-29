@@ -17,6 +17,13 @@
     "tracks",
     "noAlbums",
     "noArtists",
-    "noTracks"
+    "noTracks",
+    "addToTheFavourites",
+    "addToTheQueue",
+    "addToThePlaylist",
+    "showArtist",
+    "viewAlbum",
+    "sortAlphabetically",
+    "sortByIndex"
   ]
 }

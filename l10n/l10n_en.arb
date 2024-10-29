@@ -29,5 +29,12 @@
     "noAlbums": "No albums found",
     "noArtists": "No artists found",
     "noTracks": "No tracks found",
+    "addToTheFavourites": "Add to the favourites",
+    "addToTheQueue": "Add to the queue",
+    "addToThePlaylist": "Add to the playlist",
+    "showArtist": "Show artist",
+    "viewAlbum": "View album",
+    "sortAlphabetically": "Sort alphabetically",
+    "sortByIndex": "Sort by index",
     "@_END": {}
 }
