@@ -86,9 +86,9 @@ class PlayerWidget extends StatelessWidget {
                             ),
                           ),
                           const HorizontalSpacer(),
-                          IconButton(
-                            icon: const Icon(Icons.shuffle),
-                            onPressed: () {},
+                          const IconButton(
+                            icon: Icon(Icons.shuffle),
+                            onPressed: null,
                           ),
                           const PlayPauseIcon(
                             size: 24,

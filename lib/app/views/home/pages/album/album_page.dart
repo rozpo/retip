@@ -29,6 +29,17 @@ class _AlbumPageState extends State<AlbumPage> {
   SortMode sortMode = SortMode.numerically;
 
   @override
+  void initState() {
+    sortMode = SortMode.numerically;
+
+    widget.album.tracks.sort((a, b) {
+      return a.index?.compareTo(b.index ?? 0) ?? 0;
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -60,13 +71,13 @@ class _AlbumPageState extends State<AlbumPage> {
               Navigator.pop(context);
             },
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.grid_view),
+          const IconButton(
+            onPressed: null,
+            icon: Icon(Icons.grid_view),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_vert),
+          const IconButton(
+            onPressed: null,
+            icon: Icon(Icons.more_vert),
           ),
           const HorizontalSpacer(),
         ],
@@ -164,69 +175,7 @@ class _AlbumPageState extends State<AlbumPage> {
                 Text(track.duration.text),
                 IconButton(
                   style: Theme.of(context).iconButtonTheme.style,
-                  onPressed: () {
-                    showModalBottomSheet(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only()),
-                      context: context,
-                      builder: (context) {
-                        return ListView(
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: Sizer.x1, horizontal: Sizer.x1),
-                          children: [
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              leading: IconButton.filledTonal(
-                                onPressed: () {},
-                                style: Theme.of(context).iconButtonTheme.style,
-                                icon: const Icon(Icons.favorite),
-                              ),
-                              title: const Text('Add to favourites'),
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              leading: IconButton.filledTonal(
-                                onPressed: () {},
-                                style: Theme.of(context).iconButtonTheme.style,
-                                icon: const Icon(Icons.queue_music),
-                              ),
-                              title: const Text('Add to queue'),
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: const Text('Add to playlist'),
-                              leading: IconButton.filledTonal(
-                                onPressed: () {},
-                                style: Theme.of(context).iconButtonTheme.style,
-                                icon: const Icon(Icons.playlist_add),
-                              ),
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: const Text('Go to artist page'),
-                              leading: IconButton.filledTonal(
-                                onPressed: () {},
-                                style: Theme.of(context).iconButtonTheme.style,
-                                icon: const Icon(Icons.person),
-                              ),
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: const Text('View album'),
-                              leading: IconButton.filledTonal(
-                                onPressed: () {},
-                                style: Theme.of(context).iconButtonTheme.style,
-                                icon: const Icon(Icons.album),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                    //todo
-                  },
+                  onPressed: null,
                   icon: const Icon(Icons.more_vert),
                 ),
               ],
