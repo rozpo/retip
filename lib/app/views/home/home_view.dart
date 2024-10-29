@@ -32,19 +32,18 @@ class _HomeViewState extends State<HomeView> {
     final player = GetIt.I.get<RetipAudio>();
 
     return Scaffold(
-      body: Column(
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: pageController,
+        children: const [
+          FavouritePage(),
+          SearchView(),
+          LibraryPage(),
+        ],
+      ),
+      bottomSheet: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: pageController,
-              children: const [
-                FavouritePage(),
-                SearchView(),
-                LibraryPage(),
-              ],
-            ),
-          ),
           StreamBuilder(
             stream: player.playerStateStream,
             builder: (context, snapshot) {
