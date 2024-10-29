@@ -5,6 +5,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PlayerView extends StatefulWidget {
@@ -162,10 +163,18 @@ class ArtworkWidget extends StatelessWidget {
             ? player.tracks[index]
             : null;
 
-        return SizedBox.square(
-          dimension: MediaQuery.of(context).size.width / 1.25,
+        return Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 4,
+              color: Theme.of(context).colorScheme.surfaceBright,
+            ),
+            borderRadius: BorderRadius.circular(Sizer.x1),
+          ),
+          width: MediaQuery.of(context).size.width / 1.25,
+          height: MediaQuery.of(context).size.width / 1.25,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(Sizer.x0_5),
             child: track != null && track.artwork != null
                 ? Image.memory(
                     track.artwork!,
@@ -241,7 +250,7 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: Sizer.x1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
