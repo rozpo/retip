@@ -152,7 +152,6 @@ class _SearchPageState extends State<SearchPage> {
                       );
 
                       await audio.playlistAddAll([item]);
-                      await audio.stop();
                       await audio.seekToIndex(0);
                       await audio.play();
                     }

@@ -187,7 +187,6 @@ class _FavouritePageState extends State<FavouritePage> {
                   );
 
                   await audio.playlistAddAll(listOfFavouriteTracks);
-                  await audio.stop();
                   await audio.seekToIndex(absoluteIndex);
                   await audio.play();
                 },

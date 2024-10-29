@@ -94,7 +94,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final tracks = (state as HomeIdleState).tracks;
     final audio = GetIt.instance.get<RetipAudio>();
 
-    await audio.stop();
     await audio.seekToIndex(event.index);
     await audio.play();
 

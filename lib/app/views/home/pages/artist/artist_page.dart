@@ -252,7 +252,6 @@ class _ArtistPageState extends State<ArtistPage> {
                 ),
               );
 
-              await player.stop();
               await player.playlistAddAll(tracks);
               await player.seekToIndex(index - 1);
               await player.play();

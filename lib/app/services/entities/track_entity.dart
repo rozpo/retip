@@ -57,7 +57,6 @@ abstract class TrackEntity extends AbstractEntity {
       onTap: () async {
         final player = GetIt.I.get<RetipAudio>();
 
-        await player.stop();
         await player.playlistAddAll([this]);
         await player.play();
 

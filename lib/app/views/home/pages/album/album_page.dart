@@ -201,7 +201,6 @@ class _AlbumPageState extends State<AlbumPage> {
                 ),
               );
 
-              await player.stop();
               await player.playlistAddAll(widget.album.tracks);
               await player.seekToIndex(index - 1);
               await player.play();

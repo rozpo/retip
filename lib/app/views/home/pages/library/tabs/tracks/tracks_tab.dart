@@ -105,7 +105,6 @@ class _TracksTabState extends State<TracksTab> {
                   );
 
                   await audio.playlistAddAll(allData);
-                  await audio.stop();
                   await audio.seekToIndex(albsoluteIndex);
                   await audio.play();
                 },

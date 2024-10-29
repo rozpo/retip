@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:retip/core/asset/retip_asset.dart';
+import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,56 +35,119 @@ class _PlayerViewState extends State<PlayerView> {
       currentTrack.isFavourite =
           favouriteTracks.contains(currentTrack.id.toString());
     }
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () async {
-              if (currentTrack != null) {
-                if (currentTrack.isFavourite) {
-                  favouriteTracks.remove(currentTrack.id.toString());
-                } else {
-                  favouriteTracks.add(currentTrack.id.toString());
-                }
+    return StreamBuilder<int?>(
+        stream: widget.player.currentIndexStream,
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.arrow_back),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () async {
+                    if (currentTrack != null) {
+                      if (currentTrack.isFavourite) {
+                        favouriteTracks.remove(currentTrack.id.toString());
+                      } else {
+                        favouriteTracks.add(currentTrack.id.toString());
+                      }
 
-                await prefs.setStringList('favourite_tracks', favouriteTracks);
+                      await prefs.setStringList(
+                          'favourite_tracks', favouriteTracks);
 
-                setState(() {});
-              }
-            },
-            icon: Icon(
-              currentTrack != null && currentTrack.isFavourite
-                  ? Icons.favorite
-                  : Icons.favorite_border,
+                      setState(() {});
+                    }
+                  },
+                  icon: Icon(
+                    currentTrack != null && currentTrack.isFavourite
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        context: context,
+                        builder: (context) {
+                          return ListView.builder(
+                            itemCount: widget.player.tracks.length,
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            padding:
+                                const EdgeInsets.symmetric(vertical: Sizer.x1),
+                            itemBuilder: (context, index) {
+                              final track = widget.player.tracks[index];
+
+                              return ListTile(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: Sizer.x1),
+                                leading: SizedBox.square(
+                                  dimension: Sizer.x5,
+                                  child: ArtworkWidget(
+                                    bytes: track.artwork,
+                                    borderWidth: 0,
+                                  ),
+                                ),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(track.duration.text),
+                                    IconButton(
+                                      style: Theme.of(context)
+                                          .iconButtonTheme
+                                          .style,
+                                      onPressed: null,
+                                      icon: const Icon(Icons.more_vert),
+                                    ),
+                                  ],
+                                ),
+                                title: Text(track.title, maxLines: 1),
+                                subtitle: Text(track.artist, maxLines: 1),
+                                onTap: () async {
+                                  Navigator.of(context).pop();
+
+                                  await widget.player.seekToIndex(index);
+                                  await widget.player.play();
+                                },
+                              );
+                            },
+                          );
+                        });
+
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.queue_music),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.more_vert),
+                ),
+              ],
             ),
-          ),
-          IconButton(
-            onPressed: () async {
-              await showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return PlaylistBottomSheet(player: widget.player);
-                  });
-
-              setState(() {});
-            },
-            icon: const Icon(Icons.queue_music),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            PlayerArtworkWidget(player: widget.player),
-            AudioInfoWidget(player: widget.player),
-          ],
-        ),
-      ),
-    );
+            body: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: Sizer.x2,
+                horizontal: Sizer.x4,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  PlayerArtworkWidget(player: widget.player),
+                  const SizedBox(
+                    height: Sizer.x2,
+                  ),
+                  AudioInfoWidget(player: widget.player),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 
@@ -163,33 +226,7 @@ class PlayerArtworkWidget extends StatelessWidget {
             ? player.tracks[index]
             : null;
 
-        return Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 4,
-              color: Theme.of(context).colorScheme.surfaceBright,
-            ),
-            borderRadius: BorderRadius.circular(Sizer.x1),
-          ),
-          width: MediaQuery.of(context).size.width / 1.25,
-          height: MediaQuery.of(context).size.width / 1.25,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(Sizer.x0_5),
-            child: track != null && track.artwork != null
-                ? Image.memory(
-                    track.artwork!,
-                    width: 500,
-                    height: 500,
-                    fit: BoxFit.cover,
-                  )
-                : SvgPicture.asset(
-                    RetipAsset.logo,
-                    width: 500,
-                    height: 500,
-                    fit: BoxFit.cover,
-                  ),
-          ),
-        );
+        return ArtworkWidget(bytes: track?.artwork);
       },
     );
   }
@@ -234,7 +271,13 @@ class AudioInfoWidget extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
+              const SizedBox(
+                height: Sizer.x2,
+              ),
               ProgressBar(player: player),
+              const SizedBox(
+                height: Sizer.x2,
+              ),
               const PlaybackButtons(),
             ],
           );
@@ -249,53 +292,42 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Sizer.x1),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          StreamBuilder<Duration>(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        StreamBuilder<Duration>(
+          stream: player.positionStream,
+          builder: (context, snapshot) {
+            final Duration position = snapshot.data ?? Duration.zero;
+            return Text(position.text);
+          },
+        ),
+        Expanded(
+          child: StreamBuilder<Duration>(
             stream: player.positionStream,
             builder: (context, snapshot) {
               final Duration position = snapshot.data ?? Duration.zero;
-              return Text(durationToString(position));
-            },
-          ),
-          Expanded(
-            child: StreamBuilder<Duration>(
-              stream: player.positionStream,
-              builder: (context, snapshot) {
-                final Duration position = snapshot.data ?? Duration.zero;
-                final Duration duration = player.duration ?? Duration.zero;
+              final Duration duration = player.duration ?? Duration.zero;
 
-                return Slider(
-                  value: position.inSeconds.toDouble(),
-                  max: duration.inSeconds.toDouble(),
-                  onChanged: (value) {
-                    player.seek(Duration(seconds: value.toInt()));
-                  },
-                );
-              },
-            ),
-          ),
-          StreamBuilder<Duration?>(
-            stream: player.durationStream,
-            builder: (context, snapshot) {
-              final Duration duration = snapshot.data ?? Duration.zero;
-              return Text(durationToString(duration));
+              return Slider(
+                value: position.inSeconds.toDouble(),
+                max: duration.inSeconds.toDouble(),
+                onChanged: (value) {
+                  player.seek(Duration(seconds: value.toInt()));
+                },
+              );
             },
           ),
-        ],
-      ),
+        ),
+        StreamBuilder<Duration?>(
+          stream: player.durationStream,
+          builder: (context, snapshot) {
+            final Duration duration = snapshot.data ?? Duration.zero;
+            return Text(duration.text);
+          },
+        ),
+      ],
     );
-  }
-
-  String durationToString(Duration duration) {
-    final String hours = (duration.inHours % 24).toString();
-    final String minutes = (duration.inMinutes % 60).toString().padLeft(2, '0');
-    final String seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
-
-    return '${duration.inHours > 1 ? '$hours:' : ''}$minutes:$seconds';
   }
 }
 
@@ -307,7 +339,7 @@ class PlaybackButtons extends StatelessWidget {
     final player = GetIt.instance.get<RetipAudio>();
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         StreamBuilder<bool>(
@@ -330,7 +362,7 @@ class PlaybackButtons extends StatelessWidget {
           onPressed: () => player.seekToPrevious(),
           icon: const Icon(Icons.skip_previous),
         ),
-        const PlayPauseIcon(),
+        const PlayPauseIcon(size: Sizer.x5),
         IconButton.filledTonal(
           onPressed: () => player.seekToNext(),
           icon: const Icon(Icons.skip_next),
