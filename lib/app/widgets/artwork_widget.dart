@@ -27,6 +27,8 @@ class ArtworkWidget extends StatelessWidget {
 
         if (style == ArtworkStyle.square) {
           return Container(
+            height: dimension,
+            width: dimension,
             decoration: BoxDecoration(
               border: Border.all(
                 width: borderWidth,
@@ -41,12 +43,16 @@ class ArtworkWidget extends StatelessWidget {
                       bytes!,
                       cacheHeight: 3 * dimension.toInt(),
                       cacheWidth: 3 * dimension.toInt(),
+                      fit: BoxFit.cover,
                     )
                   : Container(
                       width: dimension,
                       height: dimension,
                       color: Theme.of(context).colorScheme.surfaceBright,
-                      child: const Icon(Icons.music_note),
+                      child: Icon(
+                        Icons.music_note,
+                        size: dimension / 2,
+                      ),
                     ),
             ),
           );
@@ -63,7 +69,12 @@ class ArtworkWidget extends StatelessWidget {
                       cacheWidth: 3 * dimension.toInt(),
                     ).image
                   : null,
-              child: bytes == null ? const Icon(Icons.person) : null,
+              child: bytes == null
+                  ? Icon(
+                      Icons.person,
+                      size: dimension / 2,
+                    )
+                  : null,
             ),
           );
         }
