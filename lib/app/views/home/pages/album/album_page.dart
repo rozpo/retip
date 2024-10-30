@@ -5,6 +5,8 @@ import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
+import 'package:retip/app/widgets/track_tile.dart';
+import 'package:retip/app/widgets/tracks_header.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
@@ -96,9 +98,9 @@ class _AlbumPageState extends State<AlbumPage> {
             },
             icon: Icon(isFavourite ? Icons.favorite : Icons.favorite_outline),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.more_vert),
+          const IconButton(
+            onPressed: null,
+            icon: Icon(Icons.more_vert),
           ),
           const HorizontalSpacer(),
         ],
@@ -152,17 +154,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             const Divider(),
                             Wrap(
                               children: [
-                                // IconButton.filledTonal(
-                                //   onPressed: () {},
-                                //   icon: const Icon(Icons.favorite),
-                                // ),
-                                // IconButton.filledTonal(
-                                //   onPressed: () {},
-                                //   icon: const Icon(Icons.repeat),
-                                // ),
                                 IconButton.filledTonal(
-                                  // constraints: BoxConstraints(),
-                                  // padding: EdgeInsets.zero,
                                   style: const ButtonStyle(
                                       tapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap),
@@ -195,16 +187,7 @@ class _AlbumPageState extends State<AlbumPage> {
                     ],
                   ),
                   const SizedBox(height: Sizer.x2),
-                  Row(
-                    children: [
-                      const Icon(Icons.queue_music),
-                      const HorizontalSpacer(),
-                      Text(
-                        RetipL10n.of(context).tracks,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ],
-                  ),
+                  const TracksHeader(),
                 ],
               ),
             );
@@ -212,51 +195,12 @@ class _AlbumPageState extends State<AlbumPage> {
 
           final track = widget.album.tracks[index - 1];
 
-          return ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-            leading: Container(
-              width: Sizer.x5,
-              height: Sizer.x5,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Sizer.x0_5),
-                color: Theme.of(context).colorScheme.surfaceBright,
-              ),
-              child: Center(
-                child: Text(
-                  track.index.toString().padLeft(2, '0'),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ),
+          return TrackTile(
+            track: track,
+            onTap: () => PlayAudio.call(
+              widget.album.tracks,
+              index: index - 1,
             ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Text(track.duration.text),
-                IconButton(
-                  style: Theme.of(context).iconButtonTheme.style,
-                  onPressed: () {},
-                  icon: const Icon(Icons.more_vert),
-                ),
-              ],
-            ),
-            title: Text(
-              track.title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(
-              track.artist,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            onTap: () {
-              PlayAudio.call(
-                widget.album.tracks,
-                index: index - 1,
-              );
-            },
           );
         },
       ),
