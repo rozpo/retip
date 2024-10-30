@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
-import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/app/widgets/sort_button.dart';
@@ -48,6 +47,8 @@ class _AlbumPageState extends State<AlbumPage> {
     super.initState();
   }
 
+  bool isFavourite = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,13 +81,27 @@ class _AlbumPageState extends State<AlbumPage> {
               Navigator.pop(context);
             },
           ),
-          const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.grid_view),
+          IconButton(
+            onPressed: () {
+              isFavourite = !isFavourite;
+
+              final snackBar = SnackBar(
+                  backgroundColor:
+                      Theme.of(context).colorScheme.surfaceContainer,
+                  duration: const Duration(seconds: 1),
+                  content: Text(
+                    '${isFavourite ? 'Added to' : 'Removed from'} favourites',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+              setState(() {});
+            },
+            icon: Icon(isFavourite ? Icons.favorite : Icons.favorite_outline),
           ),
-          const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.more_vert),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
           ),
           const HorizontalSpacer(),
         ],
@@ -116,42 +131,69 @@ class _AlbumPageState extends State<AlbumPage> {
                               widget.album.title,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .titleLarge
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
-                            const VerticalSpacer(),
+                            // const VerticalSpacer(),
                             Text(widget.album.artist),
                             const VerticalSpacer(),
+                            Text(
+                              'Year: ${widget.album.year}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            // const VerticalSpacer(),
                             Text(
                               '${RetipL10n.of(context).tracks}: ${widget.album.tracks.length}',
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
-                            const VerticalSpacer(),
+                            // const VerticalSpacer(),
                             Text(
                               '${RetipL10n.of(context).duration}: ${duration.text}',
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
+                            // const VerticalSpacer(),
                             const Divider(),
                             Wrap(
                               children: [
+                                // IconButton.filledTonal(
+                                //   onPressed: () {},
+                                //   icon: const Icon(Icons.favorite),
+                                // ),
+                                // IconButton.filledTonal(
+                                //   onPressed: () {},
+                                //   icon: const Icon(Icons.repeat),
+                                // ),
                                 IconButton.filledTonal(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.favorite),
-                                ),
-                                IconButton.filledTonal(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.repeat),
-                                ),
-                                IconButton.filledTonal(
-                                  onPressed: () {},
+                                  // constraints: BoxConstraints(),
+                                  // padding: EdgeInsets.zero,
+                                  style: const ButtonStyle(
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap),
+                                  onPressed: () async {
+                                    await player.setShuffleMode(true);
+                                    await player
+                                        .playlistAddAll(widget.album.tracks);
+                                    // await player.seekToIndex(0);
+                                    await player.play();
+                                  },
                                   icon: const Icon(Icons.shuffle),
                                 ),
+                                const HorizontalSpacer(),
                                 IconButton.filled(
-                                  onPressed: () {},
+                                  style: const ButtonStyle(
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap),
+                                  onPressed: () async {
+                                    await player.setShuffleMode(false);
+                                    await player
+                                        .playlistAddAll(widget.album.tracks);
+                                    // await player.seekToIndex(0);
+                                    await player.play();
+                                  },
                                   icon: const Icon(Icons.play_arrow),
                                 ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       )
@@ -164,7 +206,7 @@ class _AlbumPageState extends State<AlbumPage> {
                       const HorizontalSpacer(),
                       Text(
                         RetipL10n.of(context).tracks,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
                   ),
@@ -196,25 +238,25 @@ class _AlbumPageState extends State<AlbumPage> {
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(track.duration.text),
+                // Text(track.duration.text),
                 IconButton(
                   style: Theme.of(context).iconButtonTheme.style,
-                  onPressed: null,
+                  onPressed: () {},
                   icon: const Icon(Icons.more_vert),
                 ),
               ],
             ),
-            title: Text(track.title, maxLines: 1),
-            subtitle: Text(track.artist, maxLines: 1),
+            title: Text(
+              track.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: Text(
+              track.artist,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
             onTap: () async {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => PlayerView(
-                    player: player,
-                  ),
-                ),
-              );
-
               await player.playlistAddAll(widget.album.tracks);
               await player.seekToIndex(index - 1);
               await player.play();

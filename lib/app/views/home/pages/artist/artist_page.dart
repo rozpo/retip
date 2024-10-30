@@ -126,7 +126,7 @@ class _ArtistPageState extends State<ArtistPage> {
                               widget.artist.name,
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .titleLarge
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             const VerticalSpacer(),
@@ -178,7 +178,7 @@ class _ArtistPageState extends State<ArtistPage> {
                       const HorizontalSpacer(),
                       Text(
                         RetipL10n.of(context).albums,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
                   ),
@@ -225,7 +225,7 @@ class _ArtistPageState extends State<ArtistPage> {
                       const HorizontalSpacer(),
                       Text(
                         RetipL10n.of(context).tracks,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
                   ),

@@ -13,6 +13,7 @@ abstract class AlbumEntity extends AbstractEntity {
   final String title;
   final String artist;
   final Uint8List? artwork;
+  final String year;
 
   final List<TrackEntity> tracks;
 
@@ -21,6 +22,7 @@ abstract class AlbumEntity extends AbstractEntity {
     required this.artist,
     required this.artwork,
     required this.tracks,
+    this.year = '2024',
   });
 
   @override
