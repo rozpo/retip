@@ -59,7 +59,7 @@ class _FavouritePageState extends State<FavouritePage> {
                   )
                 ],
               )
-            : Text(RetipL10n.of(context).favourite),
+            : Text(RetipL10n.of(context).favourites),
         actions: isSearching
             ? null
             : [
