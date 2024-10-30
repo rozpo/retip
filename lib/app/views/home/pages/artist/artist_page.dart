@@ -32,14 +32,24 @@ class _ArtistPageState extends State<ArtistPage> {
 
   final tracks = <TrackEntity>[];
 
+  Duration duration = Duration.zero;
+
   @override
   void initState() {
+    int seconds = 0;
+
     for (final album in widget.artist.albums) {
       album.tracks.sort((a, b) {
         return a.index?.compareTo(b.index ?? 0) ?? 0;
       });
       tracks.addAll(album.tracks);
+
+      for (final track in album.tracks) {
+        seconds += track.duration.inSeconds;
+      }
     }
+
+    duration = Duration(seconds: seconds);
     super.initState();
   }
 
@@ -125,6 +135,11 @@ class _ArtistPageState extends State<ArtistPage> {
                             const VerticalSpacer(),
                             Text(
                               '${RetipL10n.of(context).tracks}: ${tracks.length}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            const VerticalSpacer(),
+                            Text(
+                              '${RetipL10n.of(context).duration}: ${duration.text}',
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             const Divider(),

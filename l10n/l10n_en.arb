@@ -36,5 +36,6 @@
     "viewAlbum": "View album",
     "sortAlphabetically": "Sort alphabetically",
     "sortByIndex": "Sort by index",
+    "duration": "Duration",
     "@_END": {}
 }

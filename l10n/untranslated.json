@@ -24,6 +24,7 @@
     "showArtist",
     "viewAlbum",
     "sortAlphabetically",
-    "sortByIndex"
+    "sortByIndex",
+    "duration"
   ]
 }

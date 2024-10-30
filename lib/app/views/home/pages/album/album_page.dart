@@ -27,9 +27,18 @@ class _AlbumPageState extends State<AlbumPage> {
   final RetipAudio player = GetIt.I.get();
 
   SortMode sortMode = SortMode.numerically;
+  Duration duration = Duration.zero;
 
   @override
   void initState() {
+    int seconds = 0;
+
+    for (final track in widget.album.tracks) {
+      seconds += track.duration.inSeconds;
+    }
+
+    duration = Duration(seconds: seconds);
+
     sortMode = SortMode.numerically;
 
     widget.album.tracks.sort((a, b) {
@@ -115,6 +124,11 @@ class _AlbumPageState extends State<AlbumPage> {
                             const VerticalSpacer(),
                             Text(
                               '${RetipL10n.of(context).tracks}: ${widget.album.tracks.length}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            const VerticalSpacer(),
+                            Text(
+                              '${RetipL10n.of(context).duration}: ${duration.text}',
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             const Divider(),
