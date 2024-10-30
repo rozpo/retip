@@ -44,6 +44,8 @@ class ArtistsTab extends StatelessWidget {
             );
           }
 
+          data.removeWhere((artist) => artist.albums.isEmpty);
+
           return ListView.builder(
             itemCount: data.length,
             itemBuilder: (context, index) {
