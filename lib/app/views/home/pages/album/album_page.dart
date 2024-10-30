@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
-import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
@@ -23,8 +22,6 @@ class AlbumPage extends StatefulWidget {
 }
 
 class _AlbumPageState extends State<AlbumPage> {
-  final RetipAudio player = GetIt.I.get();
-
   SortMode sortMode = SortMode.numerically;
   Duration duration = Duration.zero;
 
@@ -169,12 +166,11 @@ class _AlbumPageState extends State<AlbumPage> {
                                   style: const ButtonStyle(
                                       tapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap),
-                                  onPressed: () async {
-                                    await player.setShuffleMode(true);
-                                    await player
-                                        .playlistAddAll(widget.album.tracks);
-                                    // await player.seekToIndex(0);
-                                    await player.play();
+                                  onPressed: () {
+                                    PlayAudio.call(
+                                      widget.album.tracks,
+                                      shuffle: true,
+                                    );
                                   },
                                   icon: const Icon(Icons.shuffle),
                                 ),
@@ -183,12 +179,11 @@ class _AlbumPageState extends State<AlbumPage> {
                                   style: const ButtonStyle(
                                       tapTargetSize:
                                           MaterialTapTargetSize.shrinkWrap),
-                                  onPressed: () async {
-                                    await player.setShuffleMode(false);
-                                    await player
-                                        .playlistAddAll(widget.album.tracks);
-                                    // await player.seekToIndex(0);
-                                    await player.play();
+                                  onPressed: () {
+                                    PlayAudio.call(
+                                      widget.album.tracks,
+                                      shuffle: false,
+                                    );
                                   },
                                   icon: const Icon(Icons.play_arrow),
                                 ),
@@ -256,10 +251,11 @@ class _AlbumPageState extends State<AlbumPage> {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            onTap: () async {
-              await player.playlistAddAll(widget.album.tracks);
-              await player.seekToIndex(index - 1);
-              await player.play();
+            onTap: () {
+              PlayAudio.call(
+                widget.album.tracks,
+                index: index - 1,
+              );
             },
           );
         },
