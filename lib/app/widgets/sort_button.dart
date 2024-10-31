@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/widgets/modal_bottom_sheet.dart';
 import 'package:retip/app/widgets/option_list_tile.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 enum SortMode {
@@ -26,8 +27,8 @@ class SortButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(sortMode.icon),
+    return RpIconButton(
+      icon: sortMode.icon,
       onPressed: () {
         showModalBottomSheet(
           shape: const RoundedRectangleBorder(

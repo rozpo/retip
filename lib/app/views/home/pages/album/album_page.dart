@@ -3,6 +3,7 @@ import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/player/player_widget.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/track_tile.dart';
@@ -52,9 +53,12 @@ class _AlbumPageState extends State<AlbumPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: RpIconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icons.arrow_back,
+          ),
         ),
         actions: [
           SortButton(
@@ -80,7 +84,8 @@ class _AlbumPageState extends State<AlbumPage> {
               Navigator.pop(context);
             },
           ),
-          IconButton(
+          const HorizontalSpacer(),
+          RpIconButton(
             onPressed: () {
               isFavourite = !isFavourite;
 
@@ -96,11 +101,12 @@ class _AlbumPageState extends State<AlbumPage> {
 
               setState(() {});
             },
-            icon: Icon(isFavourite ? Icons.favorite : Icons.favorite_outline),
+            icon: isFavourite ? Icons.favorite : Icons.favorite_outline,
           ),
-          const IconButton(
+          const HorizontalSpacer(),
+          const RpIconButton(
             onPressed: null,
-            icon: Icon(Icons.more_vert),
+            icon: Icons.more_vert,
           ),
           const HorizontalSpacer(),
         ],
@@ -154,30 +160,24 @@ class _AlbumPageState extends State<AlbumPage> {
                             const Divider(),
                             Wrap(
                               children: [
-                                IconButton.filledTonal(
-                                  style: const ButtonStyle(
-                                      tapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap),
+                                RpIconButton.filledTonal(
                                   onPressed: () {
                                     PlayAudio.call(
                                       widget.album.tracks,
                                       shuffle: true,
                                     );
                                   },
-                                  icon: const Icon(Icons.shuffle),
+                                  icon: Icons.shuffle,
                                 ),
                                 const HorizontalSpacer(),
-                                IconButton.filled(
-                                  style: const ButtonStyle(
-                                      tapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap),
+                                RpIconButton.filled(
                                   onPressed: () {
                                     PlayAudio.call(
                                       widget.album.tracks,
                                       shuffle: false,
                                     );
                                   },
-                                  icon: const Icon(Icons.play_arrow),
+                                  icon: Icons.play_arrow,
                                 ),
                               ],
                             ),

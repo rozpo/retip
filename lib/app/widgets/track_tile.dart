@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class TrackTile extends StatelessWidget {
@@ -40,9 +41,8 @@ class TrackTile extends StatelessWidget {
           ),
         ),
       ),
-      trailing: IconButton(
-        style: theme.iconButtonTheme.style,
-        icon: const Icon(Icons.more_vert),
+      trailing: RpIconButton(
+        icon: Icons.more_vert,
         onPressed: onMore,
       ),
       title: Text(

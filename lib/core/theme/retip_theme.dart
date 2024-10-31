@@ -49,4 +49,8 @@ mixin RetipTheme {
     trackShape: RectangularSliderTrackShape(),
     trackHeight: Sizer.x0_5,
   );
+
+  static const iconButtonStyle = ButtonStyle(
+    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+  );
 }
