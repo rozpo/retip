@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
+import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class TrackTile extends StatelessWidget {
@@ -8,12 +9,16 @@ class TrackTile extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final VoidCallback? onMore;
+  final VoidCallback? onQuickAction;
+  final IconData? quickActionIcon;
 
   const TrackTile({
     required this.track,
     this.onTap,
     this.onLongPress,
     this.onMore,
+    this.onQuickAction,
+    this.quickActionIcon,
     super.key,
   });
 
@@ -41,9 +46,22 @@ class TrackTile extends StatelessWidget {
           ),
         ),
       ),
-      trailing: RpIconButton(
-        icon: Icons.more_vert,
-        onPressed: onMore,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (quickActionIcon != null) ...[
+            RpIconButton(
+              icon: quickActionIcon!,
+              onPressed: onQuickAction,
+            ),
+            const HorizontalSpacer(),
+          ],
+          RpIconButton(
+            icon: Icons.more_vert,
+            onPressed: onMore,
+          ),
+        ],
       ),
       title: Text(
         track.title,

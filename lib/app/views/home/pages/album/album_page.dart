@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
+import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
@@ -195,12 +198,25 @@ class _AlbumPageState extends State<AlbumPage> {
 
           final track = widget.album.tracks[index - 1];
 
+          final isFavourite = IsInFavourites.call(track);
+
           return TrackTile(
             track: track,
             onTap: () => PlayAudio.call(
               widget.album.tracks,
               index: index - 1,
             ),
+            quickActionIcon:
+                isFavourite ? Icons.favorite : Icons.favorite_outline,
+            onQuickAction: () {
+              if (isFavourite) {
+                RemoveFromFavourites.call(track);
+              } else {
+                AddToFavourites.call(track);
+              }
+
+              setState(() {});
+            },
           );
         },
       ),
