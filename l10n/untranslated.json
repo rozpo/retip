@@ -25,6 +25,8 @@
     "viewAlbum",
     "sortAlphabetically",
     "sortByIndex",
-    "duration"
+    "duration",
+    "addedTo",
+    "removedFrom"
   ]
 }

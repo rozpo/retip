@@ -37,5 +37,23 @@
     "sortAlphabetically": "Sort alphabetically",
     "sortByIndex": "Sort by index",
     "duration": "Duration",
+    "addedTo": "Added to {name}",
+    "@addedTo": {
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "favourite"
+            }
+        }
+    },
+    "removedFrom": "Removed from {name}",
+    "@removedFrom": {
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "favourite"
+            }
+        }
+    },
     "@_END": {}
 }

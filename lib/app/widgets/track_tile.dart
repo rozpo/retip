@@ -9,16 +9,14 @@ class TrackTile extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final VoidCallback? onMore;
-  final VoidCallback? onQuickAction;
-  final IconData? quickActionIcon;
+  final Widget? quickAction;
 
   const TrackTile({
     required this.track,
     this.onTap,
     this.onLongPress,
     this.onMore,
-    this.onQuickAction,
-    this.quickActionIcon,
+    this.quickAction,
     super.key,
   });
 
@@ -50,11 +48,8 @@ class TrackTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          if (quickActionIcon != null) ...[
-            RpIconButton(
-              icon: quickActionIcon!,
-              onPressed: onQuickAction,
-            ),
+          if (quickAction != null) ...[
+            quickAction!,
             const HorizontalSpacer(),
           ],
           RpIconButton(

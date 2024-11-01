@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
+import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
+import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
@@ -235,6 +239,7 @@ class _ArtistPageState extends State<ArtistPage> {
           }
 
           final track = tracks[index - 1];
+          final isFavourite = IsInFavourites.call(track);
 
           return ListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
@@ -248,7 +253,18 @@ class _ArtistPageState extends State<ArtistPage> {
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(track.duration.text),
+                FavouriteButton(
+                  isFavourite: isFavourite,
+                  onPressed: () {
+                    if (isFavourite) {
+                      RemoveFromFavourites.call(track);
+                    } else {
+                      AddToFavourites.call(track);
+                    }
+
+                    setState(() {});
+                  },
+                ),
                 IconButton(
                   style: Theme.of(context).iconButtonTheme.style,
                   onPressed: null,

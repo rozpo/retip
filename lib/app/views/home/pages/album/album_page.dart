@@ -5,6 +5,7 @@ import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart'
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
+import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/sort_button.dart';
@@ -88,24 +89,7 @@ class _AlbumPageState extends State<AlbumPage> {
             },
           ),
           const HorizontalSpacer(),
-          RpIconButton(
-            onPressed: () {
-              isFavourite = !isFavourite;
-
-              final snackBar = SnackBar(
-                  backgroundColor:
-                      Theme.of(context).colorScheme.surfaceContainer,
-                  duration: const Duration(seconds: 1),
-                  content: Text(
-                    '${isFavourite ? 'Added to' : 'Removed from'} favourites',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-              setState(() {});
-            },
-            icon: isFavourite ? Icons.favorite : Icons.favorite_outline,
-          ),
+          const FavouriteButton(),
           const HorizontalSpacer(),
           const RpIconButton(
             onPressed: null,
@@ -206,17 +190,18 @@ class _AlbumPageState extends State<AlbumPage> {
               widget.album.tracks,
               index: index - 1,
             ),
-            quickActionIcon:
-                isFavourite ? Icons.favorite : Icons.favorite_outline,
-            onQuickAction: () {
-              if (isFavourite) {
-                RemoveFromFavourites.call(track);
-              } else {
-                AddToFavourites.call(track);
-              }
+            quickAction: FavouriteButton(
+              isFavourite: isFavourite,
+              onPressed: () {
+                if (isFavourite) {
+                  RemoveFromFavourites.call(track);
+                } else {
+                  AddToFavourites.call(track);
+                }
 
-              setState(() {});
-            },
+                setState(() {});
+              },
+            ),
           );
         },
       ),
