@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/dev/dev_menu.dart';
 import 'package:retip/app/views/home/bloc/home_bloc.dart';
 import 'package:retip/app/views/player/player_view.dart';
-import 'package:retip/app/widgets/player/player_widget.dart';
+import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 

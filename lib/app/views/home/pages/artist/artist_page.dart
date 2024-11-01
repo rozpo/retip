@@ -5,7 +5,7 @@ import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/player/player_widget.dart';
+import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/core/audio/retip_audio.dart';

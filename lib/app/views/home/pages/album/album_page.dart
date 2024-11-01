@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/player/player_widget.dart';
+import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;

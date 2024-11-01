@@ -12,6 +12,14 @@ class RetipAudio extends AudioPlayer {
 
   List<TrackEntity> tracks = [];
 
+  TrackEntity? get nextArtist {
+    return nextIndex != null ? tracks[nextIndex!] : null;
+  }
+
+  TrackEntity? get previousArtist {
+    return previousIndex != null ? tracks[previousIndex!] : null;
+  }
+
   ConcatenatingAudioSource get playlist => _playlist;
 
   Future<void> next() async => await seekToNext();

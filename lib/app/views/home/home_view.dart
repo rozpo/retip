@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/views/home/pages/favourites/favourites_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/search/search_view.dart';
-import 'package:retip/app/widgets/player/player_widget.dart';
+import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'widgets/retip_icon.dart';
