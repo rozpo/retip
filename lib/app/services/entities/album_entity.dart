@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -11,11 +12,11 @@ import 'track_entity.dart';
 
 abstract class AlbumEntity extends AbstractEntity {
   final String title;
-  final String artist;
   final Uint8List? artwork;
   final String year;
 
   final List<TrackEntity> tracks;
+  final ArtistEntity? artist;
 
   AlbumEntity({
     required this.title,
@@ -41,7 +42,7 @@ abstract class AlbumEntity extends AbstractEntity {
       title: query != null
           ? RetipUtils.getQueryText(context, title, query)
           : Text(title),
-      subtitle: Text(artist),
+      subtitle: artist != null ? Text(artist!.name) : null,
       leading: artwork != null ? ArtworkWidget(bytes: artwork) : null,
       onTap: () {
         Navigator.push(

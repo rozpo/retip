@@ -55,4 +55,10 @@ class OnAudioQueryProvider {
       format: ArtworkFormat.JPEG,
     );
   }
+
+  Future<ArtistModel> getArtist(int id) async {
+    final artists = await _onAudioQuery.queryArtists();
+
+    return artists.firstWhere((artist) => artist.id == id);
+  }
 }

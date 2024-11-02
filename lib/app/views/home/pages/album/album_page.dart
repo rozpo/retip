@@ -4,11 +4,13 @@ import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
+import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
+import 'package:retip/app/widgets/modal_bottom_sheet.dart';
+import 'package:retip/app/widgets/option_list_tile.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
-import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/app/widgets/tracks_header.dart';
@@ -30,7 +32,6 @@ class AlbumPage extends StatefulWidget {
 }
 
 class _AlbumPageState extends State<AlbumPage> {
-  SortMode sortMode = SortMode.numerically;
   Duration duration = Duration.zero;
 
   @override
@@ -43,22 +44,9 @@ class _AlbumPageState extends State<AlbumPage> {
 
     duration = Duration(seconds: seconds);
 
-    sortMode = SortMode.numerically;
-
     widget.album.tracks.sort((a, b) {
       return a.index?.compareTo(b.index ?? 0) ?? 0;
     });
-
-    // scrollController.addListener(() {
-    //   final RenderObject? box = titleKey.currentContext?.findRenderObject();
-    //   if (box != null) {
-    //     title = '';
-    //   } else {
-    //     title = widget.album.title;
-    //   }
-
-    //   setState(() {});
-    // });
 
     super.initState();
   }
@@ -105,7 +93,36 @@ class _AlbumPageState extends State<AlbumPage> {
           ),
           const HorizontalSpacer(),
           RpIconButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
+                context: context,
+                builder: (context) {
+                  return ModalBottomSheet(
+                    options: [
+                      if (widget.album.artist != null)
+                        OptionListTile(
+                          text: RetipL10n.of(context).showAlbumArtist,
+                          icon: Icons.person,
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ArtistPage(
+                                      artist: widget.album.artist!);
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  );
+                },
+              );
+            },
             icon: Icons.more_vert,
           ),
           const HorizontalSpacer(),
@@ -125,7 +142,6 @@ class _AlbumPageState extends State<AlbumPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    // crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
                         child: ArtworkWidget(bytes: widget.album.artwork),
@@ -141,19 +157,11 @@ class _AlbumPageState extends State<AlbumPage> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text('Year: ${widget.album.year}'),
                                 Text(
-                                  'Year: ${widget.album.year}',
-                                  // style: Theme.of(context).textTheme.bodySmall,
-                                ),
+                                    '${RetipL10n.of(context).tracks}: ${widget.album.tracks.length}'),
                                 Text(
-                                  '${RetipL10n.of(context).tracks}: ${widget.album.tracks.length}',
-                                  // style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                                // const VerticalSpacer(),
-                                Text(
-                                  '${RetipL10n.of(context).duration}: ${duration.text}',
-                                  // style: Theme.of(context).textTheme.bodySmall,
-                                ),
+                                    '${RetipL10n.of(context).duration}: ${duration.text}'),
                               ],
                             ),
                           ],
@@ -161,7 +169,7 @@ class _AlbumPageState extends State<AlbumPage> {
                       )
                     ],
                   ),
-                  VerticalSpacer(),
+                  const VerticalSpacer(),
                   VisibilityDetector(
                     key: titleKey,
                     onVisibilityChanged: (info) {
@@ -181,8 +189,8 @@ class _AlbumPageState extends State<AlbumPage> {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  // const VerticalSpacer(),
-                  Text(widget.album.artist),
+                  if (widget.album.artist != null)
+                    Text(widget.album.artist!.name),
                   const SizedBox(height: Sizer.x2),
                   const TracksHeader(),
                 ],

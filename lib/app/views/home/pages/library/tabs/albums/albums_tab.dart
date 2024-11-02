@@ -50,7 +50,8 @@ class AlbumsTab extends StatelessWidget {
               return ListTile(
                 leading: ArtworkWidget(bytes: album.artwork),
                 title: RetipUtils.getQueryText(context, album.title, search),
-                subtitle: Text(album.artist),
+                subtitle:
+                    album.artist != null ? Text(album.artist!.name) : null,
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(

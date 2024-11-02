@@ -43,7 +43,22 @@ class LibraryRepositoryImplementation implements LibraryRepository {
           .map((e) => TrackModel.fromSongModel(e, albumArtwork))
           .toList();
 
-      result.add(AlbumModel.fromAlbumModel(album, albumArtwork, albumTracks));
+      if (album.artistId != null) {
+        final artist = await onAudioQueryProvider.getArtist(album.artistId!);
+        result.add(AlbumModel.fromAlbumModel(
+          album,
+          albumArtwork,
+          albumTracks,
+          artist,
+        ));
+      } else {
+        result.add(AlbumModel.fromAlbumModel(
+          album,
+          albumArtwork,
+          albumTracks,
+          null,
+        ));
+      }
     }
 
     return result;

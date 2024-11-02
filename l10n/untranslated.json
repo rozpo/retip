@@ -21,6 +21,7 @@
     "addToTheFavourites",
     "addToTheQueue",
     "addToThePlaylist",
+    "showAlbumArtist",
     "showArtist",
     "viewAlbum",
     "sortAlphabetically",
