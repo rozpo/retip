@@ -185,6 +185,7 @@ class _AlbumPageState extends State<AlbumPage> {
           final isFavourite = IsInFavourites.call(track);
 
           return TrackTile(
+            showArtwork: false,
             track: track,
             onTap: () => PlayAudio.call(
               widget.album.tracks,

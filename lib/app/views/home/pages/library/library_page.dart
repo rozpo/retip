@@ -77,7 +77,7 @@ class _LibraryPageState extends State<LibraryPage> {
           children: [
             ArtistsTab(search: controller.text),
             AlbumsTab(search: controller.text),
-            TracksTab(search: controller.text),
+            const TracksTab(),
           ],
         ),
       ),

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
+import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/cases/get_all_tracks.dart';
+import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/views/player/player_view.dart'
-    hide PlayerArtworkWidget;
-import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/app/widgets/buttons/favourite_button.dart';
+import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class TracksTab extends StatefulWidget {
-  final String search;
-  const TracksTab({this.search = '', super.key});
+  const TracksTab({super.key});
 
   @override
   State<TracksTab> createState() => _TracksTabState();
@@ -39,75 +37,36 @@ class _TracksTabState extends State<TracksTab> {
             );
           }
 
-          final allData = snapshot.requireData;
-
-          final data = snapshot.requireData
-              .where((e) =>
-                  e.title.toLowerCase().contains(widget.search.toLowerCase()))
-              .toList();
-
-          if (data.isEmpty) {
+          if (snapshot.hasData == false || snapshot.requireData.isEmpty) {
             return Center(
               child: Text(RetipL10n.of(context).noTracks),
             );
           }
 
-          final prefs = GetIt.I.get<SharedPreferences>();
-          final favouriteTracks = prefs.getStringList('favourite_tracks') ?? [];
-
           return ListView.builder(
-            itemCount: data.length,
+            itemCount: snapshot.requireData.length,
             itemBuilder: (context, index) {
-              final track = data[index];
-              track.isFavourite = favouriteTracks.contains(track.id.toString());
+              final track = snapshot.requireData[index];
+              final isFavourite = IsInFavourites.call(track);
 
-              return ListTile(
-                leading: ArtworkWidget(bytes: track.artwork),
-                title: RetipUtils.getQueryText(
-                  context,
-                  track.title,
-                  widget.search,
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(track.album),
-                    Text(track.artist),
-                  ],
-                ),
-                trailing: IconButton(
-                  onPressed: () async {
-                    if (track.isFavourite) {
-                      favouriteTracks.remove(track.id.toString());
+              return TrackTile(
+                track: track,
+                quickAction: FavouriteButton(
+                  isFavourite: isFavourite,
+                  onPressed: () {
+                    if (isFavourite) {
+                      RemoveFromFavourites.call(track);
                     } else {
-                      favouriteTracks.add(track.id.toString());
+                      AddToFavourites.call(track);
                     }
-
-                    await prefs.setStringList(
-                        'favourite_tracks', favouriteTracks);
 
                     setState(() {});
                   },
-                  icon: Icon(
-                    track.isFavourite ? Icons.favorite : Icons.favorite_border,
-                  ),
                 ),
-                onTap: () async {
-                  final albsoluteIndex = allData.indexOf(track);
-                  final audio = GetIt.instance.get<RetipAudio>();
-
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PlayerView(
-                        player: audio,
-                      ),
-                    ),
-                  );
-
-                  await audio.playlistAddAll(allData);
-                  await audio.seekToIndex(albsoluteIndex);
-                  await audio.play();
-                },
+                onTap: () => PlayAudio.call(
+                  snapshot.requireData,
+                  index: index,
+                ),
               );
             },
           );
