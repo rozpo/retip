@@ -15,8 +15,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final PageController pageController = PageController();
-  int index = 0;
+  final PageController pageController = PageController(initialPage: 1);
+  int index = 1;
 
   bool focusSearch = false;
 
@@ -35,8 +35,8 @@ class _HomeViewState extends State<HomeView> {
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: [
-          const FavouritePage(),
           SearchView(isSelected: () => focusSearch),
+          const FavouritePage(),
           const LibraryPage(),
         ],
       ),
@@ -49,14 +49,14 @@ class _HomeViewState extends State<HomeView> {
         fixedColor: colorScheme.primary,
         items: [
           BottomNavigationBarItem(
-            activeIcon: RetipIcon(color: colorScheme.primary),
-            icon: RetipIcon(color: colorScheme.outline),
-            label: RetipL10n.of(context).home,
-          ),
-          BottomNavigationBarItem(
             activeIcon: const Icon(Icons.search),
             icon: const Icon(Icons.search_outlined),
             label: RetipL10n.of(context).search,
+          ),
+          BottomNavigationBarItem(
+            activeIcon: RetipIcon(color: colorScheme.primary),
+            icon: RetipIcon(color: colorScheme.outline),
+            label: RetipL10n.of(context).home,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.library_music),
@@ -67,7 +67,7 @@ class _HomeViewState extends State<HomeView> {
         onTap: (value) {
           index = value;
 
-          if (index == 1) {
+          if (index == 0) {
             focusSearch = true;
           } else {
             focusSearch = false;
