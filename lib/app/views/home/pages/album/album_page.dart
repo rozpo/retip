@@ -15,6 +15,7 @@ import 'package:retip/app/widgets/tracks_header.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class AlbumPage extends StatefulWidget {
   final AlbumEntity album;
@@ -48,15 +49,33 @@ class _AlbumPageState extends State<AlbumPage> {
       return a.index?.compareTo(b.index ?? 0) ?? 0;
     });
 
+    // scrollController.addListener(() {
+    //   final RenderObject? box = titleKey.currentContext?.findRenderObject();
+    //   if (box != null) {
+    //     title = '';
+    //   } else {
+    //     title = widget.album.title;
+    //   }
+
+    //   setState(() {});
+    // });
+
     super.initState();
   }
 
+  String title = '';
+
   bool isFavourite = false;
+
+  ScrollController scrollController = ScrollController();
+
+  GlobalKey titleKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(title),
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: RpIconButton(
@@ -65,34 +84,28 @@ class _AlbumPageState extends State<AlbumPage> {
           ),
         ),
         actions: [
-          SortButton(
-            sortMode: sortMode,
-            sortByAlpha: () {
-              sortMode = SortMode.alphabetically;
-
-              widget.album.tracks.sort((a, b) {
-                return a.title.compareTo(b.title);
-              });
-
-              setState(() {});
-              Navigator.pop(context);
+          RpIconButton(
+            onPressed: () {
+              PlayAudio.call(
+                widget.album.tracks,
+                shuffle: true,
+              );
             },
-            sortByNum: () {
-              sortMode = SortMode.numerically;
-
-              widget.album.tracks.sort((a, b) {
-                return a.index?.compareTo(b.index ?? 0) ?? 0;
-              });
-
-              setState(() {});
-              Navigator.pop(context);
-            },
+            icon: Icons.shuffle,
           ),
           const HorizontalSpacer(),
-          const FavouriteButton(),
+          RpIconButton(
+            onPressed: () {
+              PlayAudio.call(
+                widget.album.tracks,
+                shuffle: false,
+              );
+            },
+            icon: Icons.play_arrow,
+          ),
           const HorizontalSpacer(),
-          const RpIconButton(
-            onPressed: null,
+          RpIconButton(
+            onPressed: () {},
             icon: Icons.more_vert,
           ),
           const HorizontalSpacer(),
@@ -100,6 +113,7 @@ class _AlbumPageState extends State<AlbumPage> {
       ),
       bottomNavigationBar: const PlayerWidget(),
       body: ListView.builder(
+        controller: scrollController,
         padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
         physics: const BouncingScrollPhysics(),
         itemCount: widget.album.tracks.length + 1,
@@ -108,63 +122,37 @@ class _AlbumPageState extends State<AlbumPage> {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                          child: ArtworkWidget(bytes: widget.album.artwork)),
+                        child: ArtworkWidget(bytes: widget.album.artwork),
+                      ),
                       const HorizontalSpacer(),
                       Expanded(
                         child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              widget.album.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            // const VerticalSpacer(),
-                            Text(widget.album.artist),
-                            const VerticalSpacer(),
-                            Text(
-                              'Year: ${widget.album.year}',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            // const VerticalSpacer(),
-                            Text(
-                              '${RetipL10n.of(context).tracks}: ${widget.album.tracks.length}',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            // const VerticalSpacer(),
-                            Text(
-                              '${RetipL10n.of(context).duration}: ${duration.text}',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            // const VerticalSpacer(),
-                            const Divider(),
-                            Wrap(
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                RpIconButton.filledTonal(
-                                  onPressed: () {
-                                    PlayAudio.call(
-                                      widget.album.tracks,
-                                      shuffle: true,
-                                    );
-                                  },
-                                  icon: Icons.shuffle,
+                                Text(
+                                  'Year: ${widget.album.year}',
+                                  // style: Theme.of(context).textTheme.bodySmall,
                                 ),
-                                const HorizontalSpacer(),
-                                RpIconButton.filled(
-                                  onPressed: () {
-                                    PlayAudio.call(
-                                      widget.album.tracks,
-                                      shuffle: false,
-                                    );
-                                  },
-                                  icon: Icons.play_arrow,
+                                Text(
+                                  '${RetipL10n.of(context).tracks}: ${widget.album.tracks.length}',
+                                  // style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                // const VerticalSpacer(),
+                                Text(
+                                  '${RetipL10n.of(context).duration}: ${duration.text}',
+                                  // style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ],
                             ),
@@ -173,6 +161,28 @@ class _AlbumPageState extends State<AlbumPage> {
                       )
                     ],
                   ),
+                  VerticalSpacer(),
+                  VisibilityDetector(
+                    key: titleKey,
+                    onVisibilityChanged: (info) {
+                      if (info.visibleFraction > 0.9) {
+                        title = '';
+                      } else {
+                        title = widget.album.title;
+                      }
+
+                      setState(() {});
+                    },
+                    child: Text(
+                      widget.album.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  // const VerticalSpacer(),
+                  Text(widget.album.artist),
                   const SizedBox(height: Sizer.x2),
                   const TracksHeader(),
                 ],
