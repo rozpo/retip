@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:retip/app/views/dev/dev_menu.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 
 import 'package:retip/core/l10n/retip_l10n.dart';
 
@@ -32,6 +35,7 @@ class _LibraryPageState extends State<LibraryPage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          leading: const Icon(Icons.library_music),
           title: isSearching
               ? SearchBar(
                   focusNode: focusNode,
@@ -55,22 +59,34 @@ class _LibraryPageState extends State<LibraryPage> {
                   ],
                 )
               : Text(RetipL10n.of(context).library),
-          actions: isSearching
-              ? null
-              : [
-                  IconButton(
-                    onPressed: () {
-                      isSearching = true;
-                      focusNode.requestFocus();
-                      setState(() {});
-                    },
-                    icon: const Icon(Icons.search),
+          actions: [
+            if (kReleaseMode == false) ...[
+              IconButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const DevMenu(),
                   ),
-                ],
+                ),
+                icon: const Icon(Icons.developer_board),
+              ),
+            ],
+            const RpIconButton(icon: Icons.sort),
+            const RpIconButton(icon: Icons.grid_view),
+            const RpIconButton(icon: Icons.settings),
+          ],
           bottom: TabBar(tabs: [
-            Tab(text: RetipL10n.of(context).artists),
-            Tab(text: RetipL10n.of(context).albums),
-            Tab(text: RetipL10n.of(context).tracks),
+            Tab(
+              text: RetipL10n.of(context).artists,
+              icon: const Icon(Icons.person),
+            ),
+            Tab(
+              text: RetipL10n.of(context).albums,
+              icon: const Icon(Icons.album),
+            ),
+            Tab(
+              text: RetipL10n.of(context).tracks,
+              icon: const Icon(Icons.queue_music),
+            ),
           ]),
         ),
         body: TabBarView(
