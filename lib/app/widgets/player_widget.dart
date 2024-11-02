@@ -142,10 +142,6 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                               ),
                             ),
                             const HorizontalSpacer(),
-                            const IconButton(
-                              icon: Icon(Icons.shuffle),
-                              onPressed: null,
-                            ),
                             const PlayPauseIcon(
                               size: 24,
                             ),

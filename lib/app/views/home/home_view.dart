@@ -40,47 +40,52 @@ class _HomeViewState extends State<HomeView> {
           const LibraryPage(),
         ],
       ),
-      bottomSheet: const PlayerWidget(),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        unselectedItemColor: colorScheme.outline,
-        fixedColor: colorScheme.primary,
-        items: [
-          BottomNavigationBarItem(
-            activeIcon: const Icon(Icons.search),
-            icon: const Icon(Icons.search_outlined),
-            label: RetipL10n.of(context).search,
-          ),
-          BottomNavigationBarItem(
-            activeIcon: RetipIcon(color: colorScheme.primary),
-            icon: RetipIcon(color: colorScheme.outline),
-            label: RetipL10n.of(context).home,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.library_music),
-            label: RetipL10n.of(context).library,
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const PlayerWidget(),
+          BottomNavigationBar(
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            unselectedItemColor: colorScheme.outline,
+            fixedColor: colorScheme.primary,
+            items: [
+              BottomNavigationBarItem(
+                activeIcon: const Icon(Icons.search),
+                icon: const Icon(Icons.search_outlined),
+                label: RetipL10n.of(context).search,
+              ),
+              BottomNavigationBarItem(
+                activeIcon: RetipIcon(color: colorScheme.primary),
+                icon: RetipIcon(color: colorScheme.outline),
+                label: RetipL10n.of(context).home,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.library_music),
+                label: RetipL10n.of(context).library,
+              ),
+            ],
+            currentIndex: index,
+            onTap: (value) {
+              index = value;
+
+              if (index == 0) {
+                focusSearch = true;
+              } else {
+                focusSearch = false;
+              }
+
+              setState(() {});
+
+              pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+              );
+            },
           ),
         ],
-        currentIndex: index,
-        onTap: (value) {
-          index = value;
-
-          if (index == 0) {
-            focusSearch = true;
-          } else {
-            focusSearch = false;
-          }
-
-          setState(() {});
-
-          pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeInOut,
-          );
-        },
       ),
     );
   }
