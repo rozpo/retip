@@ -156,4 +156,22 @@ class LibraryRepositoryImplementation implements LibraryRepository {
 
     return tracks;
   }
+
+  @override
+  Future<AlbumEntity> getAlbum(int id) {
+    // TODO: implement getAlbum
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ArtistEntity> getArtist(int id) {
+    // TODO: implement getArtist
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<TrackEntity> getTrack(int id) {
+    // TODO: implement getTrack
+    throw UnimplementedError();
+  }
 }

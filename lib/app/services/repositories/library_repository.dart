@@ -8,4 +8,10 @@ abstract class LibraryRepository {
   Future<List<AlbumEntity>> getAllAlbums();
 
   Future<List<ArtistEntity>> getAllArtists();
+
+  Future<TrackEntity> getTrack(int id);
+
+  Future<AlbumEntity> getAlbum(int id);
+
+  Future<ArtistEntity> getArtist(int id);
 }
