@@ -14,9 +14,9 @@ import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/app/widgets/tracks_header.dart';
+import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
-import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class AlbumPage extends StatefulWidget {
@@ -179,7 +179,9 @@ class _AlbumPageState extends State<AlbumPage> {
                         title = widget.album.title;
                       }
 
-                      setState(() {});
+                      if (context.mounted) {
+                        setState(() {});
+                      }
                     },
                     child: Text(
                       widget.album.title,
