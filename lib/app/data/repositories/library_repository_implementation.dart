@@ -147,9 +147,10 @@ class LibraryRepositoryImplementation implements LibraryRepository {
   }
 
   @override
-  Future<AlbumEntity> getAlbum(int id) {
-    // TODO: implement getAlbum
-    throw UnimplementedError();
+  Future<AlbumEntity> getAlbum(int id) async {
+    final albums = await getAllAlbums();
+
+    return albums.firstWhere((album) => album.id == id);
   }
 
   @override

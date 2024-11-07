@@ -6,6 +6,7 @@ import 'package:retip/app/services/entities/album_entity.dart';
 
 class AlbumModel extends AlbumEntity {
   AlbumModel._({
+    required super.id,
     required super.title,
     required super.artwork,
     required super.tracks,
@@ -20,6 +21,7 @@ class AlbumModel extends AlbumEntity {
   ) {
     try {
       return AlbumModel._(
+        id: data.id,
         title: data.album,
         artist: data.artist ?? '',
         artistId: data.artistId,

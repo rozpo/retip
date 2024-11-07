@@ -10,6 +10,7 @@ import 'abstract_entity.dart';
 import 'track_entity.dart';
 
 abstract class AlbumEntity extends AbstractEntity {
+  int id;
   final String title;
   final Uint8List? artwork;
   final String year;
@@ -19,6 +20,7 @@ abstract class AlbumEntity extends AbstractEntity {
   final int? artistId;
 
   AlbumEntity({
+    required this.id,
     required this.title,
     required this.artist,
     this.artistId,

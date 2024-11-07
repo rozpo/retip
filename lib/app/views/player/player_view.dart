@@ -4,8 +4,16 @@ import 'package:just_audio/just_audio.dart';
 import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
+import 'package:retip/app/services/cases/get_album.dart';
+import 'package:retip/app/services/cases/get_artist.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/views/home/pages/album/album_page.dart';
+import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
+import 'package:retip/app/widgets/modal_bottom_sheet.dart';
+import 'package:retip/app/widgets/option_list_tile.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
+import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -59,7 +67,7 @@ class _PlayerViewState extends State<PlayerView> {
                 icon: const Icon(Icons.arrow_back),
               ),
               actions: [
-                IconButton(
+                RpIconButton(
                   onPressed: () async {
                     if (currentTrack != null) {
                       if (isFavourite) {
@@ -71,13 +79,12 @@ class _PlayerViewState extends State<PlayerView> {
                       setState(() {});
                     }
                   },
-                  icon: Icon(
-                    currentTrack != null && isFavourite
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                  ),
+                  icon: currentTrack != null && isFavourite
+                      ? Icons.favorite
+                      : Icons.favorite_border,
                 ),
-                IconButton(
+                const HorizontalSpacer(),
+                RpIconButton(
                   onPressed: () async {
                     await showModalBottomSheet(
                         shape: const RoundedRectangleBorder(
@@ -132,12 +139,67 @@ class _PlayerViewState extends State<PlayerView> {
 
                     setState(() {});
                   },
-                  icon: const Icon(Icons.queue_music),
+                  icon: Icons.queue_music,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.more_vert),
+                const HorizontalSpacer(),
+                RpIconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                      context: context,
+                      builder: (context) {
+                        return ModalBottomSheet(
+                          options: [
+                            if (currentTrack?.artistId != null)
+                              OptionListTile(
+                                text: RetipL10n.of(context).showArtist,
+                                icon: Icons.person,
+                                onTap: () async {
+                                  final artist = await GetArtist.call(
+                                      currentTrack!.artistId!);
+
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return ArtistPage(artist: artist);
+                                        },
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            if (currentTrack?.artistId != null)
+                              OptionListTile(
+                                text: RetipL10n.of(context).viewAlbum,
+                                icon: Icons.album,
+                                onTap: () async {
+                                  final album = await GetAlbum.call(
+                                      currentTrack!.albumId!);
+
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return AlbumPage(album: album);
+                                        },
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  icon: Icons.more_vert,
                 ),
+                const HorizontalSpacer(),
               ],
             ),
             body: Padding(
