@@ -9,6 +9,7 @@ import '../../../../../../widgets/artwork_widget.dart';
 
 class AlbumsTab extends StatelessWidget {
   final String search;
+
   const AlbumsTab({this.search = '', super.key});
 
   static Future<List<AlbumEntity>> future = GetAllAlbums.call();
@@ -50,8 +51,7 @@ class AlbumsTab extends StatelessWidget {
               return ListTile(
                 leading: ArtworkWidget(bytes: album.artwork),
                 title: RetipUtils.getQueryText(context, album.title, search),
-                subtitle:
-                    album.artist != null ? Text(album.artist!.name) : null,
+                subtitle: Text(album.artist),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(

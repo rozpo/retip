@@ -17,6 +17,7 @@ abstract class TrackEntity extends AbstractEntity {
   final String title;
   final String album;
   final String artist;
+  final int? artistId;
   final Uri uri;
   final Uint8List? artwork;
   final int? index;
@@ -30,6 +31,7 @@ abstract class TrackEntity extends AbstractEntity {
     required this.title,
     required this.album,
     required this.artist,
+    this.artistId,
     required this.uri,
     required this.duration,
     this.artwork,

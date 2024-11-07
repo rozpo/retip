@@ -102,7 +102,7 @@ class _AlbumPageState extends State<AlbumPage> {
                 builder: (context) {
                   return ModalBottomSheet(
                     options: [
-                      if (widget.album.artist != null)
+                      if (widget.album.artistId != null)
                         OptionListTile(
                           text: RetipL10n.of(context).showAlbumArtist,
                           icon: Icons.person,
@@ -191,8 +191,7 @@ class _AlbumPageState extends State<AlbumPage> {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  if (widget.album.artist != null)
-                    Text(widget.album.artist!.name),
+                  Text(widget.album.artist),
                   const SizedBox(height: Sizer.x2),
                   const TracksHeader(),
                 ],
