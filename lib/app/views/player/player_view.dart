@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
+import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
+import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
@@ -21,23 +25,33 @@ class PlayerView extends StatefulWidget {
 }
 
 class _PlayerViewState extends State<PlayerView> {
+  TrackEntity? currentTrack;
+  bool isFavourite = false;
+  int? currentIndex;
+
   @override
   Widget build(BuildContext context) {
-    final prefs = GetIt.I.get<SharedPreferences>();
-    final favouriteTracks = prefs.getStringList('favourite_tracks') ?? [];
+    currentIndex = widget.player.currentIndex;
 
-    final currentIndex = widget.player.currentIndex;
-
-    final currentTrack =
-        currentIndex != null ? widget.player.tracks[currentIndex] : null;
+    currentTrack =
+        currentIndex != null ? widget.player.tracks[currentIndex!] : null;
 
     if (currentTrack != null) {
-      currentTrack.isFavourite =
-          favouriteTracks.contains(currentTrack.id.toString());
+      isFavourite = IsInFavourites.call(currentTrack!);
     }
+
     return StreamBuilder<int?>(
         stream: widget.player.currentIndexStream,
         builder: (context, snapshot) {
+          currentIndex = widget.player.currentIndex;
+
+          currentTrack =
+              currentIndex != null ? widget.player.tracks[currentIndex!] : null;
+
+          if (currentTrack != null) {
+            isFavourite = IsInFavourites.call(currentTrack!);
+          }
+
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
@@ -48,20 +62,17 @@ class _PlayerViewState extends State<PlayerView> {
                 IconButton(
                   onPressed: () async {
                     if (currentTrack != null) {
-                      if (currentTrack.isFavourite) {
-                        favouriteTracks.remove(currentTrack.id.toString());
+                      if (isFavourite) {
+                        RemoveFromFavourites.call(currentTrack!);
                       } else {
-                        favouriteTracks.add(currentTrack.id.toString());
+                        AddToFavourites.call(currentTrack!);
                       }
-
-                      await prefs.setStringList(
-                          'favourite_tracks', favouriteTracks);
 
                       setState(() {});
                     }
                   },
                   icon: Icon(
-                    currentTrack != null && currentTrack.isFavourite
+                    currentTrack != null && isFavourite
                         ? Icons.favorite
                         : Icons.favorite_border,
                   ),
@@ -153,6 +164,7 @@ class _PlayerViewState extends State<PlayerView> {
 
 class PlaylistBottomSheet extends StatefulWidget {
   final RetipAudio player;
+
   const PlaylistBottomSheet({
     required this.player,
     super.key,
