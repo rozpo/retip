@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
+import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
@@ -10,12 +11,13 @@ import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/player_widget.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/core/audio/retip_audio.dart';
-import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class ArtistPage extends StatefulWidget {
   final ArtistEntity artist;
@@ -37,6 +39,10 @@ class _ArtistPageState extends State<ArtistPage> {
   final tracks = <TrackEntity>[];
 
   Duration duration = Duration.zero;
+
+  GlobalKey nameKey = GlobalKey();
+
+  String name = '';
 
   @override
   void initState() {
@@ -61,41 +67,47 @@ class _ArtistPageState extends State<ArtistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(name),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back),
         ),
         actions: [
-          SortButton(
-            sortMode: sortMode,
-            sortByAlpha: () {
-              sortMode = SortMode.alphabetically;
+          RpIconButton(
+            onPressed: () {
+              final tracks = <TrackEntity>[];
 
-              tracks.sort((a, b) {
-                return a.title.compareTo(b.title);
-              });
+              for (final album in widget.artist.albums) {
+                tracks.addAll(album.tracks);
+              }
 
-              setState(() {});
-              Navigator.pop(context);
+              PlayAudio.call(
+                tracks,
+                shuffle: true,
+              );
             },
-            sortByNum: () {
-              sortMode = SortMode.numerically;
+            icon: Icons.shuffle,
+          ),
+          const HorizontalSpacer(),
+          RpIconButton(
+            onPressed: () {
+              final tracks = <TrackEntity>[];
 
-              tracks.sort((a, b) {
-                return a.index?.compareTo(b.index ?? 0) ?? 0;
-              });
+              for (final album in widget.artist.albums) {
+                tracks.addAll(album.tracks);
+              }
 
-              setState(() {});
-              Navigator.pop(context);
+              PlayAudio.call(
+                tracks,
+                shuffle: false,
+              );
             },
+            icon: Icons.play_arrow,
           ),
-          const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.grid_view),
-          ),
-          const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.more_vert),
+          const HorizontalSpacer(),
+          RpIconButton(
+            onPressed: () {},
+            icon: Icons.more_vert,
           ),
           const HorizontalSpacer(),
         ],
@@ -112,65 +124,43 @@ class _ArtistPageState extends State<ArtistPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
+                  child: LayoutBuilder(builder: (context, constraints) {
+                    return Center(
+                      child: SizedBox.square(
+                        dimension: constraints.maxWidth / 2,
                         child: ArtworkWidget(
                           bytes: widget.artist.artwork,
                           style: ArtworkStyle.circle,
                         ),
                       ),
-                      const HorizontalSpacer(),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.artist.name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            const VerticalSpacer(),
-                            Text(
-                                '${RetipL10n.of(context).albums}: ${widget.artist.albums.length}'),
-                            const VerticalSpacer(),
-                            Text(
-                              '${RetipL10n.of(context).tracks}: ${tracks.length}',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            const VerticalSpacer(),
-                            Text(
-                              '${RetipL10n.of(context).duration}: ${duration.text}',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            const Divider(),
-                            Wrap(
-                              children: [
-                                IconButton.filledTonal(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.favorite),
-                                ),
-                                IconButton.filledTonal(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.repeat),
-                                ),
-                                IconButton.filledTonal(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.shuffle),
-                                ),
-                                IconButton.filled(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.play_arrow),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                    );
+                  }),
+                ),
+                const VerticalSpacer(),
+                VisibilityDetector(
+                  key: nameKey,
+                  onVisibilityChanged: (info) {
+                    if (info.visibleFraction > 0.9) {
+                      name = '';
+                    } else {
+                      name = widget.artist.name;
+                    }
+
+                    if (context.mounted) {
+                      setState(() {});
+                    }
+                  },
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        widget.artist.name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: Sizer.x2),
