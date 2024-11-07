@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
+import 'package:retip/app/services/cases/get_artist.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/views/home/pages/artist/artist_page.dart';
@@ -106,16 +107,20 @@ class _AlbumPageState extends State<AlbumPage> {
                         OptionListTile(
                           text: RetipL10n.of(context).showAlbumArtist,
                           icon: Icons.person,
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return ArtistPage(
-                                      artist: widget.album.artist!);
-                                },
-                              ),
-                            );
+                          onTap: () async {
+                            final artist =
+                                await GetArtist.call(widget.album.artistId!);
+
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return ArtistPage(artist: artist);
+                                  },
+                                ),
+                              );
+                            }
                           },
                         ),
                     ],

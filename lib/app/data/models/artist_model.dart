@@ -6,6 +6,7 @@ import 'package:retip/app/services/entities/artist_entity.dart';
 
 class ArtistModel extends ArtistEntity {
   ArtistModel._({
+    required super.id,
     required super.name,
     required super.artwork,
     required super.albums,
@@ -18,6 +19,7 @@ class ArtistModel extends ArtistEntity {
   ) {
     try {
       return ArtistModel._(
+        id: data.id,
         name: data.artist,
         artwork: artwork,
         albums: albums,

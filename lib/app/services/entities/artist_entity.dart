@@ -10,11 +10,13 @@ import 'abstract_entity.dart';
 import 'album_entity.dart';
 
 abstract class ArtistEntity extends AbstractEntity {
+  final int id;
   final String name;
   final Uint8List? artwork;
   final List<AlbumEntity> albums;
 
   ArtistEntity({
+    required this.id,
     required this.name,
     required this.artwork,
     required this.albums,
