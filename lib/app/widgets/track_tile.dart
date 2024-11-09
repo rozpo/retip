@@ -4,7 +4,6 @@ import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
-import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
@@ -70,10 +69,10 @@ class TrackTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          if (quickAction != null) ...[
-            quickAction!,
-            const HorizontalSpacer(),
-          ],
+          // if (quickAction != null) ...[
+          //   quickAction!,
+          //   const HorizontalSpacer(),
+          // ],
           MoreIcon.horizontal(
             title: track.title,
             subtitle: track.artist,

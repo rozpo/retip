@@ -8,6 +8,7 @@ import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/sizer.dart';
 
 class TracksTab extends StatefulWidget {
   const TracksTab({super.key});
@@ -44,6 +45,7 @@ class _TracksTabState extends State<TracksTab> {
           }
 
           return ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: Sizer.x1),
             itemCount: snapshot.requireData.length,
             itemBuilder: (context, index) {
               final track = snapshot.requireData[index];
