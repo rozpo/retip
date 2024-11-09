@@ -6,10 +6,7 @@ import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class ArtistsTab extends StatelessWidget {
-  final String search;
-
   const ArtistsTab({
-    this.search = '',
     super.key,
   });
 
@@ -33,9 +30,7 @@ class ArtistsTab extends StatelessWidget {
             );
           }
 
-          final data = snapshot.requireData
-              .where((e) => e.name.toLowerCase().contains(search.toLowerCase()))
-              .toList();
+          final data = snapshot.requireData;
 
           if (data.isEmpty) {
             return Center(

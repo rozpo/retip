@@ -5,6 +5,7 @@ class RpAppBar extends AppBar {
     super.leading,
     super.title,
     super.actions,
+    super.bottom,
     super.key,
   }) : super(
           titleSpacing: 0,
