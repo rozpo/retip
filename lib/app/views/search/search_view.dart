@@ -50,7 +50,7 @@ class _SearchViewState extends State<SearchView> {
               title: SearchBar(
                 focusNode: _focus,
                 controller: _controller,
-                autoFocus: false,
+                autoFocus: true,
                 shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(Sizer.x1),
