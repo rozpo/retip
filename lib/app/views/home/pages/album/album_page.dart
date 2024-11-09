@@ -9,10 +9,12 @@ import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
+import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/modal_bottom_sheet.dart';
 import 'package:retip/app/widgets/option_list_tile.dart';
 import 'package:retip/app/widgets/player_widget.dart';
+import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_chip.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
@@ -65,17 +67,11 @@ class _AlbumPageState extends State<AlbumPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: RpAppBar(
         title: Text(title),
-        leading: Padding(
-          padding: const EdgeInsets.only(
-              top: Sizer.x1, bottom: Sizer.x1, left: Sizer.x2, right: Sizer.x0),
-          child: RpIconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icons.arrow_back,
-          ),
-        ),
+        leading: const RpBackButton(),
         actions: [
+          const HorizontalSpacer(),
           FavouriteButton(
             isFavourite: IsInFavourites.call(widget.album),
             onPressed: () {
@@ -131,89 +127,94 @@ class _AlbumPageState extends State<AlbumPage> {
             icon: Icons.more_vert,
           ),
           const HorizontalSpacer(),
-          const HorizontalSpacer(),
         ],
       ),
       bottomNavigationBar: const PlayerWidget(),
       body: ListView.builder(
         controller: scrollController,
-        padding: const EdgeInsets.all(Sizer.x2),
+        padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
         physics: const BouncingScrollPhysics(),
         itemCount: widget.album.tracks.length + 1,
         itemBuilder: (context, index) {
           if (index == 0) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: ArtworkWidget(bytes: widget.album.artwork),
-                    ),
-                    const HorizontalSpacer(),
-                    Expanded(
-                      child: Wrap(
-                        spacing: Sizer.x1,
-                        runSpacing: Sizer.x1,
-                        // mainAxisSize: MainAxisSize.min,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (widget.album.year != null)
-                            RpChip(text: widget.album.year!),
-                        ],
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ArtworkWidget(bytes: widget.album.artwork),
                       ),
-                    ),
-                  ],
-                ),
-                const VerticalSpacer(),
-                VisibilityDetector(
-                  key: titleKey,
-                  onVisibilityChanged: (info) {
-                    if (info.visibleFraction > 0.9) {
-                      title = '';
-                    } else {
-                      title = widget.album.title;
-                    }
-
-                    if (context.mounted) {
-                      setState(() {});
-                    }
-                  },
-                  child: Text(
-                    widget.album.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                      const HorizontalSpacer(),
+                      Expanded(
+                        child: Wrap(
+                          spacing: Sizer.x1,
+                          runSpacing: Sizer.x1,
+                          // mainAxisSize: MainAxisSize.min,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (widget.album.year != null)
+                              RpChip(text: widget.album.year!),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Text(widget.album.artist),
-                const SizedBox(height: Sizer.x1),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ShuffleButton(
-                        onPressed: () => PlayAudio.call(
-                          widget.album.tracks,
-                          shuffle: true,
+                  const VerticalSpacer(),
+                  const VerticalSpacer(),
+                  VisibilityDetector(
+                    key: titleKey,
+                    onVisibilityChanged: (info) {
+                      if (info.visibleFraction > 0.9) {
+                        title = '';
+                      } else {
+                        title = widget.album.title;
+                      }
+
+                      if (context.mounted) {
+                        setState(() {});
+                      }
+                    },
+                    child: Text(
+                      widget.album.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(widget.album.artist),
+                  const SizedBox(height: Sizer.x1),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ShuffleButton(
+                          onPressed: () => PlayAudio.call(
+                            widget.album.tracks,
+                            shuffle: true,
+                          ),
                         ),
                       ),
-                    ),
-                    const HorizontalSpacer(),
-                    Expanded(
-                      child: PlayButton(
-                        onPressed: () => PlayAudio.call(
-                          widget.album.tracks,
-                          shuffle: false,
+                      const HorizontalSpacer(),
+                      Expanded(
+                        child: PlayButton(
+                          onPressed: () => PlayAudio.call(
+                            widget.album.tracks,
+                            shuffle: false,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: Sizer.x2),
-                const TracksHeader(),
-              ],
+                    ],
+                  ),
+                  const VerticalSpacer(),
+                  const VerticalSpacer(),
+                  TracksHeader(value: widget.album.tracks.length),
+                  const VerticalSpacer(),
+                ],
+              ),
             );
           }
 

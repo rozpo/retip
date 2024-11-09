@@ -3,7 +3,12 @@ import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class TracksHeader extends StatelessWidget {
-  const TracksHeader({super.key});
+  final int? value;
+
+  const TracksHeader({
+    this.value,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class TracksHeader extends StatelessWidget {
         const Icon(Icons.queue_music),
         const HorizontalSpacer(),
         Text(
-          RetipL10n.of(context).tracks,
+          '${value ?? ''} ${RetipL10n.of(context).tracks}',
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ],

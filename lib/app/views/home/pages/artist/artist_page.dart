@@ -67,10 +67,11 @@ class _ArtistPageState extends State<ArtistPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back),
-        ),
+        // leading: const RpBackButton(),
+        // leading: IconButton(
+        //   onPressed: () => Navigator.pop(context),
+        //   icon: const Icon(Icons.arrow_back),
+        // ),
         actions: [
           RpIconButton(
             onPressed: () {

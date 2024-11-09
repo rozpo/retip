@@ -28,6 +28,8 @@
     "sortByIndex",
     "duration",
     "addedTo",
-    "removedFrom"
+    "removedFrom",
+    "play",
+    "shuffle"
   ]
 }

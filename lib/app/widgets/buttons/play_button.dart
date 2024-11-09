@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class PlayButton extends StatelessWidget {
@@ -12,7 +13,9 @@ class PlayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton.icon(
-      label: const Text('Play'),
+      label: Text(
+        RetipL10n.of(context).play.toUpperCase(),
+      ),
       icon: const Icon(Icons.play_arrow),
       style: ButtonStyle(
         padding: const WidgetStatePropertyAll(EdgeInsets.zero),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class ShuffleButton extends StatelessWidget {
@@ -12,7 +13,9 @@ class ShuffleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton.tonalIcon(
-      label: const Text('Shuffle'),
+      label: Text(
+        RetipL10n.of(context).shuffle.toUpperCase(),
+      ),
       icon: const Icon(Icons.shuffle),
       style: ButtonStyle(
         padding: const WidgetStatePropertyAll(EdgeInsets.zero),

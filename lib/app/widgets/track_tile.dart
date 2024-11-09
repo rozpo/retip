@@ -28,9 +28,12 @@ class TrackTile extends StatelessWidget {
     final theme = Theme.of(context);
 
     return ListTile(
+      horizontalTitleGap: Sizer.x1,
+      minTileHeight: Sizer.x0,
+      minVerticalPadding: Sizer.x1,
       onTap: onTap,
       onLongPress: onLongPress,
-      contentPadding: EdgeInsets.zero,
+      contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
       leading: Container(
         width: Sizer.x5,
         height: Sizer.x5,
