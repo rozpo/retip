@@ -1,18 +1,20 @@
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/services/entities/abstract_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 mixin AddToFavourites {
-  static Future<bool> call(TrackEntity track) async {
+  static Future<bool> call(AbstractEntity entity) async {
     final prefs = GetIt.I.get<SharedPreferences>();
-    final favouriteTracks = prefs.getStringList('favourite_tracks') ?? [];
 
-    if (favouriteTracks.contains(track.id.toString())) {
+    final key = entity.runtimeType.toString();
+    final favourites = prefs.getStringList(key) ?? [];
+
+    if (favourites.contains(entity.id.toString())) {
       return true;
     }
 
-    favouriteTracks.add(track.id.toString());
+    favourites.add(entity.id.toString());
 
-    return await prefs.setStringList('favourite_tracks', favouriteTracks);
+    return await prefs.setStringList(key, favourites);
   }
 }

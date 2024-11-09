@@ -12,7 +12,6 @@ import 'package:retip/core/utils/utils.dart';
 import 'abstract_entity.dart';
 
 abstract class TrackEntity extends AbstractEntity {
-  final int id;
   final int? albumId;
   final String title;
   final String album;
@@ -26,7 +25,7 @@ abstract class TrackEntity extends AbstractEntity {
   bool isFavourite = false;
 
   TrackEntity({
-    required this.id,
+    required super.id,
     this.albumId,
     required this.title,
     required this.album,
