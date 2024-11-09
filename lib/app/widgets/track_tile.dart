@@ -30,11 +30,15 @@ class TrackTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       onLongPress: onLongPress,
-      contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
+      contentPadding: EdgeInsets.zero,
       leading: Container(
         width: Sizer.x5,
         height: Sizer.x5,
         decoration: BoxDecoration(
+          image: showArtwork == false && track.artwork != null
+              ? DecorationImage(
+                  image: Image.memory(track.artwork!).image, opacity: 0.1)
+              : null,
           borderRadius: BorderRadius.circular(Sizer.x0_5),
           color: theme.colorScheme.surfaceBright,
         ),

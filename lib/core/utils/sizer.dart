@@ -1,4 +1,5 @@
 mixin Sizer {
+  static const double x0 = 0;
   static const double x0_5 = 4;
   static const double x1 = 8;
   static const double x2 = 16;

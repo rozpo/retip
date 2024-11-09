@@ -12,6 +12,7 @@ class AlbumModel extends AlbumEntity {
     required super.tracks,
     super.artistId,
     required super.artist,
+    required super.year,
   });
 
   factory AlbumModel.fromAlbumModel(
@@ -27,6 +28,7 @@ class AlbumModel extends AlbumEntity {
         artistId: data.artistId,
         artwork: artwork,
         tracks: tracks,
+        year: data.getMap['maxyear'] ?? data.getMap['minyear'],
       );
     } catch (e) {
       throw ArgumentError();
