@@ -43,9 +43,11 @@ class AlbumsTab extends StatelessWidget {
 
           return GridView.builder(
             physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(Sizer.x0_5),
+            padding: const EdgeInsets.symmetric(
+                vertical: Sizer.x1 + Sizer.x0_5, horizontal: Sizer.x0_5),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3),
+              crossAxisCount: 3,
+            ),
             itemCount: data.length,
             itemBuilder: (context, index) {
               final album = data[index];
@@ -64,6 +66,9 @@ class AlbumsTab extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
+                      color: album.artwork == null
+                          ? Theme.of(context).colorScheme.surfaceContainer
+                          : null,
                       borderRadius: BorderRadius.circular(Sizer.x1),
                       border: Border.all(
                           width: 2,
