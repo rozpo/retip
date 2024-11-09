@@ -9,10 +9,13 @@ import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
+import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/player_widget.dart';
-import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
+import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
+import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -64,53 +67,17 @@ class _ArtistPageState extends State<ArtistPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isInFavourites = IsInFavourites.call(widget.artist);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
-        // leading: const RpBackButton(),
-        // leading: IconButton(
-        //   onPressed: () => Navigator.pop(context),
-        //   icon: const Icon(Icons.arrow_back),
-        // ),
         actions: [
-          RpIconButton(
-            onPressed: () {
-              final tracks = <TrackEntity>[];
-
-              for (final album in widget.artist.albums) {
-                tracks.addAll(album.tracks);
-              }
-
-              PlayAudio.call(
-                tracks,
-                shuffle: true,
-              );
-            },
-            icon: Icons.shuffle,
-          ),
-          const HorizontalSpacer(),
-          RpIconButton(
-            onPressed: () {
-              final tracks = <TrackEntity>[];
-
-              for (final album in widget.artist.albums) {
-                tracks.addAll(album.tracks);
-              }
-
-              PlayAudio.call(
-                tracks,
-                shuffle: false,
-              );
-            },
-            icon: Icons.play_arrow,
-          ),
           const HorizontalSpacer(),
           FavouriteButton(
-            isFavourite: IsInFavourites.call(widget.artist),
+            isFavourite: isInFavourites,
             onPressed: () {
-              final isFavourte = IsInFavourites.call(widget.artist);
-
-              if (isFavourte) {
+              if (isInFavourites) {
                 RemoveFromFavourites.call(widget.artist);
               } else {
                 AddToFavourites.call(widget.artist);
@@ -120,9 +87,20 @@ class _ArtistPageState extends State<ArtistPage> {
             },
           ),
           const HorizontalSpacer(),
-          RpIconButton(
-            onPressed: () {},
-            icon: Icons.more_vert,
+          MoreIcon.vertical(
+            title: widget.artist.name,
+            image: widget.artist.artwork,
+            tiles: [
+              isInFavourites
+                  ? RemoveFromFavTile(
+                      widget.artist,
+                      onTap: () => setState(() {}),
+                    )
+                  : AddToFavTile(
+                      widget.artist,
+                      onTap: () => setState(() {}),
+                    ),
+            ],
           ),
           const HorizontalSpacer(),
         ],
@@ -246,40 +224,28 @@ class _ArtistPageState extends State<ArtistPage> {
           final track = tracks[index - 1];
           final isFavourite = IsInFavourites.call(track);
 
-          return ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-            leading: SizedBox.square(
-              dimension: Sizer.x5,
-              child: ArtworkWidget(
-                bytes: track.artwork,
-                borderWidth: 0,
-              ),
+          return TrackTile(
+            refresh: () => setState(() {}),
+            goToArtist: false,
+            showArtwork: true,
+            track: track,
+            onTap: () => PlayAudio.call(
+              tracks,
+              index: index - 1,
             ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FavouriteButton(
-                  isFavourite: isFavourite,
-                  onPressed: () {
-                    if (isFavourite) {
-                      RemoveFromFavourites.call(track);
-                    } else {
-                      AddToFavourites.call(track);
-                    }
+            onMore: () {},
+            quickAction: FavouriteButton(
+              isFavourite: isFavourite,
+              onPressed: () {
+                if (isFavourite) {
+                  RemoveFromFavourites.call(track);
+                } else {
+                  AddToFavourites.call(track);
+                }
 
-                    setState(() {});
-                  },
-                ),
-                IconButton(
-                  style: Theme.of(context).iconButtonTheme.style,
-                  onPressed: null,
-                  icon: const Icon(Icons.more_vert),
-                ),
-              ],
+                setState(() {});
+              },
             ),
-            title: Text(track.title, maxLines: 1),
-            subtitle: Text(track.artist, maxLines: 1),
-            onTap: () => PlayAudio.call(tracks, index: index - 1),
           );
         },
       ),

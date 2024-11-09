@@ -32,6 +32,9 @@
     "play",
     "shuffle",
     "addToFavourites",
-    "removeFromFavourites"
+    "removeFromFavourites",
+    "goToArtist",
+    "goToAlbum",
+    "addToPlaylist"
   ]
 }

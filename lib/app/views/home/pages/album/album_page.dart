@@ -2,25 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
-import 'package:retip/app/services/cases/get_artist.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
-import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
 import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
-import 'package:retip/app/widgets/modal_bottom_sheet.dart';
-import 'package:retip/app/widgets/option_list_tile.dart';
+import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_chip.dart';
-import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
+import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
+import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/app/widgets/tracks_header.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -64,6 +62,8 @@ class _AlbumPageState extends State<AlbumPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isInFavourites = IsInFavourites.call(widget.album);
+
     return Scaffold(
       appBar: RpAppBar(
         title: Text(title),
@@ -71,11 +71,9 @@ class _AlbumPageState extends State<AlbumPage> {
         actions: [
           const HorizontalSpacer(),
           FavouriteButton(
-            isFavourite: IsInFavourites.call(widget.album),
+            isFavourite: isInFavourites,
             onPressed: () {
-              final isFavourte = IsInFavourites.call(widget.album);
-
-              if (isFavourte) {
+              if (isInFavourites) {
                 RemoveFromFavourites.call(widget.album);
               } else {
                 AddToFavourites.call(widget.album);
@@ -85,85 +83,22 @@ class _AlbumPageState extends State<AlbumPage> {
             },
           ),
           const HorizontalSpacer(),
-          RpIconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
-                context: context,
-                builder: (context) {
-                  final isFavourite = IsInFavourites.call(widget.album);
-
-                  return ModalBottomSheet(
-                    header: widget.album.title,
-                    artwork: widget.album.artwork,
-                    subheader: widget.album.artist,
-                    options: [
-                      OptionListTile(
-                        title: isFavourite
-                            ? RetipL10n.of(context).removeFromFavourites
-                            : RetipL10n.of(context).addToFavourites,
-                        icon: isFavourite
-                            ? Icons.favorite_outline
-                            : Icons.favorite,
-                        onTap: () async {
-                          Navigator.of(context).pop();
-
-                          final theme = Theme.of(context);
-
-                          final l10n = RetipL10n.of(context);
-                          final favourite = l10n.favourites.toLowerCase();
-
-                          final snackBar = SnackBar(
-                            backgroundColor: theme.colorScheme.surfaceContainer,
-                            duration: const Duration(seconds: 1),
-                            content: Text(
-                              isFavourite
-                                  ? l10n.removedFrom(favourite)
-                                  : l10n.addedTo(favourite),
-                              style: theme.textTheme.bodyMedium,
-                            ),
-                          );
-
-                          if (isFavourite) {
-                            RemoveFromFavourites.call(widget.album);
-                          } else {
-                            AddToFavourites.call(widget.album);
-                          }
-
-                          ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-                          setState(() {});
-                        },
-                      ),
-                      if (widget.album.artistId != null)
-                        OptionListTile(
-                          title: RetipL10n.of(context).showAlbumArtist,
-                          icon: Icons.person,
-                          onTap: () async {
-                            final artist =
-                                await GetArtist.call(widget.album.artistId!);
-
-                            if (context.mounted) {
-                              Navigator.pop(context);
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return ArtistPage(artist: artist);
-                                  },
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                    ],
-                  );
-                },
-              );
-            },
-            icon: Icons.more_vert,
+          MoreIcon.vertical(
+            title: widget.album.title,
+            subtitle: widget.album.artist,
+            image: widget.album.artwork,
+            tiles: [
+              isInFavourites
+                  ? RemoveFromFavTile(
+                      widget.album,
+                      onTap: () => setState(() {}),
+                    )
+                  : AddToFavTile(
+                      widget.album,
+                      onTap: () => setState(() {}),
+                    ),
+              GoToArtistTile(widget.album.artistId!),
+            ],
           ),
           const HorizontalSpacer(),
         ],
@@ -261,6 +196,8 @@ class _AlbumPageState extends State<AlbumPage> {
           final isFavourite = IsInFavourites.call(track);
 
           return TrackTile(
+            refresh: () => setState(() {}),
+            goToAlbum: false,
             showArtwork: false,
             track: track,
             onTap: () => PlayAudio.call(

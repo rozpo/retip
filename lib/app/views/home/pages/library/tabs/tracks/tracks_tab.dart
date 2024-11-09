@@ -50,6 +50,7 @@ class _TracksTabState extends State<TracksTab> {
               final isFavourite = IsInFavourites.call(track);
 
               return TrackTile(
+                refresh: () => setState(() {}),
                 track: track,
                 quickAction: FavouriteButton(
                   isFavourite: isFavourite,

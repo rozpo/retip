@@ -58,7 +58,10 @@
     },
     "play": "Play",
     "shuffle": "Shuffle",
-    "addToFavourites": "Add to the favourites",
-    "removeFromFavourites": "Remove from the favourites",
+    "addToFavourites": "Add to favourites",
+    "removeFromFavourites": "Remove from favourites",
+    "goToArtist": "Go to artist",
+    "goToAlbum": "Go to album",
+    "addToPlaylist": "Add to playlist",
     "@_END": {}
 }

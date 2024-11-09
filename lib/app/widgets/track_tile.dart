@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/rp_icon_button.dart';
+import 'package:retip/app/widgets/more/more_icon.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/spacer.dart';
+import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
+import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
+import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class TrackTile extends StatelessWidget {
@@ -12,14 +18,20 @@ class TrackTile extends StatelessWidget {
   final VoidCallback? onMore;
   final Widget? quickAction;
   final bool showArtwork;
+  final bool goToAlbum;
+  final bool goToArtist;
+  final VoidCallback? refresh;
 
   const TrackTile({
     required this.track,
     this.showArtwork = true,
+    this.goToAlbum = true,
+    this.goToArtist = true,
     this.onTap,
     this.onLongPress,
     this.onMore,
     this.quickAction,
+    this.refresh,
     super.key,
   });
 
@@ -27,13 +39,8 @@ class TrackTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return ListTile(
-      horizontalTitleGap: Sizer.x1,
-      minTileHeight: Sizer.x0,
-      minVerticalPadding: Sizer.x1,
+    return RpListTile(
       onTap: onTap,
-      onLongPress: onLongPress,
-      contentPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
       leading: Container(
         width: Sizer.x5,
         height: Sizer.x5,
@@ -67,9 +74,22 @@ class TrackTile extends StatelessWidget {
             quickAction!,
             const HorizontalSpacer(),
           ],
-          RpIconButton(
-            icon: Icons.more_horiz,
-            onPressed: onMore,
+          MoreIcon.horizontal(
+            title: track.title,
+            subtitle: track.artist,
+            image: track.artwork,
+            tiles: [
+              IsInFavourites.call(track)
+                  ? RemoveFromFavTile(
+                      track,
+                      onTap: refresh,
+                    )
+                  : AddToFavTile(track, onTap: refresh),
+              if (goToAlbum && track.albumId != null)
+                GoToAlbumTile(track.albumId!),
+              if (goToArtist && track.artistId != null)
+                GoToArtistTile(track.artistId!),
+            ],
           ),
         ],
       ),
