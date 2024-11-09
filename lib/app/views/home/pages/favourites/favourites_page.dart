@@ -1,15 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:retip/app/services/cases/get_all_tracks.dart';
+import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
+import 'package:retip/app/services/cases/play_audio.dart';
+import 'package:retip/app/services/entities/album_entity.dart';
+import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/dev/dev_menu.dart';
-import 'package:retip/app/views/player/player_view.dart';
-import 'package:retip/app/views/search/search_view.dart';
+import 'package:retip/app/views/home/pages/album/album_page.dart';
+import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/widgets/rp_divider.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
+import 'package:retip/app/widgets/spacer.dart';
+import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:retip/core/utils/sizer.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({super.key});
@@ -19,80 +25,41 @@ class FavouritePage extends StatefulWidget {
 }
 
 class _FavouritePageState extends State<FavouritePage> {
-  final TextEditingController controller = TextEditingController();
-  final FocusNode focusNode = FocusNode();
+  static Future<List<ArtistEntity>> favArtists =
+      GetAllFavourites.call<ArtistEntity>('ArtistModel');
 
-  static Future<List<TrackEntity>> future = GetAllTracks.call();
+  static Future<List<AlbumEntity>> favAlbums =
+      GetAllFavourites.call<AlbumEntity>('AlbumModel');
 
-  bool isSearching = false;
-
-  @override
-  void dispose() {
-    controller.dispose();
-    focusNode.dispose();
-    super.dispose();
-  }
+  static Future<List<TrackEntity>> favTracks =
+      GetAllFavourites.call<TrackEntity>('TrackModel');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: isSearching
-            ? SearchBar(
-                focusNode: focusNode,
-                autoFocus: false,
-                onChanged: (value) {
-                  setState(() {});
-                },
-                hintText: '${RetipL10n.of(context).search}...',
-                controller: controller,
-                leading: const Icon(Icons.search),
-                trailing: [
-                  IconButton(
-                    onPressed: () {
-                      isSearching = false;
-                      controller.text = '';
-                      focusNode.unfocus();
-                      setState(() {});
-                    },
-                    icon: const Icon(Icons.close),
-                  )
-                ],
-              )
-            : Text(RetipL10n.of(context).favourites),
-        actions: isSearching
-            ? null
-            : [
-                IconButton(
-                  onPressed: () {
-                    isSearching = true;
-                    focusNode.requestFocus();
-                    setState(() {});
-                  },
-                  icon: const Icon(Icons.search),
+      appBar: RpAppBar(
+        leading: const Icon(Icons.queue_music_outlined),
+        title: Text(RetipL10n.of(context).retip),
+        actions: [
+          if (kReleaseMode == false) ...[
+            const HorizontalSpacer(),
+            IconButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DevMenu(),
                 ),
-                if (kReleaseMode == false) ...[
-                  IconButton(
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const SearchView(),
-                      ),
-                    ),
-                    icon: const Icon(Icons.saved_search),
-                  ),
-                  IconButton(
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const DevMenu(),
-                      ),
-                    ),
-                    icon: const Icon(Icons.developer_board),
-                  ),
-                ]
-              ],
+              ),
+              icon: const Icon(Icons.developer_board),
+            ),
+          ]
+        ],
       ),
       body: FutureBuilder(
-        future: future,
+        future: Future.wait([
+          favArtists,
+          favAlbums,
+          favTracks,
+        ]),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(
@@ -114,84 +81,105 @@ class _FavouritePageState extends State<FavouritePage> {
             );
           }
 
-          final prefs = GetIt.I.get<SharedPreferences>();
-          final favouriteTracks = prefs.getStringList('favourite_tracks') ?? [];
+          final artists = snapshot.requireData[0] as List<ArtistEntity>;
+          final albums = snapshot.requireData[1] as List<AlbumEntity>;
+          final tracks = snapshot.requireData[2] as List<TrackEntity>;
 
-          final listOfFavouriteTracks = data.where((track) {
-            return favouriteTracks.contains(track.id.toString());
-          }).toList();
+          return ListView(
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              RpDivider(text: RetipL10n.of(context).artists),
+              ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: artists.length,
+                itemBuilder: (context, index) {
+                  final artist = artists[index];
+                  final theme = Theme.of(context);
 
-          final displayFavouriteTracks = listOfFavouriteTracks
-              .where((e) =>
-                  e.title.toLowerCase().contains(controller.text.toLowerCase()))
-              .toList();
-
-          return ListView.builder(
-            itemCount: displayFavouriteTracks.length,
-            itemBuilder: (context, index) {
-              final track = displayFavouriteTracks[index];
-
-              return ListTile(
-                leading: ArtworkWidget(bytes: track.artwork),
-                title: Text(track.title),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(track.album),
-                    Text(track.artist),
-                  ],
-                ),
-                trailing: IconButton(
-                  onPressed: () async {
-                    showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title:
-                            Text(RetipL10n.of(context).alertRemoveFromFavTitle),
-                        content:
-                            Text(RetipL10n.of(context).alertRemoveFromFavMsg),
-                        actions: [
-                          OutlinedButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(RetipL10n.of(context).cancel),
-                          ),
-                          ElevatedButton(
-                            onPressed: () async {
-                              Navigator.pop(context);
-
-                              favouriteTracks.remove(track.id.toString());
-
-                              await prefs.setStringList(
-                                  'favourite_tracks', favouriteTracks);
-
-                              setState(() {});
-                            },
-                            child: Text(RetipL10n.of(context).remove),
-                          ),
-                        ],
+                  return RpListTile(
+                    leading: Container(
+                      width: Sizer.x5,
+                      height: Sizer.x5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Sizer.max),
+                        color: theme.colorScheme.surfaceBright,
                       ),
-                    );
-                  },
-                  icon: const Icon(Icons.more_vert),
-                ),
-                onTap: () async {
-                  final absoluteIndex = listOfFavouriteTracks.indexOf(track);
-                  final audio = GetIt.instance.get<RetipAudio>();
-
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PlayerView(
-                        player: audio,
+                      child: ArtworkWidget(
+                        style: ArtworkStyle.circle,
+                        bytes: artist.artwork,
+                        borderWidth: 0,
                       ),
                     ),
+                    title: Text(artist.name),
+                    subtitle: Text(
+                        '${artist.albums.length} ${RetipL10n.of(context).albums.toLowerCase()}'),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ArtistPage(
+                              artist: artist,
+                            );
+                          },
+                        ),
+                      );
+                    },
                   );
-
-                  await audio.playlistAddAll(listOfFavouriteTracks);
-                  await audio.seekToIndex(absoluteIndex);
-                  await audio.play();
                 },
-              );
-            },
+              ),
+              RpDivider(text: RetipL10n.of(context).albums),
+              ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: albums.length,
+                itemBuilder: (context, index) {
+                  final album = albums[index];
+                  final theme = Theme.of(context);
+
+                  return RpListTile(
+                    leading: Container(
+                      width: Sizer.x5,
+                      height: Sizer.x5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Sizer.x0_5),
+                        color: theme.colorScheme.surfaceBright,
+                      ),
+                      child: ArtworkWidget(
+                        bytes: album.artwork,
+                        borderWidth: 0,
+                      ),
+                    ),
+                    title: Text(album.title),
+                    subtitle: Text(album.artist),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return AlbumPage(album: album);
+                          },
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              RpDivider(text: RetipL10n.of(context).tracks),
+              ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: tracks.length,
+                itemBuilder: (context, index) {
+                  final track = tracks[index];
+
+                  return TrackTile(
+                    onTap: () => PlayAudio.call(tracks, index: index),
+                    track: track,
+                  );
+                },
+              ),
+            ],
           );
         },
       ),

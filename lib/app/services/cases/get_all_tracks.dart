@@ -4,6 +4,6 @@ import 'package:retip/app/services/repositories/library_repository.dart';
 
 class GetAllTracks {
   static Future<List<TrackEntity>> call() async {
-    return GetIt.I.get<LibraryRepository>().getAllTracks();
+    return await GetIt.I.get<LibraryRepository>().getAllTracks();
   }
 }
