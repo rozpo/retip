@@ -100,6 +100,8 @@ class _AlbumPageState extends State<AlbumPage> {
                 context: context,
                 builder: (context) {
                   return ModalBottomSheet(
+                    header: widget.album.title,
+                    artwork: widget.album.artwork,
                     options: [
                       if (widget.album.artistId != null)
                         OptionListTile(

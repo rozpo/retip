@@ -1,16 +1,21 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class OptionListTile extends StatelessWidget {
   final String text;
   final IconData icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool isActive;
+  final Uint8List? artwork;
 
   const OptionListTile({
+    this.artwork,
     required this.text,
     required this.icon,
-    required this.onTap,
+    this.onTap,
     this.isActive = false,
     super.key,
   });
@@ -26,7 +31,12 @@ class OptionListTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(Sizer.x0_5),
           color: Theme.of(context).colorScheme.surfaceBright,
         ),
-        child: Icon(icon),
+        child: artwork != null
+            ? ArtworkWidget(
+                bytes: artwork,
+                borderWidth: 0,
+              )
+            : Icon(icon),
       ),
       // leading: IconButton.filledTonal(
       //   onPressed: null,

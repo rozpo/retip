@@ -151,6 +151,8 @@ class _PlayerViewState extends State<PlayerView> {
                       context: context,
                       builder: (context) {
                         return ModalBottomSheet(
+                          header: currentTrack?.title,
+                          artwork: currentTrack?.artwork,
                           options: [
                             if (currentTrack?.artistId != null)
                               OptionListTile(
