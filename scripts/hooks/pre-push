@@ -3,11 +3,13 @@
 dart format --output=none --set-exit-if-changed .
 
 if [ $? -ne 0 ]; then
+  dart format .
   exit 1;
 fi
 
 dart analyze --fatal-infos --fatal-warnings
 
 if [ $? -ne 0 ]; then
+  dart fix --apply
   exit 1;
 fi
