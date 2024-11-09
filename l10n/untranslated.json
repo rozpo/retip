@@ -30,6 +30,8 @@
     "addedTo",
     "removedFrom",
     "play",
-    "shuffle"
+    "shuffle",
+    "addToFavourites",
+    "removeFromFavourites"
   ]
 }

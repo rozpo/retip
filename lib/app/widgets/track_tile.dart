@@ -68,7 +68,7 @@ class TrackTile extends StatelessWidget {
             const HorizontalSpacer(),
           ],
           RpIconButton(
-            icon: Icons.more_vert,
+            icon: Icons.more_horiz,
             onPressed: onMore,
           ),
         ],

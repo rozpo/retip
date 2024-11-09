@@ -5,16 +5,20 @@ import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class OptionListTile extends StatelessWidget {
-  final String text;
+  final String title;
+  final String? subtitle;
   final IconData icon;
   final VoidCallback? onTap;
   final bool isActive;
   final Uint8List? artwork;
+  final Widget? trailing;
 
   const OptionListTile({
     this.artwork,
-    required this.text,
+    required this.title,
+    this.subtitle,
     required this.icon,
+    this.trailing,
     this.onTap,
     this.isActive = false,
     super.key,
@@ -38,11 +42,10 @@ class OptionListTile extends StatelessWidget {
               )
             : Icon(icon),
       ),
-      // leading: IconButton.filledTonal(
-      //   onPressed: null,
-      // ),
-      title: Text(text),
+      title: Text(title),
+      subtitle: subtitle != null ? Text(subtitle!) : null,
       onTap: onTap,
+      trailing: trailing,
     );
   }
 }

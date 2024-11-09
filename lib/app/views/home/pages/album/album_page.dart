@@ -58,8 +58,6 @@ class _AlbumPageState extends State<AlbumPage> {
 
   String title = '';
 
-  bool isFavourite = false;
-
   ScrollController scrollController = ScrollController();
 
   GlobalKey titleKey = GlobalKey();
@@ -95,13 +93,54 @@ class _AlbumPageState extends State<AlbumPage> {
                 ),
                 context: context,
                 builder: (context) {
+                  final isFavourite = IsInFavourites.call(widget.album);
+
                   return ModalBottomSheet(
                     header: widget.album.title,
                     artwork: widget.album.artwork,
+                    subheader: widget.album.artist,
                     options: [
+                      OptionListTile(
+                        title: isFavourite
+                            ? RetipL10n.of(context).removeFromFavourites
+                            : RetipL10n.of(context).addToFavourites,
+                        icon: isFavourite
+                            ? Icons.favorite_outline
+                            : Icons.favorite,
+                        onTap: () async {
+                          Navigator.of(context).pop();
+
+                          final theme = Theme.of(context);
+
+                          final l10n = RetipL10n.of(context);
+                          final favourite = l10n.favourites.toLowerCase();
+
+                          final snackBar = SnackBar(
+                            backgroundColor: theme.colorScheme.surfaceContainer,
+                            duration: const Duration(seconds: 1),
+                            content: Text(
+                              isFavourite
+                                  ? l10n.removedFrom(favourite)
+                                  : l10n.addedTo(favourite),
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                          );
+
+                          if (isFavourite) {
+                            RemoveFromFavourites.call(widget.album);
+                          } else {
+                            AddToFavourites.call(widget.album);
+                          }
+
+                          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                          setState(() {});
+                        },
+                      ),
                       if (widget.album.artistId != null)
                         OptionListTile(
-                          text: RetipL10n.of(context).showAlbumArtist,
+                          title: RetipL10n.of(context).showAlbumArtist,
                           icon: Icons.person,
                           onTap: () async {
                             final artist =
@@ -163,7 +202,6 @@ class _AlbumPageState extends State<AlbumPage> {
                       ),
                     ],
                   ),
-                  const VerticalSpacer(),
                   const VerticalSpacer(),
                   VisibilityDetector(
                     key: titleKey,

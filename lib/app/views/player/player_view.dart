@@ -156,7 +156,7 @@ class _PlayerViewState extends State<PlayerView> {
                           options: [
                             if (currentTrack?.artistId != null)
                               OptionListTile(
-                                text: RetipL10n.of(context).showArtist,
+                                title: RetipL10n.of(context).showArtist,
                                 icon: Icons.person,
                                 onTap: () async {
                                   final artist = await GetArtist.call(
@@ -176,7 +176,7 @@ class _PlayerViewState extends State<PlayerView> {
                               ),
                             if (currentTrack?.artistId != null)
                               OptionListTile(
-                                text: RetipL10n.of(context).viewAlbum,
+                                title: RetipL10n.of(context).viewAlbum,
                                 icon: Icons.album,
                                 onTap: () async {
                                   final album = await GetAlbum.call(

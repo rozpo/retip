@@ -39,12 +39,12 @@ class SortButton extends StatelessWidget {
             return ModalBottomSheet(
               options: [
                 OptionListTile(
-                  text: RetipL10n.of(context).sortByIndex,
+                  title: RetipL10n.of(context).sortByIndex,
                   icon: SortMode.numerically.icon,
                   onTap: sortByNum,
                 ),
                 OptionListTile(
-                  text: RetipL10n.of(context).sortAlphabetically,
+                  title: RetipL10n.of(context).sortAlphabetically,
                   icon: SortMode.alphabetically.icon,
                   onTap: sortByAlpha,
                 ),

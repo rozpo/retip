@@ -58,5 +58,7 @@
     },
     "play": "Play",
     "shuffle": "Shuffle",
+    "addToFavourites": "Add to the favourites",
+    "removeFromFavourites": "Remove from the favourites",
     "@_END": {}
 }
