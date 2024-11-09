@@ -7,7 +7,6 @@ import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
-import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/player_widget.dart';
@@ -264,19 +263,7 @@ class _ArtistPageState extends State<ArtistPage> {
             ),
             title: Text(track.title, maxLines: 1),
             subtitle: Text(track.artist, maxLines: 1),
-            onTap: () async {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => PlayerView(
-                    player: player,
-                  ),
-                ),
-              );
-
-              await player.playlistAddAll(tracks);
-              await player.seekToIndex(index - 1);
-              await player.play();
-            },
+            onTap: () => PlayAudio.call(tracks, index: index - 1),
           );
         },
       ),
