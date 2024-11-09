@@ -104,6 +104,21 @@ class _ArtistPageState extends State<ArtistPage> {
             icon: Icons.play_arrow,
           ),
           const HorizontalSpacer(),
+          FavouriteButton(
+            isFavourite: IsInFavourites.call(widget.artist),
+            onPressed: () {
+              final isFavourte = IsInFavourites.call(widget.artist);
+
+              if (isFavourte) {
+                RemoveFromFavourites.call(widget.artist);
+              } else {
+                AddToFavourites.call(widget.artist);
+              }
+
+              setState(() {});
+            },
+          ),
+          const HorizontalSpacer(),
           RpIconButton(
             onPressed: () {},
             icon: Icons.more_vert,

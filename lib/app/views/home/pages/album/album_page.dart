@@ -76,7 +76,20 @@ class _AlbumPageState extends State<AlbumPage> {
           ),
         ),
         actions: [
-          FavouriteButton(onPressed: () {}),
+          FavouriteButton(
+            isFavourite: IsInFavourites.call(widget.album),
+            onPressed: () {
+              final isFavourte = IsInFavourites.call(widget.album);
+
+              if (isFavourte) {
+                RemoveFromFavourites.call(widget.album);
+              } else {
+                AddToFavourites.call(widget.album);
+              }
+
+              setState(() {});
+            },
+          ),
           const HorizontalSpacer(),
           RpIconButton(
             onPressed: () {
