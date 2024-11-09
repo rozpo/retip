@@ -25,15 +25,6 @@ class FavouritePage extends StatefulWidget {
 }
 
 class _FavouritePageState extends State<FavouritePage> {
-  static Future<List<ArtistEntity>> favArtists =
-      GetAllFavourites.call<ArtistEntity>('ArtistModel');
-
-  static Future<List<AlbumEntity>> favAlbums =
-      GetAllFavourites.call<AlbumEntity>('AlbumModel');
-
-  static Future<List<TrackEntity>> favTracks =
-      GetAllFavourites.call<TrackEntity>('TrackModel');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,9 +47,9 @@ class _FavouritePageState extends State<FavouritePage> {
       ),
       body: FutureBuilder(
         future: Future.wait([
-          favArtists,
-          favAlbums,
-          favTracks,
+          GetAllFavourites.call<ArtistEntity>('ArtistModel'),
+          GetAllFavourites.call<AlbumEntity>('AlbumModel'),
+          GetAllFavourites.call<TrackEntity>('TrackModel'),
         ]),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
