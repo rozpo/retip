@@ -21,6 +21,7 @@ class GoToArtistTile extends StatelessWidget {
         final artist = await GetArtist.call(artistId);
 
         if (context.mounted) {
+          Navigator.of(context).pop();
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {

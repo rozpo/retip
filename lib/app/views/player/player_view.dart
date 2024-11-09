@@ -4,16 +4,15 @@ import 'package:just_audio/just_audio.dart';
 import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
-import 'package:retip/app/services/cases/get_album.dart';
-import 'package:retip/app/services/cases/get_artist.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/views/home/pages/album/album_page.dart';
-import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/modal_bottom_sheet.dart';
-import 'package:retip/app/widgets/option_list_tile.dart';
+import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart';
+import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
+import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
+import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -142,66 +141,27 @@ class _PlayerViewState extends State<PlayerView> {
                   icon: Icons.queue_music,
                 ),
                 const HorizontalSpacer(),
-                RpIconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                      context: context,
-                      builder: (context) {
-                        return ModalBottomSheet(
-                          header: currentTrack?.title,
-                          artwork: currentTrack?.artwork,
-                          options: [
-                            if (currentTrack?.artistId != null)
-                              OptionListTile(
-                                title: RetipL10n.of(context).showArtist,
-                                icon: Icons.person,
-                                onTap: () async {
-                                  final artist = await GetArtist.call(
-                                      currentTrack!.artistId!);
-
-                                  if (context.mounted) {
-                                    Navigator.pop(context);
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return ArtistPage(artist: artist);
-                                        },
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                            if (currentTrack?.artistId != null)
-                              OptionListTile(
-                                title: RetipL10n.of(context).viewAlbum,
-                                icon: Icons.album,
-                                onTap: () async {
-                                  final album = await GetAlbum.call(
-                                      currentTrack!.albumId!);
-
-                                  if (context.mounted) {
-                                    Navigator.pop(context);
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return AlbumPage(album: album);
-                                        },
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  icon: Icons.more_vert,
-                ),
-                const HorizontalSpacer(),
+                if (currentTrack != null) ...[
+                  MoreIcon.vertical(
+                    title: currentTrack!.title,
+                    subtitle: currentTrack!.artist,
+                    image: currentTrack!.artwork,
+                    tiles: [
+                      isFavourite
+                          ? RemoveFromFavTile(
+                              currentTrack!,
+                              onTap: () => setState(() {}),
+                            )
+                          : AddToFavTile(
+                              currentTrack!,
+                              onTap: () => setState(() {}),
+                            ),
+                      GoToAlbumTile(currentTrack!.albumId!),
+                      GoToArtistTile(currentTrack!.artistId!),
+                    ],
+                  ),
+                  const HorizontalSpacer(),
+                ]
               ],
             ),
             body: Padding(

@@ -23,6 +23,7 @@ class AddToFavTile extends StatelessWidget {
       icon: Icons.favorite_outline,
       text: l10n.addToFavourites,
       onTap: () {
+        Navigator.of(context).pop();
         AddToFavourites.call(entity);
 
         final message = l10n.addedTo(l10n.favourites.toLowerCase());

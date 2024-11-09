@@ -22,10 +22,7 @@ class MoreTile extends StatelessWidget {
         maxLines: 1,
         text,
       ),
-      onTap: () {
-        Navigator.of(context).pop();
-        onTap.call();
-      },
+      onTap: onTap,
       leading: RpIcon(icon: icon),
     );
   }

@@ -21,6 +21,7 @@ class GoToAlbumTile extends StatelessWidget {
         final album = await GetAlbum.call(albumId);
 
         if (context.mounted) {
+          Navigator.of(context).pop();
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {

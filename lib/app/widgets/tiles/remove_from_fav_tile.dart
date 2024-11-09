@@ -23,6 +23,7 @@ class RemoveFromFavTile extends StatelessWidget {
       icon: Icons.favorite,
       text: l10n.removeFromFavourites,
       onTap: () {
+        Navigator.of(context).pop();
         RemoveFromFavourites.call(entity);
 
         final message = l10n.removedFrom(l10n.favourites.toLowerCase());
