@@ -6,7 +6,7 @@ import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart'
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/views/home/pages/album/album_page.dart';
+import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
@@ -26,19 +26,19 @@ import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class ArtistPage extends StatefulWidget {
+class ArtistView extends StatefulWidget {
   final ArtistEntity artist;
 
-  const ArtistPage({
+  const ArtistView({
     required this.artist,
     super.key,
   });
 
   @override
-  State<ArtistPage> createState() => _ArtistPageState();
+  State<ArtistView> createState() => _ArtistViewState();
 }
 
-class _ArtistPageState extends State<ArtistPage> {
+class _ArtistViewState extends State<ArtistView> {
   final RetipAudio player = GetIt.I.get();
 
   SortMode sortMode = SortMode.numerically;
@@ -228,7 +228,7 @@ class _ArtistPageState extends State<ArtistPage> {
                           await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return AlbumPage(album: album);
+                                return AlbumView(album: album);
                               },
                             ),
                           );

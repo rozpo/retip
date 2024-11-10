@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/get_all_artists.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
-import 'package:retip/app/views/home/pages/artist/artist_page.dart';
+import 'package:retip/app/views/artist/artist_view.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -68,7 +68,7 @@ class ArtistsTab extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return ArtistPage(artist: artist);
+                              return ArtistView(artist: artist);
                             },
                           ),
                         );

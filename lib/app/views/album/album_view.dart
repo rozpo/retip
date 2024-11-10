@@ -22,19 +22,19 @@ import 'package:retip/app/widgets/tracks_header.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class AlbumPage extends StatefulWidget {
+class AlbumView extends StatefulWidget {
   final AlbumEntity album;
 
-  const AlbumPage({
+  const AlbumView({
     required this.album,
     super.key,
   });
 
   @override
-  State<AlbumPage> createState() => _AlbumPageState();
+  State<AlbumView> createState() => _AlbumViewState();
 }
 
-class _AlbumPageState extends State<AlbumPage> {
+class _AlbumViewState extends State<AlbumView> {
   Duration duration = Duration.zero;
 
   @override

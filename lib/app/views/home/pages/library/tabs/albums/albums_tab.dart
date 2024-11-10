@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/get_all_albums.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
-import 'package:retip/app/views/home/pages/album/album_page.dart';
+import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -59,7 +59,7 @@ class AlbumsTab extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
-                          return AlbumPage(album: album);
+                          return AlbumView(album: album);
                         },
                       ),
                     );

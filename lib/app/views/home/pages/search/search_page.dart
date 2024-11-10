@@ -1,164 +1,200 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:retip/app/services/cases/get_all_artists.dart';
-import 'package:retip/app/services/entities/album_entity.dart';
-import 'package:retip/app/services/entities/artist_entity.dart';
-import 'package:retip/app/views/home/pages/album/album_page.dart';
-import 'package:retip/app/views/home/pages/artist/artist_page.dart';
-import 'package:retip/app/views/player/player_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/widgets/rp_divider.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/spacer.dart';
-import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/debouncer.dart';
 import 'package:retip/core/utils/sizer.dart';
 
+import 'bloc/search_bloc.dart';
+
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  final bool Function()? isSelected;
+
+  const SearchPage({
+    this.isSelected,
+    super.key,
+  });
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final TextEditingController controller = TextEditingController();
-  final focusNode = FocusNode();
-  final debouncer = Debouncer(const Duration(milliseconds: 500));
-
-  @override
-  void initState() {
-    Future.delayed(const Duration(seconds: 1)).then(
-      (value) => focusNode.requestFocus(),
-    );
-    super.initState();
-  }
+  final _focus = FocusNode();
+  final _debouncer = Debouncer(const Duration(seconds: 1));
+  final _controller = TextEditingController();
 
   @override
   void dispose() {
-    controller.dispose();
-    focusNode.unfocus();
-
+    _controller.dispose();
     super.dispose();
   }
 
-  List media = [];
-  List artists = <ArtistEntity>[];
-  bool searching = false;
+  final bloc = SearchBloc();
+
+  void requestFocus() {
+    if (widget.isSelected?.call() == true) {
+      _focus.requestFocus();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: SearchBar(
-          focusNode: focusNode,
-          autoFocus: false,
-          hintText: '${RetipL10n.of(context).search}...',
-          controller: controller,
-          onChanged: (value) {
-            debouncer.run(() async {
-              setState(() {
-                searching = true;
-              });
-              media.clear();
+    requestFocus();
 
-              if (controller.text.isEmpty) {
-                setState(() {
-                  searching = false;
-                });
-                return;
-              }
+    return BlocProvider(
+      create: (context) => bloc,
+      child: BlocBuilder<SearchBloc, SearchState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: RpAppBar(
+              leading: const Icon(Icons.search),
+              actions: [
+                const HorizontalSpacer(),
+                _controller.text.isEmpty
+                    ? const RpIconButton(
+                        onPressed: null,
+                        icon: Icons.mic,
+                      )
+                    : RpIconButton(
+                        onPressed: () {
+                          _controller.text = '';
+                          setState(() {});
+                          bloc.add(SearchRefreshEvent(''));
+                        },
+                        icon: Icons.close,
+                      ),
+                const HorizontalSpacer(),
+              ],
+              title: SearchBar(
+                padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+                focusNode: _focus,
+                controller: _controller,
+                autoFocus: true,
+                shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+                backgroundColor:
+                    const WidgetStatePropertyAll(Colors.transparent),
+                shape: const WidgetStatePropertyAll(LinearBorder.none
+                    // RoundedRectangleBorder(
+                    //   borderRadius: BorderRadius.circular(Sizer.x0_5),
+                    // ),
+                    ),
+                textInputAction: TextInputAction.search,
+                onChanged: (value) {
+                  setState(() {});
 
-              final query = controller.text.toLowerCase();
-              if (artists.isEmpty) {
-                artists = await GetAllArtists.call();
-              }
-
-              for (final artist in artists) {
-                if (artist.name.toLowerCase().contains(query)) {
-                  media.add(artist);
-                }
-
-                for (final album in artist.albums) {
-                  if (album.title.toLowerCase().contains(query)) {
-                    media.add(album);
+                  if (value.isEmpty) {
+                    _debouncer.cancel(
+                      () => bloc.add(SearchRefreshEvent(value)),
+                    );
                   }
 
-                  for (final track in album.tracks) {
-                    if (track.title.toLowerCase().contains(query)) {
-                      media.add(track);
-                    }
-                  }
-                }
-              }
-
-              setState(() {
-                searching = false;
-              });
-            });
-          },
-        ),
-      ),
-      body: searching
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
-              separatorBuilder: (context, index) {
-                return const VerticalSpacer();
-              },
-              itemCount: media.length,
-              itemBuilder: (context, index) {
-                final item = media[index];
-                String subtitle;
-
-                if (item is AlbumEntity) {
-                  subtitle = RetipL10n.of(context).album;
-                } else if (item is ArtistEntity) {
-                  subtitle = RetipL10n.of(context).artist;
-                } else {
-                  subtitle = RetipL10n.of(context).track;
+                  _debouncer.run(() {
+                    bloc.add(SearchRefreshEvent(value));
+                  });
+                },
+                hintText: RetipL10n.of(context).searchForMusic,
+                trailing: const [],
+              ),
+            ),
+            body: BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state is SearchSearchingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
 
-                return ListTile(
-                  leading:
-                      item.artwork != null ? Image.memory(item.artwork) : null,
-                  title: Text(item.toString()),
-                  subtitle: Text(subtitle),
-                  onTap: () async {
-                    if (item is ArtistEntity) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return ArtistPage(artist: item);
-                          },
-                        ),
-                      );
-                    } else if (item is AlbumEntity) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return AlbumPage(album: item);
-                          },
-                        ),
-                      );
-                    } else {
-                      final audio = GetIt.instance.get<RetipAudio>();
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PlayerView(
-                            player: audio,
-                          ),
-                        ),
-                      );
+                if (state is SearchErrorState) {
+                  return Center(
+                    child: Text(RetipL10n.of(context).noTracks),
+                  );
+                }
 
-                      await audio.playlistAddAll([item]);
-                      await audio.seekToIndex(0);
-                      await audio.play();
-                    }
-                  },
+                if (state is SearchSuccessState) {
+                  return ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
+                    itemCount: state.mediaLength,
+                    itemBuilder: (context, index) {
+                      Widget preWidget = const SizedBox();
+                      final item = state.media[index];
+
+                      if (index == 0) {
+                        preWidget = RpDivider(text: item.toTypeString(context));
+                      } else {
+                        final currentType = state.media[index];
+                        final prevType = state.media[index - 1];
+
+                        if (currentType.runtimeType != prevType.runtimeType) {
+                          preWidget = RpDivider(
+                            text: item.toTypeString(context),
+                          );
+                        }
+                      }
+
+                      return Column(
+                        children: [
+                          preWidget,
+                          item.toListTile(context, state.query),
+                        ],
+                      );
+                    },
+                  );
+                }
+                final list = bloc.recentSearch
+                    .map((e) => RpListTile(
+                          title: Text(e),
+                          leading: const Icon(Icons.search),
+                          onTap: () {
+                            _controller.text = e;
+
+                            setState(() {});
+
+                            _debouncer.cancel(
+                              () => bloc.add(SearchRefreshEvent(e)),
+                            );
+                          },
+                        ))
+                    .toList()
+                    .reversed
+                    .toList();
+
+                // const header = Padding(
+                //   padding: EdgeInsets.only(
+                //     left: Sizer.x2,
+                //     right: Sizer.x2,
+                //     top: Sizer.x2,
+                //   ),
+                //   child: Row(
+                //     children: [
+                //       Text('Recent search'),
+                //       Expanded(
+                //         child: Divider(
+                //           indent: Sizer.x1,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // );
+                final header =
+                    RpDivider(text: RetipL10n.of(context).recentSearch);
+
+                return ListView(
+                  padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
+                  children: [
+                    if (list.isNotEmpty) ...[header],
+                    ...list,
+                  ],
                 );
               },
             ),
+          );
+        },
+      ),
     );
   }
 }

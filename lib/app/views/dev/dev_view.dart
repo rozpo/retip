@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/views/dev/widgets/dev_switch_list_tile.dart';
 import 'package:retip/core/config/retip_config.dart';
 
-class DevMenu extends StatefulWidget {
-  const DevMenu({super.key});
+class DevView extends StatefulWidget {
+  const DevView({super.key});
 
   @override
-  State<DevMenu> createState() => _DevMenuState();
+  State<DevView> createState() => _DevViewState();
 }
 
-class _DevMenuState extends State<DevMenu> {
+class _DevViewState extends State<DevView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

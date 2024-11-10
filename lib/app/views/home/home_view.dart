@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/views/home/pages/home/home_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
-import 'package:retip/app/views/search/search_view.dart';
+import 'package:retip/app/views/home/pages/search/search_page.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
-import 'widgets/retip_icon.dart';
+import '../../widgets/retip_icon.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -35,7 +35,7 @@ class _HomeViewState extends State<HomeView> {
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: [
-          SearchView(isSelected: () => focusSearch),
+          SearchPage(isSelected: () => focusSearch),
           const HomePage(),
           const LibraryPage(),
         ],
@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
               BottomNavigationBarItem(
                 activeIcon: RetipIcon(color: colorScheme.primary),
                 icon: RetipIcon(color: colorScheme.outline),
-                label: RetipL10n.of(context).home,
+                label: RetipL10n.of(context).retip,
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.library_music),

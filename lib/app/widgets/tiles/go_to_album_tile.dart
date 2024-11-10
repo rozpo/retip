@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/get_album.dart';
-import 'package:retip/app/views/home/pages/album/album_page.dart';
+import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
@@ -25,7 +25,7 @@ class GoToAlbumTile extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return AlbumPage(album: album);
+                return AlbumView(album: album);
               },
             ),
           );

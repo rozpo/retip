@@ -4,8 +4,8 @@ import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/views/home/pages/album/album_page.dart';
-import 'package:retip/app/views/home/pages/artist/artist_page.dart';
+import 'package:retip/app/views/album/album_view.dart';
+import 'package:retip/app/views/artist/artist_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
@@ -95,7 +95,7 @@ class _FavouriteTabState extends State<FavouriteTab> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return ArtistPage(
+                            return ArtistView(
                               artist: artist,
                             );
                           },
@@ -133,7 +133,7 @@ class _FavouriteTabState extends State<FavouriteTab> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return AlbumPage(album: album);
+                            return AlbumView(album: album);
                           },
                         ),
                       );

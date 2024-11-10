@@ -1,9 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:retip/app/views/dev/dev_menu.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
-import 'package:retip/app/widgets/rp_icon_button.dart';
-import 'package:retip/app/widgets/spacer.dart';
 
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -28,20 +24,6 @@ class _LibraryPageState extends State<LibraryPage> {
         appBar: RpAppBar(
           leading: const Icon(Icons.library_music),
           title: Text(RetipL10n.of(context).library),
-          actions: [
-            if (kReleaseMode == false) ...[
-              const HorizontalSpacer(),
-              RpIconButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const DevMenu(),
-                  ),
-                ),
-                icon: Icons.developer_board,
-              ),
-            ],
-            const HorizontalSpacer()
-          ],
           bottom: TabBar(
             labelPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
             indicatorSize: TabBarIndicatorSize.tab,

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:retip/app/views/dev/dev_menu.dart';
+import 'package:retip/app/views/dev/dev_view.dart';
 import 'package:retip/app/views/home/pages/home/tabs/explore_tab.dart';
 import 'package:retip/app/views/home/pages/home/tabs/favourites_tab.dart';
 import 'package:retip/app/views/home/pages/home/tabs/playlists_tab.dart';
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
               IconButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const DevMenu(),
+                    builder: (context) => const DevView(),
                   ),
                 ),
                 icon: const Icon(Icons.developer_board),
