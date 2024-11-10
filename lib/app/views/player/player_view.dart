@@ -489,6 +489,9 @@ class _PlayPauseIconState extends State<PlayPauseIcon>
             icon: AnimatedIcons.play_pause,
             progress: animation,
           ),
+          style: Theme.of(context).iconButtonTheme.style?.copyWith(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
         );
       },
     );

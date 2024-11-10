@@ -134,10 +134,16 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                             Expanded(
                               child: Row(
                                 children: [
+                                  const SizedBox(width: Sizer.x1),
                                   PlayerArtworkWidget(player: player),
                                   const SizedBox(width: Sizer.x1),
                                   Expanded(
-                                      child: AudioInfoWidget(player: player)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: Sizer.x1),
+                                      child: AudioInfoWidget(player: player),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -206,7 +212,7 @@ class PlayerArtworkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double size = 24 * 2 + 16;
+    const double size = Sizer.x5;
 
     return StreamBuilder<int?>(
       stream: player.currentIndexStream,
@@ -217,21 +223,29 @@ class PlayerArtworkWidget extends StatelessWidget {
             : null;
 
         return LayoutBuilder(builder: (context, constraints) {
-          return SizedBox.square(
-            dimension: size,
-            child: track?.artwork != null
-                ? Image.memory(
-                    track!.artwork!,
-                    width: size,
-                    height: size,
+          return Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Sizer.x0_5),
+              image: track?.artwork != null
+                  ? DecorationImage(
+                      image: Image.memory(
+                      track!.artwork!,
+                      // width: size,
+                      // height: size,
+                      fit: BoxFit.cover,
+                    ).image)
+                  : null,
+            ),
+            child: track?.artwork == null
+                ? SvgPicture.asset(
+                    RetipAsset.logo,
+                    // width: size,
+                    // height: size,
                     fit: BoxFit.cover,
                   )
-                : SvgPicture.asset(
-                    RetipAsset.logo,
-                    width: size,
-                    height: size,
-                    fit: BoxFit.cover,
-                  ),
+                : null,
           );
         });
       },
