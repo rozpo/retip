@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart';
-import 'package:retip/core/asset/retip_asset.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -238,14 +237,7 @@ class PlayerArtworkWidget extends StatelessWidget {
                     ).image)
                   : null,
             ),
-            child: track?.artwork == null
-                ? SvgPicture.asset(
-                    RetipAsset.logo,
-                    // width: size,
-                    // height: size,
-                    fit: BoxFit.cover,
-                  )
-                : null,
+            child: track?.artwork == null ? const ArtworkWidget() : null,
           );
         });
       },
