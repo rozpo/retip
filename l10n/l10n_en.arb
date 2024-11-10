@@ -75,5 +75,7 @@
             "count": {}
         }
     },
-    "recentSearch": "Recent search"
+    "recentSearch": "Recent search",
+    "playlists": "Playlists",
+    "explore": "Explore"
 }

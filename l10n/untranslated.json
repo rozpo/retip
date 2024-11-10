@@ -38,6 +38,8 @@
     "addToPlaylist",
     "albumsCount",
     "tracksCount",
-    "recentSearch"
+    "recentSearch",
+    "playlists",
+    "explore"
   ]
 }

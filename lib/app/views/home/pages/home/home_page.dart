@@ -1,140 +1,64 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/dev/dev_menu.dart';
-import 'package:retip/app/views/home/bloc/home_bloc.dart';
-import 'package:retip/app/views/player/player_view.dart';
-import 'package:retip/app/widgets/player_widget.dart';
-import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/app/views/home/pages/home/tabs/explore_tab.dart';
+import 'package:retip/app/views/home/pages/home/tabs/favourites_tab.dart';
+import 'package:retip/app/views/home/pages/home/tabs/playlists_tab.dart';
+import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/sizer.dart';
 
-class HomePage2 extends StatelessWidget {
-  const HomePage2({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        final bloc = HomeBloc();
-        return bloc..add(HomeGetTracksEvent());
-      },
-      child: _HomePage(),
-    );
-  }
-}
-
-class _HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final bloc = context.read<HomeBloc>();
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(RetipL10n.of(context).retip),
-        actions: [
-          IconButton(
-            onPressed: () => bloc.add(HomeSortTracksEvent()),
-            icon: const Icon(Icons.sort),
-          ),
-          const VerticalDivider(),
-          if (kReleaseMode == false) ...[
-            IconButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const DevMenu(),
-                ),
-              ),
-              icon: const Icon(Icons.developer_board),
-            ),
-          ]
-        ],
-      ),
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          if (state is HomeIdleState) {
-            final tracks = state.tracks;
-            final player = GetIt.instance.get<RetipAudio>();
-
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: tracks.length,
-                    itemBuilder: (context, index) {
-                      final track = tracks[index];
-
-                      return ListTile(
-                        onTap: () async {
-                          bloc.add(HomePlayTrackEvent(index));
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => PlayerView(
-                                player: GetIt.instance.get<RetipAudio>(),
-                              ),
-                            ),
-                          );
-                        },
-                        leading: track.artwork != null
-                            ? SizedBox.square(
-                                dimension: 50,
-                                child: Image.memory(
-                                  track.artwork!,
-                                  cacheHeight: 50,
-                                  cacheWidth: 50,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : CircleAvatar(
-                                child: Text(track.title[0]),
-                              ),
-                        title: Text(
-                          track.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              track.album,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              track.artist,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                        trailing: StreamBuilder<int?>(
-                          stream: player.currentIndexStream,
-                          builder: (context, snapshot) {
-                            final audioIndex = snapshot.data ?? 0;
-
-                            return index == audioIndex
-                                ? Icon(
-                                    Icons.music_note,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  )
-                                : const Icon(Icons.more_vert);
-                          },
-                        ),
-                      );
-                    },
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: RpAppBar(
+          leading: const Icon(Icons.queue_music_outlined),
+          title: Text(RetipL10n.of(context).retip),
+          actions: [
+            if (kReleaseMode == false) ...[
+              const HorizontalSpacer(),
+              IconButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const DevMenu(),
                   ),
                 ),
-                const PlayerWidget(),
-              ],
-            );
-          }
-
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+                icon: const Icon(Icons.developer_board),
+              ),
+            ]
+          ],
+          bottom: TabBar(
+            labelPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
+            indicatorSize: TabBarIndicatorSize.tab,
+            tabs: [
+              Tab(
+                text: RetipL10n.of(context).explore,
+                icon: const Icon(Icons.explore),
+              ),
+              Tab(
+                text: RetipL10n.of(context).favourites,
+                icon: const Icon(Icons.favorite),
+              ),
+              Tab(
+                text: RetipL10n.of(context).playlists,
+                icon: const Icon(Icons.queue_music),
+              ),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            ExploreTab(),
+            FavouriteTab(),
+            PlaylistsTab(),
+          ],
+        ),
       ),
     );
   }

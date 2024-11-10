@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/views/home/pages/favourites/favourites_page.dart';
+import 'package:retip/app/views/home/pages/home/home_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/search/search_view.dart';
 import 'package:retip/app/widgets/player_widget.dart';
@@ -36,7 +36,7 @@ class _HomeViewState extends State<HomeView> {
         controller: pageController,
         children: [
           SearchView(isSelected: () => focusSearch),
-          const FavouritePage(),
+          const HomePage(),
           const LibraryPage(),
         ],
       ),

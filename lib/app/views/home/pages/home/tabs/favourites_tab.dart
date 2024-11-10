@@ -1,50 +1,29 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/views/dev/dev_menu.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/views/home/pages/artist/artist_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
-import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class FavouritePage extends StatefulWidget {
-  const FavouritePage({super.key});
+class FavouriteTab extends StatefulWidget {
+  const FavouriteTab({super.key});
 
   @override
-  State<FavouritePage> createState() => _FavouritePageState();
+  State<FavouriteTab> createState() => _FavouriteTabState();
 }
 
-class _FavouritePageState extends State<FavouritePage> {
+class _FavouriteTabState extends State<FavouriteTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: RpAppBar(
-        leading: const Icon(Icons.queue_music_outlined),
-        title: Text(RetipL10n.of(context).retip),
-        actions: [
-          if (kReleaseMode == false) ...[
-            const HorizontalSpacer(),
-            IconButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const DevMenu(),
-                ),
-              ),
-              icon: const Icon(Icons.developer_board),
-            ),
-          ]
-        ],
-      ),
       body: FutureBuilder(
         future: Future.wait([
           GetAllFavourites.call<ArtistEntity>('ArtistModel'),
