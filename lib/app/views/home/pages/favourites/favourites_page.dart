@@ -88,6 +88,11 @@ class _FavouritePageState extends State<FavouritePage> {
                 itemBuilder: (context, index) {
                   final artist = artists[index];
                   final theme = Theme.of(context);
+                  int tracksLength = 0;
+
+                  for (final album in albums) {
+                    tracksLength += album.tracks.length;
+                  }
 
                   return RpListTile(
                     leading: Container(
@@ -105,7 +110,7 @@ class _FavouritePageState extends State<FavouritePage> {
                     ),
                     title: Text(artist.name),
                     subtitle: Text(
-                        '${artist.albums.length} ${RetipL10n.of(context).albums.toLowerCase()}'),
+                        '${RetipL10n.of(context).albumsCount(artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracksLength)}'),
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
