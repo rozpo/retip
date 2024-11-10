@@ -35,6 +35,8 @@
     "removeFromFavourites",
     "goToArtist",
     "goToAlbum",
-    "addToPlaylist"
+    "addToPlaylist",
+    "albumsCount",
+    "tracksCount"
   ]
 }

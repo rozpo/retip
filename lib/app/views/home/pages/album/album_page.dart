@@ -185,7 +185,6 @@ class _AlbumPageState extends State<AlbumPage> {
                   const VerticalSpacer(),
                   const VerticalSpacer(),
                   TracksHeader(value: widget.album.tracks.length),
-                  const VerticalSpacer(),
                 ],
               ),
             );

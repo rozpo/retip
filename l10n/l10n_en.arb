@@ -63,5 +63,16 @@
     "goToArtist": "Go to artist",
     "goToAlbum": "Go to album",
     "addToPlaylist": "Add to playlist",
-    "@_END": {}
+    "albumsCount": "{count, plural, zero{No albums} one{1 Album} other{{count} Albums}}",
+    "@albumsCount": {
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "tracksCount": "{count, plural, zero{No tracks} one{1 Track} other{{count} Tracks}}",
+    "@tracksCount": {
+        "placeholders": {
+            "count": {}
+        }
+    }
 }

@@ -9,8 +9,13 @@ import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
+import 'package:retip/app/widgets/buttons/play_button.dart';
+import 'package:retip/app/widgets/buttons/rp_back_button.dart';
+import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/player_widget.dart';
+import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
@@ -70,8 +75,9 @@ class _ArtistPageState extends State<ArtistPage> {
     final isInFavourites = IsInFavourites.call(widget.artist);
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: RpAppBar(
         title: Text(name),
+        leading: const RpBackButton(),
         actions: [
           const HorizontalSpacer(),
           FavouriteButton(
@@ -146,17 +152,49 @@ class _ArtistPageState extends State<ArtistPage> {
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
+                      child: RpText(
                         widget.artist.name,
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge
                             ?.copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: Sizer.x2),
+                Center(
+                  child: RpText(
+                    '${RetipL10n.of(context).albumsCount(widget.artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracks.length)}',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const VerticalSpacer(),
+                Row(
+                  children: [
+                    const HorizontalSpacer(),
+                    Expanded(
+                      child: ShuffleButton(
+                        onPressed: () => PlayAudio.call(
+                          tracks,
+                          shuffle: true,
+                        ),
+                      ),
+                    ),
+                    const HorizontalSpacer(),
+                    Expanded(
+                      child: PlayButton(
+                        onPressed: () => PlayAudio.call(
+                          tracks,
+                          shuffle: false,
+                        ),
+                      ),
+                    ),
+                    const HorizontalSpacer(),
+                  ],
+                ),
+                const VerticalSpacer(),
+                const VerticalSpacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                   child: Row(
@@ -164,7 +202,9 @@ class _ArtistPageState extends State<ArtistPage> {
                       const Icon(Icons.album),
                       const HorizontalSpacer(),
                       Text(
-                        RetipL10n.of(context).albums,
+                        RetipL10n.of(context).albumsCount(
+                          widget.artist.albums.length,
+                        ),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
@@ -196,7 +236,10 @@ class _ArtistPageState extends State<ArtistPage> {
                           setState(() {});
                         },
                         child: SizedBox.square(
-                          child: ArtworkWidget(bytes: album.artwork),
+                          child: ArtworkWidget(
+                            bytes: album.artwork,
+                            borderWidth: 2,
+                          ),
                         ),
                       );
                     },
@@ -210,8 +253,8 @@ class _ArtistPageState extends State<ArtistPage> {
                     children: [
                       const Icon(Icons.queue_music),
                       const HorizontalSpacer(),
-                      Text(
-                        RetipL10n.of(context).tracks,
+                      RpText(
+                        RetipL10n.of(context).tracksCount(tracks.length),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
