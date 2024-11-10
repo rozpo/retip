@@ -91,7 +91,7 @@ class _FavouritePageState extends State<FavouritePage> {
                   final theme = Theme.of(context);
                   int tracksLength = 0;
 
-                  for (final album in albums) {
+                  for (final album in artist.albums) {
                     tracksLength += album.tracks.length;
                   }
 
