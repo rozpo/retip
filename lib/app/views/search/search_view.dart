@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/widgets/rp_divider.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
+import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/debouncer.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -46,16 +51,38 @@ class _SearchViewState extends State<SearchView> {
       child: BlocBuilder<SearchBloc, SearchState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
+            appBar: RpAppBar(
+              leading: const Icon(Icons.search),
+              actions: [
+                const HorizontalSpacer(),
+                _controller.text.isEmpty
+                    ? const RpIconButton(
+                        onPressed: null,
+                        icon: Icons.mic,
+                      )
+                    : RpIconButton(
+                        onPressed: () {
+                          _controller.text = '';
+                          setState(() {});
+                          bloc.add(SearchRefreshEvent(''));
+                        },
+                        icon: Icons.close,
+                      ),
+                const HorizontalSpacer(),
+              ],
               title: SearchBar(
+                padding: const WidgetStatePropertyAll(EdgeInsets.zero),
                 focusNode: _focus,
                 controller: _controller,
                 autoFocus: true,
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(Sizer.x1),
-                  ),
-                ),
+                shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+                backgroundColor:
+                    const WidgetStatePropertyAll(Colors.transparent),
+                shape: const WidgetStatePropertyAll(LinearBorder.none
+                    // RoundedRectangleBorder(
+                    //   borderRadius: BorderRadius.circular(Sizer.x0_5),
+                    // ),
+                    ),
                 textInputAction: TextInputAction.search,
                 onChanged: (value) {
                   setState(() {});
@@ -71,21 +98,7 @@ class _SearchViewState extends State<SearchView> {
                   });
                 },
                 hintText: RetipL10n.of(context).searchForMusic,
-                trailing: [
-                  _controller.text.isEmpty
-                      ? const IconButton(
-                          onPressed: null,
-                          icon: Icon(Icons.mic),
-                        )
-                      : IconButton(
-                          onPressed: () {
-                            _controller.text = '';
-                            setState(() {});
-                            bloc.add(SearchRefreshEvent(''));
-                          },
-                          icon: const Icon(Icons.close),
-                        ),
-                ],
+                trailing: const [],
               ),
             ),
             body: BlocBuilder<SearchBloc, SearchState>(
@@ -111,40 +124,14 @@ class _SearchViewState extends State<SearchView> {
                       final item = state.media[index];
 
                       if (index == 0) {
-                        preWidget = Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Sizer.x2,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(item.toTypeString(context)),
-                              const Expanded(
-                                child: Divider(
-                                  indent: Sizer.x1,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        preWidget = RpDivider(text: item.toTypeString(context));
                       } else {
                         final currentType = state.media[index];
                         final prevType = state.media[index - 1];
 
                         if (currentType.runtimeType != prevType.runtimeType) {
-                          preWidget = Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: Sizer.x2,
-                            ),
-                            child: Row(
-                              children: [
-                                Text(item.toTypeString(context)),
-                                const Expanded(
-                                  child: Divider(
-                                    indent: Sizer.x1,
-                                  ),
-                                ),
-                              ],
-                            ),
+                          preWidget = RpDivider(
+                            text: item.toTypeString(context),
                           );
                         }
                       }
@@ -159,7 +146,7 @@ class _SearchViewState extends State<SearchView> {
                   );
                 }
                 final list = bloc.recentSearch
-                    .map((e) => ListTile(
+                    .map((e) => RpListTile(
                           title: Text(e),
                           leading: const Icon(Icons.search),
                           onTap: () {
@@ -176,25 +163,28 @@ class _SearchViewState extends State<SearchView> {
                     .reversed
                     .toList();
 
-                const header = Padding(
-                  padding: EdgeInsets.only(
-                    left: Sizer.x2,
-                    right: Sizer.x2,
-                    top: Sizer.x2,
-                  ),
-                  child: Row(
-                    children: [
-                      Text('Recent search'),
-                      Expanded(
-                        child: Divider(
-                          indent: Sizer.x1,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+                // const header = Padding(
+                //   padding: EdgeInsets.only(
+                //     left: Sizer.x2,
+                //     right: Sizer.x2,
+                //     top: Sizer.x2,
+                //   ),
+                //   child: Row(
+                //     children: [
+                //       Text('Recent search'),
+                //       Expanded(
+                //         child: Divider(
+                //           indent: Sizer.x1,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // );
+                final header =
+                    RpDivider(text: RetipL10n.of(context).recentSearch);
 
                 return ListView(
+                  padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
                   children: [
                     if (list.isNotEmpty) ...[header],
                     ...list,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
 
 abstract class AbstractEntity {
   final int id;
@@ -11,7 +12,7 @@ abstract class AbstractEntity {
     throw UnimplementedError();
   }
 
-  ListTile toListTile(BuildContext context, [String? query]) {
+  RpListTile toListTile(BuildContext context, [String? query]) {
     throw UnimplementedError();
   }
 }

@@ -37,6 +37,7 @@
     "goToAlbum",
     "addToPlaylist",
     "albumsCount",
-    "tracksCount"
+    "tracksCount",
+    "recentSearch"
   ]
 }

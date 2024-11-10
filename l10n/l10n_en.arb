@@ -74,5 +74,6 @@
         "placeholders": {
             "count": {}
         }
-    }
+    },
+    "recentSearch": "Recent search"
 }

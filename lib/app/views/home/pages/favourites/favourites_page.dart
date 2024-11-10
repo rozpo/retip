@@ -77,6 +77,7 @@ class _FavouritePageState extends State<FavouritePage> {
           final tracks = snapshot.requireData[2] as List<TrackEntity>;
 
           return ListView(
+            padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             children: [

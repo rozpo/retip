@@ -3,7 +3,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:retip/app/views/home/pages/album/album_page.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/utils/utils.dart';
 
 import 'abstract_entity.dart';
@@ -39,16 +41,26 @@ abstract class AlbumEntity extends AbstractEntity {
   }
 
   @override
-  ListTile toListTile(BuildContext context, [String? query]) {
-    return ListTile(
-      title: query != null
-          ? RetipUtils.getQueryText(context, title, query)
-          : Text(title),
+  RpListTile toListTile(BuildContext context, [String? query]) {
+    final theme = Theme.of(context);
+
+    return RpListTile(
+      leading: Container(
+        width: Sizer.x5,
+        height: Sizer.x5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Sizer.x0_5),
+          color: theme.colorScheme.surfaceBright,
+        ),
+        child: ArtworkWidget(
+          bytes: artwork,
+          borderWidth: 0,
+        ),
+      ),
+      title: RetipUtils.getQueryText(context, title, query ?? ''),
       subtitle: Text(artist),
-      leading: artwork != null ? ArtworkWidget(bytes: artwork) : null,
       onTap: () {
-        Navigator.push(
-          context,
+        Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
               return AlbumPage(album: this);

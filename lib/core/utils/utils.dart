@@ -16,7 +16,10 @@ mixin RetipUtils {
           ],
           TextSpan(
             text: boldText,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
           TextSpan(text: title.substring(endIndex)),
         ],
