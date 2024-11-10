@@ -5,6 +5,7 @@ import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/widgets/tiles/add_to_playlist_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
@@ -20,6 +21,7 @@ class TrackTile extends StatelessWidget {
   final bool goToAlbum;
   final bool goToArtist;
   final VoidCallback? refresh;
+  final List<Widget> moreActions;
 
   const TrackTile({
     required this.track,
@@ -31,6 +33,7 @@ class TrackTile extends StatelessWidget {
     this.onMore,
     this.quickAction,
     this.refresh,
+    this.moreActions = const [],
     super.key,
   });
 
@@ -84,6 +87,8 @@ class TrackTile extends StatelessWidget {
                       onTap: refresh,
                     )
                   : AddToFavTile(track, onTap: refresh),
+              AddToPlaylistTile(track: track),
+              ...moreActions,
               if (goToAlbum && track.albumId != null)
                 GoToAlbumTile(track.albumId!),
               if (goToArtist && track.artistId != null)

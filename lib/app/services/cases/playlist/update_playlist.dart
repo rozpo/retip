@@ -1,18 +1,19 @@
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 mixin UpdatePlaylist {
-  static Future<bool> call(String name, List<TrackEntity> tracks) async {
+  static Future<bool> call(PlaylistEntity playlist) async {
     final prefs = GetIt.I.get<SharedPreferences>();
 
-    final key = 'pl_$name';
-    final trackIds = prefs.getStringList(key);
-    if (trackIds == null) {
-      return false;
-    }
+    final key = 'pl_${playlist.uuid}';
 
     return await prefs.setStringList(
-        key, tracks.map((track) => track.id.toString()).toList());
+      key,
+      [
+        playlist.name,
+        ...playlist.tracks.map((track) => track.id.toString()),
+      ],
+    );
   }
 }

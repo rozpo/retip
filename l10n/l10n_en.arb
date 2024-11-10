@@ -29,6 +29,7 @@
     "noAlbums": "No albums found",
     "noArtists": "No artists found",
     "noTracks": "No tracks found",
+    "noPlaylists": "No playlists found",
     "addToTheFavourites": "Add to the favourites",
     "addToTheQueue": "Add to the queue",
     "addToThePlaylist": "Add to the playlist",
@@ -77,5 +78,8 @@
     },
     "recentSearch": "Recent search",
     "playlists": "Playlists",
-    "explore": "Explore"
+    "explore": "Explore",
+    "deletePlaylist": "Delete playlist",
+    "playlistDeleted": "Playlist deleted",
+    "removeFromPlaylist": "Remove from playlist"
 }

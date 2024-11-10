@@ -3,7 +3,7 @@ import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
-import 'package:retip/app/services/entities/album_entity.dart';
+import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
@@ -12,21 +12,22 @@ import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
-import 'package:retip/app/widgets/rp_chip.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
-import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
+import 'package:retip/app/widgets/tiles/delete_playlist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
+import 'package:retip/app/widgets/tiles/remove_from_playlist_tile.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/app/widgets/tracks_header.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class PlaylistView extends StatefulWidget {
-  final AlbumEntity album;
+  final PlaylistEntity playlist;
 
   const PlaylistView({
-    required this.album,
+    required this.playlist,
     super.key,
   });
 
@@ -41,13 +42,13 @@ class _PlaylistViewState extends State<PlaylistView> {
   void initState() {
     int seconds = 0;
 
-    for (final track in widget.album.tracks) {
+    for (final track in widget.playlist.tracks) {
       seconds += track.duration.inSeconds;
     }
 
     duration = Duration(seconds: seconds);
 
-    widget.album.tracks.sort((a, b) {
+    widget.playlist.tracks.sort((a, b) {
       return a.index?.compareTo(b.index ?? 0) ?? 0;
     });
 
@@ -62,7 +63,7 @@ class _PlaylistViewState extends State<PlaylistView> {
 
   @override
   Widget build(BuildContext context) {
-    final isInFavourites = IsInFavourites.call(widget.album);
+    final isInFavourites = IsInFavourites.call(widget.playlist);
 
     return Scaffold(
       appBar: RpAppBar(
@@ -74,9 +75,9 @@ class _PlaylistViewState extends State<PlaylistView> {
             isFavourite: isInFavourites,
             onPressed: () {
               if (isInFavourites) {
-                RemoveFromFavourites.call(widget.album);
+                RemoveFromFavourites.call(widget.playlist);
               } else {
-                AddToFavourites.call(widget.album);
+                AddToFavourites.call(widget.playlist);
               }
 
               setState(() {});
@@ -84,20 +85,21 @@ class _PlaylistViewState extends State<PlaylistView> {
           ),
           const HorizontalSpacer(),
           MoreIcon.vertical(
-            title: widget.album.title,
-            subtitle: widget.album.artist,
-            image: widget.album.artwork,
+            title: widget.playlist.name,
+            subtitle: RetipL10n.of(context)
+                .tracksCount(widget.playlist.tracks.length),
+            image: widget.playlist.artwork,
             tiles: [
               isInFavourites
                   ? RemoveFromFavTile(
-                      widget.album,
+                      widget.playlist,
                       onTap: () => setState(() {}),
                     )
                   : AddToFavTile(
-                      widget.album,
+                      widget.playlist,
                       onTap: () => setState(() {}),
                     ),
-              GoToArtistTile(widget.album.artistId!),
+              DeletePlaylistTile(widget.playlist),
             ],
           ),
           const HorizontalSpacer(),
@@ -105,37 +107,22 @@ class _PlaylistViewState extends State<PlaylistView> {
       ),
       bottomNavigationBar: const PlayerWidget(),
       body: ListView.builder(
+        shrinkWrap: true,
         controller: scrollController,
         padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
         physics: const BouncingScrollPhysics(),
-        itemCount: widget.album.tracks.length + 1,
+        itemCount: widget.playlist.tracks.length + 1,
         itemBuilder: (context, index) {
           if (index == 0) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // shrinkWrap: true,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: ArtworkWidget(bytes: widget.album.artwork),
-                      ),
-                      const HorizontalSpacer(),
-                      Expanded(
-                        child: Wrap(
-                          spacing: Sizer.x1,
-                          runSpacing: Sizer.x1,
-                          // mainAxisSize: MainAxisSize.min,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (widget.album.year != null)
-                              RpChip(text: widget.album.year!),
-                          ],
-                        ),
-                      ),
-                    ],
+                  SizedBox.square(
+                    dimension: MediaQuery.of(context).size.width / 2,
+                    child: ArtworkWidget(bytes: widget.playlist.artwork),
                   ),
                   const VerticalSpacer(),
                   VisibilityDetector(
@@ -144,7 +131,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                       if (info.visibleFraction > 0.9) {
                         title = '';
                       } else {
-                        title = widget.album.title;
+                        title = widget.playlist.name;
                       }
 
                       if (context.mounted) {
@@ -152,21 +139,22 @@ class _PlaylistViewState extends State<PlaylistView> {
                       }
                     },
                     child: Text(
-                      widget.album.title,
+                      widget.playlist.name,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text(widget.album.artist),
+                  Text(RetipL10n.of(context)
+                      .tracksCount(widget.playlist.tracks.length)),
                   const SizedBox(height: Sizer.x1),
                   Row(
                     children: [
                       Expanded(
                         child: ShuffleButton(
                           onPressed: () => PlayAudio.call(
-                            widget.album.tracks,
+                            widget.playlist.tracks,
                             shuffle: true,
                           ),
                         ),
@@ -175,7 +163,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                       Expanded(
                         child: PlayButton(
                           onPressed: () => PlayAudio.call(
-                            widget.album.tracks,
+                            widget.playlist.tracks,
                             shuffle: false,
                           ),
                         ),
@@ -184,13 +172,13 @@ class _PlaylistViewState extends State<PlaylistView> {
                   ),
                   const VerticalSpacer(),
                   const VerticalSpacer(),
-                  TracksHeader(value: widget.album.tracks.length),
+                  TracksHeader(value: widget.playlist.tracks.length),
                 ],
               ),
             );
           }
 
-          final track = widget.album.tracks[index - 1];
+          final track = widget.playlist.tracks[index - 1];
 
           final isFavourite = IsInFavourites.call(track);
 
@@ -200,10 +188,19 @@ class _PlaylistViewState extends State<PlaylistView> {
             showArtwork: false,
             track: track,
             onTap: () => PlayAudio.call(
-              widget.album.tracks,
+              widget.playlist.tracks,
               index: index - 1,
             ),
             onMore: () {},
+            moreActions: [
+              RemoveFromPlaylistTile(
+                track: track,
+                playlist: widget.playlist,
+                onTap: () {
+                  setState(() {});
+                },
+              )
+            ],
             quickAction: FavouriteButton(
               isFavourite: isFavourite,
               onPressed: () {

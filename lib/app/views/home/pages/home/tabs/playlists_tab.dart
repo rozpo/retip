@@ -1,20 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/get_all_albums.dart';
-import 'package:retip/app/services/entities/album_entity.dart';
+import 'package:retip/app/services/cases/playlist/create_playlist.dart';
+import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
+import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class PlaylistsTab extends StatelessWidget {
-  final String search;
+class PlaylistsTab extends StatefulWidget {
+  const PlaylistsTab({super.key});
 
-  const PlaylistsTab({this.search = '', super.key});
+  @override
+  State<PlaylistsTab> createState() => _PlaylistsTabState();
+}
 
-  static Future<List<AlbumEntity>> future = GetAllAlbums.call();
+class _PlaylistsTabState extends State<PlaylistsTab> {
+  static Future<List<PlaylistEntity>> future = GetAllPlaylists.call();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: RpIconButton.filled(
+        icon: Icons.playlist_add,
+        onPressed: () async {
+          String text = '';
+
+          await showDialog<bool>(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    decoration:
+                        const InputDecoration(hintText: 'Name a new playlist'),
+                    onChanged: (value) {
+                      text = value;
+                    },
+                  ),
+                ],
+              ),
+              actions: [
+                OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel')),
+                FilledButton(
+                  onPressed: () async {
+                    if (text.isNotEmpty) {
+                      Navigator.pop(context);
+
+                      await CreatePlaylist.call(text);
+                    }
+                  },
+                  child: const Text('Create'),
+                ),
+              ],
+            ),
+          );
+
+          setState(() {});
+          future = GetAllPlaylists.call();
+        },
+      ),
       body: FutureBuilder(
         future: future,
         builder: (context, snapshot) {
@@ -30,67 +79,70 @@ class PlaylistsTab extends StatelessWidget {
             );
           }
 
-          final data = snapshot.requireData
-              .where(
-                  (e) => e.title.toLowerCase().contains(search.toLowerCase()))
-              .toList();
+          final data = snapshot.requireData;
 
           if (data.isEmpty) {
             return Center(
-              child: Text(RetipL10n.of(context).noAlbums),
+              child: Text(RetipL10n.of(context).noPlaylists),
             );
           }
 
           return GridView.builder(
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(
-                vertical: Sizer.x1 + Sizer.x0_5, horizontal: Sizer.x0_5),
+              vertical: Sizer.x1 + Sizer.x0_5,
+              horizontal: Sizer.x0_5,
+            ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
             ),
             itemCount: data.length,
             itemBuilder: (context, index) {
-              final album = data[index];
+              final playlist = data[index];
 
               return Padding(
                 padding: const EdgeInsets.all(Sizer.x0_5),
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
+                  onTap: () async {
+                    await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
-                          return PlaylistView(album: album);
+                          return PlaylistView(playlist: playlist);
                         },
                       ),
                     );
+
+                    future = GetAllPlaylists.call();
+                    setState(() {});
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: album.artwork == null
+                      color: playlist.artwork == null
                           ? Theme.of(context).colorScheme.surfaceContainer
                           : null,
                       borderRadius: BorderRadius.circular(Sizer.x1),
                       border: Border.all(
                           width: 2,
                           color: Theme.of(context).colorScheme.surfaceBright),
-                      image: album.artwork != null
+                      image: playlist.artwork != null
                           ? DecorationImage(
                               fit: BoxFit.cover,
-                              image: Image.memory(album.artwork!).image,
+                              image: Image.memory(playlist.artwork!).image,
                             )
                           : null,
                     ),
-                    child: album.artwork == null
-                        ? Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(Sizer.x1),
-                              child: Text(
-                                album.title,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          )
-                        : null,
+                    child: Center(
+                      child: Container(
+                        color: Colors.black,
+                        child: Padding(
+                          padding: const EdgeInsets.all(Sizer.x1),
+                          child: Text(
+                            playlist.name,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               );

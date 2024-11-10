@@ -18,6 +18,7 @@
     "noAlbums",
     "noArtists",
     "noTracks",
+    "noPlaylists",
     "addToTheFavourites",
     "addToTheQueue",
     "addToThePlaylist",
@@ -40,6 +41,9 @@
     "tracksCount",
     "recentSearch",
     "playlists",
-    "explore"
+    "explore",
+    "deletePlaylist",
+    "playlistDeleted",
+    "removeFromPlaylist"
   ]
 }
