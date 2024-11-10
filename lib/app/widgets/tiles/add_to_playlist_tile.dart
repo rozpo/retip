@@ -24,15 +24,12 @@ class AddToPlaylistTile extends StatelessWidget {
       icon: Icons.playlist_add,
       text: l10n.addToPlaylist,
       onTap: () async {
-        Navigator.of(context).pop();
         final playlists = await GetAllPlaylists.call();
 
         if (context.mounted) {
           showModalBottomSheet(
             context: context,
             builder: (context) {
-              // return AlertDialog(
-              // scrollable: true,
               return ListView.builder(
                 shrinkWrap: true,
                 itemCount: playlists.length,
@@ -52,11 +49,11 @@ class AddToPlaylistTile extends StatelessWidget {
                       ScaffoldMessenger.of(context).removeCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(snackbar);
                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                     },
                   );
                 },
               );
-              // );
             },
           );
         }

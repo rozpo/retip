@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/playlist/create_playlist.dart';
 import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
-import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -15,7 +14,7 @@ class PlaylistsTab extends StatefulWidget {
 }
 
 class _PlaylistsTabState extends State<PlaylistsTab> {
-  static Future<List<PlaylistEntity>> future = GetAllPlaylists.call();
+  // static Future<List<PlaylistEntity>> future = GetAllPlaylists.call();
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +60,10 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
           );
 
           setState(() {});
-          future = GetAllPlaylists.call();
         },
       ),
       body: FutureBuilder(
-        future: future,
+        future: GetAllPlaylists.call(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(
@@ -112,7 +110,6 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                       ),
                     );
 
-                    future = GetAllPlaylists.call();
                     setState(() {});
                   },
                   child: Container(
