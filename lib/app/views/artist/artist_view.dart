@@ -119,21 +119,14 @@ class _ArtistViewState extends State<ArtistView> {
         itemBuilder: (context, index) {
           if (index == 0) {
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-                  child: LayoutBuilder(builder: (context, constraints) {
-                    return Center(
-                      child: SizedBox.square(
-                        dimension: constraints.maxWidth / 2,
-                        child: ArtworkWidget(
-                          bytes: widget.artist.artwork,
-                          style: ArtworkStyle.circle,
-                        ),
-                      ),
-                    );
-                  }),
+                SizedBox.square(
+                  dimension: MediaQuery.of(context).size.width / 2,
+                  child: ArtworkWidget(
+                    bytes: widget.artist.artwork,
+                    style: ArtworkStyle.circle,
+                  ),
                 ),
                 const VerticalSpacer(),
                 VisibilityDetector(
@@ -149,25 +142,21 @@ class _ArtistViewState extends State<ArtistView> {
                       setState(() {});
                     }
                   },
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: RpText(
-                        widget.artist.name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: RpText(
+                      widget.artist.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
-                Center(
-                  child: RpText(
-                    '${RetipL10n.of(context).albumsCount(widget.artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracks.length)}',
-                    textAlign: TextAlign.center,
-                  ),
+                RpText(
+                  '${RetipL10n.of(context).albumsCount(widget.artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracks.length)}',
+                  textAlign: TextAlign.center,
                 ),
                 const VerticalSpacer(),
                 Row(

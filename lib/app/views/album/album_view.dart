@@ -12,7 +12,6 @@ import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
-import 'package:retip/app/widgets/rp_chip.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
@@ -114,29 +113,35 @@ class _AlbumViewState extends State<AlbumView> {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: ArtworkWidget(bytes: widget.album.artwork),
-                      ),
-                      const HorizontalSpacer(),
-                      Expanded(
-                        child: Wrap(
-                          spacing: Sizer.x1,
-                          runSpacing: Sizer.x1,
-                          // mainAxisSize: MainAxisSize.min,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (widget.album.year != null)
-                              RpChip(text: widget.album.year!),
-                          ],
-                        ),
-                      ),
-                    ],
+                  SizedBox.square(
+                    dimension: MediaQuery.of(context).size.width / 2,
+                    child: ArtworkWidget(
+                      bytes: widget.album.artwork,
+                    ),
                   ),
+                  // Row(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Expanded(
+                  //       child: ArtworkWidget(bytes: widget.album.artwork),
+                  //     ),
+                  //     const HorizontalSpacer(),
+                  //     Expanded(
+                  //       child: Wrap(
+                  //         spacing: Sizer.x1,
+                  //         runSpacing: Sizer.x1,
+                  //         // mainAxisSize: MainAxisSize.min,
+                  //         // crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           if (widget.album.year != null)
+                  //             RpChip(text: widget.album.year!),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   const VerticalSpacer(),
                   VisibilityDetector(
                     key: titleKey,
