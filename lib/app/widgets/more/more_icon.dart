@@ -51,11 +51,7 @@ class MoreIcon extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 RpListTile(
-                  title: Text(
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    title,
-                  ),
+                  title: RpText(title),
                   subtitle: subtitle != null ? RpText(subtitle!) : null,
                   leading: image != null
                       ? RpIconImage(bytes: image!)

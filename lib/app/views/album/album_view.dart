@@ -18,6 +18,7 @@ import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/app/widgets/tracks_header.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -84,7 +85,8 @@ class _AlbumViewState extends State<AlbumView> {
           const HorizontalSpacer(),
           MoreIcon.vertical(
             title: widget.album.title,
-            subtitle: widget.album.artist,
+            subtitle:
+                '${RetipL10n.of(context).album} - ${widget.album.artist}${widget.album.year != null ? ' - ${widget.album.year}' : ''}',
             image: widget.album.artwork,
             tiles: [
               isInFavourites
@@ -158,13 +160,23 @@ class _AlbumViewState extends State<AlbumView> {
                     },
                     child: Text(
                       widget.album.title,
+                      textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text(widget.album.artist),
+                  Text(
+                    widget.album.artist,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  Text(
+                    '${RetipL10n.of(context).album}${widget.album.year != null ? ' - ${widget.album.year}' : ''}',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                   const SizedBox(height: Sizer.x1),
                   Row(
                     children: [
