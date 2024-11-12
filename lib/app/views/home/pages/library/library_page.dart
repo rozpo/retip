@@ -44,6 +44,7 @@ class _LibraryPageState extends State<LibraryPage> {
           ),
         ),
         body: const TabBarView(
+          physics: BouncingScrollPhysics(),
           children: [
             ArtistsTab(),
             AlbumsTab(),
