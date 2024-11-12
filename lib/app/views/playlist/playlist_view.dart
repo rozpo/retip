@@ -1,16 +1,18 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/playlist_entity.dart';
-import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
 import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/player_widget.dart';
+import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
@@ -114,6 +116,18 @@ class _PlaylistViewState extends State<PlaylistView> {
         itemCount: widget.playlist.tracks.length + 1,
         itemBuilder: (context, index) {
           if (index == 0) {
+            final images = <Uint8List>[];
+
+            for (final track in widget.playlist.tracks) {
+              if (track.artwork != null) {
+                images.add(track.artwork!);
+
+                if (images.length >= 4) {
+                  break;
+                }
+              }
+            }
+
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
               child: Column(
@@ -122,7 +136,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                 children: [
                   SizedBox.square(
                     dimension: MediaQuery.of(context).size.width / 2,
-                    child: ArtworkWidget(bytes: widget.playlist.artwork),
+                    child: PlaylistArtwork(images: images),
                   ),
                   const VerticalSpacer(),
                   VisibilityDetector(
@@ -146,8 +160,8 @@ class _PlaylistViewState extends State<PlaylistView> {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text(RetipL10n.of(context)
-                      .tracksCount(widget.playlist.tracks.length)),
+                  Text(
+                      '${RetipL10n.of(context).playlist} - ${RetipL10n.of(context).tracksCount(widget.playlist.tracks.length)}'),
                   const SizedBox(height: Sizer.x1),
                   Row(
                     children: [
