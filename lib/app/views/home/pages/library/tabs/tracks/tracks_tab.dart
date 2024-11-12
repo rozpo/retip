@@ -45,6 +45,7 @@ class _TracksTabState extends State<TracksTab> {
           }
 
           return ListView.builder(
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(vertical: Sizer.x1),
             itemCount: snapshot.requireData.length,
             itemBuilder: (context, index) {
