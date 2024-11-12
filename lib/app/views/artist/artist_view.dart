@@ -200,6 +200,7 @@ class _ArtistViewState extends State<ArtistView> {
                   ),
                 ),
                 SizedBox(
+                  width: double.infinity,
                   height: MediaQuery.of(context).size.width / 3,
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),

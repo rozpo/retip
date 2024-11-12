@@ -81,5 +81,8 @@
     "explore": "Explore",
     "deletePlaylist": "Delete playlist",
     "playlistDeleted": "Playlist deleted",
-    "removeFromPlaylist": "Remove from playlist"
+    "removeFromPlaylist": "Remove from playlist",
+    "suggestedArtists": "Artists for you",
+    "suggestedAlbums": "Albums for you",
+    "somethingGotWrong": "Something got wrong"
 }
