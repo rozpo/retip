@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/views/home/pages/home/tabs/playlists_tab.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 
 import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
 
 import 'tabs/albums/albums_tab.dart';
 import 'tabs/artists/artists_tab.dart';
@@ -19,15 +19,18 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: RpAppBar(
           leading: const Icon(Icons.library_music),
           title: Text(RetipL10n.of(context).library),
           bottom: TabBar(
-            labelPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: [
+              Tab(
+                text: RetipL10n.of(context).playlists,
+                icon: const Icon(Icons.queue_music),
+              ),
               Tab(
                 text: RetipL10n.of(context).artists,
                 icon: const Icon(Icons.person),
@@ -46,6 +49,7 @@ class _LibraryPageState extends State<LibraryPage> {
         body: const TabBarView(
           physics: BouncingScrollPhysics(),
           children: [
+            PlaylistsTab(),
             ArtistsTab(),
             AlbumsTab(),
             TracksTab(),
