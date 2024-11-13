@@ -86,5 +86,7 @@
     "settings": "Settings",
     "developer": "Developer",
     "info": "Info",
-    "version": "Version"
+    "version": "Version",
+    "liked": "Liked",
+    "noFavYet": "No favourites yet, try like something from library"
 }

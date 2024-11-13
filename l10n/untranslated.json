@@ -52,6 +52,8 @@
     "settings",
     "developer",
     "info",
-    "version"
+    "version",
+    "liked",
+    "noFavYet"
   ]
 }

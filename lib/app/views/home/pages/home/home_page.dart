@@ -1,65 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/views/home/pages/home/tabs/explore_tab.dart';
-import 'package:retip/app/views/home/pages/home/tabs/favourites_tab.dart';
-import 'package:retip/app/views/home/pages/home/tabs/playlists_tab.dart';
 import 'package:retip/app/views/settings/settings_view.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: RpAppBar(
-          leading: const Icon(Icons.queue_music_outlined),
-          title: Text(RetipL10n.of(context).retip),
-          actions: [
-            const HorizontalSpacer(),
-            RpIconButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SettingsView(),
-                ),
+    return Scaffold(
+      appBar: RpAppBar(
+        leading: const Icon(Icons.queue_music_outlined),
+        title: Text(RetipL10n.of(context).retip),
+        actions: [
+          const HorizontalSpacer(),
+          RpIconButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const SettingsView(),
               ),
-              icon: Icons.settings,
             ),
-            const HorizontalSpacer(),
-          ],
-          bottom: TabBar(
-            labelPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
-            indicatorSize: TabBarIndicatorSize.tab,
-            tabs: [
-              Tab(
-                text: RetipL10n.of(context).explore,
-                icon: const Icon(Icons.explore),
-              ),
-              Tab(
-                text: RetipL10n.of(context).favourites,
-                icon: const Icon(Icons.favorite),
-              ),
-              Tab(
-                text: RetipL10n.of(context).playlists,
-                icon: const Icon(Icons.queue_music),
-              ),
-            ],
+            icon: Icons.settings,
           ),
-        ),
-        body: const TabBarView(
-          physics: BouncingScrollPhysics(),
-          children: [
-            ExploreTab(),
-            FavouriteTab(),
-            PlaylistsTab(),
-          ],
-        ),
+          const HorizontalSpacer(),
+        ],
       ),
+      body: const ExploreTab(),
     );
   }
 }

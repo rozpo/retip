@@ -1,59 +1,74 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/get_all_albums.dart';
-import 'package:retip/app/services/cases/get_all_artists.dart';
-import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
+import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
-import 'package:retip/app/services/entities/playlist_entity.dart';
+import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
-import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
+import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/app/widgets/spacer.dart';
+import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class ExploreTab extends StatelessWidget {
+class ExploreTab extends StatefulWidget {
   const ExploreTab({super.key});
 
   @override
+  State<ExploreTab> createState() => _ExploreTabState();
+}
+
+class _ExploreTabState extends State<ExploreTab> {
+  var artistsFuture = GetAllFavourites.call('ArtistModel');
+  var albumsFuture = GetAllFavourites.call('AlbumModel');
+  var tracksFuture = GetAllFavourites.call('TrackModel');
+
+  @override
   Widget build(BuildContext context) {
+    final l10n = RetipL10n.of(context);
+
     return FutureBuilder(
-        future: Future.wait([
-          GetAllArtists.call(),
-          GetAllAlbums.call(),
-          GetAllPlaylists.call(),
-        ]),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      future: Future.wait([
+        artistsFuture,
+        albumsFuture,
+        tracksFuture,
+      ]),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-          if (snapshot.hasError || snapshot.hasData == false) {
-            return Center(
-              child: Text(RetipL10n.of(context).somethingGotWrong),
-            );
-          }
+        if (snapshot.hasError || snapshot.hasData == false) {
+          return Center(
+            child: Text(RetipL10n.of(context).somethingGotWrong),
+          );
+        }
 
-          final artists = snapshot.requireData[0] as List<ArtistEntity>;
-          final albums = snapshot.requireData[1] as List<AlbumEntity>;
-          final playlists = snapshot.requireData[2] as List<PlaylistEntity>;
-          final size = MediaQuery.of(context).size.width;
+        final artists = snapshot.requireData[0] as List<ArtistEntity>;
+        final albums = snapshot.requireData[1] as List<AlbumEntity>;
+        final tracks = snapshot.requireData[2] as List<TrackEntity>;
+        final size = MediaQuery.of(context).size.width;
 
-          return ListView(
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
-            shrinkWrap: true,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: Sizer.x1),
-                child: RpText(
-                  RetipL10n.of(context).artists,
-                ),
+        if (artists.isEmpty && albums.isEmpty && tracks.isEmpty) {
+          return Center(
+            child: Text(l10n.noFavYet),
+          );
+        }
+
+        return ListView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.only(top: Sizer.x1, bottom: Sizer.x2),
+          shrinkWrap: true,
+          children: [
+            if (artists.isNotEmpty) ...[
+              const VerticalSpacer(),
+              RpDivider(
+                text: '${l10n.liked} ${l10n.artists.toLowerCase()}',
               ),
               SizedBox(
                 height: size / 2 + Sizer.x1 * 2,
@@ -61,22 +76,25 @@ class ExploreTab extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10,
+                  itemCount: artists.length,
                   separatorBuilder: (context, index) {
                     return const SizedBox.square(dimension: Sizer.x1);
                   },
                   itemBuilder: (context, index) {
-                    final artist = artists[Random().nextInt(artists.length)];
+                    final artist = artists[index];
 
                     return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
+                      onTap: () async {
+                        await Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
                               return ArtistView(artist: artist);
                             },
                           ),
                         );
+
+                        artistsFuture = GetAllFavourites.call('ArtistModel');
+                        setState(() {});
                       },
                       child: Column(
                         children: [
@@ -98,11 +116,11 @@ class ExploreTab extends StatelessWidget {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: Sizer.x1),
-                child: RpText(
-                  RetipL10n.of(context).albums,
-                ),
+            ],
+            if (albums.isNotEmpty) ...[
+              const VerticalSpacer(),
+              RpDivider(
+                text: '${l10n.liked} ${l10n.albums.toLowerCase()}',
               ),
               SizedBox(
                 height: size / 3 + Sizer.x1 * 2,
@@ -110,22 +128,25 @@ class ExploreTab extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10,
+                  itemCount: albums.length,
                   separatorBuilder: (context, index) {
                     return const SizedBox.square(dimension: Sizer.x1);
                   },
                   itemBuilder: (context, index) {
-                    final album = albums[Random().nextInt(albums.length)];
+                    final album = albums[index];
 
                     return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
+                      onTap: () async {
+                        await Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
                               return AlbumView(album: album);
                             },
                           ),
                         );
+
+                        albumsFuture = GetAllFavourites.call('AlbumModel');
+                        setState(() {});
                       },
                       child: ArtworkWidget(
                         borderWidth: 2,
@@ -135,74 +156,37 @@ class ExploreTab extends StatelessWidget {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: Sizer.x1),
-                child: RpText(
-                  RetipL10n.of(context).playlists,
-                ),
+            ],
+            if (tracks.isNotEmpty) ...[
+              const VerticalSpacer(),
+              RpDivider(
+                text: '${l10n.liked} ${l10n.tracks.toLowerCase()}',
               ),
-              SizedBox(
-                height: size / 4 + Sizer.x1 * 2,
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.all(Sizer.x1),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  separatorBuilder: (context, index) {
-                    return const SizedBox.square(dimension: Sizer.x1);
-                  },
-                  itemBuilder: (context, index) {
-                    final playlist =
-                        playlists[Random().nextInt(playlists.length)];
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                // padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
+                scrollDirection: Axis.vertical,
+                itemCount: tracks.length,
+                separatorBuilder: (context, index) {
+                  return const SizedBox.square(dimension: Sizer.x1);
+                },
+                itemBuilder: (context, index) {
+                  final track = tracks[index];
 
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return PlaylistView(playlist: playlist);
-                            },
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: size / 4,
-                        // height: size / 4,
-                        decoration: BoxDecoration(
-                          color: playlist.artwork == null
-                              ? Theme.of(context).colorScheme.surfaceContainer
-                              : null,
-                          borderRadius: BorderRadius.circular(Sizer.x1),
-                          border: Border.all(
-                              width: 2,
-                              color:
-                                  Theme.of(context).colorScheme.surfaceBright),
-                          image: playlist.artwork != null
-                              ? DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: Image.memory(playlist.artwork!).image,
-                                )
-                              : null,
-                        ),
-                        child: Center(
-                          child: Container(
-                            color: Colors.black,
-                            child: Padding(
-                              padding: const EdgeInsets.all(Sizer.x1),
-                              child: Text(
-                                playlist.name,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                  return TrackTile(
+                    track: track,
+                    refresh: () {
+                      tracksFuture = GetAllFavourites.call('TrackModel');
+                      setState(() {});
+                    },
+                  );
+                },
               ),
             ],
-          );
-        });
+          ],
+        );
+      },
+    );
   }
 }
