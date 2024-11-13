@@ -1,6 +1,5 @@
 {
     "@@locale": "en",
-    "@_GLOBAL": {},
     "allow": "Allow",
     "album": "Album",
     "artist": "Artist",
@@ -19,10 +18,8 @@
     "unknownTitle": "Unknown Title",
     "unknownAlbum": "Unknown Album",
     "unknownArtist": "Unknown Artist",
-    "@_FAVOURITES_PAGE": {},
     "alertRemoveFromFavTitle": "Remove from favourites",
     "alertRemoveFromFavMsg": "Are you sure to remove a track from favourites list?",
-    "@_LIBRARY_PAGE": {},
     "albums": "Albums",
     "artists": "Artists",
     "tracks": "Tracks",
@@ -85,5 +82,9 @@
     "removeFromPlaylist": "Remove from playlist",
     "suggestedArtists": "Artists for you",
     "suggestedAlbums": "Albums for you",
-    "somethingGotWrong": "Something got wrong"
+    "somethingGotWrong": "Something got wrong",
+    "settings": "Settings",
+    "developer": "Developer",
+    "info": "Info",
+    "version": "Version"
 }

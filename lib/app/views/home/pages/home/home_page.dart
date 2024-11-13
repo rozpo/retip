@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:retip/app/views/dev/dev_view.dart';
 import 'package:retip/app/views/home/pages/home/tabs/explore_tab.dart';
 import 'package:retip/app/views/home/pages/home/tabs/favourites_tab.dart';
 import 'package:retip/app/views/home/pages/home/tabs/playlists_tab.dart';
+import 'package:retip/app/views/settings/settings_view.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -21,17 +21,16 @@ class HomePage extends StatelessWidget {
           leading: const Icon(Icons.queue_music_outlined),
           title: Text(RetipL10n.of(context).retip),
           actions: [
-            if (kReleaseMode == false) ...[
-              const HorizontalSpacer(),
-              IconButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const DevView(),
-                  ),
+            const HorizontalSpacer(),
+            RpIconButton(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const SettingsView(),
                 ),
-                icon: const Icon(Icons.developer_board),
               ),
-            ]
+              icon: Icons.settings,
+            ),
+            const HorizontalSpacer(),
           ],
           bottom: TabBar(
             labelPadding: const EdgeInsets.symmetric(horizontal: Sizer.x1),

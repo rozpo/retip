@@ -48,6 +48,10 @@
     "removeFromPlaylist",
     "suggestedArtists",
     "suggestedAlbums",
-    "somethingGotWrong"
+    "somethingGotWrong",
+    "settings",
+    "developer",
+    "info",
+    "version"
   ]
 }
