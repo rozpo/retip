@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/services/cases/get_all_tracks.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
@@ -57,7 +58,12 @@ abstract class TrackEntity extends AbstractEntity {
     final theme = Theme.of(context);
 
     return RpListTile(
-      onTap: () => PlayAudio.call([this]),
+      onTap: () async {
+        final tracks = await GetAllTracks.call();
+        final index = tracks.indexWhere((track) => track.id == id);
+
+        PlayAudio.call(tracks, index: index);
+      },
       leading: Container(
         width: Sizer.x5,
         height: Sizer.x5,

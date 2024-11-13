@@ -59,7 +59,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       recentSearch.add(event.text);
     }
 
-    if (recentSearch.length > 10) {
+    if (recentSearch.length > 25) {
       recentSearch.removeAt(0);
     }
 

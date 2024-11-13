@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
