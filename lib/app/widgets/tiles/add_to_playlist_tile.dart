@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/services/cases/playlist/create_playlist.dart';
 import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
 import 'package:retip/app/services/cases/playlist/update_playlist.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
+import 'package:retip/app/widgets/rp_divider.dart';
+import 'package:retip/app/widgets/rp_icon.dart';
+import 'package:retip/app/widgets/rp_icon_image.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_snackbar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/sizer.dart';
 
 class AddToPlaylistTile extends StatelessWidget {
   final TrackEntity track;
@@ -28,18 +34,89 @@ class AddToPlaylistTile extends StatelessWidget {
 
         if (context.mounted) {
           showModalBottomSheet(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
             context: context,
             builder: (context) {
               return ListView.builder(
+                // separatorBuilder: (context, index) {
+                //   return VerticalSpacer();
+                // },
+                padding: const EdgeInsets.symmetric(vertical: Sizer.x1),
+                physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: playlists.length,
+                itemCount: playlists.length + 1,
                 itemBuilder: (context, index) {
-                  final pl = playlists[index];
+                  if (index == 0) {
+                    return Column(
+                      children: [
+                        RpListTile(
+                          leading: const RpIcon(icon: Icons.playlist_add),
+                          title: Text(RetipL10n.of(context).createNewPlaylist),
+                          onTap: () async {
+                            String text = '';
 
-                  return ListTile(
-                    title: Text(pl.name),
-                    subtitle: Text(
-                        RetipL10n.of(context).tracksCount(pl.tracks.length)),
+                            await showDialog<bool>(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    TextField(
+                                      decoration: const InputDecoration(
+                                          hintText: 'Name a new playlist'),
+                                      onChanged: (value) {
+                                        text = value;
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                actions: [
+                                  OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cancel')),
+                                  FilledButton(
+                                    onPressed: () async {
+                                      if (text.isNotEmpty) {
+                                        await CreatePlaylist.call(text, track);
+
+                                        if (context.mounted) {
+                                          final message = l10n.addedTo(text);
+                                          final snackbar = RpSnackbar(context,
+                                              message: message);
+                                          ScaffoldMessenger.of(context)
+                                              .removeCurrentSnackBar();
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(snackbar);
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        }
+                                      }
+                                    },
+                                    child: const Text('Create'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                        const RpDivider(),
+                      ],
+                    );
+                  }
+
+                  final pl = playlists[index - 1];
+
+                  return RpListTile(
+                    leading: pl.artwork != null
+                        ? RpIconImage(bytes: pl.artwork!)
+                        : const RpIcon(icon: Icons.music_note),
+                    title: Text(
+                        '${pl.name} - ${RetipL10n.of(context).tracksCount(pl.tracks.length).toLowerCase()}'),
                     onTap: () {
                       pl.tracks.add(track);
                       UpdatePlaylist.call(pl);

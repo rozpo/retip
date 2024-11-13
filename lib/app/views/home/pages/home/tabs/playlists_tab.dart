@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/playlist/create_playlist.dart';
 import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
@@ -22,43 +21,6 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
       floatingActionButton: RpIconButton.filled(
         icon: Icons.playlist_add,
         onPressed: () async {
-          String text = '';
-
-          await showDialog<bool>(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    decoration:
-                        const InputDecoration(hintText: 'Name a new playlist'),
-                    onChanged: (value) {
-                      text = value;
-                    },
-                  ),
-                ],
-              ),
-              actions: [
-                OutlinedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Cancel')),
-                FilledButton(
-                  onPressed: () async {
-                    if (text.isNotEmpty) {
-                      Navigator.pop(context);
-
-                      await CreatePlaylist.call(text);
-                    }
-                  },
-                  child: const Text('Create'),
-                ),
-              ],
-            ),
-          );
-
           setState(() {});
         },
       ),

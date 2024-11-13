@@ -88,5 +88,6 @@
     "info": "Info",
     "version": "Version",
     "liked": "Liked",
-    "noFavYet": "No favourites yet, try like something from library"
+    "noFavYet": "No favourites yet, try like something from library",
+    "createNewPlaylist": "Create new playlist"
 }

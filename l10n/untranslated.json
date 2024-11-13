@@ -54,6 +54,7 @@
     "info",
     "version",
     "liked",
-    "noFavYet"
+    "noFavYet",
+    "createNewPlaylist"
   ]
 }
