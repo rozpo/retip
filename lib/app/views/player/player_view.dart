@@ -7,12 +7,15 @@ import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart'
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
+import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
+import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -91,48 +94,41 @@ class _PlayerViewState extends State<PlayerView> {
                         ),
                         context: context,
                         builder: (context) {
-                          return ListView.builder(
-                            itemCount: widget.player.tracks.length,
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            padding:
-                                const EdgeInsets.symmetric(vertical: Sizer.x1),
-                            itemBuilder: (context, index) {
-                              final track = widget.player.tracks[index];
-
-                              return ListTile(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: Sizer.x1),
-                                leading: SizedBox.square(
-                                  dimension: Sizer.x5,
-                                  child: ArtworkWidget(
-                                    bytes: track.artwork,
-                                    borderWidth: 0,
-                                  ),
+                          return Column(
+                            children: [
+                              RpListTile(
+                                leading:
+                                    const RpIconButton(icon: Icons.queue_music),
+                                title:
+                                    Text(RetipL10n.of(context).playlingQueue),
+                                trailing: RpIconButton(
+                                  icon: Icons.close,
+                                  onPressed: () => Navigator.pop(context),
                                 ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(track.duration.text),
-                                    IconButton(
-                                      style: Theme.of(context)
-                                          .iconButtonTheme
-                                          .style,
-                                      onPressed: null,
-                                      icon: const Icon(Icons.more_vert),
-                                    ),
-                                  ],
-                                ),
-                                title: Text(track.title, maxLines: 1),
-                                subtitle: Text(track.artist, maxLines: 1),
-                                onTap: () async {
-                                  Navigator.of(context).pop();
+                              ),
+                              const RpDivider(),
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: widget.player.tracks.length,
+                                  physics: const BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: Sizer.x2),
+                                  itemBuilder: (context, index) {
+                                    final track = widget.player.tracks[index];
 
-                                  await widget.player.seekToIndex(index);
-                                  await widget.player.play();
-                                },
-                              );
-                            },
+                                    return TrackTile(
+                                      track: track,
+                                      onTap: () {
+                                        Navigator.pop(context);
+
+                                        widget.player.seekToIndex(index);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           );
                         });
 

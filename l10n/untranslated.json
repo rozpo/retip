@@ -59,6 +59,7 @@
     "createNewPlaylist",
     "create",
     "rename",
-    "nameNewPlaylist"
+    "nameNewPlaylist",
+    "playlingQueue"
   ]
 }

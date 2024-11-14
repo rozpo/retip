@@ -93,5 +93,6 @@
     "createNewPlaylist": "Create new playlist",
     "create": "Create",
     "rename": "Rename",
-    "nameNewPlaylist": "Name a new playlist"
+    "nameNewPlaylist": "Name a new playlist",
+    "playlingQueue": "Playing queue"
 }
