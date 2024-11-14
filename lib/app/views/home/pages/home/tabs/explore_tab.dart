@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
+import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
@@ -175,6 +176,9 @@ class _ExploreTabState extends State<ExploreTab> {
 
                   return TrackTile(
                     track: track,
+                    onTap: () {
+                      PlayAudio.call(tracks, index: index);
+                    },
                     refresh: () {
                       tracksFuture = GetAllFavourites.call('TrackModel');
                       setState(() {});
