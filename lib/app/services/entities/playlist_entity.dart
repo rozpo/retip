@@ -4,13 +4,11 @@ import 'package:retip/app/services/entities/abstract_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 
 class PlaylistEntity extends AbstractEntity {
-  final String uuid;
   String name;
   List<TrackEntity> tracks;
 
   PlaylistEntity({
     required super.id,
-    required this.uuid,
     required this.name,
     this.tracks = const [],
   });

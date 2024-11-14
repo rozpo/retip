@@ -18,8 +18,7 @@ mixin ReadPlaylist {
         .toList();
 
     return PlaylistEntity(
-      id: 0,
-      uuid: key.split('_')[1],
+      id: int.parse(key.split('_')[1]),
       name: trackIds.first,
       tracks: tracks,
     );

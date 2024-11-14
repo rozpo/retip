@@ -6,7 +6,7 @@ mixin UpdatePlaylist {
   static Future<bool> call(PlaylistEntity playlist) async {
     final prefs = GetIt.I.get<SharedPreferences>();
 
-    final key = 'pl_${playlist.uuid}';
+    final key = 'pl_${playlist.id}';
 
     return await prefs.setStringList(
       key,

@@ -23,7 +23,7 @@ class DeletePlaylistTile extends StatelessWidget {
       icon: Icons.delete_forever,
       text: l10n.deletePlaylist,
       onTap: () async {
-        await DeletePlaylist.call(entity.uuid);
+        await DeletePlaylist.call(entity.id);
         if (context.mounted) {
           Navigator.of(context).pop();
 
