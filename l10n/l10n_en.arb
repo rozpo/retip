@@ -78,6 +78,7 @@
     "playlists": "Playlists",
     "explore": "Explore",
     "deletePlaylist": "Delete playlist",
+    "renamePlaylist": "Rename playlist",
     "playlistDeleted": "Playlist deleted",
     "removeFromPlaylist": "Remove from playlist",
     "suggestedArtists": "Artists for you",
@@ -89,5 +90,8 @@
     "version": "Version",
     "liked": "Liked",
     "noFavYet": "No favourites yet, try like something from library",
-    "createNewPlaylist": "Create new playlist"
+    "createNewPlaylist": "Create new playlist",
+    "create": "Create",
+    "rename": "Rename",
+    "nameNewPlaylist": "Name a new playlist"
 }

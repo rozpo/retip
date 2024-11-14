@@ -44,6 +44,7 @@
     "playlists",
     "explore",
     "deletePlaylist",
+    "renamePlaylist",
     "playlistDeleted",
     "removeFromPlaylist",
     "suggestedArtists",
@@ -55,6 +56,9 @@
     "version",
     "liked",
     "noFavYet",
-    "createNewPlaylist"
+    "createNewPlaylist",
+    "create",
+    "rename",
+    "nameNewPlaylist"
   ]
 }

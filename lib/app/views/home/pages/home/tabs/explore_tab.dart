@@ -3,9 +3,11 @@ import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
+import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
+import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_text.dart';
@@ -25,6 +27,7 @@ class _ExploreTabState extends State<ExploreTab> {
   var artistsFuture = GetAllFavourites.call('ArtistModel');
   var albumsFuture = GetAllFavourites.call('AlbumModel');
   var tracksFuture = GetAllFavourites.call('TrackModel');
+  var playlistsFuture = GetAllFavourites.call('PlaylistEntity');
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class _ExploreTabState extends State<ExploreTab> {
         artistsFuture,
         albumsFuture,
         tracksFuture,
+        playlistsFuture,
       ]),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
@@ -52,9 +56,14 @@ class _ExploreTabState extends State<ExploreTab> {
         final artists = snapshot.requireData[0] as List<ArtistEntity>;
         final albums = snapshot.requireData[1] as List<AlbumEntity>;
         final tracks = snapshot.requireData[2] as List<TrackEntity>;
+        final playlists = snapshot.requireData[3] as List<PlaylistEntity>;
+
         final size = MediaQuery.of(context).size.width;
 
-        if (artists.isEmpty && albums.isEmpty && tracks.isEmpty) {
+        if (artists.isEmpty &&
+            albums.isEmpty &&
+            tracks.isEmpty &&
+            playlists.isEmpty) {
           return Center(
             child: Text(l10n.noFavYet),
           );
@@ -185,6 +194,58 @@ class _ExploreTabState extends State<ExploreTab> {
                     },
                   );
                 },
+              ),
+            ],
+            if (playlists.isNotEmpty) ...[
+              const VerticalSpacer(),
+              RpDivider(
+                text: '${l10n.liked} ${l10n.playlists.toLowerCase()}',
+              ),
+              SizedBox(
+                height: size / 3 + Sizer.x1 * 2,
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(Sizer.x1),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: playlists.length,
+                  separatorBuilder: (context, index) {
+                    return const SizedBox.square(dimension: Sizer.x1);
+                  },
+                  itemBuilder: (context, index) {
+                    final playlist = playlists[index];
+
+                    return GestureDetector(
+                      onTap: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return PlaylistView(playlist: playlist);
+                            },
+                          ),
+                        );
+
+                        playlistsFuture =
+                            GetAllFavourites.call('PlaylistEntity');
+                        setState(() {});
+                      },
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ArtworkWidget(
+                              borderWidth: 2,
+                              bytes: playlist.artwork,
+                            ),
+                          ),
+                          const SizedBox(height: Sizer.x0_5),
+                          RpText(
+                            playlist.name,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ],
