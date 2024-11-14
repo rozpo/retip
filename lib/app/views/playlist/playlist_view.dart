@@ -19,6 +19,7 @@ import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/delete_playlist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_playlist_tile.dart';
+import 'package:retip/app/widgets/tiles/rename_playlist_tile.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/app/widgets/tracks_header.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -101,6 +102,12 @@ class _PlaylistViewState extends State<PlaylistView> {
                       widget.playlist,
                       onTap: () => setState(() {}),
                     ),
+              RenamePlaylistTile(
+                widget.playlist,
+                onTap: () {
+                  setState(() {});
+                },
+              ),
               DeletePlaylistTile(widget.playlist),
             ],
           ),

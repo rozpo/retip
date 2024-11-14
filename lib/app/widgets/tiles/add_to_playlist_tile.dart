@@ -64,8 +64,8 @@ class AddToPlaylistTile extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     TextField(
-                                      decoration: const InputDecoration(
-                                          hintText: 'Name a new playlist'),
+                                      decoration: InputDecoration(
+                                          hintText: l10n.nameNewPlaylist),
                                       onChanged: (value) {
                                         text = value;
                                       },
@@ -77,7 +77,7 @@ class AddToPlaylistTile extends StatelessWidget {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: const Text('Cancel')),
+                                      child: Text(l10n.cancel)),
                                   FilledButton(
                                     onPressed: () async {
                                       if (text.isNotEmpty) {
@@ -97,7 +97,7 @@ class AddToPlaylistTile extends StatelessWidget {
                                         }
                                       }
                                     },
-                                    child: const Text('Create'),
+                                    child: Text(l10n.create),
                                   ),
                                 ],
                               ),
