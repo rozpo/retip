@@ -166,36 +166,6 @@ class _ExploreTabState extends State<ExploreTab> {
                 ),
               ),
             ],
-            if (tracks.isNotEmpty) ...[
-              const VerticalSpacer(),
-              RpDivider(
-                text: '${l10n.liked} ${l10n.tracks.toLowerCase()}',
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                // padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
-                scrollDirection: Axis.vertical,
-                itemCount: tracks.length,
-                separatorBuilder: (context, index) {
-                  return const SizedBox.square(dimension: Sizer.x1);
-                },
-                itemBuilder: (context, index) {
-                  final track = tracks[index];
-
-                  return TrackTile(
-                    track: track,
-                    onTap: () {
-                      PlayAudio.call(tracks, index: index);
-                    },
-                    refresh: () {
-                      tracksFuture = GetAllFavourites.call('TrackModel');
-                      setState(() {});
-                    },
-                  );
-                },
-              ),
-            ],
             if (playlists.isNotEmpty) ...[
               const VerticalSpacer(),
               RpDivider(
@@ -247,6 +217,36 @@ class _ExploreTabState extends State<ExploreTab> {
                   },
                 ),
               ),
+              if (tracks.isNotEmpty) ...[
+                const VerticalSpacer(),
+                RpDivider(
+                  text: '${l10n.liked} ${l10n.tracks.toLowerCase()}',
+                ),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  // padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
+                  scrollDirection: Axis.vertical,
+                  itemCount: tracks.length,
+                  separatorBuilder: (context, index) {
+                    return const SizedBox.square(dimension: Sizer.x1);
+                  },
+                  itemBuilder: (context, index) {
+                    final track = tracks[index];
+
+                    return TrackTile(
+                      track: track,
+                      onTap: () {
+                        PlayAudio.call(tracks, index: index);
+                      },
+                      refresh: () {
+                        tracksFuture = GetAllFavourites.call('TrackModel');
+                        setState(() {});
+                      },
+                    );
+                  },
+                ),
+              ],
             ],
           ],
         );
