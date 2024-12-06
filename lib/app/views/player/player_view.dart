@@ -439,9 +439,11 @@ class PlaybackButtons extends StatelessWidget {
 }
 
 class PlayPauseIcon extends StatefulWidget {
+  final bool disabled;
   final double size;
 
   const PlayPauseIcon({
+    this.disabled = false,
     this.size = 32,
     super.key,
   });
@@ -479,7 +481,9 @@ class _PlayPauseIconState extends State<PlayPauseIcon>
         }
 
         return IconButton.filled(
-          onPressed: () => player.playing ? player.pause() : player.play(),
+          onPressed: widget.disabled
+              ? null
+              : () => player.playing ? player.pause() : player.play(),
           icon: AnimatedIcon(
             size: widget.size,
             icon: AnimatedIcons.play_pause,

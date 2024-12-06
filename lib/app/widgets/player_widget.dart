@@ -31,11 +31,13 @@ class _PlayerWidgetState extends State<PlayerWidget> {
               // }
 
               return GestureDetector(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PlayerView(player: player),
-                  ),
-                ),
+                onTap: player.tracks.isNotEmpty
+                    ? () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => PlayerView(player: player),
+                          ),
+                        )
+                    : null,
                 // onHorizontalDragEnd: (details) {
                 //   if ((details.primaryVelocity ?? 0.0) > 0.0) {
                 //     player.previous();
@@ -147,7 +149,8 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                               ),
                             ),
                             const HorizontalSpacer(),
-                            const PlayPauseIcon(
+                            PlayPauseIcon(
+                              disabled: player.tracks.isEmpty,
                               size: 24,
                             ),
                             const HorizontalSpacer(),
