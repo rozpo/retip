@@ -1,7 +1,15 @@
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:retip/app/services/entities/abstract_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/views/playlist/playlist_view.dart';
+import 'package:retip/app/widgets/playlist_artwork.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
+import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/utils/sizer.dart';
+import 'package:retip/core/utils/utils.dart';
 
 class PlaylistEntity extends AbstractEntity {
   String name;
@@ -36,5 +44,40 @@ class PlaylistEntity extends AbstractEntity {
     }
 
     return result.toList();
+  }
+
+  @override
+  String toTypeString(BuildContext context) {
+    return RetipL10n.of(context).playlists;
+  }
+
+  @override
+  RpListTile toListTile(BuildContext context, [String? query]) {
+    final theme = Theme.of(context);
+
+    return RpListTile(
+      leading: Container(
+        width: Sizer.x5,
+        height: Sizer.x5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Sizer.x0_5),
+          color: theme.colorScheme.surfaceBright,
+        ),
+        child: PlaylistArtwork(
+          images: artworks,
+        ),
+      ),
+      title: RetipUtils.getQueryText(context, name, query ?? ''),
+      subtitle: RpText(RetipL10n.of(context).tracksCount(tracks.length)),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return PlaylistView(playlist: this);
+            },
+          ),
+        );
+      },
+    );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:retip/app/services/cases/get_all_artists.dart';
+import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
 import 'package:retip/app/services/entities/abstract_entity.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
+import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 
 part 'search_event.dart';
@@ -30,8 +32,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     emit(SearchSearchingState());
 
     final data = await GetAllArtists.call();
+    final pls = await GetAllPlaylists.call();
+
     final artists = <ArtistEntity>[];
     final albums = <AlbumEntity>[];
+    final playlists = <PlaylistEntity>[];
     final tracks = <TrackEntity>[];
 
     final query = event.text.toLowerCase();
@@ -54,6 +59,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       }
     }
 
+    for (final pl in pls) {
+      if (pl.name.toLowerCase().contains(query)) {
+        playlists.add(pl);
+      }
+    }
+
     if (recentSearch.any((e) => e.toLowerCase() == event.text.toLowerCase()) ==
         false) {
       recentSearch.add(event.text);
@@ -71,6 +82,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       emit(SearchSuccessState(
         artists: artists,
         albums: albums,
+        playlists: playlists,
         tracks: tracks,
         query: event.text,
       ));
