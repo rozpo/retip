@@ -4,9 +4,9 @@ import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
 import 'package:retip/app/services/cases/playlist/update_playlist.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
+import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_icon.dart';
-import 'package:retip/app/widgets/rp_icon_image.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_snackbar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -112,9 +112,10 @@ class AddToPlaylistTile extends StatelessWidget {
                   final pl = playlists[index - 1];
 
                   return RpListTile(
-                    leading: pl.artwork != null
-                        ? RpIconImage(bytes: pl.artwork!)
-                        : const RpIcon(icon: Icons.music_note),
+                    leading: SizedBox.square(
+                      dimension: Sizer.x5,
+                      child: PlaylistArtwork(images: pl.artworks),
+                    ),
                     title: Text(
                         '${pl.name} - ${RetipL10n.of(context).tracksCount(pl.tracks.length).toLowerCase()}'),
                     onTap: () {

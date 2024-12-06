@@ -9,6 +9,7 @@ import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
+import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/spacer.dart';
@@ -201,15 +202,18 @@ class _ExploreTabState extends State<ExploreTab> {
                       child: Column(
                         children: [
                           Expanded(
-                            child: ArtworkWidget(
-                              borderWidth: 2,
-                              bytes: playlist.artwork,
+                            child: PlaylistArtwork(
+                              images: playlist.artworks,
                             ),
                           ),
                           const SizedBox(height: Sizer.x0_5),
-                          RpText(
-                            playlist.name,
-                            style: Theme.of(context).textTheme.titleMedium,
+                          SizedBox(
+                            width: size / 3 - Sizer.x2 * 2,
+                            child: RpText(
+                              playlist.name,
+                              style: Theme.of(context).textTheme.titleMedium,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ],
                       ),

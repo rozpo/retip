@@ -21,4 +21,20 @@ class PlaylistEntity extends AbstractEntity {
     }
     return null;
   }
+
+  List<Uint8List> get artworks {
+    final result = <Uint8List>{};
+
+    for (final track in tracks) {
+      if (track.artwork != null) {
+        result.add(track.artwork!);
+
+        if (result.length >= 4) {
+          break;
+        }
+      }
+    }
+
+    return result.toList();
+  }
 }
