@@ -12,6 +12,7 @@ import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/widgets/tiles/add_to_playlist_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
@@ -152,6 +153,7 @@ class _PlayerViewState extends State<PlayerView> {
                               currentTrack!,
                               onTap: () => setState(() {}),
                             ),
+                      AddToPlaylistTile(track: currentTrack!),
                       GoToAlbumTile(currentTrack!.albumId!),
                       GoToArtistTile(currentTrack!.artistId!),
                     ],
