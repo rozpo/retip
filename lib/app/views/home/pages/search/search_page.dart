@@ -111,7 +111,7 @@ class _SearchPageState extends State<SearchPage> {
 
                 if (state is SearchErrorState) {
                   return Center(
-                    child: Text(RetipL10n.of(context).noTracks),
+                    child: Text(RetipL10n.of(context).nothingFound),
                   );
                 }
 
