@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
+import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_text.dart';
@@ -14,13 +15,17 @@ class PlaylistsTab extends StatefulWidget {
 }
 
 class _PlaylistsTabState extends State<PlaylistsTab> {
+  static List<PlaylistEntity> playlists = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
+        initialData: playlists,
         future: GetAllPlaylists.call(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
+          if (snapshot.connectionState != ConnectionState.done &&
+              playlists.isEmpty) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -32,7 +37,12 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
             );
           }
 
-          final data = snapshot.requireData;
+          final hasChanged = snapshot.requireData.length != playlists.length;
+          final data = hasChanged ? snapshot.requireData : playlists;
+
+          if (hasChanged) {
+            playlists = snapshot.requireData;
+          }
 
           if (data.isEmpty) {
             return Center(
