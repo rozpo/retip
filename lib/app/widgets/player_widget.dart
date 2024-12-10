@@ -104,13 +104,13 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                         StreamBuilder(
                           stream: player.positionStream,
                           builder: (context, snapshot) {
-                            final duration = player.duration?.inSeconds;
-                            final progress = player.position.inSeconds;
+                            final position = snapshot.data ?? Duration.zero;
+                            final duration = player.duration ?? Duration.zero;
 
                             return Row(
                               children: [
                                 Expanded(
-                                  flex: progress,
+                                  flex: position.inSeconds,
                                   child: Container(
                                     height: 4,
                                     color:
@@ -118,7 +118,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                                   ),
                                 ),
                                 Expanded(
-                                  flex: (duration ?? progress) - progress,
+                                  flex: duration.inSeconds - position.inSeconds,
                                   child: Container(
                                     height: 4,
                                     color:
