@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
+import 'package:retip/app/services/entities/abstract_entity.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/playlist_entity.dart';
@@ -30,11 +31,14 @@ class _ExploreTabState extends State<ExploreTab> {
   var tracksFuture = GetAllFavourites.call('TrackModel');
   var playlistsFuture = GetAllFavourites.call('PlaylistEntity');
 
+  static List<List<AbstractEntity>> initialData = const [];
+
   @override
   Widget build(BuildContext context) {
     final l10n = RetipL10n.of(context);
 
     return FutureBuilder(
+      initialData: initialData,
       future: Future.wait([
         artistsFuture,
         albumsFuture,
@@ -42,7 +46,8 @@ class _ExploreTabState extends State<ExploreTab> {
         playlistsFuture,
       ]),
       builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
+        if (snapshot.connectionState != ConnectionState.done &&
+            initialData.isEmpty) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -54,10 +59,29 @@ class _ExploreTabState extends State<ExploreTab> {
           );
         }
 
-        final artists = snapshot.requireData[0] as List<ArtistEntity>;
-        final albums = snapshot.requireData[1] as List<AlbumEntity>;
-        final tracks = snapshot.requireData[2] as List<TrackEntity>;
-        final playlists = snapshot.requireData[3] as List<PlaylistEntity>;
+        bool hasChanged = initialData.length != snapshot.requireData.length;
+
+        if (hasChanged == false) {
+          for (int i = 0; i < snapshot.requireData.length; i++) {
+            if (initialData[i].length != snapshot.requireData[i].length) {
+              hasChanged = true;
+              break;
+            }
+          }
+        }
+
+        if (hasChanged) {
+          initialData = snapshot.requireData;
+        }
+
+        final artists = List<ArtistEntity>.from(
+            hasChanged ? snapshot.requireData[0] : initialData[0]);
+        final albums = List<AlbumEntity>.from(
+            hasChanged ? snapshot.requireData[1] : initialData[1]);
+        final tracks = List<TrackEntity>.from(
+            hasChanged ? snapshot.requireData[2] : initialData[2]);
+        final playlists = List<PlaylistEntity>.from(
+            hasChanged ? snapshot.requireData[3] : initialData[3]);
 
         final size = MediaQuery.of(context).size.width;
 
