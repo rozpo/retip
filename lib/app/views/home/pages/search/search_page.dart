@@ -55,19 +55,15 @@ class _SearchPageState extends State<SearchPage> {
               leading: const Icon(Icons.search),
               actions: [
                 const HorizontalSpacer(),
-                _controller.text.isEmpty
-                    ? const RpIconButton(
-                        onPressed: null,
-                        icon: Icons.mic,
-                      )
-                    : RpIconButton(
-                        onPressed: () {
-                          _controller.text = '';
-                          setState(() {});
-                          bloc.add(SearchRefreshEvent(''));
-                        },
-                        icon: Icons.close,
-                      ),
+                if (_controller.text.isNotEmpty)
+                  RpIconButton(
+                    onPressed: () {
+                      _controller.text = '';
+                      setState(() {});
+                      bloc.add(SearchRefreshEvent(''));
+                    },
+                    icon: Icons.close,
+                  ),
                 const HorizontalSpacer(),
               ],
               title: SearchBar(
