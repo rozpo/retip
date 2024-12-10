@@ -143,6 +143,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                     },
                     child: Text(
                       widget.playlist.name,
+                      textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge

@@ -9,6 +9,7 @@ import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_snackbar.dart';
+import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -116,8 +117,12 @@ class AddToPlaylistTile extends StatelessWidget {
                       dimension: Sizer.x5,
                       child: PlaylistArtwork(images: pl.artworks),
                     ),
-                    title: Text(
-                        '${pl.name} - ${RetipL10n.of(context).tracksCount(pl.tracks.length).toLowerCase()}'),
+                    subtitle: RpText(
+                      RetipL10n.of(context)
+                          .tracksCount(pl.tracks.length)
+                          .toLowerCase(),
+                    ),
+                    title: RpText(pl.name),
                     onTap: () {
                       pl.tracks.add(track);
                       UpdatePlaylist.call(pl);
