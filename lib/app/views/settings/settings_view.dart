@@ -51,8 +51,17 @@ class SettingsView extends StatelessWidget {
             text: l10n.info,
           ),
           SettingsTile(
-            title: '${l10n.version} $version',
-            icon: Icons.numbers,
+            title: l10n.aboutApp,
+            icon: Icons.info,
+            onTap: () {
+              showAboutDialog(
+                applicationName: l10n.retip,
+                applicationLegalese: l10n.legalese,
+                applicationIcon: const RetipIcon(size: Size.square(64)),
+                applicationVersion: 'v$version',
+                context: context,
+              );
+            },
           ),
           SettingsTile(
             title: l10n.checkForUpdate,
@@ -81,13 +90,8 @@ class SettingsView extends StatelessWidget {
               showLicensePage(
                 applicationLegalese: l10n.legalese,
                 applicationName: l10n.retip,
-                applicationIcon: const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: RetipIcon(
-                    size: Size.square(40),
-                  ),
-                ),
-                applicationVersion: version,
+                applicationIcon: const RetipIcon(size: Size.square(64)),
+                applicationVersion: 'v$version',
                 context: context,
               );
             },

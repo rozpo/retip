@@ -11,6 +11,7 @@
     "openAppSettings": "Open app settings",
     "remove": "Remove",
     "retip": "Retip",
+    "retipMusicPlayer": "Retip Music Player",
     "search": "Search",
     "searchForMusic": "Search for music...",
     "storagePermission": "Storage access",
@@ -99,5 +100,6 @@
     "checkForUpdate": "Check for update",
     "privacyPolicy": "Privacy policy",
     "legalese": "Copyright (c) 2024 Piotr Rozpończyk",
-    "licenses": "Licenses"
+    "licenses": "Licenses",
+    "aboutApp": "About application"
 }
