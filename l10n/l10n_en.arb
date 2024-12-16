@@ -101,5 +101,8 @@
     "privacyPolicy": "Privacy policy",
     "legalese": "Copyright (c) 2024 Piotr Rozpończyk",
     "licenses": "Licenses",
-    "aboutApp": "About application"
+    "aboutApp": "About application",
+    "appearance": "Appearance",
+    "darkMode": "Dark mode",
+    "batterySaver": "Battery saver"
 }

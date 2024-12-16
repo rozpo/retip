@@ -7,12 +7,14 @@ class SettingsTile extends StatelessWidget {
   final String title;
   final String? subtitle;
   final IconData icon;
+  final Widget? trailing;
   final VoidCallback? onTap;
 
   const SettingsTile({
     required this.title,
     required this.icon,
     this.subtitle,
+    this.trailing,
     this.onTap,
     super.key,
   });
@@ -22,6 +24,7 @@ class SettingsTile extends StatelessWidget {
     return RpListTile(
       title: RpText(title),
       subtitle: subtitle != null ? RpText(subtitle!) : null,
+      trailing: trailing,
       onTap: onTap,
       leading: RpIcon(
         icon: icon,

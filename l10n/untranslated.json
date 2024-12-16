@@ -67,6 +67,9 @@
     "privacyPolicy",
     "legalese",
     "licenses",
-    "aboutApp"
+    "aboutApp",
+    "appearance",
+    "darkMode",
+    "batterySaver"
   ]
 }

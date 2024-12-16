@@ -48,6 +48,47 @@ class SettingsView extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           RpDivider(
+            text: l10n.appearance,
+          ),
+          SizedBox(
+            height: Sizer.x5 + Sizer.x2,
+            child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              separatorBuilder: (context, index) => const HorizontalSpacer(),
+              padding: const EdgeInsets.all(Sizer.x1),
+              itemCount: Colors.primaries.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final color = Colors.primaries[index];
+
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Sizer.x0_5),
+                    color: color,
+                  ),
+                  width: Sizer.x5,
+                  height: Sizer.x5,
+                );
+              },
+            ),
+          ),
+          SettingsTile(
+            title: l10n.darkMode,
+            icon: Icons.dark_mode,
+            trailing: RpIconButton.filled(
+              icon: Icons.check,
+              onPressed: () {},
+            ),
+          ),
+          SettingsTile(
+            title: l10n.batterySaver,
+            icon: Icons.battery_saver,
+            trailing: RpIconButton.outlined(
+              icon: Icons.close,
+              onPressed: () {},
+            ),
+          ),
+          RpDivider(
             text: l10n.info,
           ),
           SettingsTile(

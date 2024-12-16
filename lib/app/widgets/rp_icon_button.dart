@@ -52,7 +52,10 @@ class RpIconButton extends StatelessWidget {
         );
       case _RpIconButtonType.filled:
         return IconButton.filled(
-          icon: Icon(icon),
+          icon: Icon(
+            icon,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
           onPressed: onPressed,
           style: style,
         );
