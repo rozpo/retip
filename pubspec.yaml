@@ -46,17 +46,18 @@ dependencies:
       url: https://github.com/rozpo/on_audio_query
       path: packages/on_audio_query
       ref: main
-  package_info_plus: ^8.1.1
+  package_info_plus: ^8.1.2
   path_provider: ^2.1.4
   shared_preferences: ^2.3.2
   shared_preferences_android: ^2.3.4
+  url_launcher: ^6.3.1
   uuid: ^4.5.1
   visibility_detector: ^0.4.0+2
 
 # For local development only
-# dependency_overrides:
-#   on_audio_query:
-#     path: ../on_audio_query/packages/on_audio_query
+dependency_overrides:
+  on_audio_query:
+    path: ../on_audio_query/packages/on_audio_query
 
 dev_dependencies:
   flutter_test:

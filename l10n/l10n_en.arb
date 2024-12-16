@@ -95,5 +95,9 @@
     "rename": "Rename",
     "nameNewPlaylist": "Name a new playlist",
     "playlingQueue": "Playing queue",
-    "nothingFound": "Nothing found"
+    "nothingFound": "Nothing found",
+    "checkForUpdate": "Check for update",
+    "privacyPolicy": "Privacy policy",
+    "legalese": "Copyright (c) 2024 Piotr Rozpończyk",
+    "licenses": "Licenses"
 }

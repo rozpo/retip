@@ -61,6 +61,10 @@
     "rename",
     "nameNewPlaylist",
     "playlingQueue",
-    "nothingFound"
+    "nothingFound",
+    "checkForUpdate",
+    "privacyPolicy",
+    "legalese",
+    "licenses"
   ]
 }
