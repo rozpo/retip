@@ -114,6 +114,16 @@ class SettingsView extends StatelessWidget {
             },
           ),
           SettingsTile(
+            title: l10n.termsAndConditions,
+            icon: Icons.gavel,
+            trailing: const RpIconButton(icon: Icons.public),
+            onTap: () {
+              final url = Uri.parse(
+                  'https://github.com/rozpo/retip/blob/main/docs/TERMS_AND_CONDITIONS.md');
+              launchUrl(url, mode: LaunchMode.externalApplication);
+            },
+          ),
+          SettingsTile(
             title: l10n.licenses,
             icon: Icons.description,
             trailing: const RpIconButton(icon: Icons.arrow_forward),
