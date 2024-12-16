@@ -3,6 +3,7 @@ import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
+import 'package:retip/app/services/cases/playlist/read_playlist.dart';
 import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
@@ -37,13 +38,15 @@ class PlaylistView extends StatefulWidget {
 }
 
 class _PlaylistViewState extends State<PlaylistView> {
+  late PlaylistEntity playlist;
   Duration duration = Duration.zero;
 
   @override
   void initState() {
+    playlist = widget.playlist;
     int seconds = 0;
 
-    for (final track in widget.playlist.tracks) {
+    for (final track in playlist.tracks) {
       seconds += track.duration.inSeconds;
     }
 
@@ -60,7 +63,7 @@ class _PlaylistViewState extends State<PlaylistView> {
 
   @override
   Widget build(BuildContext context) {
-    final isInFavourites = IsInFavourites.call(widget.playlist);
+    final isInFavourites = IsInFavourites.call(playlist);
 
     return Scaffold(
       appBar: RpAppBar(
@@ -72,9 +75,9 @@ class _PlaylistViewState extends State<PlaylistView> {
             isFavourite: isInFavourites,
             onPressed: () {
               if (isInFavourites) {
-                RemoveFromFavourites.call(widget.playlist);
+                RemoveFromFavourites.call(playlist);
               } else {
-                AddToFavourites.call(widget.playlist);
+                AddToFavourites.call(playlist);
               }
 
               setState(() {});
@@ -82,27 +85,26 @@ class _PlaylistViewState extends State<PlaylistView> {
           ),
           const HorizontalSpacer(),
           MoreIcon.vertical(
-            title: widget.playlist.name,
-            subtitle: RetipL10n.of(context)
-                .tracksCount(widget.playlist.tracks.length),
-            image: widget.playlist.artwork,
+            title: playlist.name,
+            subtitle: RetipL10n.of(context).tracksCount(playlist.tracks.length),
+            image: playlist.artwork,
             tiles: [
               isInFavourites
                   ? RemoveFromFavTile(
-                      widget.playlist,
+                      playlist,
                       onTap: () => setState(() {}),
                     )
                   : AddToFavTile(
-                      widget.playlist,
+                      playlist,
                       onTap: () => setState(() {}),
                     ),
               RenamePlaylistTile(
-                widget.playlist,
+                playlist,
                 onTap: () {
                   setState(() {});
                 },
               ),
-              DeletePlaylistTile(widget.playlist),
+              DeletePlaylistTile(playlist),
             ],
           ),
           const HorizontalSpacer(),
@@ -114,7 +116,7 @@ class _PlaylistViewState extends State<PlaylistView> {
         controller: scrollController,
         padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
         physics: const BouncingScrollPhysics(),
-        itemCount: widget.playlist.tracks.length + 1,
+        itemCount: playlist.tracks.length + 1,
         itemBuilder: (context, index) {
           if (index == 0) {
             return Padding(
@@ -125,7 +127,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                 children: [
                   SizedBox.square(
                     dimension: MediaQuery.of(context).size.width / 2,
-                    child: PlaylistArtwork(images: widget.playlist.artworks),
+                    child: PlaylistArtwork(images: playlist.artworks),
                   ),
                   const VerticalSpacer(),
                   VisibilityDetector(
@@ -134,7 +136,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                       if (info.visibleFraction > 0.9) {
                         title = '';
                       } else {
-                        title = widget.playlist.name;
+                        title = playlist.name;
                       }
 
                       if (context.mounted) {
@@ -142,7 +144,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                       }
                     },
                     child: Text(
-                      widget.playlist.name,
+                      playlist.name,
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
@@ -151,14 +153,14 @@ class _PlaylistViewState extends State<PlaylistView> {
                     ),
                   ),
                   Text(
-                      '${RetipL10n.of(context).playlist} - ${RetipL10n.of(context).tracksCount(widget.playlist.tracks.length)}'),
+                      '${RetipL10n.of(context).playlist} - ${RetipL10n.of(context).tracksCount(playlist.tracks.length)}'),
                   const SizedBox(height: Sizer.x1),
                   Row(
                     children: [
                       Expanded(
                         child: ShuffleButton(
                           onPressed: () => PlayAudio.call(
-                            widget.playlist.tracks,
+                            playlist.tracks,
                             shuffle: true,
                           ),
                         ),
@@ -167,7 +169,7 @@ class _PlaylistViewState extends State<PlaylistView> {
                       Expanded(
                         child: PlayButton(
                           onPressed: () => PlayAudio.call(
-                            widget.playlist.tracks,
+                            playlist.tracks,
                             shuffle: false,
                           ),
                         ),
@@ -176,30 +178,38 @@ class _PlaylistViewState extends State<PlaylistView> {
                   ),
                   const VerticalSpacer(),
                   const VerticalSpacer(),
-                  TracksHeader(value: widget.playlist.tracks.length),
+                  TracksHeader(value: playlist.tracks.length),
                 ],
               ),
             );
           }
 
-          final track = widget.playlist.tracks[index - 1];
+          final track = playlist.tracks[index - 1];
 
           final isFavourite = IsInFavourites.call(track);
 
           return TrackTile(
-            refresh: () => setState(() {}),
+            refresh: () async {
+              final newPlaylist = await ReadPlaylist.call('pl_${playlist.id}');
+
+              if (newPlaylist != null &&
+                  newPlaylist.tracks.length != playlist.tracks.length) {
+                playlist = newPlaylist;
+                setState(() {});
+              }
+            },
             goToAlbum: true,
             showArtwork: true,
             track: track,
             onTap: () => PlayAudio.call(
-              widget.playlist.tracks,
+              playlist.tracks,
               index: index - 1,
             ),
             onMore: () {},
             moreActions: [
               RemoveFromPlaylistTile(
                 track: track,
-                playlist: widget.playlist,
+                playlist: playlist,
                 onTap: () {
                   setState(() {});
                 },

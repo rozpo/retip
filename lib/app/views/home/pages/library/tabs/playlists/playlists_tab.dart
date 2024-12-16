@@ -37,9 +37,21 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
             );
           }
 
-          final hasChanged = snapshot.requireData.length != playlists.length;
-          final data = hasChanged ? snapshot.requireData : playlists;
+          bool hasChanged = snapshot.requireData.length != playlists.length;
 
+          if (hasChanged == false) {
+            for (int i = 0; i < playlists.length; i++) {
+              final oldPlaylist = playlists[i];
+              final newPlaylist = snapshot.requireData[i];
+
+              if (oldPlaylist.tracks.length != newPlaylist.tracks.length) {
+                hasChanged = true;
+                break;
+              }
+            }
+          }
+
+          final data = hasChanged ? snapshot.requireData : playlists;
           if (hasChanged) {
             playlists = snapshot.requireData;
           }
@@ -92,35 +104,6 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                       RpText(playlist.name),
                     ],
                   ),
-                  // child: Container(
-                  //   decoration: BoxDecoration(
-                  //     color: playlist.artwork == null
-                  //         ? Theme.of(context).colorScheme.surfaceContainer
-                  //         : null,
-                  //     borderRadius: BorderRadius.circular(Sizer.x1),
-                  //     border: Border.all(
-                  //         width: 2,
-                  //         color: Theme.of(context).colorScheme.surfaceBright),
-                  //     image: playlist.artwork != null
-                  //         ? DecorationImage(
-                  //             fit: BoxFit.cover,
-                  //             image: Image.memory(playlist.artwork!).image,
-                  //           )
-                  //         : null,
-                  //   ),
-                  //   child: Center(
-                  //     child: Container(
-                  //       color: Colors.black,
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.all(Sizer.x1),
-                  //         child: Text(
-                  //           playlist.name,
-                  //           textAlign: TextAlign.center,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ),
               );
             },

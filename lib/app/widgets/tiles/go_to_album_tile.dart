@@ -5,10 +5,12 @@ import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class GoToAlbumTile extends StatelessWidget {
+  final VoidCallback? refresh;
   final int albumId;
 
   const GoToAlbumTile(
     this.albumId, {
+    this.refresh,
     super.key,
   });
 
@@ -22,13 +24,15 @@ class GoToAlbumTile extends StatelessWidget {
 
         if (context.mounted) {
           Navigator.of(context).pop();
-          Navigator.of(context).push(
+          await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
                 return AlbumView(album: album);
               },
             ),
           );
+
+          refresh?.call();
         }
       },
     );

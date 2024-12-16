@@ -90,9 +90,15 @@ class TrackTile extends StatelessWidget {
               AddToPlaylistTile(track: track),
               ...moreActions,
               if (goToAlbum && track.albumId != null)
-                GoToAlbumTile(track.albumId!),
+                GoToAlbumTile(
+                  track.albumId!,
+                  refresh: refresh,
+                ),
               if (goToArtist && track.artistId != null)
-                GoToArtistTile(track.artistId!),
+                GoToArtistTile(
+                  track.artistId!,
+                  refresh: refresh,
+                ),
             ],
           ),
         ],

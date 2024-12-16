@@ -70,6 +70,20 @@ class _ExploreTabState extends State<ExploreTab> {
           }
         }
 
+        // Check if playlist has changed
+        if (hasChanged == false) {
+          final playlists = List<PlaylistEntity>.from(snapshot.requireData[3]);
+          for (int i = 0; i < playlists.length; i++) {
+            final oldPlaylist = List<PlaylistEntity>.from(initialData[3])[i];
+            final newPlaylist = playlists[i];
+
+            if (oldPlaylist.tracks.length != newPlaylist.tracks.length) {
+              hasChanged = true;
+              break;
+            }
+          }
+        }
+
         if (hasChanged) {
           initialData = snapshot.requireData;
         }
