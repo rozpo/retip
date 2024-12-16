@@ -104,5 +104,6 @@
     "aboutApp": "About application",
     "appearance": "Appearance",
     "darkMode": "Dark mode",
-    "batterySaver": "Battery saver"
+    "batterySaver": "Battery saver",
+    "developerMenu": "Developer menu"
 }

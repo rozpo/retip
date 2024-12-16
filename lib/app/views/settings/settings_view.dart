@@ -28,20 +28,6 @@ class SettingsView extends StatelessWidget {
       appBar: RpAppBar(
         leading: const RpBackButton(),
         title: RpText(RetipL10n.of(context).settings),
-        actions: kReleaseMode == false
-            ? [
-                const HorizontalSpacer(),
-                RpIconButton(
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const DevView(),
-                    ),
-                  ),
-                  icon: Icons.developer_board,
-                ),
-                const HorizontalSpacer(),
-              ]
-            : null,
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
@@ -94,6 +80,7 @@ class SettingsView extends StatelessWidget {
           SettingsTile(
             title: l10n.aboutApp,
             icon: Icons.info,
+            trailing: const RpIconButton(icon: Icons.arrow_forward),
             onTap: () {
               showAboutDialog(
                 applicationName: l10n.retip,
@@ -107,6 +94,7 @@ class SettingsView extends StatelessWidget {
           SettingsTile(
             title: l10n.checkForUpdate,
             icon: Icons.update,
+            trailing: const RpIconButton(icon: Icons.shop),
             onTap: () {
               final url = Uri.parse(
                 'https://play.google.com/store/apps/details?id=dev.rozpo.retip',
@@ -117,6 +105,7 @@ class SettingsView extends StatelessWidget {
           SettingsTile(
             title: l10n.privacyPolicy,
             icon: Icons.privacy_tip,
+            trailing: const RpIconButton(icon: Icons.public),
             onTap: () {
               final url = Uri.parse(
                 'https://github.com/rozpo/retip/blob/main/docs/PRIVACY_POLICY.md',
@@ -127,6 +116,7 @@ class SettingsView extends StatelessWidget {
           SettingsTile(
             title: l10n.licenses,
             icon: Icons.description,
+            trailing: const RpIconButton(icon: Icons.arrow_forward),
             onTap: () {
               showLicensePage(
                 applicationLegalese: l10n.legalese,
@@ -137,6 +127,21 @@ class SettingsView extends StatelessWidget {
               );
             },
           ),
+          if (kReleaseMode == false) ...[
+            RpDivider(
+              text: l10n.developer,
+            ),
+            SettingsTile(
+              title: l10n.developerMenu,
+              icon: Icons.developer_board,
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DevView(),
+                ),
+              ),
+              trailing: const RpIconButton(icon: Icons.arrow_forward),
+            ),
+          ],
         ],
       ),
     );

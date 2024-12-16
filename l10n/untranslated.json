@@ -70,6 +70,7 @@
     "aboutApp",
     "appearance",
     "darkMode",
-    "batterySaver"
+    "batterySaver",
+    "developerMenu"
   ]
 }
