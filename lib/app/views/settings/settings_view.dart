@@ -62,17 +62,41 @@ class SettingsView extends StatelessWidget {
             title: l10n.darkMode,
             icon: Icons.dark_mode,
             trailing: RpIconButton.filled(
-              icon: Icons.check,
+              icon: Icons.toggle_on,
               onPressed: () {},
             ),
           ),
           SettingsTile(
             title: l10n.batterySaver,
             icon: Icons.battery_saver,
-            trailing: RpIconButton.outlined(
-              icon: Icons.close,
+            trailing: RpIconButton(
+              icon: Icons.toggle_off_outlined,
               onPressed: () {},
             ),
+          ),
+          RpDivider(
+            text: l10n.playback,
+          ),
+          SettingsTile(
+            title: l10n.autoplay,
+            icon: Icons.play_circle_outline,
+            trailing: RpIconButton(
+              icon: Icons.toggle_off_outlined,
+              onPressed: () {},
+            ),
+          ),
+          SettingsTile(
+            title: l10n.crossfade,
+            icon: Icons.graphic_eq,
+            trailing: RpIconButton(
+              icon: Icons.toggle_off_outlined,
+              onPressed: () {},
+            ),
+          ),
+          SettingsTile(
+            title: l10n.equalizer,
+            icon: Icons.equalizer,
+            trailing: const RpIconButton(icon: Icons.arrow_forward),
           ),
           RpDivider(
             text: l10n.info,

@@ -72,6 +72,10 @@
     "appearance",
     "darkMode",
     "batterySaver",
-    "developerMenu"
+    "developerMenu",
+    "playback",
+    "autoplay",
+    "crossfade",
+    "equalizer"
   ]
 }

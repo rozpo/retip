@@ -106,5 +106,9 @@
     "appearance": "Appearance",
     "darkMode": "Dark mode",
     "batterySaver": "Battery saver",
-    "developerMenu": "Developer menu"
+    "developerMenu": "Developer menu",
+    "playback": "Playback",
+    "autoplay": "Autoplay",
+    "crossfade": "Crossfade",
+    "equalizer": "Equalizer"
 }
