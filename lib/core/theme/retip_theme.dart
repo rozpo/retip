@@ -8,20 +8,20 @@ mixin RetipTheme {
   static const primaryColor = Colors.lightBlue;
 
   static light([Color colorSchemeSeed = primaryColor]) => ThemeData(
-    brightness: Brightness.light,
-    colorSchemeSeed: colorSchemeSeed,
-    fontFamily: fontFamily,
-    iconButtonTheme: iconButtonFilled,
-    sliderTheme: sliderTheme,
-  );
+        brightness: Brightness.light,
+        colorSchemeSeed: colorSchemeSeed,
+        fontFamily: fontFamily,
+        iconButtonTheme: iconButtonFilled,
+        sliderTheme: sliderTheme,
+      );
 
   static dark([Color colorSchemeSeed = primaryColor]) => ThemeData(
-    brightness: Brightness.dark,
-    colorSchemeSeed: colorSchemeSeed,
-    fontFamily: fontFamily,
-    iconButtonTheme: iconButtonFilled,
-    sliderTheme: sliderTheme,
-  );
+        brightness: Brightness.dark,
+        colorSchemeSeed: colorSchemeSeed,
+        fontFamily: fontFamily,
+        iconButtonTheme: iconButtonFilled,
+        sliderTheme: sliderTheme,
+      );
 
   static final contrastLight = ThemeData(
     brightness: Brightness.light,
