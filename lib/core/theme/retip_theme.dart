@@ -11,6 +11,8 @@ mixin RetipTheme {
     brightness: Brightness.light,
     colorSchemeSeed: Colors.blue,
     fontFamily: fontFamily,
+    iconButtonTheme: iconButtonFilled,
+    sliderTheme: sliderTheme,
   );
 
   static final dark = ThemeData(
