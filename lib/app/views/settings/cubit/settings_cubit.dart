@@ -30,6 +30,14 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
+  void toggleBatterySaver() async {
+    final result = await repository.setBatterySaver(!state.batterySaver);
+
+    if (result) {
+      emit(state.copyWith(batterySaver: !state.batterySaver));
+    }
+  }
+
   void setColorTheme(Color color) async {
     final result = await repository.setThemeColor(color);
 

@@ -8,4 +8,8 @@ abstract class ThemeRepository {
   Future<bool> setThemeColor(Color color);
 
   Color getThemeColor();
+
+  Future<bool> setBatterySaver(bool saveBattery);
+
+  bool getBatterySaver();
 }

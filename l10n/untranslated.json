@@ -76,6 +76,11 @@
     "playback",
     "autoplay",
     "crossfade",
-    "equalizer"
+    "equalizer",
+    "themeMode",
+    "dark",
+    "light",
+    "on",
+    "off"
   ]
 }

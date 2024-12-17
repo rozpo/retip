@@ -6,6 +6,7 @@ import 'package:retip/core/theme/retip_theme.dart';
 enum Keys {
   themeColor,
   themeMode,
+  themeBatterySaver,
 }
 
 class ThemeRepositoryImplementation extends ThemeRepository {
@@ -38,5 +39,15 @@ class ThemeRepositoryImplementation extends ThemeRepository {
   @override
   Future<bool> setThemeColor(Color color) {
     return provider.setString(Keys.themeColor.name, color.toString());
+  }
+
+  @override
+  bool getBatterySaver() {
+    return provider.getBool(Keys.themeBatterySaver.name);
+  }
+
+  @override
+  Future<bool> setBatterySaver(bool saveBattery) async {
+    return await provider.setBool(Keys.themeBatterySaver.name, saveBattery);
   }
 }

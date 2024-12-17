@@ -54,6 +54,7 @@ class SettingsView extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     final color = Colors.primaries[index];
+                    final isToggled = color == state.themeColor;
 
                     return GestureDetector(
                       onTap: () => cubit.setColorTheme(color),
@@ -64,6 +65,12 @@ class SettingsView extends StatelessWidget {
                         ),
                         width: Sizer.x5,
                         height: Sizer.x5,
+                        child: isToggled
+                            ? Icon(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                Icons.check,
+                              )
+                            : null,
                       ),
                     );
                   },
@@ -71,8 +78,9 @@ class SettingsView extends StatelessWidget {
               ),
               SettingsTile(
                 onTap: cubit.toggleDarkMode,
-                title: l10n.darkMode,
-                icon: Icons.dark_mode,
+                title: l10n.themeMode,
+                subtitle: state.darkMode ? l10n.dark : l10n.light,
+                icon: state.darkMode ? Icons.dark_mode : Icons.light_mode,
                 trailing: state.darkMode
                     ? RpIconButton.filled(
                         icon: Icons.toggle_on,
@@ -84,12 +92,21 @@ class SettingsView extends StatelessWidget {
                       ),
               ),
               SettingsTile(
+                onTap: cubit.toggleBatterySaver,
                 title: l10n.batterySaver,
-                icon: Icons.battery_saver,
-                trailing: RpIconButton(
-                  icon: Icons.toggle_off_outlined,
-                  onPressed: () {},
-                ),
+                subtitle: state.batterySaver ? l10n.on : l10n.off,
+                icon: state.batterySaver
+                    ? Icons.battery_saver
+                    : Icons.battery_std,
+                trailing: state.batterySaver
+                    ? RpIconButton.filled(
+                        icon: Icons.toggle_on,
+                        onPressed: cubit.toggleBatterySaver,
+                      )
+                    : RpIconButton(
+                        icon: Icons.toggle_off_outlined,
+                        onPressed: cubit.toggleBatterySaver,
+                      ),
               ),
               RpDivider(
                 text: l10n.playback,

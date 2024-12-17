@@ -110,5 +110,10 @@
     "playback": "Playback",
     "autoplay": "Autoplay",
     "crossfade": "Crossfade",
-    "equalizer": "Equalizer"
+    "equalizer": "Equalizer",
+    "themeMode": "Theme mode",
+    "dark": "Dark",
+    "light": "Light",
+    "on": "On",
+    "off": "Off"
 }

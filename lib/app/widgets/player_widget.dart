@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:retip/app/views/player/player_view.dart';
+import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart';
@@ -99,64 +101,80 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                     color: Theme.of(context).colorScheme.surfaceContainer,
                     width: double.infinity,
                     // height: (24 * 2) + 16,
-                    child: Column(
-                      children: [
-                        StreamBuilder(
-                          stream: player.positionStream,
-                          builder: (context, snapshot) {
-                            final position = snapshot.data ?? Duration.zero;
-                            final duration = player.duration ?? Duration.zero;
+                    child: BlocBuilder<SettingsCubit, SettingsState>(
+                      builder: (context, state) {
+                        return Column(
+                          children: [
+                            if (context
+                                    .read<SettingsCubit>()
+                                    .state
+                                    .batterySaver ==
+                                false) ...[
+                              StreamBuilder(
+                                stream: player.positionStream,
+                                builder: (context, snapshot) {
+                                  final position =
+                                      snapshot.data ?? Duration.zero;
+                                  final duration =
+                                      player.duration ?? Duration.zero;
 
-                            return Row(
+                                  return Row(
+                                    children: [
+                                      Expanded(
+                                        flex: position.inSeconds,
+                                        child: Container(
+                                          height: 4,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: duration.inSeconds -
+                                            position.inSeconds,
+                                        child: Container(
+                                          height: 4,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  flex: position.inSeconds,
-                                  child: Container(
-                                    height: 4,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(width: Sizer.x1),
+                                      PlayerArtworkWidget(player: player),
+                                      const SizedBox(width: Sizer.x1),
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: Sizer.x1),
+                                          child:
+                                              AudioInfoWidget(player: player),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Expanded(
-                                  flex: duration.inSeconds - position.inSeconds,
-                                  child: Container(
-                                    height: 4,
-                                    color:
-                                        Theme.of(context).colorScheme.surface,
-                                  ),
-                                )
+                                const HorizontalSpacer(),
+                                PlayPauseIcon(
+                                  disabled: player.tracks.isEmpty,
+                                  size: 24,
+                                ),
+                                const HorizontalSpacer(),
                               ],
-                            );
-                          },
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  const SizedBox(width: Sizer.x1),
-                                  PlayerArtworkWidget(player: player),
-                                  const SizedBox(width: Sizer.x1),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: Sizer.x1),
-                                      child: AudioInfoWidget(player: player),
-                                    ),
-                                  ),
-                                ],
-                              ),
                             ),
-                            const HorizontalSpacer(),
-                            PlayPauseIcon(
-                              disabled: player.tracks.isEmpty,
-                              size: 24,
-                            ),
-                            const HorizontalSpacer(),
                           ],
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ),
                 ),
