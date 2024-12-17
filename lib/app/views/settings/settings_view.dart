@@ -55,13 +55,16 @@ class SettingsView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final color = Colors.primaries[index];
 
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Sizer.x0_5),
-                        color: color,
+                    return GestureDetector(
+                      onTap: () => cubit.setColorTheme(color),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Sizer.x0_5),
+                          color: color,
+                        ),
+                        width: Sizer.x5,
+                        height: Sizer.x5,
                       ),
-                      width: Sizer.x5,
-                      height: Sizer.x5,
                     );
                   },
                 ),

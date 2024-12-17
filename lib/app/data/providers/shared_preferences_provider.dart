@@ -49,4 +49,12 @@ class SharedPreferencesProvider {
   bool getBool(String key, [bool fallback = false]) {
     return _prefs.getBool(key) ?? fallback;
   }
+
+  Future<bool> setString(String key, String value) async {
+    return await _prefs.setString(key, value);
+  }
+
+  String? getString(String key) {
+    return _prefs.getString(key);
+  }
 }

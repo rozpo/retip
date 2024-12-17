@@ -7,17 +7,17 @@ mixin RetipTheme {
 
   static const primaryColor = Colors.lightBlue;
 
-  static final light = ThemeData(
+  static light([Color colorSchemeSeed = primaryColor]) => ThemeData(
     brightness: Brightness.light,
-    colorSchemeSeed: Colors.blue,
+    colorSchemeSeed: colorSchemeSeed,
     fontFamily: fontFamily,
     iconButtonTheme: iconButtonFilled,
     sliderTheme: sliderTheme,
   );
 
-  static final dark = ThemeData(
+  static dark([Color colorSchemeSeed = primaryColor]) => ThemeData(
     brightness: Brightness.dark,
-    colorSchemeSeed: primaryColor,
+    colorSchemeSeed: colorSchemeSeed,
     fontFamily: fontFamily,
     iconButtonTheme: iconButtonFilled,
     sliderTheme: sliderTheme,

@@ -28,8 +28,8 @@ class RetipApp extends StatelessWidget {
             showPerformanceOverlay:
                 RetipConfig.getBool(RetipConfigBoolKey.showPerformanceOverlay),
             themeMode: state.darkMode ? ThemeMode.dark : ThemeMode.light,
-            theme: RetipTheme.light,
-            darkTheme: RetipTheme.dark,
+            theme: RetipTheme.light(state.themeColor),
+            darkTheme: RetipTheme.dark(state.themeColor),
             highContrastTheme: RetipTheme.contrastLight,
             highContrastDarkTheme: RetipTheme.contrastDark,
             localizationsDelegates: RetipL10n.localizationsDelegates,
