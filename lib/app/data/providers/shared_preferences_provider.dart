@@ -41,4 +41,12 @@ class SharedPreferencesProvider {
 
     _prefs.setString('$artistPrefix$id', base64);
   }
+
+  Future<bool> setBool(String key, bool value) async {
+    return await _prefs.setBool(key, value);
+  }
+
+  bool getBool(String key, [bool fallback = false]) {
+    return _prefs.getBool(key) ?? fallback;
+  }
 }
