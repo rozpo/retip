@@ -108,30 +108,30 @@ class SettingsView extends StatelessWidget {
                         onPressed: cubit.toggleBatterySaver,
                       ),
               ),
-              RpDivider(
-                text: l10n.playback,
-              ),
-              SettingsTile(
-                title: l10n.autoplay,
-                icon: Icons.play_circle_outline,
-                trailing: RpIconButton(
-                  icon: Icons.toggle_off_outlined,
-                  onPressed: () {},
-                ),
-              ),
-              SettingsTile(
-                title: l10n.crossfade,
-                icon: Icons.graphic_eq,
-                trailing: RpIconButton(
-                  icon: Icons.toggle_off_outlined,
-                  onPressed: () {},
-                ),
-              ),
-              SettingsTile(
-                title: l10n.equalizer,
-                icon: Icons.equalizer,
-                trailing: const RpIconButton(icon: Icons.arrow_forward),
-              ),
+              // RpDivider(
+              //   text: l10n.playback,
+              // ),
+              // SettingsTile(
+              //   title: l10n.autoplay,
+              //   icon: Icons.play_circle_outline,
+              //   trailing: RpIconButton(
+              //     icon: Icons.toggle_off_outlined,
+              //     onPressed: () {},
+              //   ),
+              // ),
+              // SettingsTile(
+              //   title: l10n.crossfade,
+              //   icon: Icons.graphic_eq,
+              //   trailing: RpIconButton(
+              //     icon: Icons.toggle_off_outlined,
+              //     onPressed: () {},
+              //   ),
+              // ),
+              // SettingsTile(
+              //   title: l10n.equalizer,
+              //   icon: Icons.equalizer,
+              //   trailing: const RpIconButton(icon: Icons.arrow_forward),
+              // ),
               RpDivider(
                 text: l10n.info,
               ),

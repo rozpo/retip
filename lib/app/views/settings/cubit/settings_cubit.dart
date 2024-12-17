@@ -14,10 +14,12 @@ class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit() : super(const SettingsState()) {
     final isDarkMode = repository.getThemeMode() == ThemeMode.dark;
     final themeColor = repository.getThemeColor();
+    final batterySaver = repository.getBatterySaver();
 
     emit(state.copyWith(
       themeColor: themeColor,
       darkMode: isDarkMode,
+      batterySaver: batterySaver,
     ));
   }
 
