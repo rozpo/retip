@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.2
+
+- Add appearance options to settings page
+- Prepare battery saver mode with reduced animations
+- Include privacy policy, terms and condition links
+- Show app and third party licenses
+
 ## v0.2.1
 
 - Home/playlist views loading performance improvement
