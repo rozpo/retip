@@ -352,16 +352,20 @@ packages:
   on_audio_query:
     dependency: "direct main"
     description:
-      path: "../on_audio_query/packages/on_audio_query"
-      relative: true
-    source: path
+      path: "packages/on_audio_query"
+      ref: main
+      resolved-ref: "0d782990f1bf863dea9ebb75d59165f8de9e78ab"
+      url: "https://github.com/rozpo/on_audio_query"
+    source: git
     version: "2.9.0"
   on_audio_query_android:
     dependency: transitive
     description:
-      path: "../on_audio_query/packages/on_audio_query_android"
-      relative: true
-    source: path
+      path: "packages/on_audio_query_android"
+      ref: main
+      resolved-ref: "0d782990f1bf863dea9ebb75d59165f8de9e78ab"
+      url: "https://github.com/rozpo/on_audio_query"
+    source: git
     version: "1.1.0"
   on_audio_query_ios:
     dependency: transitive
