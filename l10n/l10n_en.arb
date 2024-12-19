@@ -115,5 +115,6 @@
     "dark": "Dark",
     "light": "Light",
     "on": "On",
-    "off": "Off"
+    "off": "Off",
+    "nothingIsPlaying": "Nothing is playing"
 }

@@ -203,21 +203,32 @@ class AudioInfoWidget extends StatelessWidget {
               ? player.tracks[index]
               : null;
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                track?.title ?? RetipL10n.of(context).unknownTitle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                track?.artist ?? RetipL10n.of(context).unknownArtist,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          );
+          return SizedBox(
+              height: Sizer.x5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: player.tracks.isNotEmpty
+                    ? [
+                        Text(
+                          track?.title ?? RetipL10n.of(context).unknownTitle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          track?.artist ?? RetipL10n.of(context).unknownArtist,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ]
+                    : [
+                        Text(
+                          RetipL10n.of(context).nothingIsPlaying,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+              ));
         });
   }
 }
