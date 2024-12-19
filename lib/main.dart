@@ -7,6 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/data/repositories/library_repository_implementation.dart';
+import 'package:retip/app/data/repositories/theme_repository_implementation.dart';
 import 'package:retip/app/retip_app.dart';
 import 'package:retip/app/services/repositories/library_repository.dart';
 import 'package:retip/core/audio/retip_audio.dart';
@@ -20,7 +21,11 @@ void main() async {
   await setup();
 
   // Run application
-  runApp(const RetipApp());
+  runApp(RetipApp(
+    themeRepository: ThemeRepositoryImplementation(
+      provider: SharedPreferencesProvider(),
+    ),
+  ));
 }
 
 Future<void> init() async {

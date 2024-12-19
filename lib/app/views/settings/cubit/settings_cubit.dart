@@ -1,17 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/data/repositories/theme_repository_implementation.dart';
+import 'package:retip/app/services/repositories/theme_repository.dart';
 import 'package:retip/core/theme/retip_theme.dart';
 
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  final repository = ThemeRepositoryImplementation(
-    provider: SharedPreferencesProvider(),
-  );
+  final ThemeRepository repository;
 
-  SettingsCubit() : super(const SettingsState()) {
+  SettingsCubit(this.repository) : super(const SettingsState()) {
     final isDarkMode = repository.getThemeMode() == ThemeMode.dark;
     final themeColor = repository.getThemeColor();
     final batterySaver = repository.getBatterySaver();
