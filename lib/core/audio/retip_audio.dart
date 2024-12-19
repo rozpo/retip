@@ -42,7 +42,11 @@ class RetipAudio extends AudioPlayer {
 
       if (track.artwork != null) {
         final file = File('${tmpDir.path}/${track.hashCode}.png');
-        await file.writeAsBytes(track.artwork!);
+
+        if (await file.exists() == false) {
+          await file.writeAsBytes(track.artwork!);
+        }
+
         artworkUrl = file.path;
       }
 
