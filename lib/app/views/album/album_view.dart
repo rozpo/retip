@@ -104,7 +104,12 @@ class _AlbumViewState extends State<AlbumView> {
           const HorizontalSpacer(),
         ],
       ),
-      bottomNavigationBar: const PlayerWidget(),
+      bottomNavigationBar: Container(
+        color: Theme.of(context).colorScheme.surfaceContainer,
+        child: const SafeArea(
+          child: PlayerWidget(),
+        ),
+      ),
       body: ListView.builder(
         controller: scrollController,
         padding: const EdgeInsets.symmetric(vertical: Sizer.x2),

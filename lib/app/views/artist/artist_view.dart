@@ -111,7 +111,12 @@ class _ArtistViewState extends State<ArtistView> {
           const HorizontalSpacer(),
         ],
       ),
-      bottomNavigationBar: const PlayerWidget(),
+      bottomNavigationBar: Container(
+        color: Theme.of(context).colorScheme.surfaceContainer,
+        child: const SafeArea(
+          child: PlayerWidget(),
+        ),
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
         physics: const BouncingScrollPhysics(),

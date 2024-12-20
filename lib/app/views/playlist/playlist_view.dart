@@ -110,7 +110,12 @@ class _PlaylistViewState extends State<PlaylistView> {
           const HorizontalSpacer(),
         ],
       ),
-      bottomNavigationBar: const PlayerWidget(),
+      bottomNavigationBar: Container(
+        color: Theme.of(context).colorScheme.surfaceContainer,
+        child: const SafeArea(
+          child: PlayerWidget(),
+        ),
+      ),
       body: ListView.builder(
         shrinkWrap: true,
         controller: scrollController,
