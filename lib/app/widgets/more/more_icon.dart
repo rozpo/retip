@@ -45,25 +45,27 @@ class MoreIcon extends StatelessWidget {
           ),
           context: context,
           builder: (context) {
-            return ListView(
-              padding: const EdgeInsets.symmetric(vertical: Sizer.x1),
-              physics: const BouncingScrollPhysics(),
-              shrinkWrap: true,
-              children: [
-                RpListTile(
-                  title: RpText(title),
-                  subtitle: subtitle != null ? RpText(subtitle!) : null,
-                  leading: image != null
-                      ? RpIconImage(bytes: image!)
-                      : const RpIcon(icon: Icons.music_note),
-                  trailing: RpIconButton(
-                    icon: Icons.close,
-                    onPressed: () => Navigator.of(context).pop(),
+            return SafeArea(
+              child: ListView(
+                padding: const EdgeInsets.only(top: Sizer.x1),
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  RpListTile(
+                    title: RpText(title),
+                    subtitle: subtitle != null ? RpText(subtitle!) : null,
+                    leading: image != null
+                        ? RpIconImage(bytes: image!)
+                        : const RpIcon(icon: Icons.music_note),
+                    trailing: RpIconButton(
+                      icon: Icons.close,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
                   ),
-                ),
-                const RpDivider(),
-                ...tiles,
-              ],
+                  const RpDivider(),
+                  ...tiles,
+                ],
+              ),
             );
           },
         );
