@@ -4,6 +4,7 @@ import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -61,35 +62,49 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
               child: Text(RetipL10n.of(context).noPlaylists),
             );
           }
+          const columns = 3;
+
+          final textLineHeight = 'A'.height(
+              Theme.of(context).textTheme.bodySmall!,
+              MediaQuery.of(context).size.width / columns);
+          final textLineHeight2 = 'A'.height(
+              Theme.of(context).textTheme.bodyMedium!,
+              MediaQuery.of(context).size.width / columns);
 
           return GridView.builder(
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(
-              vertical: Sizer.x1 + Sizer.x0_5,
-              horizontal: Sizer.x0_5,
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+                vertical: Sizer.x1 + Sizer.x0_5, horizontal: Sizer.x1),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: Sizer.x1,
+              crossAxisSpacing: Sizer.x1,
+              crossAxisCount: columns,
+              mainAxisExtent: MediaQuery.of(context).size.width / columns +
+                  textLineHeight +
+                  textLineHeight2,
             ),
             itemCount: data.length,
             itemBuilder: (context, index) {
               final playlist = data[index];
 
-              return Padding(
-                padding: const EdgeInsets.all(Sizer.x0_5),
-                child: GestureDetector(
-                  onTap: () async {
-                    await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return PlaylistView(playlist: playlist);
-                        },
-                      ),
-                    );
-
-                    setState(() {});
-                  },
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return PlaylistView(playlist: playlist);
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Sizer.x1),
+                    color: Theme.of(context).colorScheme.surfaceContainer,
+                  ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Expanded(
                         child: LayoutBuilder(builder: (context, constraints) {
@@ -97,11 +112,32 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
 
                           return SizedBox.square(
                             dimension: dimension,
-                            child: PlaylistArtwork(images: playlist.artworks),
+                            child: PlaylistArtwork(
+                              images: playlist.artworks,
+                            ),
                           );
                         }),
                       ),
-                      RpText(playlist.name),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: Sizer.x0_5,
+                          horizontal: Sizer.x1,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RpText(
+                              playlist.name,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            RpText(
+                              RetipL10n.of(context)
+                                  .tracksCount(playlist.tracks.length),
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
