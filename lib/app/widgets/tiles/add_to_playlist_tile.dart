@@ -10,6 +10,7 @@ import 'package:retip/app/widgets/rp_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_snackbar.dart';
 import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -60,6 +61,10 @@ class AddToPlaylistTile extends StatelessWidget {
                               await showDialog<bool>(
                                 context: context,
                                 builder: (context) => AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(Sizer.x1),
+                                  ),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -70,37 +75,81 @@ class AddToPlaylistTile extends StatelessWidget {
                                           text = value;
                                         },
                                       ),
+                                      const VerticalSpacer(),
+                                      const VerticalSpacer(),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: OutlinedButton(
+                                              style: ButtonStyle(
+                                                padding:
+                                                    const WidgetStatePropertyAll(
+                                                        EdgeInsets.zero),
+                                                tapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                shape: WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            Sizer.x0_5),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text(l10n.cancel),
+                                            ),
+                                          ),
+                                          const HorizontalSpacer(),
+                                          Expanded(
+                                            child: FilledButton(
+                                              style: ButtonStyle(
+                                                padding:
+                                                    const WidgetStatePropertyAll(
+                                                        EdgeInsets.zero),
+                                                tapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                                shape: WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            Sizer.x0_5),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () async {
+                                                if (text.isNotEmpty) {
+                                                  await CreatePlaylist.call(
+                                                      text, track);
+
+                                                  if (context.mounted) {
+                                                    final message =
+                                                        l10n.addedTo(text);
+                                                    final snackbar = RpSnackbar(
+                                                        context,
+                                                        message: message);
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .removeCurrentSnackBar();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(snackbar);
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(context);
+                                                    Navigator.pop(context);
+                                                  }
+                                                }
+                                              },
+                                              child: Text(l10n.create),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                  actions: [
-                                    OutlinedButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(l10n.cancel)),
-                                    FilledButton(
-                                      onPressed: () async {
-                                        if (text.isNotEmpty) {
-                                          await CreatePlaylist.call(
-                                              text, track);
-
-                                          if (context.mounted) {
-                                            final message = l10n.addedTo(text);
-                                            final snackbar = RpSnackbar(context,
-                                                message: message);
-                                            ScaffoldMessenger.of(context)
-                                                .removeCurrentSnackBar();
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackbar);
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                          }
-                                        }
-                                      },
-                                      child: Text(l10n.create),
-                                    ),
-                                  ],
                                 ),
                               );
                             },

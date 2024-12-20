@@ -74,11 +74,7 @@ class _SearchPageState extends State<SearchPage> {
                 shadowColor: const WidgetStatePropertyAll(Colors.transparent),
                 backgroundColor:
                     const WidgetStatePropertyAll(Colors.transparent),
-                shape: const WidgetStatePropertyAll(LinearBorder.none
-                    // RoundedRectangleBorder(
-                    //   borderRadius: BorderRadius.circular(Sizer.x0_5),
-                    // ),
-                    ),
+                shape: const WidgetStatePropertyAll(LinearBorder.none),
                 textInputAction: TextInputAction.search,
                 onChanged: (value) {
                   setState(() {});
