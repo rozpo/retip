@@ -30,6 +30,20 @@ abstract class TrackEntity extends AbstractEntity {
 
   bool isFavourite = false;
 
+  final int size;
+  final String? genre;
+  final String? composer;
+  final DateTime? dateAdded;
+  final DateTime? dateModified;
+  final String fileType;
+
+  final bool? isAlarm;
+  final bool? isAudioBook;
+  final bool? isMusic;
+  final bool? isNotification;
+  final bool? isPodcast;
+  final bool? isRingtone;
+
   TrackEntity({
     required super.id,
     this.albumId,
@@ -41,6 +55,18 @@ abstract class TrackEntity extends AbstractEntity {
     required this.duration,
     this.artwork,
     this.index,
+    required this.size,
+    this.genre,
+    this.composer,
+    this.dateAdded,
+    this.dateModified,
+    required this.fileType,
+    this.isAlarm,
+    this.isAudioBook,
+    this.isMusic,
+    this.isNotification,
+    this.isPodcast,
+    this.isRingtone,
   });
 
   @override
