@@ -21,6 +21,7 @@ class TrackModel extends TrackEntity {
     super.composer,
     super.dateAdded,
     super.dateModified,
+    required super.fileLocation,
     required super.fileType,
     super.isAlarm,
     super.isAudioBook,
@@ -47,11 +48,12 @@ class TrackModel extends TrackEntity {
         genre: data.genre,
         composer: data.composer,
         dateAdded: data.dateAdded != null
-            ? DateTime.fromMillisecondsSinceEpoch(data.dateAdded!)
+            ? DateTime(1970, 0, 0, 0, 0, data.dateAdded!)
             : null,
         dateModified: data.dateModified != null
-            ? DateTime.fromMillisecondsSinceEpoch(data.dateModified!)
+            ? DateTime(1970, 0, 0, 0, 0, data.dateModified!)
             : null,
+        fileLocation: data.data,
         fileType: data.fileExtension,
         isAlarm: data.isAlarm,
         isAudioBook: data.isAudioBook,

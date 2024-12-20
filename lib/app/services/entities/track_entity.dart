@@ -35,6 +35,7 @@ abstract class TrackEntity extends AbstractEntity {
   final String? composer;
   final DateTime? dateAdded;
   final DateTime? dateModified;
+  final String fileLocation;
   final String fileType;
 
   final bool? isAlarm;
@@ -60,6 +61,7 @@ abstract class TrackEntity extends AbstractEntity {
     this.composer,
     this.dateAdded,
     this.dateModified,
+    required this.fileLocation,
     required this.fileType,
     this.isAlarm,
     this.isAudioBook,

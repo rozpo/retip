@@ -6,6 +6,7 @@ import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/add_to_playlist_tile.dart';
+import 'package:retip/app/widgets/tiles/file_details.dart';
 import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
@@ -99,6 +100,7 @@ class TrackTile extends StatelessWidget {
                   track.artistId!,
                   refresh: refresh,
                 ),
+              FileDetailsTile(track: track),
             ],
           ),
         ],

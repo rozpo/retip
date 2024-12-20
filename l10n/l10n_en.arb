@@ -116,5 +116,13 @@
     "light": "Light",
     "on": "On",
     "off": "Off",
-    "nothingIsPlaying": "Nothing is playing"
+    "nothingIsPlaying": "Nothing is playing",
+    "fileDetails": "File details",
+    "title": "Title",
+    "location": "Location",
+    "genre": "Genre",
+    "composer": "Composer",
+    "dateAdded": "Date added",
+    "dateModified": "Date modified",
+    "size": "Size"
 }

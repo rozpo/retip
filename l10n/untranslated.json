@@ -82,6 +82,14 @@
     "light",
     "on",
     "off",
-    "nothingIsPlaying"
+    "nothingIsPlaying",
+    "fileDetails",
+    "title",
+    "location",
+    "genre",
+    "composer",
+    "dateAdded",
+    "dateModified",
+    "size"
   ]
 }
