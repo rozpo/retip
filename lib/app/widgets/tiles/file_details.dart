@@ -23,7 +23,7 @@ class FileDetailsTile extends StatelessWidget {
     final l10n = RetipL10n.of(context);
 
     return MoreTile(
-      icon: Icons.details,
+      icon: Icons.info,
       text: l10n.fileDetails,
       onTap: () {
         Navigator.of(context).pop();
