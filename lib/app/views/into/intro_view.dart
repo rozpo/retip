@@ -47,14 +47,23 @@ class IntroView extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const VerticalSpacer(),
-                    IntroSettingsButtonWidget(
-                      onPressed: () => AppSettings.openAppSettings(),
-                    ),
                     const VerticalSpacer(),
-                    IntroAllowButtonWidget(
-                      onPressed: () => introBloc.add(
-                        IntroAskPermissionsEvent(),
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: IntroSettingsButtonWidget(
+                            onPressed: () => AppSettings.openAppSettings(),
+                          ),
+                        ),
+                        const HorizontalSpacer(),
+                        Expanded(
+                          child: IntroAllowButtonWidget(
+                            onPressed: () => introBloc.add(
+                              IntroAskPermissionsEvent(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
