@@ -12,6 +12,8 @@
     "remove": "Remove",
     "retip": "Retip",
     "retipMusicPlayer": "Retip Music Player",
+    "retipDescription": "Retip is a beautiful and intuitive music player built using the Flutter. It provides a seamless and immersive experience for music enthusiasts, allowing them to enjoy their favorite tracks with ease.",
+    "retipMotto": "If you think that in the era of streaming, the art of offline listening to music has not disappeared. It's a sure sign that you need a RETIP!",
     "search": "Search",
     "searchForMusic": "Search for music...",
     "storagePermission": "Storage access",

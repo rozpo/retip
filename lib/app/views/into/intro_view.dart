@@ -32,19 +32,34 @@ class IntroView extends StatelessWidget {
               padding: const EdgeInsets.all(Sizer.x2),
               child: Center(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const IntroLogoWidget(),
+                    Text(
+                      RetipL10n.of(context).retipMusicPlayer,
+                      style: Theme.of(context).textTheme.displaySmall,
+                      // textAlign: TextAlign.center,
+                    ),
                     const VerticalSpacer(),
                     Text(
+                      RetipL10n.of(context).retipDescription,
+                      // textAlign: TextAlign.center,
+                    ),
+                    const VerticalSpacer(),
+                    const VerticalSpacer(),
+                    const Center(child: IntroLogoWidget()),
+                    const VerticalSpacer(),
+                    const VerticalSpacer(),
+                    const Divider(),
+                    Text(
                       RetipL10n.of(context).storagePermission,
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: Theme.of(context).textTheme.headlineMedium,
                       textAlign: TextAlign.center,
                     ),
                     const VerticalSpacer(),
                     Text(
                       RetipL10n.of(context).grantPermission,
-                      textAlign: TextAlign.center,
+                      // textAlign: TextAlign.center,
                     ),
                     const VerticalSpacer(),
                     const VerticalSpacer(),
@@ -64,6 +79,16 @@ class IntroView extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                    const VerticalSpacer(),
+                    const VerticalSpacer(),
+                    const Divider(),
+                    Text(
+                      '"${RetipL10n.of(context).retipMotto}"',
+                      // textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontStyle: FontStyle.italic,
+                          ),
                     ),
                   ],
                 ),
