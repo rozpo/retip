@@ -54,10 +54,8 @@ class ArtistsTab extends StatelessWidget {
 
           return GridView.builder(
             physics: const BouncingScrollPhysics(),
-            // padding: const EdgeInsets.all(Sizer.x0_5),
             padding: const EdgeInsets.symmetric(
                 vertical: Sizer.x1 + Sizer.x0_5, horizontal: Sizer.x1),
-
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               mainAxisSpacing: Sizer.x1,
               crossAxisSpacing: Sizer.x1,
