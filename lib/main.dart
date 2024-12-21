@@ -6,9 +6,11 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
+import 'package:retip/app/data/repositories/audio_repository_implementation.dart';
 import 'package:retip/app/data/repositories/library_repository_implementation.dart';
 import 'package:retip/app/data/repositories/theme_repository_implementation.dart';
 import 'package:retip/app/retip_app.dart';
+import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/services/repositories/library_repository.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,20 +47,31 @@ Future<void> init() async {
   );
 }
 
-Future<void> setup({RetipAudio? audio}) async {
+Future<void> setup() async {
   final sharedPrefs = await SharedPreferences.getInstance();
   GetIt.I.registerSingleton<SharedPreferences>(sharedPrefs);
 
   final packageInfo = await PackageInfo.fromPlatform();
   GetIt.I.registerSingleton<PackageInfo>(packageInfo);
 
-  GetIt.I.registerSingleton<RetipAudio>(audio ?? RetipAudio());
+  final player = GetIt.I.registerSingleton<RetipAudio>(RetipAudio());
+
+  final sharedPrefsProvider = SharedPreferencesProvider();
 
   // Library repository register
   GetIt.I.registerSingleton<LibraryRepository>(
     LibraryRepositoryImplementation(
       onAudioQueryProvider: OnAudioQueryProvider(),
-      sharedPreferencesProvider: SharedPreferencesProvider(),
+      sharedPreferencesProvider: sharedPrefsProvider,
     ),
   );
+
+  final audio = GetIt.I.registerSingleton<AudioRepository>(
+    AudioRepositoryImplementation(
+      sharedPreferencesProvider: sharedPrefsProvider,
+    ),
+  );
+
+  await player.setShuffleMode(audio.getShuffleMode());
+  await player.setRepeatMode(audio.getRepeatMode());
 }

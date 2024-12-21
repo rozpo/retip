@@ -5,6 +5,7 @@ import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
@@ -382,7 +383,7 @@ class PlaybackButtons extends StatelessWidget {
             final enabled = snapshot.data ?? false;
 
             return IconButton(
-              onPressed: () => player.setShuffleModeEnabled(!enabled),
+              onPressed: () => player.setShuffleMode(!enabled),
               icon: Icon(
                 Icons.shuffle,
                 color: enabled
@@ -426,8 +427,21 @@ class PlaybackButtons extends StatelessWidget {
                 break;
             }
 
+            final AudioRepeatMode nextRepeatMode;
+            switch (nextLoopMode) {
+              case LoopMode.all:
+                nextRepeatMode = AudioRepeatMode.all;
+                break;
+              case LoopMode.one:
+                nextRepeatMode = AudioRepeatMode.one;
+                break;
+              case LoopMode.off:
+                nextRepeatMode = AudioRepeatMode.none;
+                break;
+            }
+
             return IconButton(
-              onPressed: () => player.setLoopMode(nextLoopMode),
+              onPressed: () => player.setRepeatMode(nextRepeatMode),
               icon: Icon(
                 iconData,
                 color: iconColor,
