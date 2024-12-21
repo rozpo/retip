@@ -9,9 +9,12 @@ import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/retip_icon.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
+import 'package:retip/app/widgets/rp_icon.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
+import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/spacer.dart';
+import 'package:retip/core/config/retip_config.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -94,7 +97,9 @@ class SettingsView extends StatelessWidget {
               SettingsTile(
                 onTap: cubit.toggleBatterySaver,
                 title: l10n.batterySaver,
-                subtitle: state.batterySaver ? l10n.on : l10n.off,
+                subtitle: state.batterySaver
+                    ? l10n.reduceApplicationAnimations
+                    : l10n.off,
                 icon: state.batterySaver
                     ? Icons.battery_saver
                     : Icons.battery_std,
@@ -132,6 +137,23 @@ class SettingsView extends StatelessWidget {
               //   icon: Icons.equalizer,
               //   trailing: const RpIconButton(icon: Icons.arrow_forward),
               // ),
+              RpDivider(text: l10n.library),
+              RpListTile(
+                leading: const RpIcon(icon: Icons.grid_on),
+                title: Text(l10n.gridView),
+                subtitle: Text(l10n.columnsCount(state.gridViewColumns)),
+              ),
+              Slider(
+                value: state.gridViewColumns.toDouble(),
+                min: RetipConfig.minGridViewColumns.toDouble(),
+                max: RetipConfig.maxGridViewColumns.toDouble(),
+                divisions: (RetipConfig.maxGridViewColumns.toDouble() /
+                        RetipConfig.minGridViewColumns.toDouble())
+                    .toInt(),
+                onChanged: (value) {
+                  cubit.setGridViewColumns(value.toInt());
+                },
+              ),
               RpDivider(
                 text: l10n.info,
               ),

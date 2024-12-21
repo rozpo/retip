@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/services/cases/get_all_artists.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
+import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/core/extensions/string_extension.dart';
@@ -43,7 +45,7 @@ class ArtistsTab extends StatelessWidget {
 
           data.removeWhere((artist) => artist.albums.isEmpty);
 
-          const columns = 2;
+          final columns = context.read<SettingsCubit>().state.gridViewColumns;
 
           final textLineHeight = 'A'.height(
               Theme.of(context).textTheme.bodySmall!,

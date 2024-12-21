@@ -4,9 +4,10 @@ import 'package:retip/app/services/repositories/theme_repository.dart';
 import 'package:retip/core/theme/retip_theme.dart';
 
 enum Keys {
+  themeGridViewColumns,
+  themeBatterySaver,
   themeColor,
   themeMode,
-  themeBatterySaver,
 }
 
 class ThemeRepositoryImplementation extends ThemeRepository {
@@ -49,5 +50,15 @@ class ThemeRepositoryImplementation extends ThemeRepository {
   @override
   Future<bool> setBatterySaver(bool saveBattery) async {
     return await provider.setBool(Keys.themeBatterySaver.name, saveBattery);
+  }
+
+  @override
+  int getGridViewColumns() {
+    return provider.getInt(Keys.themeGridViewColumns.name, 2);
+  }
+
+  @override
+  Future<bool> setGridViewColumns(int columns) async {
+    return await provider.setInt(Keys.themeGridViewColumns.name, columns);
   }
 }

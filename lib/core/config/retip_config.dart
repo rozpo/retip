@@ -14,6 +14,9 @@ enum RetipConfigBoolKey {
 }
 
 mixin RetipConfig {
+  static const int minGridViewColumns = 2;
+  static const int maxGridViewColumns = 4;
+
   static bool getBool(RetipConfigBoolKey key) {
     final prefs = GetIt.instance.get<SharedPreferences>();
     return prefs.getBool(key.name) ?? key.defaultValue;

@@ -108,6 +108,7 @@
     "appearance": "Appearance",
     "darkMode": "Dark mode",
     "batterySaver": "Battery saver",
+    "reduceApplicationAnimations": "Reduce application animations",
     "developerMenu": "Developer menu",
     "playback": "Playback",
     "autoplay": "Autoplay",
@@ -126,5 +127,14 @@
     "composer": "Composer",
     "dateAdded": "Date added",
     "dateModified": "Date modified",
-    "size": "Size"
+    "size": "Size",
+    "gridView": "Grid view",
+    "columnsCount": "Display {count} columns",
+    "@columnsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

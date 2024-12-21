@@ -12,4 +12,8 @@ abstract class ThemeRepository {
   Future<bool> setBatterySaver(bool saveBattery);
 
   bool getBatterySaver();
+
+  Future<bool> setGridViewColumns(int columns);
+
+  int getGridViewColumns();
 }
