@@ -86,7 +86,7 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
               final playlist = index == 0
                   ? PlaylistEntity(
                       id: 0, name: RetipL10n.of(context).favourites)
-                  : data[index + 1];
+                  : data[index - 1];
 
               return GestureDetector(
                 onTap: () {
@@ -135,8 +135,10 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             RpText(
-                              RetipL10n.of(context)
-                                  .tracksCount(playlist.tracks.length),
+                              index == 0
+                                  ? RetipL10n.of(context).generatedPlaylist
+                                  : RetipL10n.of(context)
+                                      .tracksCount(playlist.tracks.length),
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],

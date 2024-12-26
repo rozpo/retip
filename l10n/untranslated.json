@@ -95,6 +95,8 @@
     "dateModified",
     "size",
     "gridView",
-    "columnsCount"
+    "columnsCount",
+    "generatedPlaylist",
+    "showAll"
   ]
 }

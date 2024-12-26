@@ -136,5 +136,7 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "generatedPlaylist": "Generated playlist",
+    "showAll": "Show all"
 }

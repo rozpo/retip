@@ -8,6 +8,7 @@ import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
+import 'package:retip/app/views/favourites/favourites_view.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
@@ -264,13 +265,20 @@ class _ExploreTabState extends State<ExploreTab> {
               const VerticalSpacer(),
               RpDivider(
                 text: '${l10n.liked} ${l10n.tracks.toLowerCase()}',
+                showAll: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return const FavouritesView();
+                    }),
+                  );
+                },
               ),
               ListView.separated(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 // padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
                 scrollDirection: Axis.vertical,
-                itemCount: tracks.length,
+                itemCount: tracks.length.clamp(0, 5),
                 separatorBuilder: (context, index) {
                   return const SizedBox.square(dimension: Sizer.x1);
                 },

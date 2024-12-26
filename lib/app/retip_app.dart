@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/services/repositories/theme_repository.dart';
+import 'package:retip/app/views/favourites/bloc/favourites_bloc.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/core/config/retip_config.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -30,9 +31,8 @@ class RetipApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (_) => SettingsCubit(themeRepository),
-          )
+          BlocProvider(create: (_) => SettingsCubit(themeRepository)),
+          BlocProvider(create: (_) => FavouritesBloc()),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(
           builder: (context, state) {
