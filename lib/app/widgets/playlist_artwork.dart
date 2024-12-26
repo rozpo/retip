@@ -6,9 +6,11 @@ import 'package:retip/core/utils/sizer.dart';
 
 class PlaylistArtwork extends StatelessWidget {
   final List<Uint8List> images;
+  final IconData? icon;
 
   const PlaylistArtwork({
     this.images = const [],
+    this.icon,
     super.key,
   });
 
@@ -24,7 +26,7 @@ class PlaylistArtwork extends StatelessWidget {
               color: Theme.of(context).colorScheme.surfaceContainer,
             ),
             child: images.isEmpty
-                ? const ArtworkWidget()
+                ? ArtworkWidget(icon: icon)
                 : images.length < 4
                     ? Image.memory(images[0])
                     : Column(

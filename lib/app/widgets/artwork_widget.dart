@@ -8,14 +8,16 @@ enum ArtworkStyle {
 }
 
 class ArtworkWidget extends StatelessWidget {
-  final Uint8List? bytes;
-  final ArtworkStyle style;
   final double borderWidth;
+  final ArtworkStyle style;
+  final Uint8List? bytes;
+  final IconData? icon;
 
   const ArtworkWidget({
-    this.bytes,
     this.style = ArtworkStyle.square,
     this.borderWidth = 4,
+    this.bytes,
+    this.icon,
     super.key,
   });
 
@@ -50,7 +52,7 @@ class ArtworkWidget extends StatelessWidget {
                       height: dimension,
                       color: Theme.of(context).colorScheme.surfaceBright,
                       child: Icon(
-                        Icons.music_note,
+                        icon ?? Icons.music_note,
                         size: dimension / 2,
                       ),
                     ),
@@ -71,7 +73,7 @@ class ArtworkWidget extends StatelessWidget {
                   : null,
               child: bytes == null
                   ? Icon(
-                      Icons.person,
+                      icon ?? Icons.person,
                       size: dimension / 2,
                     )
                   : null,

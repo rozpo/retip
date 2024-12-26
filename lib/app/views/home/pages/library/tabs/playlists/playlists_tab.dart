@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
 import 'package:retip/app/services/entities/playlist_entity.dart';
+import 'package:retip/app/views/favourites/favourites_view.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
@@ -59,11 +60,6 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
             playlists = snapshot.requireData;
           }
 
-          if (data.isEmpty) {
-            return Center(
-              child: Text(RetipL10n.of(context).noPlaylists),
-            );
-          }
           final columns = context.read<SettingsCubit>().state.gridViewColumns;
 
           final textLineHeight = 'A'.height(
@@ -85,16 +81,21 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                   textLineHeight +
                   textLineHeight2,
             ),
-            itemCount: data.length,
+            itemCount: data.length + 1,
             itemBuilder: (context, index) {
-              final playlist = data[index];
+              final playlist = index == 0
+                  ? PlaylistEntity(
+                      id: 0, name: RetipL10n.of(context).favourites)
+                  : data[index + 1];
 
               return GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return PlaylistView(playlist: playlist);
+                        return index == 0
+                            ? const FavouritesView()
+                            : PlaylistView(playlist: playlist);
                       },
                     ),
                   );
@@ -116,6 +117,7 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                             dimension: dimension,
                             child: PlaylistArtwork(
                               images: playlist.artworks,
+                              icon: index == 0 ? Icons.favorite : null,
                             ),
                           );
                         }),
