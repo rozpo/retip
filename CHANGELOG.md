@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.3
+
+- Fix bottom screen overflow with safe area
+- Add show file info to track more actions
+- Enhance intro page with more info about app
+- Prepare new media card widget for grid view
+- Save shuffle/repeat playback mode to persistency
+- Configurable columns count for grid view
+- Performance improvements, widgets style fixes
+
 ## v0.2.2
 
 - Add appearance options to settings page
