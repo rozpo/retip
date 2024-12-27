@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -22,7 +21,7 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
 
-  const icon = kReleaseMode ? 'mipmap/ic_launcher' : 'drawable/ic_stat_name';
+  const icon = 'drawable/ic_stat_name';
 
   await JustAudioBackground.init(
     androidNotificationChannelId: 'dev.rozpo.retip.audio',
