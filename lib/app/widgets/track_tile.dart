@@ -42,6 +42,12 @@ class TrackTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    int? index = track.index;
+
+    while (index! > 1000) {
+      index -= 1000;
+    }
+
     return RpListTile(
       onTap: onTap,
       leading: Container(
@@ -62,7 +68,7 @@ class TrackTile extends StatelessWidget {
               )
             : Center(
                 child: Text(
-                  track.index.toString().padLeft(2, '0'),
+                  index.toString().padLeft(2, '0'),
                   style: theme.textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
