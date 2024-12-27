@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/services/cases/get_all_artists.dart';
 import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
 import 'package:retip/app/services/entities/abstract_entity.dart';
@@ -12,9 +14,17 @@ part 'search_event.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
+  final provider = GetIt.I.get<SharedPreferencesProvider>();
+
   final List<String> recentSearch = [];
 
   SearchBloc() : super(SearchIdleState()) {
+    final data = provider.getStringList('recentSearch');
+
+    if (data != null) {
+      recentSearch.addAll(data);
+    }
+
     on<SearchRefreshEvent>(_search);
   }
 
@@ -75,6 +85,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     if (recentSearch.length > 25) {
       recentSearch.removeAt(0);
     }
+
+    provider.setStringList('recentSearch', recentSearch);
 
     if (artists.isEmpty && albums.isEmpty && tracks.isEmpty) {
       // No data found, change to error state
