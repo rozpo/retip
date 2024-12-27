@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.2.4
+
+- Add favourites auto playlist to playlists view
+- Save current playback on app close
+- Add autoplay on startup fuctionality
+- Fix incorrect notification icon for release mode
+- Move settings view to bottom navbar
+- Create custom loading indicator
+- Hide artists without albums for search results
+- Fix theme color saving on release mode
+- Hide duplicated albums
+- Display correct index for multi CDs albums
+- Save recent search to persistency
+
 ## v0.2.3
 
 - Fix bottom screen overflow with safe area
