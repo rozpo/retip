@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/services/repositories/theme_repository.dart';
+import 'package:retip/core/extensions/color_extension.dart';
 import 'package:retip/core/theme/retip_theme.dart';
 
 enum Keys {
@@ -29,17 +32,28 @@ class ThemeRepositoryImplementation extends ThemeRepository {
 
   @override
   Color getThemeColor() {
-    final color = provider.getString(Keys.themeColor.name) ??
-        RetipTheme.primaryColor.toString();
+    final data = provider.getString(Keys.themeColor.name);
 
-    return Colors.primaries.firstWhere((element) {
-      return element.toString() == color;
-    });
+    if (data == null) {
+      return RetipTheme.primaryColor;
+    }
+
+    try {
+      return ColorExtension.fromJson(jsonDecode(data));
+    } catch (e) {
+      setThemeColor(RetipTheme.primaryColor);
+      return RetipTheme.primaryColor;
+    }
   }
 
   @override
-  Future<bool> setThemeColor(Color color) {
-    return provider.setString(Keys.themeColor.name, color.toString());
+  Future<bool> setThemeColor(Color color) async {
+    try {
+      final data = jsonEncode(color.toJson());
+      return await provider.setString(Keys.themeColor.name, data);
+    } catch (e) {
+      return false;
+    }
   }
 
   @override
