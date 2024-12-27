@@ -14,6 +14,21 @@ class RetipAudio extends AudioPlayer {
 
   List<TrackEntity> tracks = [];
 
+  Future<void> init() async {
+    final audio = GetIt.I.get<AudioRepository>();
+
+    final index = audio.getTracksIndex();
+    final tracks = await audio.getTracksList();
+
+    if (tracks.isNotEmpty) {
+      await playlistAddAll(tracks);
+      await seekToIndex(index);
+    }
+
+    await setShuffleMode(audio.getShuffleMode());
+    await setRepeatMode(audio.getRepeatMode());
+  }
+
   TrackEntity? get nextArtist {
     return nextIndex != null ? tracks[nextIndex!] : null;
   }
@@ -71,6 +86,7 @@ class RetipAudio extends AudioPlayer {
       children: children,
     );
 
+    GetIt.I.get<AudioRepository>().setTracksList(tracks);
     return await setAudioSource(_playlist);
   }
 

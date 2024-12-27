@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/views/player/player_view.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
@@ -202,6 +203,8 @@ class AudioInfoWidget extends StatelessWidget {
           final track = (index >= 0 && index < player.tracks.length)
               ? player.tracks[index]
               : null;
+
+          GetIt.I.get<AudioRepository>().setTracksIndex(index);
 
           return SizedBox(
               height: Sizer.x5,

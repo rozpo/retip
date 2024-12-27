@@ -65,4 +65,12 @@ class SharedPreferencesProvider {
   String? getString(String key) {
     return _prefs.getString(key);
   }
+
+  Future<bool> setStringList(String key, List<String> value) async {
+    return await _prefs.setStringList(key, value);
+  }
+
+  List<String>? getStringList(String key) {
+    return _prefs.getStringList(key);
+  }
 }

@@ -59,19 +59,20 @@ Future<void> setup() async {
   final sharedPrefsProvider = SharedPreferencesProvider();
 
   // Library repository register
-  GetIt.I.registerSingleton<LibraryRepository>(
+  final libraryRepository = GetIt.I.registerSingleton<LibraryRepository>(
     LibraryRepositoryImplementation(
       onAudioQueryProvider: OnAudioQueryProvider(),
       sharedPreferencesProvider: sharedPrefsProvider,
     ),
   );
 
-  final audio = GetIt.I.registerSingleton<AudioRepository>(
+  GetIt.I.registerSingleton<AudioRepository>(
     AudioRepositoryImplementation(
       sharedPreferencesProvider: sharedPrefsProvider,
+      libraryRepository: libraryRepository,
     ),
   );
 
-  await player.setShuffleMode(audio.getShuffleMode());
-  await player.setRepeatMode(audio.getRepeatMode());
+  // TODO Refactor this temporary player manager to proper audio repository
+  await player.init();
 }

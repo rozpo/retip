@@ -1,3 +1,5 @@
+import 'package:retip/app/services/entities/track_entity.dart';
+
 enum AudioRepeatMode {
   /// Repeat audio queue when reach end of list.
   all,
@@ -39,4 +41,12 @@ abstract class AudioRepository {
   ///
   /// Return [AudioRepeatMode.none] as fallback.
   AudioRepeatMode getRepeatMode();
+
+  Future<bool> setTracksIndex(int index);
+
+  int getTracksIndex();
+
+  Future<bool> setTracksList(List<TrackEntity> tracks);
+
+  Future<List<TrackEntity>> getTracksList();
 }
