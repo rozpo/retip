@@ -43,7 +43,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     for (final artist in data) {
       if (artist.name.toLowerCase().contains(query)) {
-        artists.add(artist);
+        if (artist.albums.isNotEmpty) {
+          artists.add(artist);
+        }
       }
 
       for (final album in artist.albums) {

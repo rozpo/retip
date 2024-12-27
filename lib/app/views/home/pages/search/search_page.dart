@@ -5,6 +5,7 @@ import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/spacer.dart';
+import 'package:retip/app/widgets/widgets.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/debouncer.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -97,7 +98,7 @@ class _SearchPageState extends State<SearchPage> {
               builder: (context, state) {
                 if (state is SearchSearchingState) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: SpinnerWidget(),
                   );
                 }
 
