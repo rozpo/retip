@@ -7,6 +7,7 @@ import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/track_tile.dart';
+import 'package:retip/app/widgets/widgets.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -28,7 +29,7 @@ class _TracksTabState extends State<TracksTab> {
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: SpinnerWidget(),
             );
           }
 

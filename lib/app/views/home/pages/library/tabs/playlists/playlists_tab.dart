@@ -7,6 +7,7 @@ import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/app/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -31,7 +32,7 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
           if (snapshot.connectionState != ConnectionState.done &&
               playlists.isEmpty) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: SpinnerWidget(),
             );
           }
 

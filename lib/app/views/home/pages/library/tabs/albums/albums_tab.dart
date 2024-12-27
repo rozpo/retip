@@ -6,6 +6,7 @@ import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/app/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -25,7 +26,7 @@ class AlbumsTab extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: SpinnerWidget(),
             );
           }
 
