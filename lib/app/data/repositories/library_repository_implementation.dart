@@ -43,6 +43,17 @@ class LibraryRepositoryImplementation implements LibraryRepository {
           .map((e) => TrackModel.fromSongModel(e, albumArtwork))
           .toList();
 
+      if (result.map((e) => e.title).contains(album.album)) {
+        final duplicatedAlbum = result.firstWhere(
+          (e) => e.title == album.album,
+        );
+
+        if (duplicatedAlbum.tracks.length == albumTracks.length) {
+          // Duplciated album skipping
+          continue;
+        }
+      }
+
       result.add(AlbumModel.fromAlbumModel(
         album,
         albumArtwork,
@@ -98,12 +109,29 @@ class LibraryRepositoryImplementation implements LibraryRepository {
           tracksToAdd.add(TrackModel.fromSongModel(albumTrack, albumArtwork));
         }
 
-        albumsToAdd.add(
-            AlbumModel.fromAlbumModel(artistAlbum, albumArtwork, tracksToAdd));
+        if (albumsToAdd.map((e) => e.title).contains(artistAlbum.album)) {
+          final duplicatedAlbum = albumsToAdd.firstWhere(
+            (e) => e.title == artistAlbum.album,
+          );
+
+          if (duplicatedAlbum.tracks.length == tracksToAdd.length) {
+            // Duplciated album skipping
+            continue;
+          }
+        }
+
+        albumsToAdd.add(AlbumModel.fromAlbumModel(
+          artistAlbum,
+          albumArtwork,
+          tracksToAdd,
+        ));
       }
 
-      result
-          .add(ArtistModel.fromArtistModel(artist, artistArtwork, albumsToAdd));
+      result.add(ArtistModel.fromArtistModel(
+        artist,
+        artistArtwork,
+        albumsToAdd,
+      ));
     }
 
     return result;
