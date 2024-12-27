@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:retip/app/views/dev/dev_view.dart';
 import 'package:retip/app/views/settings/widgets/settings_tile.dart';
-import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/retip_icon.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
@@ -32,7 +31,7 @@ class SettingsView extends StatelessWidget {
 
     return Scaffold(
       appBar: RpAppBar(
-        leading: const RpBackButton(),
+        leading: const Icon(Icons.settings),
         title: RpText(RetipL10n.of(context).settings),
       ),
       body: BlocBuilder<SettingsCubit, SettingsState>(

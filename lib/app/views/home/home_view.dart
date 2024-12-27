@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/views/home/pages/home/home_page.dart';
 import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/home/pages/search/search_page.dart';
+import 'package:retip/app/views/settings/settings_page.dart';
 import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
@@ -36,8 +37,9 @@ class _HomeViewState extends State<HomeView> {
         controller: pageController,
         children: [
           SearchPage(isSelected: () => focusSearch),
-          const HomePage(),
+          const RetipPage(),
           const LibraryPage(),
+          const SettingsPage(),
         ],
       ),
       bottomNavigationBar: Column(
@@ -45,7 +47,8 @@ class _HomeViewState extends State<HomeView> {
         children: [
           const PlayerWidget(),
           BottomNavigationBar(
-            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: colorScheme.surfaceContainer,
             showSelectedLabels: true,
             showUnselectedLabels: true,
             unselectedItemColor: colorScheme.outline,
@@ -62,8 +65,14 @@ class _HomeViewState extends State<HomeView> {
                 label: RetipL10n.of(context).retip,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.library_music),
+                activeIcon: const Icon(Icons.library_music),
+                icon: const Icon(Icons.library_music_outlined),
                 label: RetipL10n.of(context).library,
+              ),
+              BottomNavigationBarItem(
+                activeIcon: const Icon(Icons.settings),
+                icon: const Icon(Icons.settings_outlined),
+                label: RetipL10n.of(context).settings,
               ),
             ],
             currentIndex: index,
