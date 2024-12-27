@@ -8,6 +8,8 @@ enum Keys {
   audioShuffleMode,
   audioTracksIndex,
   audioTracksList,
+  audioAutoplay,
+  audioKeepPlayback,
 }
 
 class AudioRepositoryImplementation extends AudioRepository {
@@ -83,5 +85,31 @@ class AudioRepositoryImplementation extends AudioRepository {
         allTracks.where((e) => trackIds.contains(e.id.toString())).toList();
 
     return playerTracks;
+  }
+
+  @override
+  bool getAutoplay() {
+    return sharedPreferencesProvider.getBool(Keys.audioAutoplay.name);
+  }
+
+  @override
+  bool getKeepPlayback() {
+    return sharedPreferencesProvider.getBool(Keys.audioKeepPlayback.name);
+  }
+
+  @override
+  Future<bool> setAutoplay(bool autoplay) async {
+    return await sharedPreferencesProvider.setBool(
+      Keys.audioAutoplay.name,
+      autoplay,
+    );
+  }
+
+  @override
+  Future<bool> setKeepPlayback(bool keepPlayback) async {
+    return await sharedPreferencesProvider.setBool(
+      Keys.audioKeepPlayback.name,
+      keepPlayback,
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/services/repositories/theme_repository.dart';
 import 'package:retip/app/views/favourites/bloc/favourites_bloc.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
@@ -10,9 +11,11 @@ import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/theme/retip_theme.dart';
 
 class RetipApp extends StatelessWidget {
+  final AudioRepository audioRepository;
   final ThemeRepository themeRepository;
 
   const RetipApp({
+    required this.audioRepository,
     required this.themeRepository,
     super.key,
   });
@@ -27,11 +30,17 @@ class RetipApp extends StatelessWidget {
 
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider(create: (_) => audioRepository),
         RepositoryProvider(create: (_) => themeRepository),
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => SettingsCubit(themeRepository)),
+          BlocProvider(create: (_) {
+            return SettingsCubit(
+              audioRepository: audioRepository,
+              themeRepository: themeRepository,
+            );
+          }),
           BlocProvider(create: (_) => FavouritesBloc()),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(

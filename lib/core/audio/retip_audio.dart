@@ -20,9 +20,19 @@ class RetipAudio extends AudioPlayer {
     final index = audio.getTracksIndex();
     final tracks = await audio.getTracksList();
 
-    if (tracks.isNotEmpty) {
+    final keepPlayback = audio.getKeepPlayback();
+
+    if (keepPlayback == false) {
+      await audio.setTracksList([]);
+    }
+
+    if (tracks.isNotEmpty && keepPlayback) {
       await playlistAddAll(tracks);
       await seekToIndex(index);
+
+      if (audio.getAutoplay()) {
+        play();
+      }
     }
 
     await setShuffleMode(audio.getShuffleMode());

@@ -97,6 +97,9 @@
     "gridView",
     "columnsCount",
     "generatedPlaylist",
-    "showAll"
+    "showAll",
+    "keepPlayback",
+    "playOnAppStart",
+    "resumePlaybackOn"
   ]
 }

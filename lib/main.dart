@@ -16,21 +16,6 @@ import 'package:retip/core/audio/retip_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  // Initialize
-  await init();
-
-  // Setup the dependency injection
-  await setup();
-
-  // Run application
-  runApp(RetipApp(
-    themeRepository: ThemeRepositoryImplementation(
-      provider: SharedPreferencesProvider(),
-    ),
-  ));
-}
-
-Future<void> init() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await SystemChrome.setPreferredOrientations([
@@ -45,9 +30,8 @@ Future<void> init() async {
     androidStopForegroundOnPause: true,
     androidNotificationOngoing: true,
   );
-}
 
-Future<void> setup() async {
+  // Setup the dependency injection
   final sharedPrefs = await SharedPreferences.getInstance();
   GetIt.I.registerSingleton<SharedPreferences>(sharedPrefs);
 
@@ -56,7 +40,9 @@ Future<void> setup() async {
 
   final player = GetIt.I.registerSingleton<RetipAudio>(RetipAudio());
 
-  final sharedPrefsProvider = SharedPreferencesProvider();
+  final sharedPrefsProvider = GetIt.I.registerSingleton(
+    SharedPreferencesProvider(),
+  );
 
   // Library repository register
   final libraryRepository = GetIt.I.registerSingleton<LibraryRepository>(
@@ -75,4 +61,15 @@ Future<void> setup() async {
 
   // TODO Refactor this temporary player manager to proper audio repository
   await player.init();
+
+  // Run application
+  runApp(RetipApp(
+    audioRepository: AudioRepositoryImplementation(
+      libraryRepository: libraryRepository,
+      sharedPreferencesProvider: sharedPrefsProvider,
+    ),
+    themeRepository: ThemeRepositoryImplementation(
+      provider: SharedPreferencesProvider(),
+    ),
+  ));
 }

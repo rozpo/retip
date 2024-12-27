@@ -138,5 +138,8 @@
         }
     },
     "generatedPlaylist": "Generated playlist",
-    "showAll": "Show all"
+    "showAll": "Show all",
+    "keepPlayback": "Keep playing queue",
+    "playOnAppStart": "Start playing on app startup",
+    "resumePlaybackOn" : "Resume playback from last track"
 }

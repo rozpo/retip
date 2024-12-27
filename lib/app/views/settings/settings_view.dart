@@ -113,17 +113,43 @@ class SettingsView extends StatelessWidget {
                         onPressed: cubit.toggleBatterySaver,
                       ),
               ),
-              // RpDivider(
-              //   text: l10n.playback,
-              // ),
-              // SettingsTile(
-              //   title: l10n.autoplay,
-              //   icon: Icons.play_circle_outline,
-              //   trailing: RpIconButton(
-              //     icon: Icons.toggle_off_outlined,
-              //     onPressed: () {},
-              //   ),
-              // ),
+              RpDivider(
+                text: l10n.playback,
+              ),
+              SettingsTile(
+                onTap: cubit.toggleKeepPlayback,
+                title: l10n.keepPlayback,
+                subtitle: l10n.resumePlaybackOn,
+                icon: state.keepPlayback ? Icons.music_note : Icons.music_off,
+                trailing: state.keepPlayback
+                    ? RpIconButton.filled(
+                        icon: Icons.toggle_on,
+                        onPressed: cubit.toggleKeepPlayback,
+                      )
+                    : RpIconButton(
+                        icon: Icons.toggle_off_outlined,
+                        onPressed: cubit.toggleKeepPlayback,
+                      ),
+              ),
+              SettingsTile(
+                onTap: state.keepPlayback ? cubit.toggleAutoplay : null,
+                subtitle: l10n.playOnAppStart,
+                title: l10n.autoplay,
+                icon: state.autoplay
+                    ? Icons.play_circle
+                    : Icons.play_circle_outline,
+                trailing: state.autoplay && state.keepPlayback
+                    ? RpIconButton.filled(
+                        icon: Icons.toggle_on,
+                        onPressed:
+                            state.keepPlayback ? cubit.toggleAutoplay : null,
+                      )
+                    : RpIconButton(
+                        icon: Icons.toggle_off_outlined,
+                        onPressed:
+                            state.keepPlayback ? cubit.toggleAutoplay : null,
+                      ),
+              ),
               // SettingsTile(
               //   title: l10n.crossfade,
               //   icon: Icons.graphic_eq,

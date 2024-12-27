@@ -49,4 +49,12 @@ abstract class AudioRepository {
   Future<bool> setTracksList(List<TrackEntity> tracks);
 
   Future<List<TrackEntity>> getTracksList();
+
+  Future<bool> setAutoplay(bool autoplay);
+
+  bool getAutoplay();
+
+  Future<bool> setKeepPlayback(bool keepPlayback);
+
+  bool getKeepPlayback();
 }
