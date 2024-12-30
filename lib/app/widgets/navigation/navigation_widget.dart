@@ -76,16 +76,25 @@ class _NavigationWidgetState extends State<NavigationWidget> {
 
             final shellContext = RetipRouter.shellNavKey.currentContext;
 
+            bool jump = false;
             while (shellContext != null && Navigator.canPop(shellContext)) {
               Navigator.pop(shellContext);
+              jump = true;
             }
 
             setState(() {});
-            widget.pageController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-            );
+
+            if (jump) {
+              widget.pageController.jumpToPage(
+                index,
+              );
+            } else {
+              widget.pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+              );
+            }
           },
         ),
       ],
