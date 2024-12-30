@@ -10,14 +10,10 @@ mixin PlayAudio {
   }) async {
     final player = GetIt.I.get<RetipAudio>();
 
+    await player.playlistAddAll(tracks, index);
+
     if (shuffle != null) {
       await player.setShuffleMode(shuffle);
-    }
-
-    await player.playlistAddAll(tracks);
-
-    if (index != null) {
-      await player.seekToIndex(index);
     }
 
     player.play();

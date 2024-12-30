@@ -60,7 +60,10 @@ class RetipAudio extends AudioPlayer {
     );
   }
 
-  Future<Duration?> playlistAddAll(List<TrackEntity> tracks) async {
+  Future<Duration?> playlistAddAll(
+    List<TrackEntity> tracks, [
+    int? index,
+  ]) async {
     final tmpDir = await getTemporaryDirectory();
     final children = <AudioSource>[];
 
@@ -97,7 +100,7 @@ class RetipAudio extends AudioPlayer {
     );
 
     GetIt.I.get<AudioRepository>().setTracksList(tracks);
-    return await setAudioSource(_playlist);
+    return await setAudioSource(_playlist, initialIndex: index);
   }
 
   Future<void> playlistClear() async {
