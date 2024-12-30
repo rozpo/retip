@@ -21,6 +21,7 @@ import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/audio/retip_audio.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -94,7 +95,8 @@ class _PlayerViewState extends State<PlayerView> {
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.zero,
                         ),
-                        context: context,
+                        context:
+                            RetipRouter.rootNavKey.currentContext ?? context,
                         builder: (context) {
                           return Column(
                             children: [

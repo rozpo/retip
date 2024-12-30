@@ -11,6 +11,7 @@ import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/extensions/int_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class FileDetailsTile extends StatelessWidget {
@@ -31,7 +32,7 @@ class FileDetailsTile extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
           ),
-          context: context,
+          context: RetipRouter.rootNavKey.currentContext ?? context,
           builder: (context) {
             return SafeArea(
               child: ListView(

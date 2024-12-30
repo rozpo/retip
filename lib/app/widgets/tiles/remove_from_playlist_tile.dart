@@ -36,31 +36,6 @@ class RemoveFromPlaylistTile extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(snackbar);
 
         onTap?.call();
-
-        // if (context.mounted) {
-        //   showModalBottomSheet(
-        //     context: context,
-        //     builder: (context) {
-        //       // return AlertDialog(
-        //       // scrollable: true,
-        //       return ListView.builder(
-        //         shrinkWrap: true,
-        //         itemCount: playlists.length,
-        //         itemBuilder: (context, index) {
-        //           final pl = playlists[index];
-
-        //           return ListTile(
-        //             title: Text(pl.name),
-        //             subtitle: Text(
-        //                 RetipL10n.of(context).tracksCount(pl.tracks.length)),
-        //             onTap: () {},
-        //           );
-        //         },
-        //       );
-        //       // );
-        //     },
-        //   );
-        // }
       },
     );
   }

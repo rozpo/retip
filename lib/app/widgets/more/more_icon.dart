@@ -7,6 +7,7 @@ import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/rp_icon_image.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class MoreIcon extends StatelessWidget {
@@ -43,7 +44,7 @@ class MoreIcon extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
           ),
-          context: context,
+          context: RetipRouter.rootNavKey.currentContext ?? context,
           builder: (context) {
             return SafeArea(
               child: ListView(

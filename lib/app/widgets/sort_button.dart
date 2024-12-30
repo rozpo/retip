@@ -3,6 +3,7 @@ import 'package:retip/app/widgets/modal_bottom_sheet.dart';
 import 'package:retip/app/widgets/option_list_tile.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/router/retip_router.dart';
 
 enum SortMode {
   numerically(icon: Icons.sort),
@@ -34,7 +35,7 @@ class SortButton extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
           ),
-          context: context,
+          context: RetipRouter.rootNavKey.currentContext ?? context,
           builder: (context) {
             return ModalBottomSheet(
               options: [
