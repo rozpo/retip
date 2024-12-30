@@ -23,7 +23,7 @@ class IntroView extends StatelessWidget {
       child: BlocConsumer<IntroBloc, IntroState>(
         listener: (context, state) {
           if (state is IntroPermissionsGranted) {
-            context.go('/home');
+            context.go('/');
           }
         },
         builder: (context, state) {

@@ -10,7 +10,6 @@ import 'package:retip/app/widgets/buttons/play_button.dart';
 import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
-import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
@@ -109,12 +108,6 @@ class _PlaylistViewState extends State<PlaylistView> {
           ),
           const HorizontalSpacer(),
         ],
-      ),
-      bottomNavigationBar: Container(
-        color: Theme.of(context).colorScheme.surfaceContainer,
-        child: const SafeArea(
-          child: PlayerWidget(),
-        ),
       ),
       body: ListView.builder(
         shrinkWrap: true,

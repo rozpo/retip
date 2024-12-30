@@ -13,7 +13,6 @@ import 'package:retip/app/widgets/buttons/play_button.dart';
 import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
-import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/sort_button.dart';
@@ -110,12 +109,6 @@ class _ArtistViewState extends State<ArtistView> {
           ),
           const HorizontalSpacer(),
         ],
-      ),
-      bottomNavigationBar: Container(
-        color: Theme.of(context).colorScheme.surfaceContainer,
-        child: const SafeArea(
-          child: PlayerWidget(),
-        ),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: Sizer.x2),

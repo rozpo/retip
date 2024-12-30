@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:retip/app/views/dev/dev_view.dart';
 import 'package:retip/app/views/settings/widgets/settings_tile.dart';
 import 'package:retip/app/widgets/retip_icon.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
@@ -249,11 +249,7 @@ class SettingsView extends StatelessWidget {
                 SettingsTile(
                   title: l10n.developerMenu,
                   icon: Icons.developer_board,
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const DevView(),
-                    ),
-                  ),
+                  onTap: () => context.go('/dev'),
                   trailing: const RpIconButton(icon: Icons.arrow_forward),
                 ),
               ],

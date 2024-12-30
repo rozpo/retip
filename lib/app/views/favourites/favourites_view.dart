@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
-import 'package:retip/app/widgets/player_widget.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/app/widgets/track_tile.dart';
@@ -127,12 +126,6 @@ class FavouritesView extends StatelessWidget {
             ),
           );
         },
-      ),
-      bottomNavigationBar: Container(
-        color: Theme.of(context).colorScheme.surfaceContainer,
-        child: const SafeArea(
-          child: PlayerWidget(),
-        ),
       ),
     );
   }
