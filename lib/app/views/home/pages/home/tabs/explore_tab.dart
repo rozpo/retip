@@ -19,6 +19,7 @@ import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/track_tile.dart';
+import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -112,6 +113,13 @@ class _ExploreTabState extends State<ExploreTab> {
           );
         }
 
+        final textLineHeight = 'A'.height(
+            Theme.of(context).textTheme.bodySmall!,
+            MediaQuery.of(context).size.width);
+        final textLineHeight2 = 'A'.height(
+            Theme.of(context).textTheme.bodyMedium!,
+            MediaQuery.of(context).size.width);
+
         return ListView(
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.only(top: Sizer.x1, bottom: Sizer.x2),
@@ -119,6 +127,10 @@ class _ExploreTabState extends State<ExploreTab> {
           children: [
             if (artists.isNotEmpty) ...[
               RpDivider(
+                leading: const Icon(
+                  Icons.person,
+                  size: Sizer.x2,
+                ),
                 text: '${l10n.liked} ${l10n.artists.toLowerCase()}',
                 showAll: () {
                   Navigator.of(context).push(
@@ -135,7 +147,7 @@ class _ExploreTabState extends State<ExploreTab> {
                 },
               ),
               SizedBox(
-                height: size / 2 + Sizer.x1 * 2,
+                height: size / 2 + textLineHeight2 + textLineHeight + Sizer.x3,
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
@@ -146,6 +158,11 @@ class _ExploreTabState extends State<ExploreTab> {
                   },
                   itemBuilder: (context, index) {
                     final artist = artists[index];
+                    int tracksCount = 0;
+
+                    for (final album in artist.albums) {
+                      tracksCount += album.tracks.length;
+                    }
 
                     return GestureDetector(
                       onTap: () async {
@@ -160,21 +177,42 @@ class _ExploreTabState extends State<ExploreTab> {
                         artistsFuture = GetAllFavourites.call('ArtistModel');
                         setState(() {});
                       },
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: ArtworkWidget(
-                              borderWidth: 2,
+                      child: Container(
+                        width: size / 2,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Sizer.x1),
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ArtworkWidget(
                               bytes: artist.artwork,
-                              style: ArtworkStyle.circle,
+                              borderWidth: 1,
                             ),
-                          ),
-                          const SizedBox(height: Sizer.x0_5),
-                          RpText(
-                            artist.name,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizer.x0_5,
+                                horizontal: Sizer.x1,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RpText(
+                                    artist.name,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  RpText(
+                                    '${RetipL10n.of(context).albumsCount(artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracksCount)}',
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -183,6 +221,10 @@ class _ExploreTabState extends State<ExploreTab> {
             ],
             if (albums.isNotEmpty) ...[
               RpDivider(
+                leading: const Icon(
+                  Icons.album,
+                  size: Sizer.x2,
+                ),
                 text: '${l10n.liked} ${l10n.albums.toLowerCase()}',
                 showAll: () {
                   Navigator.of(context).push(
@@ -199,7 +241,7 @@ class _ExploreTabState extends State<ExploreTab> {
                 },
               ),
               SizedBox(
-                height: size / 3 + Sizer.x1 * 2,
+                height: size / 3 + textLineHeight2 + textLineHeight + Sizer.x3,
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
@@ -224,9 +266,42 @@ class _ExploreTabState extends State<ExploreTab> {
                         albumsFuture = GetAllFavourites.call('AlbumModel');
                         setState(() {});
                       },
-                      child: ArtworkWidget(
-                        borderWidth: 2,
-                        bytes: album.artwork,
+                      child: Container(
+                        width: size / 3,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Sizer.x1),
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ArtworkWidget(
+                              bytes: album.artwork,
+                              borderWidth: 1,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizer.x0_5,
+                                horizontal: Sizer.x1,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RpText(
+                                    album.title,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  RpText(
+                                    album.artist,
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -235,6 +310,10 @@ class _ExploreTabState extends State<ExploreTab> {
             ],
             if (playlists.isNotEmpty) ...[
               RpDivider(
+                leading: const Icon(
+                  Icons.queue_music,
+                  size: Sizer.x2,
+                ),
                 text: '${l10n.liked} ${l10n.playlists.toLowerCase()}',
                 showAll: () {
                   Navigator.of(context).push(
@@ -251,7 +330,7 @@ class _ExploreTabState extends State<ExploreTab> {
                 },
               ),
               SizedBox(
-                height: size / 3 + Sizer.x1 * 2,
+                height: size / 4 + textLineHeight2 + textLineHeight + Sizer.x3,
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
@@ -277,23 +356,53 @@ class _ExploreTabState extends State<ExploreTab> {
                             GetAllFavourites.call('PlaylistEntity');
                         setState(() {});
                       },
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: PlaylistArtwork(
-                              images: playlist.artworks,
+                      child: Container(
+                        width: size / 4,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Sizer.x1),
+                          color: Theme.of(context).colorScheme.surfaceContainer,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                              child: LayoutBuilder(
+                                  builder: (context, constraints) {
+                                final dimension = constraints.maxHeight;
+
+                                return SizedBox.square(
+                                  dimension: dimension,
+                                  child: PlaylistArtwork(
+                                    images: playlist.artworks,
+                                  ),
+                                );
+                              }),
                             ),
-                          ),
-                          const SizedBox(height: Sizer.x0_5),
-                          SizedBox(
-                            width: size / 3 - Sizer.x2 * 2,
-                            child: RpText(
-                              playlist.name,
-                              style: Theme.of(context).textTheme.titleMedium,
-                              textAlign: TextAlign.center,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Sizer.x0_5,
+                                horizontal: Sizer.x1,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RpText(
+                                    playlist.name,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  RpText(
+                                    RetipL10n.of(context)
+                                        .tracksCount(playlist.tracks.length),
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -302,6 +411,10 @@ class _ExploreTabState extends State<ExploreTab> {
             ],
             if (tracks.isNotEmpty) ...[
               RpDivider(
+                leading: const Icon(
+                  Icons.music_note,
+                  size: Sizer.x2,
+                ),
                 text: '${l10n.liked} ${l10n.tracks.toLowerCase()}',
                 showAll: () {
                   Navigator.of(context).push(
@@ -314,12 +427,8 @@ class _ExploreTabState extends State<ExploreTab> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
-                // padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
                 scrollDirection: Axis.vertical,
                 itemCount: tracks.length.clamp(0, 5),
-                // separatorBuilder: (context, index) {
-                //   return const SizedBox.square(dimension: Sizer.x1);
-                // },
                 itemBuilder: (context, index) {
                   final track = tracks[index];
 

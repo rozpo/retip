@@ -4,11 +4,13 @@ import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class RpDivider extends StatelessWidget {
-  final String? text;
   final VoidCallback? showAll;
+  final Widget? leading;
+  final String? text;
 
   const RpDivider({
     this.showAll,
+    this.leading,
     this.text,
     super.key,
   });
@@ -17,6 +19,12 @@ class RpDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        if (leading != null) ...[
+          Padding(
+            padding: const EdgeInsets.only(left: Sizer.x1),
+            child: leading!,
+          ),
+        ],
         if (text != null) ...[
           Padding(
             padding: const EdgeInsets.only(left: Sizer.x1),
