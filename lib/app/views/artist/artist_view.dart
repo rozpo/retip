@@ -7,6 +7,7 @@ import 'package:retip/app/services/cases/play_audio.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/views/album/album_view.dart';
+import 'package:retip/app/views/home/pages/library/tabs/albums/albums_tab.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
@@ -14,6 +15,7 @@ import 'package:retip/app/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/sort_button.dart';
 import 'package:retip/app/widgets/spacer.dart' hide Spacer;
@@ -21,6 +23,7 @@ import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -72,6 +75,11 @@ class _ArtistViewState extends State<ArtistView> {
   @override
   Widget build(BuildContext context) {
     final isInFavourites = IsInFavourites.call(widget.artist);
+
+    final textLineHeight = 'A'.height(Theme.of(context).textTheme.bodySmall!,
+        MediaQuery.of(context).size.width);
+    final textLineHeight2 = 'A'.height(Theme.of(context).textTheme.bodyMedium!,
+        MediaQuery.of(context).size.width);
 
     return Scaffold(
       appBar: RpAppBar(
@@ -185,21 +193,48 @@ class _ArtistViewState extends State<ArtistView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.album),
-                      const HorizontalSpacer(),
-                      Text(
-                        RetipL10n.of(context).albumsCount(
-                          widget.artist.albums.length,
-                        ),
-                        style: Theme.of(context).textTheme.titleMedium,
+                      Row(
+                        children: [
+                          const Icon(Icons.album),
+                          const HorizontalSpacer(),
+                          Text(
+                            RetipL10n.of(context).albumsCount(
+                              widget.artist.albums.length,
+                            ),
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                      RpIconButton(
+                        icon: Icons.arrow_forward,
+                        onPressed: () {
+                          final l10n = RetipL10n.of(context);
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) {
+                              return Scaffold(
+                                appBar: RpAppBar(
+                                  title: Text(
+                                    '${widget.artist.name} - ${l10n.albumsCount(widget.artist.albums.length)}',
+                                  ),
+                                ),
+                                body: AlbumsTab(albums: widget.artist.albums),
+                              );
+                            }),
+                          );
+                        },
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.width / 3 +
+                      textLineHeight2 +
+                      textLineHeight +
+                      Sizer.x3,
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.all(Sizer.x1),
@@ -223,17 +258,49 @@ class _ArtistViewState extends State<ArtistView> {
 
                           setState(() {});
                         },
-                        child: SizedBox.square(
-                          child: ArtworkWidget(
-                            bytes: album.artwork,
-                            borderWidth: 2,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 3, // tODO
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(Sizer.x1),
+                            color:
+                                Theme.of(context).colorScheme.surfaceContainer,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ArtworkWidget(
+                                bytes: album.artwork,
+                                borderWidth: 1,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: Sizer.x0_5,
+                                  horizontal: Sizer.x1,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RpText(
+                                      album.title,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
+                                    RpText(
+                                      album.artist,
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );
                     },
                   ),
                 ),
-                const VerticalSpacer(),
                 const VerticalSpacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
