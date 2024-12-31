@@ -61,11 +61,7 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
             }
           }
 
-          final data = playlists.isNotEmpty
-              ? playlists
-              : hasChanged
-                  ? snapshot.requireData
-                  : playlists;
+          final data = hasChanged ? snapshot.requireData : playlists;
 
           if (hasChanged) {
             playlists = snapshot.requireData;
@@ -92,13 +88,14 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                   textLineHeight +
                   textLineHeight2,
             ),
-            itemCount:
-                playlists.isNotEmpty ? playlists.length : data.length + 1,
+            itemCount: widget.playlists.isNotEmpty
+                ? widget.playlists.length
+                : data.length + 1,
             itemBuilder: (context, index) {
               late final PlaylistEntity playlist;
 
-              if (playlists.isNotEmpty) {
-                playlist = playlists[index];
+              if (widget.playlists.isNotEmpty) {
+                playlist = widget.playlists[index];
               } else {
                 playlist = index == 0
                     ? PlaylistEntity(
@@ -113,7 +110,7 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return index == 0 && playlists.isEmpty
+                        return index == 0 && widget.playlists.isEmpty
                             ? const FavouritesView()
                             : PlaylistView(playlist: playlist);
                       },
@@ -137,7 +134,9 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                             dimension: dimension,
                             child: PlaylistArtwork(
                               images: playlist.artworks,
-                              icon: index == 0 ? Icons.favorite : null,
+                              icon: index == 0 && widget.playlists.isEmpty
+                                  ? Icons.favorite
+                                  : null,
                             ),
                           );
                         }),
@@ -155,7 +154,7 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             RpText(
-                              index == 0
+                              index == 0 && widget.playlists.isEmpty
                                   ? RetipL10n.of(context).generatedPlaylist
                                   : RetipL10n.of(context)
                                       .tracksCount(playlist.tracks.length),

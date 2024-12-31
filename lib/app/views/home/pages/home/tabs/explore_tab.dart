@@ -244,7 +244,7 @@ class _ExploreTabState extends State<ExploreTab> {
                           title: Text(
                               '${l10n.liked} ${l10n.playlists.toLowerCase()}'),
                         ),
-                        body: const PlaylistsTab(),
+                        body: PlaylistsTab(playlists: playlists),
                       );
                     }),
                   );
