@@ -311,15 +311,15 @@ class _ExploreTabState extends State<ExploreTab> {
                   );
                 },
               ),
-              ListView.separated(
+              ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 // padding: const EdgeInsets.symmetric(vertical: Sizer.x2),
                 scrollDirection: Axis.vertical,
                 itemCount: tracks.length.clamp(0, 5),
-                separatorBuilder: (context, index) {
-                  return const SizedBox.square(dimension: Sizer.x1);
-                },
+                // separatorBuilder: (context, index) {
+                //   return const SizedBox.square(dimension: Sizer.x1);
+                // },
                 itemBuilder: (context, index) {
                   final track = tracks[index];
 
