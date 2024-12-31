@@ -12,9 +12,12 @@ import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class AlbumsTab extends StatelessWidget {
-  final String search;
+  final List<AlbumEntity> albums;
 
-  const AlbumsTab({this.search = '', super.key});
+  const AlbumsTab({
+    this.albums = const [],
+    super.key,
+  });
 
   static Future<List<AlbumEntity>> future = GetAllAlbums.call();
 
@@ -36,10 +39,7 @@ class AlbumsTab extends StatelessWidget {
             );
           }
 
-          final data = snapshot.requireData
-              .where(
-                  (e) => e.title.toLowerCase().contains(search.toLowerCase()))
-              .toList();
+          final data = albums.isNotEmpty ? albums : snapshot.requireData;
 
           if (data.isEmpty) {
             return Center(

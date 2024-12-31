@@ -12,7 +12,10 @@ import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class ArtistsTab extends StatelessWidget {
+  final List<ArtistEntity> artists;
+
   const ArtistsTab({
+    this.artists = const [],
     super.key,
   });
 
@@ -36,7 +39,7 @@ class ArtistsTab extends StatelessWidget {
             );
           }
 
-          final data = snapshot.requireData;
+          final data = artists.isNotEmpty ? artists : snapshot.requireData;
 
           if (data.isEmpty) {
             return Center(

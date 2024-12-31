@@ -13,7 +13,12 @@ import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class PlaylistsTab extends StatefulWidget {
-  const PlaylistsTab({super.key});
+  final List<PlaylistEntity> playlists;
+
+  const PlaylistsTab({
+    this.playlists = const [],
+    super.key,
+  });
 
   @override
   State<PlaylistsTab> createState() => _PlaylistsTabState();
@@ -56,7 +61,12 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
             }
           }
 
-          final data = hasChanged ? snapshot.requireData : playlists;
+          final data = playlists.isNotEmpty
+              ? playlists
+              : hasChanged
+                  ? snapshot.requireData
+                  : playlists;
+
           if (hasChanged) {
             playlists = snapshot.requireData;
           }
@@ -82,19 +92,28 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                   textLineHeight +
                   textLineHeight2,
             ),
-            itemCount: data.length + 1,
+            itemCount:
+                playlists.isNotEmpty ? playlists.length : data.length + 1,
             itemBuilder: (context, index) {
-              final playlist = index == 0
-                  ? PlaylistEntity(
-                      id: 0, name: RetipL10n.of(context).favourites)
-                  : data[index - 1];
+              late final PlaylistEntity playlist;
+
+              if (playlists.isNotEmpty) {
+                playlist = playlists[index];
+              } else {
+                playlist = index == 0
+                    ? PlaylistEntity(
+                        id: 0,
+                        name: RetipL10n.of(context).favourites,
+                      )
+                    : data[index - 1];
+              }
 
               return GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return index == 0
+                        return index == 0 && playlists.isEmpty
                             ? const FavouritesView()
                             : PlaylistView(playlist: playlist);
                       },
