@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.5
+
+- Add persistent bottom navigation bar
+- Make possible to show all media favourites elements on separate lists
+- Update home page widgets to be consistent with library view
+- Update albums list on artist view
+
 ## v0.2.4
 
 - Add favourites auto playlist to playlists view
