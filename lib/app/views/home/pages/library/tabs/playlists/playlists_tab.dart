@@ -106,8 +106,8 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
               }
 
               return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
+                onTap: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
                         return index == 0 && widget.playlists.isEmpty
@@ -116,6 +116,8 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                       },
                     ),
                   );
+
+                  setState(() {});
                 },
                 child: Container(
                   decoration: BoxDecoration(

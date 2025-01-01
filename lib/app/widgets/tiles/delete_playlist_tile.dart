@@ -4,6 +4,7 @@ import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/app/widgets/rp_snackbar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/router/retip_router.dart';
 
 class DeletePlaylistTile extends StatelessWidget {
   final PlaylistEntity entity;
@@ -25,7 +26,8 @@ class DeletePlaylistTile extends StatelessWidget {
       onTap: () async {
         await DeletePlaylist.call(entity.id);
         if (context.mounted) {
-          Navigator.of(context).pop();
+          // Close modal bottom sheet
+          Navigator.pop(context);
 
           final message = l10n.playlistDeleted;
           final snackbar = RpSnackbar(context, message: message);
@@ -33,7 +35,13 @@ class DeletePlaylistTile extends StatelessWidget {
           ScaffoldMessenger.of(context).removeCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
 
-          Navigator.of(context).pop();
+          // Close playlist view
+          final shellContext = RetipRouter.shellNavKey.currentContext;
+          if (shellContext != null) {
+            Navigator.pop(shellContext);
+          }
+
+          onTap?.call();
         }
       },
     );
