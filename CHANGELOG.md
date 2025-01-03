@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.6
+
+- Fix delete playlist logic
+- Show confirmation dialog before delete playlist
+- Update dialogs styles
+
 ## v0.2.5
 
 - Add persistent bottom navigation bar
