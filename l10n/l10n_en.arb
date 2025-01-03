@@ -141,5 +141,7 @@
     "showAll": "Show all",
     "keepPlayback": "Keep playing queue",
     "playOnAppStart": "Start playing on app startup",
-    "resumePlaybackOn" : "Resume playback from last track"
+    "resumePlaybackOn": "Resume playback from last track",
+    "areYouSure": "Are you sure? This action can't be undone",
+    "delete": "Delete"
 }
