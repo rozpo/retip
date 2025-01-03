@@ -29,13 +29,14 @@ class RenamePlaylistTile extends StatelessWidget {
         await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
+            title: Text(l10n.renamePlaylist),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Sizer.x1)),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  decoration: InputDecoration(hintText: l10n.renamePlaylist),
+                  decoration: InputDecoration(hintText: l10n.myAwesomePlaylist),
                   onChanged: (value) {
                     text = value;
                   },

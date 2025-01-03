@@ -102,6 +102,7 @@
     "playOnAppStart",
     "resumePlaybackOn",
     "areYouSure",
-    "delete"
+    "delete",
+    "myAwesomePlaylist"
   ]
 }

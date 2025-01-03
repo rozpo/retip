@@ -62,6 +62,7 @@ class AddToPlaylistTile extends StatelessWidget {
                               await showDialog<bool>(
                                 context: context,
                                 builder: (context) => AlertDialog(
+                                  title: Text(l10n.createNewPlaylist),
                                   shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.circular(Sizer.x1),
@@ -71,7 +72,8 @@ class AddToPlaylistTile extends StatelessWidget {
                                     children: [
                                       TextField(
                                         decoration: InputDecoration(
-                                            hintText: l10n.nameNewPlaylist),
+                                          hintText: l10n.myAwesomePlaylist,
+                                        ),
                                         onChanged: (value) {
                                           text = value;
                                         },

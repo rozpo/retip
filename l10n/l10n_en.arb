@@ -143,5 +143,6 @@
     "playOnAppStart": "Start playing on app startup",
     "resumePlaybackOn": "Resume playback from last track",
     "areYouSure": "Are you sure? This action can't be undone",
-    "delete": "Delete"
+    "delete": "Delete",
+    "myAwesomePlaylist": "My awesome playlist"
 }
