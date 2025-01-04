@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.2.7
+
+- Fix "show all" view state change when media is removed from favourites
+- Improve search results order
+- Update favourites view to show loading spinner
+- Add missing polish translation words
+- Fix shell navigation for artist/album view called from player view
+- Fix shell navigation for artist/album view called from more actions menu
+
 ## v0.2.6
 
 - Fix delete playlist logic
