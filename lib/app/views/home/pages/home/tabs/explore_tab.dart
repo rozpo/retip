@@ -153,7 +153,7 @@ class _ExploreTabState extends State<ExploreTab> {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
                   scrollDirection: Axis.horizontal,
-                  itemCount: artists.length,
+                  itemCount: artists.length.clamp(1, 10),
                   separatorBuilder: (context, index) {
                     return const SizedBox.square(dimension: Sizer.x1);
                   },
@@ -247,7 +247,7 @@ class _ExploreTabState extends State<ExploreTab> {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
                   scrollDirection: Axis.horizontal,
-                  itemCount: albums.length,
+                  itemCount: albums.length.clamp(1, 10),
                   separatorBuilder: (context, index) {
                     return const SizedBox.square(dimension: Sizer.x1);
                   },
@@ -336,7 +336,7 @@ class _ExploreTabState extends State<ExploreTab> {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(Sizer.x1),
                   scrollDirection: Axis.horizontal,
-                  itemCount: playlists.length,
+                  itemCount: playlists.length.clamp(1, 10),
                   separatorBuilder: (context, index) {
                     return const SizedBox.square(dimension: Sizer.x1);
                   },
@@ -429,7 +429,7 @@ class _ExploreTabState extends State<ExploreTab> {
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                itemCount: tracks.length.clamp(0, 5),
+                itemCount: tracks.length.clamp(1, 10),
                 itemBuilder: (context, index) {
                   final track = tracks[index];
 
