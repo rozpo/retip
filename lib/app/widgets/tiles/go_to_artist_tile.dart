@@ -31,6 +31,14 @@ class GoToArtistTile extends StatelessWidget {
           final contextToPush =
               isShellRoute ? RetipRouter.shellNavKey.currentContext! : context;
 
+          final rootContext = RetipRouter.rootNavKey.currentContext;
+
+          if (rootContext != null) {
+            while (Navigator.of(rootContext).canPop()) {
+              Navigator.of(rootContext).pop();
+            }
+          }
+
           await Navigator.of(contextToPush).push(
             MaterialPageRoute(
               builder: (context) {
