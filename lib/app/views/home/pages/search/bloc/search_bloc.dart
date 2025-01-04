@@ -58,6 +58,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         }
       }
 
+      artists.sort((a, b) {
+        return a.name.indexOf(query).compareTo(b.name.indexOf(query));
+      });
+
       for (final album in artist.albums) {
         if (album.title.toLowerCase().contains(query)) {
           albums.add(album);
@@ -69,6 +73,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           }
         }
       }
+
+      albums.sort((a, b) {
+        return a.title.indexOf(query).compareTo(b.title.indexOf(query));
+      });
+
+      tracks.sort((a, b) {
+        return a.title.indexOf(query).compareTo(b.title.indexOf(query));
+      });
     }
 
     for (final pl in pls) {
