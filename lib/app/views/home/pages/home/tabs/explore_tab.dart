@@ -133,8 +133,8 @@ class _ExploreTabState extends State<ExploreTab> {
                   size: Sizer.x2,
                 ),
                 text: '${l10n.liked} ${l10n.artists.toLowerCase()}',
-                showAll: () {
-                  Navigator.of(context).push(
+                showAll: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
                       return Scaffold(
                         appBar: RpAppBar(
@@ -145,6 +145,9 @@ class _ExploreTabState extends State<ExploreTab> {
                       );
                     }),
                   );
+
+                  artistsFuture = GetAllFavourites.call('ArtistModel');
+                  setState(() {});
                 },
               ),
               SizedBox(
@@ -227,8 +230,8 @@ class _ExploreTabState extends State<ExploreTab> {
                   size: Sizer.x2,
                 ),
                 text: '${l10n.liked} ${l10n.albums.toLowerCase()}',
-                showAll: () {
-                  Navigator.of(context).push(
+                showAll: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
                       return Scaffold(
                         appBar: RpAppBar(
@@ -239,6 +242,9 @@ class _ExploreTabState extends State<ExploreTab> {
                       );
                     }),
                   );
+
+                  albumsFuture = GetAllFavourites.call('AlbumModel');
+                  setState(() {});
                 },
               ),
               SizedBox(
@@ -316,8 +322,8 @@ class _ExploreTabState extends State<ExploreTab> {
                   size: Sizer.x2,
                 ),
                 text: '${l10n.liked} ${l10n.playlists.toLowerCase()}',
-                showAll: () {
-                  Navigator.of(context).push(
+                showAll: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
                       return Scaffold(
                         appBar: RpAppBar(
@@ -328,6 +334,9 @@ class _ExploreTabState extends State<ExploreTab> {
                       );
                     }),
                   );
+
+                  playlistsFuture = GetAllFavourites.call('PlaylistEntity');
+                  setState(() {});
                 },
               ),
               SizedBox(
@@ -417,12 +426,15 @@ class _ExploreTabState extends State<ExploreTab> {
                   size: Sizer.x2,
                 ),
                 text: '${l10n.liked} ${l10n.tracks.toLowerCase()}',
-                showAll: () {
-                  Navigator.of(context).push(
+                showAll: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
                       return const FavouritesView();
                     }),
                   );
+
+                  tracksFuture = GetAllFavourites.call('TrackModel');
+                  setState(() {});
                 },
               ),
               ListView.builder(
