@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
 import 'package:retip/app/services/entities/playlist_entity.dart';
 import 'package:retip/app/views/favourites/favourites_view.dart';
@@ -116,6 +117,21 @@ class _PlaylistsTabState extends State<PlaylistsTab> {
                       },
                     ),
                   );
+
+                  if (widget.playlists.isNotEmpty) {
+                    final data = await GetAllFavourites.call<PlaylistEntity>(
+                        'PlaylistEntity');
+
+                    if (data.isEmpty && context.mounted) {
+                      Navigator.of(context).pop();
+                      return;
+                    }
+
+                    if (data.length != widget.playlists.length) {
+                      widget.playlists.clear();
+                      widget.playlists.addAll(data);
+                    }
+                  }
 
                   setState(() {});
                 },

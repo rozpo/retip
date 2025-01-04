@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/cases/get_all_artists.dart';
 import 'package:retip/app/services/entities/artist_entity.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
@@ -11,7 +12,7 @@ import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class ArtistsTab extends StatelessWidget {
+class ArtistsTab extends StatefulWidget {
   final List<ArtistEntity> artists;
 
   const ArtistsTab({
@@ -19,6 +20,11 @@ class ArtistsTab extends StatelessWidget {
     super.key,
   });
 
+  @override
+  State<ArtistsTab> createState() => _ArtistsTabState();
+}
+
+class _ArtistsTabState extends State<ArtistsTab> {
   static Future<List<ArtistEntity>> future = GetAllArtists.call();
 
   @override
@@ -39,7 +45,8 @@ class ArtistsTab extends StatelessWidget {
             );
           }
 
-          final data = artists.isNotEmpty ? artists : snapshot.requireData;
+          final data =
+              widget.artists.isNotEmpty ? widget.artists : snapshot.requireData;
 
           if (data.isEmpty) {
             return Center(
@@ -80,14 +87,30 @@ class ArtistsTab extends StatelessWidget {
               }
 
               return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
+                onTap: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
                         return ArtistView(artist: artist);
                       },
                     ),
                   );
+
+                  if (widget.artists.isNotEmpty) {
+                    final data = await GetAllFavourites.call<ArtistEntity>(
+                        'ArtistModel');
+
+                    if (data.isEmpty && context.mounted) {
+                      Navigator.of(context).pop();
+                      return;
+                    }
+
+                    if (data.length != widget.artists.length) {
+                      widget.artists.clear();
+                      widget.artists.addAll(data);
+                      setState(() {});
+                    }
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/services/cases/get_all_albums.dart';
 import 'package:retip/app/services/entities/album_entity.dart';
 import 'package:retip/app/views/album/album_view.dart';
@@ -11,7 +12,7 @@ import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class AlbumsTab extends StatelessWidget {
+class AlbumsTab extends StatefulWidget {
   final List<AlbumEntity> albums;
 
   const AlbumsTab({
@@ -19,6 +20,11 @@ class AlbumsTab extends StatelessWidget {
     super.key,
   });
 
+  @override
+  State<AlbumsTab> createState() => _AlbumsTabState();
+}
+
+class _AlbumsTabState extends State<AlbumsTab> {
   static Future<List<AlbumEntity>> future = GetAllAlbums.call();
 
   @override
@@ -39,7 +45,8 @@ class AlbumsTab extends StatelessWidget {
             );
           }
 
-          final data = albums.isNotEmpty ? albums : snapshot.requireData;
+          final data =
+              widget.albums.isNotEmpty ? widget.albums : snapshot.requireData;
 
           if (data.isEmpty) {
             return Center(
@@ -73,14 +80,30 @@ class AlbumsTab extends StatelessWidget {
               final album = data[index];
 
               return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
+                onTap: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
                         return AlbumView(album: album);
                       },
                     ),
                   );
+
+                  if (widget.albums.isNotEmpty) {
+                    final data =
+                        await GetAllFavourites.call<AlbumEntity>('AlbumModel');
+
+                    if (data.isEmpty && context.mounted) {
+                      Navigator.of(context).pop();
+                      return;
+                    }
+
+                    if (data.length != widget.albums.length) {
+                      widget.albums.clear();
+                      widget.albums.addAll(data);
+                      setState(() {});
+                    }
+                  }
                 },
                 child: Container(
                   decoration: BoxDecoration(
