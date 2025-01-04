@@ -3,6 +3,7 @@ import 'package:retip/app/services/cases/get_album.dart';
 import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/router/retip_router.dart';
 
 class GoToAlbumTile extends StatelessWidget {
   final VoidCallback? refresh;
@@ -24,7 +25,13 @@ class GoToAlbumTile extends StatelessWidget {
 
         if (context.mounted) {
           Navigator.of(context).pop();
-          await Navigator.of(context).push(
+
+          final isShellRoute = RetipRouter.shellNavKey.currentContext != null;
+
+          final contextToPush =
+              isShellRoute ? RetipRouter.shellNavKey.currentContext! : context;
+
+          await Navigator.of(contextToPush).push(
             MaterialPageRoute(
               builder: (context) {
                 return AlbumView(album: album);
