@@ -1,13 +1,148 @@
 {
     "@@locale": "pl",
-    "@_GLOBAL": {},
-    "allow": "Zezwól",
-    "grantPermission": "Przyznaj uprawnienia dostępu do pamięci, aby zapewnić płynne odtwarzanie muzyki",
-    "home": "Start",
+    "allow": "Zezwalaj",
+    "album": "Album",
+    "artist": "Artysta",
+    "cancel": "Anuluj",
+    "favourites": "Ulubione",
+    "grantPermission": "Udziel zezwolenia na dostęp do pamięci masowej, aby zapewnić płynne odtwarzanie muzyki",
+    "home": "Strona główna",
     "library": "Biblioteka",
     "openAppSettings": "Otwórz ustawienia aplikacji",
+    "remove": "Usuń",
     "retip": "Retip",
-    "search": "Wyszukaj",
-    "storagePermission": "Dostęp do pamięci",
-    "@_END": {}
+    "retipMusicPlayer": "Odtwarzacz muzyki Retip",
+    "retipDescription": "Retip to piękny i intuicyjny odtwarzacz muzyki stworzony przy użyciu Fluttera. Zapewnia płynne i wciągające wrażenia dla miłośników muzyki, umożliwiając łatwe słuchanie ulubionych utworów.",
+    "retipMotto": "Jeśli uważasz, że w erze streamingu sztuka słuchania muzyki offline nie zniknęła. To pewny znak, że potrzebujesz RETIPa!",
+    "search": "Szukaj",
+    "searchForMusic": "Szukaj muzyki...",
+    "storagePermission": "Dostęp do pamięci masowej",
+    "track": "Utwór",
+    "unknownTitle": "Nieznany tytuł",
+    "unknownAlbum": "Nieznany album",
+    "unknownArtist": "Nieznany artysta",
+    "alertRemoveFromFavTitle": "Usuń z ulubionych",
+    "alertRemoveFromFavMsg": "Czy na pewno chcesz usunąć utwór z listy ulubionych?",
+    "albums": "Albumy",
+    "artists": "Artyści",
+    "tracks": "Utwory",
+    "noAlbums": "Nie znaleziono albumów",
+    "noArtists": "Nie znaleziono artystów",
+    "noTracks": "Nie znaleziono utworów",
+    "noPlaylists": "Nie znaleziono playlist",
+    "addToTheFavourites": "Dodaj do ulubionych",
+    "addToTheQueue": "Dodaj do kolejki",
+    "addToThePlaylist": "Dodaj do playlisty",
+    "showAlbumArtist": "Pokaż artystę albumu",
+    "showArtist": "Pokaż artystę",
+    "viewAlbum": "Zobacz album",
+    "sortAlphabetically": "Sortuj alfabetycznie",
+    "sortByIndex": "Sortuj według indeksu",
+    "duration": "Czas trwania",
+    "addedTo": "Dodano do {name}",
+    "@addedTo": {
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "ulubionych"
+            }
+        }
+    },
+    "removedFrom": "Usunięto z {name}",
+    "@removedFrom": {
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "ulubionych"
+            }
+        }
+    },
+    "play": "Odtwórz",
+    "shuffle": "Losuj",
+    "addToFavourites": "Dodaj do ulubionych",
+    "removeFromFavourites": "Usuń z ulubionych",
+    "goToArtist": "Przejdź do artysty",
+    "goToAlbum": "Przejdź do albumu",
+    "addToPlaylist": "Dodaj do playlisty",
+    "albumsCount": "{count, plural, zero{Brak albumów} one{1 Album} other{{count} Albumy}}",
+    "@albumsCount": {
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "tracksCount": "{count, plural, zero{Brak utworów} one{1 Utwór} other{{count} Utwory}}",
+    "@tracksCount": {
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "recentSearch": "Ostatnie wyszukiwania",
+    "playlist": "Playlista",
+    "playlists": "Playlisty",
+    "explore": "Odkrywaj",
+    "deletePlaylist": "Usuń playlistę",
+    "renamePlaylist": "Zmień nazwę playlisty",
+    "playlistDeleted": "Playlista została usunięta",
+    "removeFromPlaylist": "Usuń z playlisty",
+    "suggestedArtists": "Artyści dla Ciebie",
+    "suggestedAlbums": "Albumy dla Ciebie",
+    "somethingGotWrong": "Coś poszło nie tak",
+    "settings": "Ustawienia",
+    "developer": "Deweloper",
+    "info": "Informacje",
+    "version": "Wersja",
+    "liked": "Lubię to",
+    "noFavYet": "Brak ulubionych, dodaj coś z biblioteki",
+    "createNewPlaylist": "Utwórz nową playlistę",
+    "create": "Utwórz",
+    "rename": "Zmień nazwę",
+    "nameNewPlaylist": "Nadaj nazwę nowej playliście",
+    "playlingQueue": "Kolejka odtwarzania",
+    "nothingFound": "Nic nie znaleziono",
+    "checkForUpdate": "Sprawdź aktualizacje",
+    "privacyPolicy": "Polityka prywatności",
+    "termsAndConditions": "Warunki korzystania",
+    "legalese": "Copyright (c) 2024 Piotr Rozpończyk",
+    "licenses": "Licencje",
+    "aboutApp": "O aplikacji",
+    "appearance": "Wygląd",
+    "darkMode": "Tryb ciemny",
+    "batterySaver": "Tryb oszczędzania baterii",
+    "reduceApplicationAnimations": "Zmniejsz animacje aplikacji",
+    "developerMenu": "Menu programisty",
+    "playback": "Odtwarzanie",
+    "autoplay": "Automatyczne odtwarzanie",
+    "crossfade": "Miksowanie",
+    "equalizer": "Equalizer",
+    "themeMode": "Tryb motywu",
+    "dark": "Ciemny",
+    "light": "Jasny",
+    "on": "Włączony",
+    "off": "Wyłączony",
+    "nothingIsPlaying": "Nic nie jest odtwarzane",
+    "fileDetails": "Szczegóły pliku",
+    "title": "Tytuł",
+    "location": "Lokalizacja",
+    "genre": "Gatunek",
+    "composer": "Kompozytor",
+    "dateAdded": "Data dodania",
+    "dateModified": "Data modyfikacji",
+    "size": "Rozmiar",
+    "gridView": "Widok siatki",
+    "columnsCount": "Wyświetlaj {count} kolumny",
+    "@columnsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "generatedPlaylist": "Wygenerowana playlista",
+    "showAll": "Pokaż wszystko",
+    "keepPlayback": "Kontynuuj kolejkę odtwarzania",
+    "playOnAppStart": "Rozpocznij odtwarzanie po uruchomieniu aplikacji",
+    "resumePlaybackOn": "Wznów odtwarzanie od ostatniego utworu",
+    "areYouSure": "Czy na pewno? Tej akcji nie można cofnąć",
+    "delete": "Usuń",
+    "myAwesomePlaylist": "Moja wspaniała playlista"
 }
