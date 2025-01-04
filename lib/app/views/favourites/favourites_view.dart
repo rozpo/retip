@@ -7,6 +7,7 @@ import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/app/widgets/track_tile.dart';
 import 'package:retip/app/widgets/tracks_header.dart';
+import 'package:retip/app/widgets/widgets.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -33,6 +34,12 @@ class FavouritesView extends StatelessWidget {
         bloc: bloc..add(GetFavouritesEvent()),
         builder: (context, state) {
           final tracks = state.tracks;
+
+          if (state.isLoading && tracks.isEmpty) {
+            return const Center(
+              child: SpinnerWidget(),
+            );
+          }
 
           if (tracks.isEmpty) {
             return Center(

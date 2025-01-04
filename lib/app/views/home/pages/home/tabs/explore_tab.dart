@@ -19,6 +19,7 @@ import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/track_tile.dart';
+import 'package:retip/app/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -54,7 +55,7 @@ class _ExploreTabState extends State<ExploreTab> {
         if (snapshot.connectionState != ConnectionState.done &&
             initialData.isEmpty) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: SpinnerWidget(),
           );
         }
 

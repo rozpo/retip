@@ -19,11 +19,15 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     GetFavouritesEvent event,
     Emitter<FavouritesState> emit,
   ) async {
+    emit(state.copyWith(isLoading: true));
+
     final data = await GetAllFavourites.call('TrackModel');
     final tracks = List<TrackEntity>.from(data);
 
     if (tracks.isNotEmpty) {
-      emit(state.copyWith(tracks: tracks));
+      emit(state.copyWith(tracks: tracks, isLoading: false));
+    } else {
+      emit(state.copyWith(isLoading: false));
     }
   }
 
