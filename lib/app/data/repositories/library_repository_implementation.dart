@@ -24,7 +24,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
     final result = <AlbumEntity>[];
 
     final albums = await onAudioQueryProvider.getAllAlbums();
-    final tracks = await onAudioQueryProvider.getAllTracks();
+    final tracks = await onAudioQueryProvider.getAllSongs();
 
     for (final album in albums) {
       Uint8List? albumArtwork =
@@ -71,7 +71,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
     // Fetch all raw data
     final artists = await onAudioQueryProvider.getAllArtists();
     final albums = await onAudioQueryProvider.getAllAlbums();
-    final tracks = await onAudioQueryProvider.getAllTracks();
+    final tracks = await onAudioQueryProvider.getAllSongs();
 
     for (final artist in artists) {
       final artistAlbums =
@@ -139,7 +139,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
 
   @override
   Future<List<TrackEntity>> getAllTracks() async {
-    final data = await onAudioQueryProvider.getAllTracks();
+    final data = await onAudioQueryProvider.getAllSongs();
 
     final artworks = <int, Uint8List>{};
     final tracks = <TrackModel>[];
@@ -155,7 +155,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
           artwork = sharedPreferencesProvider.getAlbumArtwork(albumId);
 
           if (artwork == null) {
-            artwork = await onAudioQueryProvider.getAudioArtwork(track.id);
+            artwork = await onAudioQueryProvider.getSongArtwork(track.id);
 
             if (artwork != null) {
               sharedPreferencesProvider.setAlbumArtwork(albumId, artwork);
