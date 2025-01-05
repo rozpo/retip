@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/presentation/library/library_page.dart';
 import 'package:retip/app/views/home/pages/home/home_page.dart';
-import 'package:retip/app/views/home/pages/library/library_page.dart';
 import 'package:retip/app/views/home/pages/search/search_page.dart';
 import 'package:retip/app/views/settings/settings_page.dart';
 
