@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/tracks/bloc/tracks_bloc.dart';
 import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/services/repositories/theme_repository.dart';
 import 'package:retip/app/views/favourites/bloc/favourites_bloc.dart';
@@ -40,6 +41,9 @@ class RetipApp extends StatelessWidget {
               audioRepository: audioRepository,
               themeRepository: themeRepository,
             );
+          }),
+          BlocProvider(create: (_) {
+            return TracksBloc()..add(FetchTracksEvent());
           }),
           BlocProvider(create: (_) => FavouritesBloc()),
         ],
