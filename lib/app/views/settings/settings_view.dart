@@ -14,6 +14,7 @@ import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/spacer.dart';
 import 'package:retip/core/constants/layout_constants.dart';
+import 'package:retip/core/constants/routes_constants.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -249,7 +250,7 @@ class SettingsView extends StatelessWidget {
                 SettingsTile(
                   title: l10n.developerMenu,
                   icon: Icons.developer_board,
-                  onTap: () => context.go('/dev'),
+                  onTap: () => context.go(RoutesConstants.dev),
                   trailing: const RpIconButton(icon: Icons.arrow_forward),
                 ),
               ],

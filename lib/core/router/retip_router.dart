@@ -5,6 +5,7 @@ import 'package:retip/app/views/dev/dev_view.dart';
 import 'package:retip/app/views/home/home_view.dart';
 import 'package:retip/app/views/into/intro_view.dart';
 import 'package:retip/app/widgets/navigation/navigation_widget.dart';
+import 'package:retip/core/constants/routes_constants.dart';
 
 mixin RetipRouter {
   static final rootNavKey = GlobalKey<NavigatorState>();
@@ -13,10 +14,10 @@ mixin RetipRouter {
 
   static GoRouter router = GoRouter(
     navigatorKey: rootNavKey,
-    initialLocation: '/intro',
+    initialLocation: RoutesConstants.intro,
     routes: [
       GoRoute(
-        path: '/intro',
+        path: RoutesConstants.intro,
         builder: (context, state) {
           return const IntroView();
         },
@@ -25,14 +26,14 @@ mixin RetipRouter {
         navigatorKey: shellNavKey,
         routes: [
           GoRoute(
-            path: '/',
+            path: RoutesConstants.home,
             builder: (context, state) {
               return HomeView(pageController: pageController);
             },
             routes: [
               if (kReleaseMode == false) ...[
                 GoRoute(
-                  path: '/dev',
+                  path: RoutesConstants.dev,
                   builder: (context, state) {
                     return const DevView();
                   },
