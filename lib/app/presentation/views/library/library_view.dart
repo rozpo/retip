@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/views/albums/albums_view.dart';
+import 'package:retip/app/presentation/views/artists/artists_view.dart';
+import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/views/tracks/tracks_view.dart';
-import 'package:retip/app/presentation/views/albums/albums_tab.dart';
-import 'package:retip/app/presentation/views/artists/artists_tab.dart';
-import 'package:retip/app/presentation/views/playlists/playlists_tab.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'bloc/library_bloc.dart';
 
-class LibraryPage extends StatefulWidget {
-  const LibraryPage({super.key});
+class LibraryView extends StatefulWidget {
+  const LibraryView({super.key});
 
   @override
-  State<LibraryPage> createState() => _LibraryPageState();
+  State<LibraryView> createState() => _LibraryViewState();
 }
 
-class _LibraryPageState extends State<LibraryPage> {
+class _LibraryViewState extends State<LibraryView> {
   @override
   Widget build(BuildContext context) {
     final l10n = RetipL10n.of(context);
@@ -59,9 +59,9 @@ class _LibraryPageState extends State<LibraryPage> {
             body: const TabBarView(
               physics: BouncingScrollPhysics(),
               children: [
-                PlaylistsTab(),
-                ArtistsTab(),
-                AlbumsTab(),
+                PlaylistsView(),
+                ArtistsView(),
+                AlbumsView(),
                 TracksView(),
               ],
             ),

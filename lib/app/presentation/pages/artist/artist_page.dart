@@ -8,7 +8,7 @@ import 'package:retip/app/domain/cases/play_audio.dart';
 import 'package:retip/app/domain/entities/artist_entity.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/presentation/pages/album/album_page.dart';
-import 'package:retip/app/presentation/views/albums/albums_tab.dart';
+import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/presentation/widgets/buttons/play_button.dart';
@@ -220,7 +220,7 @@ class _ArtistPageState extends State<ArtistPage> {
                                     '${widget.artist.name} - ${l10n.albumsCount(widget.artist.albums.length)}',
                                   ),
                                 ),
-                                body: AlbumsTab(albums: widget.artist.albums),
+                                body: AlbumsView(albums: widget.artist.albums),
                               );
                             }),
                           );

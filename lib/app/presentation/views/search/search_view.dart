@@ -12,19 +12,19 @@ import 'package:retip/core/utils/sizer.dart';
 
 import 'bloc/search_bloc.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchView extends StatefulWidget {
   final bool Function()? isSelected;
 
-  const SearchPage({
+  const SearchView({
     this.isSelected,
     super.key,
   });
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<SearchView> createState() => _SearchViewState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchViewState extends State<SearchView> {
   final _focus = FocusNode();
   final _debouncer = Debouncer(const Duration(seconds: 1));
   final _controller = TextEditingController();

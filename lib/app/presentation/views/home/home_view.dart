@@ -3,8 +3,8 @@ import 'package:retip/app/presentation/views/home/tabs/explore_tab.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
-class RetipPage extends StatelessWidget {
-  const RetipPage({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

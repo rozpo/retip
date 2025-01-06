@@ -10,9 +10,9 @@ import 'package:retip/app/presentation/pages/album/album_page.dart';
 import 'package:retip/app/presentation/pages/artist/artist_page.dart';
 import 'package:retip/app/presentation/pages/favourites/favourites_page.dart';
 import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
-import 'package:retip/app/presentation/views/albums/albums_tab.dart';
-import 'package:retip/app/presentation/views/artists/artists_tab.dart';
-import 'package:retip/app/presentation/views/playlists/playlists_tab.dart';
+import 'package:retip/app/presentation/views/albums/albums_view.dart';
+import 'package:retip/app/presentation/views/artists/artists_view.dart';
+import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
@@ -141,7 +141,7 @@ class _ExploreTabState extends State<ExploreTab> {
                           title: Text(
                               '${l10n.liked} ${l10n.artists.toLowerCase()}'),
                         ),
-                        body: ArtistsTab(artists: artists),
+                        body: ArtistsView(artists: artists),
                       );
                     }),
                   );
@@ -238,7 +238,7 @@ class _ExploreTabState extends State<ExploreTab> {
                           title: Text(
                               '${l10n.liked} ${l10n.albums.toLowerCase()}'),
                         ),
-                        body: AlbumsTab(albums: albums),
+                        body: AlbumsView(albums: albums),
                       );
                     }),
                   );
@@ -330,7 +330,7 @@ class _ExploreTabState extends State<ExploreTab> {
                           title: Text(
                               '${l10n.liked} ${l10n.playlists.toLowerCase()}'),
                         ),
-                        body: PlaylistsTab(playlists: playlists),
+                        body: PlaylistsView(playlists: playlists),
                       );
                     }),
                   );

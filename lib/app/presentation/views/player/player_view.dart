@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
@@ -18,7 +19,6 @@ import 'package:retip/app/presentation/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/presentation/widgets/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/presentation/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/track_tile.dart';
-import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';

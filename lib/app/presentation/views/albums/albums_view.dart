@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
-import 'package:retip/app/domain/cases/get_all_artists.dart';
-import 'package:retip/app/domain/entities/artist_entity.dart';
-import 'package:retip/app/presentation/pages/artist/artist_page.dart';
+import 'package:retip/app/domain/cases/get_all_albums.dart';
+import 'package:retip/app/domain/entities/album_entity.dart';
+import 'package:retip/app/presentation/pages/album/album_page.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/rp_text.dart';
@@ -12,20 +12,20 @@ import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class ArtistsTab extends StatefulWidget {
-  final List<ArtistEntity> artists;
+class AlbumsView extends StatefulWidget {
+  final List<AlbumEntity> albums;
 
-  const ArtistsTab({
-    this.artists = const [],
+  const AlbumsView({
+    this.albums = const [],
     super.key,
   });
 
   @override
-  State<ArtistsTab> createState() => _ArtistsTabState();
+  State<AlbumsView> createState() => _AlbumsViewState();
 }
 
-class _ArtistsTabState extends State<ArtistsTab> {
-  static Future<List<ArtistEntity>> future = GetAllArtists.call();
+class _AlbumsViewState extends State<AlbumsView> {
+  static Future<List<AlbumEntity>> future = GetAllAlbums.call();
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +46,13 @@ class _ArtistsTabState extends State<ArtistsTab> {
           }
 
           final data =
-              widget.artists.isNotEmpty ? widget.artists : snapshot.requireData;
+              widget.albums.isNotEmpty ? widget.albums : snapshot.requireData;
 
           if (data.isEmpty) {
             return Center(
-              child: Text(RetipL10n.of(context).noArtists),
+              child: Text(RetipL10n.of(context).noAlbums),
             );
           }
-
-          data.removeWhere((artist) => artist.albums.isEmpty);
 
           final columns = context.read<SettingsCubit>().state.gridViewColumns;
 
@@ -79,35 +77,30 @@ class _ArtistsTabState extends State<ArtistsTab> {
             ),
             itemCount: data.length,
             itemBuilder: (context, index) {
-              final artist = data[index];
-              int tracksCount = 0;
-
-              for (final album in artist.albums) {
-                tracksCount += album.tracks.length;
-              }
+              final album = data[index];
 
               return GestureDetector(
                 onTap: () async {
                   await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return ArtistPage(artist: artist);
+                        return AlbumPage(album: album);
                       },
                     ),
                   );
 
-                  if (widget.artists.isNotEmpty) {
-                    final data = await GetAllFavourites.call<ArtistEntity>(
-                        'ArtistModel');
+                  if (widget.albums.isNotEmpty) {
+                    final data =
+                        await GetAllFavourites.call<AlbumEntity>('AlbumModel');
 
                     if (data.isEmpty && context.mounted) {
                       Navigator.of(context).pop();
                       return;
                     }
 
-                    if (data.length != widget.artists.length) {
-                      widget.artists.clear();
-                      widget.artists.addAll(data);
+                    if (data.length != widget.albums.length) {
+                      widget.albums.clear();
+                      widget.albums.addAll(data);
                       setState(() {});
                     }
                   }
@@ -121,7 +114,7 @@ class _ArtistsTabState extends State<ArtistsTab> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ArtworkWidget(
-                        bytes: artist.artwork,
+                        bytes: album.artwork,
                         borderWidth: 1,
                       ),
                       Padding(
@@ -133,11 +126,11 @@ class _ArtistsTabState extends State<ArtistsTab> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RpText(
-                              artist.name,
+                              album.title,
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             RpText(
-                              '${RetipL10n.of(context).albumsCount(artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracksCount)}',
+                              album.artist,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],
