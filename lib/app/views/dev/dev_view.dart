@@ -7,7 +7,7 @@ import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_text.dart';
-import 'package:retip/core/config/retip_config.dart';
+import 'package:retip/app/data/providers/retip_config.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 

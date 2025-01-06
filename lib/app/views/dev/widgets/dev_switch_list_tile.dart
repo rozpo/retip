@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/config/retip_config.dart';
+import 'package:retip/app/data/providers/retip_config.dart';
 
 class DevSwitchListTile extends StatefulWidget {
   final RetipConfigBoolKey boolKey;

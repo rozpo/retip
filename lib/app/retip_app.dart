@@ -7,7 +7,7 @@ import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/services/repositories/theme_repository.dart';
 import 'package:retip/app/views/favourites/bloc/favourites_bloc.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
-import 'package:retip/core/config/retip_config.dart';
+import 'package:retip/app/data/providers/retip_config.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/theme/retip_theme.dart';
