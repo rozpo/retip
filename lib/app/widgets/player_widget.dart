@@ -7,7 +7,7 @@ import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/spacer.dart';
-import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 

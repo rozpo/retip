@@ -18,7 +18,7 @@ import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/widgets/track_tile.dart';
-import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';

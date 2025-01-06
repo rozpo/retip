@@ -11,7 +11,7 @@ import 'package:retip/app/data/repositories/theme_repository_implementation.dart
 import 'package:retip/app/retip_app.dart';
 import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/services/repositories/library_repository.dart';
-import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

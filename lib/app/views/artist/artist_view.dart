@@ -22,7 +22,7 @@ import 'package:retip/app/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/widgets/track_tile.dart';
-import 'package:retip/core/audio/retip_audio.dart';
+import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
