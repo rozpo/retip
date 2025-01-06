@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/playlist/create_playlist.dart';
-import 'package:retip/app/services/cases/playlist/get_all_playlists.dart';
-import 'package:retip/app/services/cases/playlist/update_playlist.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/cases/playlist/create_playlist.dart';
+import 'package:retip/app/domain/cases/playlist/get_all_playlists.dart';
+import 'package:retip/app/domain/cases/playlist/update_playlist.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_divider.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';

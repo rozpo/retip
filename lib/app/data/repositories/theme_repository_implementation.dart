@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/services/repositories/theme_repository.dart';
+import 'package:retip/app/domain/repositories/theme_repository.dart';
 import 'package:retip/core/extensions/color_extension.dart';
 import 'package:retip/core/theme/retip_theme.dart';
 

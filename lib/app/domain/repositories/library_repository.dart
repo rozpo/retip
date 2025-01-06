@@ -1,6 +1,6 @@
-import 'package:retip/app/services/entities/album_entity.dart';
-import 'package:retip/app/services/entities/artist_entity.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/entities/album_entity.dart';
+import 'package:retip/app/domain/entities/artist_entity.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 
 abstract class LibraryRepository {
   Future<List<TrackEntity>> getAllTracks();

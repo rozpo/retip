@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
-import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
-import 'package:retip/app/services/cases/play_audio.dart';
-import 'package:retip/app/services/entities/album_entity.dart';
+import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
+import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
+import 'package:retip/app/domain/cases/play_audio.dart';
+import 'package:retip/app/domain/entities/album_entity.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';

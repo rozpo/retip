@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/playlist/delete_playlist.dart';
-import 'package:retip/app/services/entities/playlist_entity.dart';
+import 'package:retip/app/domain/cases/playlist/delete_playlist.dart';
+import 'package:retip/app/domain/entities/playlist_entity.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/app/widgets/rp_snackbar.dart';
 import 'package:retip/app/widgets/spacer.dart';

@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:on_audio_query/on_audio_query.dart' as on_audio_query;
 import 'package:retip/app/data/models/album_model.dart';
-import 'package:retip/app/services/entities/artist_entity.dart';
+import 'package:retip/app/domain/entities/artist_entity.dart';
 
 class ArtistModel extends ArtistEntity {
   ArtistModel._({

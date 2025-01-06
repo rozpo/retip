@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
-import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
-import 'package:retip/app/services/cases/play_audio.dart';
-import 'package:retip/app/services/entities/artist_entity.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
+import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
+import 'package:retip/app/domain/cases/play_audio.dart';
+import 'package:retip/app/domain/entities/artist_entity.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/views/album/album_view.dart';
 import 'package:retip/app/views/home/pages/library/tabs/albums/albums_tab.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';

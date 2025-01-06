@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/entities/abstract_entity.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/entities/abstract_entity.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/views/playlist/playlist_view.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';

@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/services/cases/get_all_tracks.dart';
-import 'package:retip/app/services/cases/play_audio.dart';
+import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/domain/cases/get_all_tracks.dart';
+import 'package:retip/app/domain/cases/play_audio.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_text.dart';

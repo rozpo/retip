@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
-import 'package:retip/app/services/cases/get_all_tracks.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/cases/get_all_tracks.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/data/providers/retip_audio.dart';
 
 part 'home_event.dart';

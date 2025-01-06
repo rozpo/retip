@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/services/cases/play_audio.dart';
+import 'package:retip/app/domain/cases/play_audio.dart';
 import 'package:retip/app/widgets/buttons/play_button.dart';
 import 'package:retip/app/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/widgets/playlist_artwork.dart';

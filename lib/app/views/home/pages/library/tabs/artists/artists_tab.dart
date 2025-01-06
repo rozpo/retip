@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/services/cases/favourites/get_all_favourites.dart';
-import 'package:retip/app/services/cases/get_all_artists.dart';
-import 'package:retip/app/services/entities/artist_entity.dart';
+import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
+import 'package:retip/app/domain/cases/get_all_artists.dart';
+import 'package:retip/app/domain/entities/artist_entity.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
 import 'package:retip/app/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';

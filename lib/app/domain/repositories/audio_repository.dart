@@ -1,4 +1,4 @@
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 
 enum AudioRepeatMode {
   /// Repeat audio queue when reach end of list.

@@ -4,8 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/services/repositories/audio_repository.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
+import 'package:retip/app/domain/repositories/audio_repository.dart';
 
 class RetipAudio extends AudioPlayer {
   ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(

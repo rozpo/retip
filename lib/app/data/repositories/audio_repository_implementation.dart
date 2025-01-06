@@ -1,7 +1,7 @@
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/services/repositories/audio_repository.dart';
-import 'package:retip/app/services/repositories/library_repository.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
+import 'package:retip/app/domain/repositories/audio_repository.dart';
+import 'package:retip/app/domain/repositories/library_repository.dart';
 import 'package:retip/app/data/providers/retip_permission.dart';
 
 enum Keys {

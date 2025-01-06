@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/services/cases/get_artist.dart';
+import 'package:retip/app/domain/cases/get_artist.dart';
 import 'package:retip/app/views/artist/artist_view.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';

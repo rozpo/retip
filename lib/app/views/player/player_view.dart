@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:retip/app/services/cases/favourites/add_to_favourites.dart';
-import 'package:retip/app/services/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/services/cases/favourites/remove_from_favourites.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/services/repositories/audio_repository.dart';
+import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
+import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
+import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
+import 'package:retip/app/domain/repositories/audio_repository.dart';
 import 'package:retip/app/widgets/artwork_widget.dart';
 import 'package:retip/app/widgets/more/more_icon.dart';
 import 'package:retip/app/widgets/rp_divider.dart';

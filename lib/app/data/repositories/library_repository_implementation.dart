@@ -5,10 +5,10 @@ import 'package:retip/app/data/models/artist_model.dart';
 import 'package:retip/app/data/models/track_model.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/services/entities/album_entity.dart';
-import 'package:retip/app/services/entities/artist_entity.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
-import 'package:retip/app/services/repositories/library_repository.dart';
+import 'package:retip/app/domain/entities/album_entity.dart';
+import 'package:retip/app/domain/entities/artist_entity.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
+import 'package:retip/app/domain/repositories/library_repository.dart';
 
 class LibraryRepositoryImplementation implements LibraryRepository {
   final OnAudioQueryProvider onAudioQueryProvider;

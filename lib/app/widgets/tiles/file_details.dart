@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:retip/app/services/entities/track_entity.dart';
+import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/widgets/more/more_tile.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
 import 'package:retip/app/widgets/rp_icon.dart';
