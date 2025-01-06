@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:retip/app/views/dev/dev_view.dart';
-import 'package:retip/app/views/home/home_view.dart';
-import 'package:retip/app/views/into/intro_view.dart';
+import 'package:retip/app/presentation/views/dev/dev_view.dart';
+import 'package:retip/app/presentation/views/home/home_view.dart';
+import 'package:retip/app/presentation/views/into/intro_view.dart';
 import 'package:retip/app/widgets/navigation/navigation_widget.dart';
 import 'package:retip/core/constants/routes_constants.dart';
 

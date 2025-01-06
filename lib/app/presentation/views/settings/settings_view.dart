@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:retip/app/views/settings/widgets/settings_tile.dart';
+import 'package:retip/app/presentation/views/settings/widgets/settings_tile.dart';
 import 'package:retip/app/widgets/retip_icon.dart';
 import 'package:retip/app/widgets/rp_app_bar.dart';
 import 'package:retip/app/widgets/rp_divider.dart';
