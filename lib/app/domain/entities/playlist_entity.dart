@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:retip/app/domain/entities/abstract_entity.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/pages/playlist/playlist_view.dart';
+import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
 import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/rp_text.dart';
@@ -73,7 +73,7 @@ class PlaylistEntity extends AbstractEntity {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return PlaylistView(playlist: this);
+              return PlaylistPage(playlist: this);
             },
           ),
         );

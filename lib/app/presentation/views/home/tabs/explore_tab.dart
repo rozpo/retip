@@ -6,13 +6,13 @@ import 'package:retip/app/domain/entities/album_entity.dart';
 import 'package:retip/app/domain/entities/artist_entity.dart';
 import 'package:retip/app/domain/entities/playlist_entity.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/pages/album/album_view.dart';
-import 'package:retip/app/presentation/pages/artist/artist_view.dart';
-import 'package:retip/app/presentation/pages/favourites/favourites_view.dart';
+import 'package:retip/app/presentation/pages/album/album_page.dart';
+import 'package:retip/app/presentation/pages/artist/artist_page.dart';
+import 'package:retip/app/presentation/pages/favourites/favourites_page.dart';
+import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
 import 'package:retip/app/presentation/views/albums/albums_tab.dart';
 import 'package:retip/app/presentation/views/artists/artists_tab.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_tab.dart';
-import 'package:retip/app/presentation/pages/playlist/playlist_view.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
@@ -173,7 +173,7 @@ class _ExploreTabState extends State<ExploreTab> {
                         await Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return ArtistView(artist: artist);
+                              return ArtistPage(artist: artist);
                             },
                           ),
                         );
@@ -265,7 +265,7 @@ class _ExploreTabState extends State<ExploreTab> {
                         await Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return AlbumView(album: album);
+                              return AlbumPage(album: album);
                             },
                           ),
                         );
@@ -357,7 +357,7 @@ class _ExploreTabState extends State<ExploreTab> {
                         await Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return PlaylistView(playlist: playlist);
+                              return PlaylistPage(playlist: playlist);
                             },
                           ),
                         );
@@ -429,7 +429,7 @@ class _ExploreTabState extends State<ExploreTab> {
                 showAll: () async {
                   await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
-                      return const FavouritesView();
+                      return const FavouritesPage();
                     }),
                   );
 

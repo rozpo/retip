@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:retip/app/presentation/pages/dev/dev_view.dart';
-import 'package:retip/app/presentation/pages/home/home_view.dart';
-import 'package:retip/app/presentation/pages/intro/intro_view.dart';
+import 'package:retip/app/presentation/pages/dev/dev_page.dart';
+import 'package:retip/app/presentation/pages/home/home_page.dart';
+import 'package:retip/app/presentation/pages/intro/intro_page.dart';
 import 'package:retip/app/presentation/widgets/navigation/navigation_widget.dart';
 import 'package:retip/core/constants/routes_constants.dart';
 
@@ -19,7 +19,7 @@ mixin RetipRouter {
       GoRoute(
         path: RoutesConstants.intro,
         builder: (context, state) {
-          return const IntroView();
+          return const IntroPage();
         },
       ),
       ShellRoute(
@@ -28,14 +28,14 @@ mixin RetipRouter {
           GoRoute(
             path: RoutesConstants.home,
             builder: (context, state) {
-              return HomeView(pageController: pageController);
+              return HomePage(pageController: pageController);
             },
             routes: [
               if (kReleaseMode == false) ...[
                 GoRoute(
                   path: RoutesConstants.dev,
                   builder: (context, state) {
-                    return const DevView();
+                    return const DevPage();
                   },
                 ),
               ],

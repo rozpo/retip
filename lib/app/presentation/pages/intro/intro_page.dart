@@ -12,8 +12,8 @@ import 'widgets/intro_allow_button.dart';
 import 'widgets/intro_logo_widget.dart';
 import 'widgets/intro_settings_button.dart';
 
-class IntroView extends StatelessWidget {
-  const IntroView({super.key});
+class IntroPage extends StatelessWidget {
+  const IntroPage({super.key});
 
   @override
   Widget build(BuildContext context) {

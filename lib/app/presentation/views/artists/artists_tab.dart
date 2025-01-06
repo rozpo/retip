@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/domain/cases/get_all_artists.dart';
 import 'package:retip/app/domain/entities/artist_entity.dart';
-import 'package:retip/app/presentation/pages/artist/artist_view.dart';
+import 'package:retip/app/presentation/pages/artist/artist_page.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/rp_text.dart';
@@ -91,7 +91,7 @@ class _ArtistsTabState extends State<ArtistsTab> {
                   await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return ArtistView(artist: artist);
+                        return ArtistPage(artist: artist);
                       },
                     ),
                   );

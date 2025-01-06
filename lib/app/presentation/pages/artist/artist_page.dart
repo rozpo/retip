@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/domain/cases/play_audio.dart';
 import 'package:retip/app/domain/entities/artist_entity.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/pages/album/album_view.dart';
+import 'package:retip/app/presentation/pages/album/album_page.dart';
 import 'package:retip/app/presentation/views/albums/albums_tab.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/buttons/favourite_button.dart';
@@ -22,25 +23,24 @@ import 'package:retip/app/presentation/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/presentation/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/track_tile.dart';
-import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class ArtistView extends StatefulWidget {
+class ArtistPage extends StatefulWidget {
   final ArtistEntity artist;
 
-  const ArtistView({
+  const ArtistPage({
     required this.artist,
     super.key,
   });
 
   @override
-  State<ArtistView> createState() => _ArtistViewState();
+  State<ArtistPage> createState() => _ArtistPageState();
 }
 
-class _ArtistViewState extends State<ArtistView> {
+class _ArtistPageState extends State<ArtistPage> {
   final RetipAudio player = GetIt.I.get();
 
   SortMode sortMode = SortMode.numerically;
@@ -251,7 +251,7 @@ class _ArtistViewState extends State<ArtistView> {
                           await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return AlbumView(album: album);
+                                return AlbumPage(album: album);
                               },
                             ),
                           );

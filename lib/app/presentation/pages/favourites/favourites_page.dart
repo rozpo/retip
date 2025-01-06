@@ -14,8 +14,8 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import 'bloc/favourites_bloc.dart';
 
-class FavouritesView extends StatelessWidget {
-  const FavouritesView({super.key});
+class FavouritesPage extends StatelessWidget {
+  const FavouritesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

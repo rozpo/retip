@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/domain/cases/get_artist.dart';
-import 'package:retip/app/presentation/pages/artist/artist_view.dart';
+import 'package:retip/app/presentation/pages/artist/artist_page.dart';
 import 'package:retip/app/presentation/widgets/more/more_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
@@ -42,7 +42,7 @@ class GoToArtistTile extends StatelessWidget {
           await Navigator.of(contextToPush).push(
             MaterialPageRoute(
               builder: (context) {
-                return ArtistView(artist: artist);
+                return ArtistPage(artist: artist);
               },
             ),
           );

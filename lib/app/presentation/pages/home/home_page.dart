@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/views/library/library_page.dart';
 import 'package:retip/app/presentation/views/home/home_page.dart';
+import 'package:retip/app/presentation/views/library/library_page.dart';
 import 'package:retip/app/presentation/views/search/search_page.dart';
 import 'package:retip/app/presentation/views/settings/settings_page.dart';
 
-class HomeView extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final PageController pageController;
 
-  const HomeView({
+  const HomePage({
     required this.pageController,
     super.key,
   });
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

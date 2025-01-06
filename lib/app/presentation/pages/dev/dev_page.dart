@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:retip/app/data/providers/retip_config.dart';
 import 'package:retip/app/presentation/pages/dev/widgets/dev_switch_list_tile.dart';
 import 'package:retip/app/presentation/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/rp_text.dart';
-import 'package:retip/app/data/providers/retip_config.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class DevView extends StatefulWidget {
-  const DevView({super.key});
+class DevPage extends StatefulWidget {
+  const DevPage({super.key});
 
   @override
-  State<DevView> createState() => _DevViewState();
+  State<DevPage> createState() => _DevPageState();
 }
 
-class _DevViewState extends State<DevView> {
+class _DevPageState extends State<DevPage> {
   @override
   Widget build(BuildContext context) {
     final packageInfo = GetIt.I.get<PackageInfo>();

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/pages/album/album_view.dart';
+import 'package:retip/app/presentation/pages/album/album_page.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -63,7 +63,7 @@ abstract class AlbumEntity extends AbstractEntity {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
-              return AlbumView(album: this);
+              return AlbumPage(album: this);
             },
           ),
         );
