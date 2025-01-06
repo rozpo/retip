@@ -2,7 +2,7 @@ import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/services/entities/track_entity.dart';
 import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/services/repositories/library_repository.dart';
-import 'package:retip/core/permission/retip_permission.dart';
+import 'package:retip/app/data/providers/retip_permission.dart';
 
 enum Keys {
   audioRepeatMode,

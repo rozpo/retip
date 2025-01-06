@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:retip/core/permission/retip_permission.dart';
+import 'package:retip/app/data/providers/retip_permission.dart';
 
 part 'intro_event.dart';
 part 'intro_state.dart';
