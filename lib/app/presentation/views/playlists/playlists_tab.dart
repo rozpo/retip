@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
-import 'package:retip/app/domain/cases/get_all_artists.dart';
-import 'package:retip/app/domain/entities/artist_entity.dart';
-import 'package:retip/app/presentation/views/artist/artist_view.dart';
+import 'package:retip/app/domain/cases/playlist/get_all_playlists.dart';
+import 'package:retip/app/domain/entities/playlist_entity.dart';
+import 'package:retip/app/presentation/pages/favourites/favourites_view.dart';
+import 'package:retip/app/presentation/pages/playlist/playlist_view.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
-import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
-class ArtistsTab extends StatefulWidget {
-  final List<ArtistEntity> artists;
+class PlaylistsTab extends StatefulWidget {
+  final List<PlaylistEntity> playlists;
 
-  const ArtistsTab({
-    this.artists = const [],
+  const PlaylistsTab({
+    this.playlists = const [],
     super.key,
   });
 
   @override
-  State<ArtistsTab> createState() => _ArtistsTabState();
+  State<PlaylistsTab> createState() => _PlaylistsTabState();
 }
 
-class _ArtistsTabState extends State<ArtistsTab> {
-  static Future<List<ArtistEntity>> future = GetAllArtists.call();
+class _PlaylistsTabState extends State<PlaylistsTab> {
+  static List<PlaylistEntity> playlists = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: future,
+        initialData: playlists,
+        future: GetAllPlaylists.call(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
+          if (snapshot.connectionState != ConnectionState.done &&
+              playlists.isEmpty) {
             return const Center(
               child: SpinnerWidget(),
             );
@@ -45,16 +48,25 @@ class _ArtistsTabState extends State<ArtistsTab> {
             );
           }
 
-          final data =
-              widget.artists.isNotEmpty ? widget.artists : snapshot.requireData;
+          bool hasChanged = snapshot.requireData.length != playlists.length;
 
-          if (data.isEmpty) {
-            return Center(
-              child: Text(RetipL10n.of(context).noArtists),
-            );
+          if (hasChanged == false) {
+            for (int i = 0; i < playlists.length; i++) {
+              final oldPlaylist = playlists[i];
+              final newPlaylist = snapshot.requireData[i];
+
+              if (oldPlaylist.tracks.length != newPlaylist.tracks.length) {
+                hasChanged = true;
+                break;
+              }
+            }
           }
 
-          data.removeWhere((artist) => artist.albums.isEmpty);
+          final data = hasChanged ? snapshot.requireData : playlists;
+
+          if (hasChanged) {
+            playlists = snapshot.requireData;
+          }
 
           final columns = context.read<SettingsCubit>().state.gridViewColumns;
 
@@ -77,13 +89,21 @@ class _ArtistsTabState extends State<ArtistsTab> {
                   textLineHeight +
                   textLineHeight2,
             ),
-            itemCount: data.length,
+            itemCount: widget.playlists.isNotEmpty
+                ? widget.playlists.length
+                : data.length + 1,
             itemBuilder: (context, index) {
-              final artist = data[index];
-              int tracksCount = 0;
+              late final PlaylistEntity playlist;
 
-              for (final album in artist.albums) {
-                tracksCount += album.tracks.length;
+              if (widget.playlists.isNotEmpty) {
+                playlist = widget.playlists[index];
+              } else {
+                playlist = index == 0
+                    ? PlaylistEntity(
+                        id: 0,
+                        name: RetipL10n.of(context).favourites,
+                      )
+                    : data[index - 1];
               }
 
               return GestureDetector(
@@ -91,26 +111,29 @@ class _ArtistsTabState extends State<ArtistsTab> {
                   await Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return ArtistView(artist: artist);
+                        return index == 0 && widget.playlists.isEmpty
+                            ? const FavouritesView()
+                            : PlaylistView(playlist: playlist);
                       },
                     ),
                   );
 
-                  if (widget.artists.isNotEmpty) {
-                    final data = await GetAllFavourites.call<ArtistEntity>(
-                        'ArtistModel');
+                  if (widget.playlists.isNotEmpty) {
+                    final data = await GetAllFavourites.call<PlaylistEntity>(
+                        'PlaylistEntity');
 
                     if (data.isEmpty && context.mounted) {
                       Navigator.of(context).pop();
                       return;
                     }
 
-                    if (data.length != widget.artists.length) {
-                      widget.artists.clear();
-                      widget.artists.addAll(data);
-                      setState(() {});
+                    if (data.length != widget.playlists.length) {
+                      widget.playlists.clear();
+                      widget.playlists.addAll(data);
                     }
                   }
+
+                  setState(() {});
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -119,10 +142,22 @@ class _ArtistsTabState extends State<ArtistsTab> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      ArtworkWidget(
-                        bytes: artist.artwork,
-                        borderWidth: 1,
+                      Expanded(
+                        child: LayoutBuilder(builder: (context, constraints) {
+                          final dimension = constraints.maxHeight;
+
+                          return SizedBox.square(
+                            dimension: dimension,
+                            child: PlaylistArtwork(
+                              images: playlist.artworks,
+                              icon: index == 0 && widget.playlists.isEmpty
+                                  ? Icons.favorite
+                                  : null,
+                            ),
+                          );
+                        }),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -133,11 +168,14 @@ class _ArtistsTabState extends State<ArtistsTab> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RpText(
-                              artist.name,
+                              playlist.name,
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             RpText(
-                              '${RetipL10n.of(context).albumsCount(artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracksCount)}',
+                              index == 0 && widget.playlists.isEmpty
+                                  ? RetipL10n.of(context).generatedPlaylist
+                                  : RetipL10n.of(context)
+                                      .tracksCount(playlist.tracks.length),
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],

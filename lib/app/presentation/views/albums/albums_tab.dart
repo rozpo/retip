@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
 import 'package:retip/app/domain/cases/get_all_albums.dart';
 import 'package:retip/app/domain/entities/album_entity.dart';
-import 'package:retip/app/presentation/views/album/album_view.dart';
+import 'package:retip/app/presentation/pages/album/album_view.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/rp_text.dart';
