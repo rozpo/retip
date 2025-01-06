@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/widgets/rp_icon.dart';
-import 'package:retip/app/widgets/rp_list_tile.dart';
-import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/app/presentation/widgets/rp_icon.dart';
+import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/rp_text.dart';
 
 class SettingsTile extends StatelessWidget {
   final String title;

@@ -4,7 +4,7 @@ import 'package:retip/app/presentation/tracks/tracks_view.dart';
 import 'package:retip/app/presentation/views/home/pages/library/tabs/albums/albums_tab.dart';
 import 'package:retip/app/presentation/views/home/pages/library/tabs/artists/artists_tab.dart';
 import 'package:retip/app/presentation/views/home/pages/library/tabs/playlists/playlists_tab.dart';
-import 'package:retip/app/widgets/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'bloc/library_bloc.dart';

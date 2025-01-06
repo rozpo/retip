@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/get_album.dart';
-import 'package:retip/app/presentation/views/album/album_view.dart';
-import 'package:retip/app/widgets/more/more_tile.dart';
+import 'package:retip/app/domain/cases/get_artist.dart';
+import 'package:retip/app/presentation/views/artist/artist_view.dart';
+import 'package:retip/app/presentation/widgets/more/more_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
 
-class GoToAlbumTile extends StatelessWidget {
+class GoToArtistTile extends StatelessWidget {
   final VoidCallback? refresh;
-  final int albumId;
+  final int artistId;
 
-  const GoToAlbumTile(
-    this.albumId, {
+  const GoToArtistTile(
+    this.artistId, {
     this.refresh,
     super.key,
   });
@@ -18,10 +18,10 @@ class GoToAlbumTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MoreTile(
-      icon: Icons.album,
-      text: RetipL10n.of(context).goToAlbum,
+      icon: Icons.person,
+      text: RetipL10n.of(context).goToArtist,
       onTap: () async {
-        final album = await GetAlbum.call(albumId);
+        final artist = await GetArtist.call(artistId);
 
         if (context.mounted) {
           Navigator.of(context).pop();
@@ -42,7 +42,7 @@ class GoToAlbumTile extends StatelessWidget {
           await Navigator.of(contextToPush).push(
             MaterialPageRoute(
               builder: (context) {
-                return AlbumView(album: album);
+                return ArtistView(artist: artist);
               },
             ),
           );

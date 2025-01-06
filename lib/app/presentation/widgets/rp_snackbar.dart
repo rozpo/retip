@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/app/presentation/widgets/rp_text.dart';
 
 class RpSnackbar extends SnackBar {
   final String message;

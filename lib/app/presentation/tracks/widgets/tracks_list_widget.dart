@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/rp_icon_button.dart';
-import 'package:retip/app/widgets/rp_list_tile.dart';
-import 'package:retip/app/widgets/rp_text.dart';
+import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
+import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class TracksListWidget extends StatelessWidget {

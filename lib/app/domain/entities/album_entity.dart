@@ -2,8 +2,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:retip/app/presentation/views/album/album_view.dart';
-import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/utils/utils.dart';

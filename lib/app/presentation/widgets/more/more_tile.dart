@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/widgets/rp_icon.dart';
-import 'package:retip/app/widgets/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/rp_icon.dart';
+import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
 
 class MoreTile extends StatelessWidget {
   final IconData icon;

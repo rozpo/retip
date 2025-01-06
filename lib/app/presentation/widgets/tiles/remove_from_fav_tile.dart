@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
 import 'package:retip/app/domain/entities/abstract_entity.dart';
-import 'package:retip/app/widgets/more/more_tile.dart';
-import 'package:retip/app/widgets/rp_snackbar.dart';
+import 'package:retip/app/presentation/widgets/more/more_tile.dart';
+import 'package:retip/app/presentation/widgets/rp_snackbar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class RemoveFromFavTile extends StatelessWidget {

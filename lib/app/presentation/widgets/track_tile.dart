@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/widgets/artwork_widget.dart';
-import 'package:retip/app/widgets/more/more_icon.dart';
-import 'package:retip/app/widgets/rp_list_tile.dart';
-import 'package:retip/app/widgets/tiles/add_to_fav_tile.dart';
-import 'package:retip/app/widgets/tiles/add_to_playlist_tile.dart';
-import 'package:retip/app/widgets/tiles/file_details.dart';
-import 'package:retip/app/widgets/tiles/go_to_album_tile.dart';
-import 'package:retip/app/widgets/tiles/go_to_artist_tile.dart';
-import 'package:retip/app/widgets/tiles/remove_from_fav_tile.dart';
+import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/more/more_icon.dart';
+import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/presentation/widgets/tiles/add_to_playlist_tile.dart';
+import 'package:retip/app/presentation/widgets/tiles/file_details.dart';
+import 'package:retip/app/presentation/widgets/tiles/go_to_album_tile.dart';
+import 'package:retip/app/presentation/widgets/tiles/go_to_artist_tile.dart';
+import 'package:retip/app/presentation/widgets/tiles/remove_from_fav_tile.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class TrackTile extends StatelessWidget {
