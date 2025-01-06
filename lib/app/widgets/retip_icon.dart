@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:retip/core/asset/retip_asset.dart';
+import 'package:retip/core/constants/assets_constants.dart';
 
 class RetipIcon extends StatelessWidget {
   final Color? color;
@@ -17,7 +17,7 @@ class RetipIcon extends StatelessWidget {
     final size = this.size ?? const Size.square(24);
 
     return SvgPicture.asset(
-      RetipAsset.icon,
+      AssetsConstants.retipMonochrome,
       width: size.width,
       height: size.height,
       colorFilter: ColorFilter.mode(

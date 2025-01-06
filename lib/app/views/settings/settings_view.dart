@@ -13,7 +13,7 @@ import 'package:retip/app/widgets/rp_icon_button.dart';
 import 'package:retip/app/widgets/rp_list_tile.dart';
 import 'package:retip/app/widgets/rp_text.dart';
 import 'package:retip/app/widgets/spacer.dart';
-import 'package:retip/core/config/retip_config.dart';
+import 'package:retip/core/constants/layout_constants.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -170,10 +170,10 @@ class SettingsView extends StatelessWidget {
               ),
               Slider(
                 value: state.gridViewColumns.toDouble(),
-                min: RetipConfig.minGridViewColumns.toDouble(),
-                max: RetipConfig.maxGridViewColumns.toDouble(),
-                divisions: (RetipConfig.maxGridViewColumns.toDouble() /
-                        RetipConfig.minGridViewColumns.toDouble())
+                min: LayoutConstants.minGridViewColumns.toDouble(),
+                max: LayoutConstants.maxGridViewColumns.toDouble(),
+                divisions: (LayoutConstants.maxGridViewColumns.toDouble() /
+                        LayoutConstants.minGridViewColumns.toDouble())
                     .toInt(),
                 onChanged: (value) {
                   cubit.setGridViewColumns(value.toInt());

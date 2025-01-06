@@ -10,7 +10,7 @@ class SettingsState {
   final bool darkMode;
 
   const SettingsState({
-    this.gridViewColumns = RetipConfig.minGridViewColumns,
+    this.gridViewColumns = LayoutConstants.minGridViewColumns,
     this.themeColor = RetipTheme.primaryColor,
     this.batterySaver = false,
     this.keepPlayback = true,

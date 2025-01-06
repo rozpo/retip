@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:retip/app/services/repositories/audio_repository.dart';
 import 'package:retip/app/services/repositories/theme_repository.dart';
-import 'package:retip/core/config/retip_config.dart';
+import 'package:retip/core/constants/layout_constants.dart';
 import 'package:retip/core/theme/retip_theme.dart';
 
 part 'settings_state.dart';
