@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.8
+
+- Fix shuffle mode
+- Load artworks at the app startup
+- Check for audio permission before load last tracks on startup
+- Library cache performance improvement
+
 ## v0.2.7
 
 - Fix "show all" view state change when media is removed from favourites
