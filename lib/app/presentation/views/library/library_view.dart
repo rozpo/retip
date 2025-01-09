@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
-import 'package:retip/app/presentation/views/tracks/tracks_view.dart';
+import 'package:retip/app/presentation/views/tracks/tracks_tab.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
@@ -36,7 +36,7 @@ class _LibraryViewState extends State<LibraryView> {
       ),
       Tab(
         text: l10n.tracks,
-        icon: const Icon(Icons.queue_music),
+        icon: const Icon(Icons.music_note),
       ),
     ];
 
@@ -62,7 +62,7 @@ class _LibraryViewState extends State<LibraryView> {
                 PlaylistsView(),
                 ArtistsView(),
                 AlbumsView(),
-                TracksView(),
+                TracksTab(),
               ],
             ),
           ),

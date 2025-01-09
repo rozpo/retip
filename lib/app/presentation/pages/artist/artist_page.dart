@@ -306,7 +306,7 @@ class _ArtistPageState extends State<ArtistPage> {
                   padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                   child: Row(
                     children: [
-                      const Icon(Icons.queue_music),
+                      const Icon(Icons.music_note),
                       const HorizontalSpacer(),
                       RpText(
                         RetipL10n.of(context).tracksCount(tracks.length),
