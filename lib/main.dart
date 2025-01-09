@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/data/repositories/audio_repository_implementation.dart';
@@ -55,6 +56,7 @@ void main() async {
     AudioRepositoryImplementation(
       sharedPreferencesProvider: sharedPrefsProvider,
       libraryRepository: libraryRepository,
+      justAudioProvider: JustAudioProvider(),
     ),
   );
 
@@ -63,10 +65,7 @@ void main() async {
 
   // Run application
   runApp(RetipApp(
-    audioRepository: AudioRepositoryImplementation(
-      libraryRepository: libraryRepository,
-      sharedPreferencesProvider: sharedPrefsProvider,
-    ),
+    audioRepository: GetIt.I.get<AudioRepository>(),
     themeRepository: ThemeRepositoryImplementation(
       provider: SharedPreferencesProvider(),
     ),

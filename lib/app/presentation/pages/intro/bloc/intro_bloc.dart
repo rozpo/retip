@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:retip/app/data/providers/retip_permission.dart';
+import 'package:retip/app/domain/repositories/library_repository.dart';
 
 part 'intro_event.dart';
 part 'intro_state.dart';
@@ -9,6 +14,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
   IntroBloc() : super(IntroIdle()) {
     on<IntroCheckPermissionsEvent>(_checkPermissions);
     on<IntroAskPermissionsEvent>(_askPermissions);
+    on<IntroLibraryScanEvent>(_onLibraryScan);
   }
 
   void _checkPermissions(
@@ -35,5 +41,34 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
     } else {
       emit(IntroIdle());
     }
+  }
+
+  void _onLibraryScan(
+    IntroLibraryScanEvent event,
+    Emitter<IntroState> emit,
+  ) async {
+    emit(const IntroLibraryScanning(progress: 0.0));
+
+    final repo = GetIt.I.get<LibraryRepository>();
+
+    final tracks = await repo.getAllTracks();
+    final tmpDir = await getTemporaryDirectory();
+
+    for (var i = 0; i < tracks.length; i++) {
+      final track = tracks[i];
+
+      if (track.artwork != null) {
+        final file = File('${tmpDir.path}/${track.id}.png');
+
+        if (await file.exists() == false) {
+          await file.writeAsBytes(track.artwork!);
+        }
+      }
+
+      emit(IntroLibraryScanning(
+          progress: i / tracks.length, filename: track.fileLocation));
+    }
+
+    emit(IntroLibraryScanned());
   }
 }

@@ -1,8 +1,9 @@
+import 'package:retip/app/data/providers/just_audio_provider.dart';
+import 'package:retip/app/data/providers/retip_permission.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/domain/repositories/audio_repository.dart';
 import 'package:retip/app/domain/repositories/library_repository.dart';
-import 'package:retip/app/data/providers/retip_permission.dart';
 
 enum Keys {
   audioRepeatMode,
@@ -17,10 +18,12 @@ class AudioRepositoryImplementation extends AudioRepository {
   // TODO remove this dependency after API cleanup
   final LibraryRepository libraryRepository;
   final SharedPreferencesProvider sharedPreferencesProvider;
+  final JustAudioProvider justAudioProvider;
 
   AudioRepositoryImplementation({
     required this.libraryRepository,
     required this.sharedPreferencesProvider,
+    required this.justAudioProvider,
   });
 
   @override
@@ -116,5 +119,48 @@ class AudioRepositoryImplementation extends AudioRepository {
       Keys.audioKeepPlayback.name,
       keepPlayback,
     );
+  }
+
+  @override
+  Future<void> play() async {
+    await justAudioProvider.play();
+  }
+
+  @override
+  Future<void> pause() async {
+    await justAudioProvider.pause();
+  }
+
+  @override
+  Future<void> seekTo(Duration position) async {
+    await justAudioProvider.seek(position);
+  }
+
+  @override
+  Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]) async {
+    // Set the playlist to the just audio provider
+    await justAudioProvider.setPlaylist(tracks, index);
+    // Save the tracks list to the shared preferences
+    setTracksList(tracks);
+  }
+
+  @override
+  Future<void> skipToIndex(int index) async {
+    await justAudioProvider.seek(Duration.zero, index: index);
+  }
+
+  @override
+  Future<void> skipToNext() async {
+    await justAudioProvider.seekToNext();
+  }
+
+  @override
+  Future<void> skipToPrevious() async {
+    await justAudioProvider.seekToPrevious();
+  }
+
+  @override
+  Future<void> stop() async {
+    await justAudioProvider.stop();
   }
 }

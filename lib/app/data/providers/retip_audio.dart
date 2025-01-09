@@ -60,32 +60,24 @@ class RetipAudio extends AudioPlayer {
     );
   }
 
+  Directory? tmpDir;
+
   Future<Duration?> playlistAddAll(
     List<TrackEntity> tracks, [
     int? index,
   ]) async {
-    final tmpDir = await getTemporaryDirectory();
+    tmpDir ??= await getTemporaryDirectory();
     final children = <AudioSource>[];
 
     for (final track in tracks) {
-      String artworkUrl = '';
-
-      if (track.artwork != null) {
-        final file = File('${tmpDir.path}/${track.hashCode}.png');
-
-        if (await file.exists() == false) {
-          await file.writeAsBytes(track.artwork!);
-        }
-
-        artworkUrl = file.path;
-      }
+      String artworkUrl = '${tmpDir!.path}/${track.id}.png';
 
       final mediaItem = MediaItem(
         id: track.hashCode.toString(),
         title: track.title,
         album: track.album,
         artist: track.artist,
-        artUri: artworkUrl.isNotEmpty ? Uri.parse('file://$artworkUrl') : null,
+        artUri: track.artwork != null ? Uri.parse('file://$artworkUrl') : null,
       );
 
       children.add(AudioSource.uri(track.uri, tag: mediaItem));
@@ -100,7 +92,9 @@ class RetipAudio extends AudioPlayer {
     );
 
     GetIt.I.get<AudioRepository>().setTracksList(tracks);
-    return await setAudioSource(_playlist, initialIndex: index);
+    final result = await setAudioSource(_playlist, initialIndex: index);
+
+    return result;
   }
 
   Future<void> playlistClear() async {

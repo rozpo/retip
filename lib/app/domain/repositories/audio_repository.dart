@@ -57,4 +57,20 @@ abstract class AudioRepository {
   Future<bool> setKeepPlayback(bool keepPlayback);
 
   bool getKeepPlayback();
+
+  Future<void> play();
+
+  Future<void> pause();
+
+  Future<void> stop();
+
+  Future<void> seekTo(Duration position);
+
+  Future<void> skipToNext();
+
+  Future<void> skipToPrevious();
+
+  Future<void> skipToIndex(int index);
+
+  Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]);
 }

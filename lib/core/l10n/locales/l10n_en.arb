@@ -144,5 +144,7 @@
     "resumePlaybackOn": "Resume playback from last track",
     "areYouSure": "Are you sure? This action can't be undone",
     "delete": "Delete",
-    "myAwesomePlaylist": "My awesome playlist"
+    "myAwesomePlaylist": "My awesome playlist",
+    "libraryScan": "Library scan",
+    "scanForMusicDescription": "Scan for music files on your device and add them to the library"
 }
