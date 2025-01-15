@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:retip/app/data/providers/file_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/domain/repositories/audio_repository.dart';
 
@@ -60,24 +58,26 @@ class RetipAudio extends AudioPlayer {
     );
   }
 
-  Directory? tmpDir;
-
   Future<Duration?> playlistAddAll(
     List<TrackEntity> tracks, [
     int? index,
   ]) async {
-    tmpDir ??= await getTemporaryDirectory();
     final children = <AudioSource>[];
+    final fileProvider = FileProvider();
 
     for (final track in tracks) {
-      String artworkUrl = '${tmpDir!.path}/${track.id}.png';
+      String? artworkUrl;
+
+      if (track.artwork != null && track.albumId != null) {
+        artworkUrl = await fileProvider.getFilePath('album_${track.albumId}');
+      }
 
       final mediaItem = MediaItem(
         id: track.hashCode.toString(),
         title: track.title,
         album: track.album,
         artist: track.artist,
-        artUri: track.artwork != null ? Uri.parse('file://$artworkUrl') : null,
+        artUri: artworkUrl != null ? Uri.parse('file://$artworkUrl') : null,
       );
 
       children.add(AudioSource.uri(track.uri, tag: mediaItem));
