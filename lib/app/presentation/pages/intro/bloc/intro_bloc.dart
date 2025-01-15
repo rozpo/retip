@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:retip/app/data/providers/file_provider.dart';
 import 'package:retip/app/data/providers/retip_permission.dart';
 import 'package:retip/app/domain/repositories/library_repository.dart';
 
@@ -52,17 +50,13 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
     final repo = GetIt.I.get<LibraryRepository>();
 
     final tracks = await repo.getAllTracks();
-    final tmpDir = await getTemporaryDirectory();
+    final provider = FileProvider();
 
     for (var i = 0; i < tracks.length; i++) {
       final track = tracks[i];
 
       if (track.artwork != null) {
-        final file = File('${tmpDir.path}/${track.id}.png');
-
-        if (await file.exists() == false) {
-          await file.writeAsBytes(track.artwork!);
-        }
+        await provider.writeFile(track.artwork!, 'track_${track.id}');
       }
 
       emit(IntroLibraryScanning(

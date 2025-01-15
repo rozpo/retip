@@ -75,11 +75,9 @@ class IntroPage extends StatelessWidget {
                             state is IntroLibraryScanning ? state.progress : 1,
                       ),
                       const VerticalSpacer(),
-                      if (state is IntroLibraryScanning
-                          ? state.filename != null
-                          : false) ...[
+                      if (state is IntroLibraryScanning) ...[
                         Text(
-                          state.filename!,
+                          state.filename ?? '',
                           maxLines: 1,
                           overflow: TextOverflow.clip,
                         ),

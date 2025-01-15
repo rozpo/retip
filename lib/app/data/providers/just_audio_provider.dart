@@ -1,29 +1,31 @@
-import 'dart:io';
-
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
+
+import 'file_provider.dart';
 
 class JustAudioProvider extends AudioPlayer {
   final playlist = ConcatenatingAudioSource(children: []);
   final tracks = <TrackEntity>[];
 
   Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]) async {
-    final tmpDir = await getTemporaryDirectory();
+    final fileProvider = FileProvider();
+
     final children = <AudioSource>[];
 
     for (final track in tracks) {
       String artworkUrl = '';
 
       if (track.artwork != null) {
-        final file = File('${tmpDir.path}/${track.hashCode}.png');
+        final path = await fileProvider.getFilePath('track_${track.id}');
 
-        if (await file.exists() == false) {
-          await file.writeAsBytes(track.artwork!);
+        if (path == null) {
+          final file =
+              await fileProvider.writeFile(track.artwork!, 'track_${track.id}');
+          artworkUrl = file.path;
+        } else {
+          artworkUrl = path;
         }
-
-        artworkUrl = file.path;
       }
 
       final mediaItem = MediaItem(
