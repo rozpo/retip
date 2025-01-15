@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.9
+
+- Store albums and artist artworks in temporary dir for better performance
+- Reduce store usage by track artworks
+
 ## v0.2.8
 
 - Fix shuffle mode
