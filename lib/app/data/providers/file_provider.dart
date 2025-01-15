@@ -15,8 +15,8 @@ class FileProvider {
   }
 
   Future<File> writeFile(
-    Uint8List bytes,
-    String fileName, [
+    String fileName,
+    Uint8List bytes, [
     bool override = false,
   ]) async {
     tmpDir ??= await getTemporaryDirectory();

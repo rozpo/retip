@@ -55,8 +55,8 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
     for (var i = 0; i < tracks.length; i++) {
       final track = tracks[i];
 
-      if (track.artwork != null) {
-        await provider.writeFile(track.artwork!, 'track_${track.id}');
+      if (track.artwork != null && track.albumId != null) {
+        await provider.writeFile('album_${track.albumId}', track.artwork!);
       }
 
       emit(IntroLibraryScanning(

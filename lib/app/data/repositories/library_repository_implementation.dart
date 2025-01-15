@@ -37,7 +37,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
         albumArtwork = await onAudioQueryProvider.getAlbumArtwork(album.id);
 
         if (albumArtwork != null) {
-          _fileProvider.writeFile(albumArtwork, 'album_${album.id}');
+          _fileProvider.writeFile('album_${album.id}', albumArtwork);
         }
       }
 
@@ -86,7 +86,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
         artistArtwork = await onAudioQueryProvider.getArtistArtwork(artist.id);
 
         if (artistArtwork != null) {
-          _fileProvider.writeFile(artistArtwork, 'artist_${artist.id}');
+          _fileProvider.writeFile('artist_${artist.id}', artistArtwork);
         }
       }
 
@@ -103,7 +103,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
               await onAudioQueryProvider.getAlbumArtwork(artistAlbum.id);
 
           if (albumArtwork != null) {
-            _fileProvider.writeFile(albumArtwork, 'album_${artistAlbum.id}');
+            _fileProvider.writeFile('album_${artistAlbum.id}', albumArtwork);
           }
         }
 
@@ -157,6 +157,14 @@ class LibraryRepositoryImplementation implements LibraryRepository {
           artwork = artworks[albumId];
         } else {
           artwork = await _fileProvider.readFile('album_$albumId');
+
+          if (artwork == null) {
+            artwork = await onAudioQueryProvider.getAlbumArtwork(albumId);
+
+            if (artwork != null) {
+              _fileProvider.writeFile('album_$albumId', artwork);
+            }
+          }
 
           if (artwork != null) {
             artworks.addAll({albumId: artwork});

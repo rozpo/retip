@@ -14,18 +14,10 @@ class JustAudioProvider extends AudioPlayer {
     final children = <AudioSource>[];
 
     for (final track in tracks) {
-      String artworkUrl = '';
+      String? artworkUrl;
 
-      if (track.artwork != null) {
-        final path = await fileProvider.getFilePath('track_${track.id}');
-
-        if (path == null) {
-          final file =
-              await fileProvider.writeFile(track.artwork!, 'track_${track.id}');
-          artworkUrl = file.path;
-        } else {
-          artworkUrl = path;
-        }
+      if (track.artwork != null && track.albumId != null) {
+        artworkUrl = await fileProvider.getFilePath('album_${track.albumId}');
       }
 
       final mediaItem = MediaItem(
@@ -33,7 +25,7 @@ class JustAudioProvider extends AudioPlayer {
         title: track.title,
         album: track.album,
         artist: track.artist,
-        artUri: artworkUrl.isNotEmpty ? Uri.parse('file://$artworkUrl') : null,
+        artUri: artworkUrl != null ? Uri.parse('file://$artworkUrl') : null,
       );
 
       children.add(AudioSource.uri(track.uri, tag: mediaItem));
