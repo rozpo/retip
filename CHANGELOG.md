@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.10
+
+- Speed up playlist list loading when adding track to a playlist
+
 ## v0.2.9
 
 - Store albums and artist artworks in temporary dir for better performance
