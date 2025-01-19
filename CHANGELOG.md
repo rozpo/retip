@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.11
+
+- Store tracks data for better performance of playlist bottom sheet menu
+
 ## v0.2.10
 
 - Speed up playlist list loading when adding track to a playlist
