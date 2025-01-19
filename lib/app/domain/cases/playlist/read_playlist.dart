@@ -5,6 +5,8 @@ import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 mixin ReadPlaylist {
+  static Map<int, TrackEntity>? tracksMap;
+
   static Future<PlaylistEntity?> call(String key) async {
     final prefs = GetIt.I.get<SharedPreferences>();
 
@@ -16,15 +18,17 @@ mixin ReadPlaylist {
 
     final trackIds = values.sublist(1).map((e) => int.parse(e)).toList();
 
-    final allTracks = await GetAllTracks.call();
+    if (tracksMap == null) {
+      final allTracks = await GetAllTracks.call();
 
-    final tracksMap = {
-      for (final track in allTracks) track.id: track,
-    };
+      tracksMap ??= {
+        for (final track in allTracks) track.id: track,
+      };
+    }
 
     final tracks = <TrackEntity>[];
     for (final trackId in trackIds) {
-      tracks.add(tracksMap[trackId]!);
+      tracks.add(tracksMap![trackId]!);
     }
 
     return PlaylistEntity(
