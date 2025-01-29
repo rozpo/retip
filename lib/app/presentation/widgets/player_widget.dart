@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/providers/retip_audio.dart';
+import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/repositories/audio_repository.dart';
 import 'package:retip/app/presentation/views/player/player_view.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
@@ -21,7 +21,7 @@ class PlayerWidget extends StatefulWidget {
 class _PlayerWidgetState extends State<PlayerWidget> {
   @override
   Widget build(BuildContext context) {
-    final player = GetIt.instance.get<RetipAudio>();
+    final player = GetIt.instance.get<JustAudioProvider>();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -192,7 +192,7 @@ class AudioInfoWidget extends StatelessWidget {
     required this.player,
   });
 
-  final RetipAudio player;
+  final JustAudioProvider player;
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +242,7 @@ class PlayerArtworkWidget extends StatelessWidget {
     super.key,
   });
 
-  final RetipAudio player;
+  final JustAudioProvider player;
 
   @override
   Widget build(BuildContext context) {

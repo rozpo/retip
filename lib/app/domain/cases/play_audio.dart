@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/providers/retip_audio.dart';
+import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 
 mixin PlayAudio {
@@ -8,7 +8,7 @@ mixin PlayAudio {
     bool? shuffle,
     int? index,
   }) async {
-    final player = GetIt.I.get<RetipAudio>();
+    final player = GetIt.I.get<JustAudioProvider>();
 
     if (shuffle != null) {
       await player.setShuffleMode(shuffle);

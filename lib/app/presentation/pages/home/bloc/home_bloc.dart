@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/cases/get_all_tracks.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/data/providers/retip_audio.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -25,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeInitState());
 
     final tracks = await GetAllTracks.call();
-    final audio = GetIt.instance.get<RetipAudio>();
+    final audio = GetIt.instance.get<JustAudioProvider>();
 
     audio.playlistAddAll(tracks);
 
@@ -79,7 +79,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         break;
     }
 
-    final audio = GetIt.instance.get<RetipAudio>();
+    final audio = GetIt.instance.get<JustAudioProvider>();
 
     audio.playlistAddAll(tracks);
 
@@ -92,7 +92,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
 
     final tracks = (state as HomeIdleState).tracks;
-    final audio = GetIt.instance.get<RetipAudio>();
+    final audio = GetIt.instance.get<JustAudioProvider>();
 
     await audio.seekToIndex(event.index);
     await audio.play();

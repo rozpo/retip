@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:retip/app/data/providers/retip_audio.dart';
+import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
@@ -26,7 +26,7 @@ import 'package:retip/core/utils/sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PlayerView extends StatefulWidget {
-  final RetipAudio player;
+  final JustAudioProvider player;
 
   const PlayerView({
     required this.player,
@@ -188,7 +188,7 @@ class _PlayerViewState extends State<PlayerView> {
 }
 
 class PlaylistBottomSheet extends StatefulWidget {
-  final RetipAudio player;
+  final JustAudioProvider player;
 
   const PlaylistBottomSheet({
     required this.player,
@@ -251,7 +251,7 @@ class PlayerArtworkWidget extends StatelessWidget {
     super.key,
   });
 
-  final RetipAudio player;
+  final JustAudioProvider player;
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +275,7 @@ class AudioInfoWidget extends StatelessWidget {
     required this.player,
   });
 
-  final RetipAudio player;
+  final JustAudioProvider player;
 
   @override
   Widget build(BuildContext context) {
@@ -323,7 +323,7 @@ class AudioInfoWidget extends StatelessWidget {
 }
 
 class ProgressBar extends StatelessWidget {
-  final RetipAudio player;
+  final JustAudioProvider player;
 
   const ProgressBar({required this.player, super.key});
 
@@ -373,7 +373,7 @@ class PlaybackButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final player = GetIt.instance.get<RetipAudio>();
+    final player = GetIt.instance.get<JustAudioProvider>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -472,7 +472,7 @@ class PlayPauseIcon extends StatefulWidget {
 
 class _PlayPauseIconState extends State<PlayPauseIcon>
     with SingleTickerProviderStateMixin {
-  final player = GetIt.instance.get<RetipAudio>();
+  final player = GetIt.instance.get<JustAudioProvider>();
 
   late AnimationController controller;
   late Animation<double> animation;

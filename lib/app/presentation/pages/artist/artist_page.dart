@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/providers/retip_audio.dart';
+import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
@@ -41,7 +41,7 @@ class ArtistPage extends StatefulWidget {
 }
 
 class _ArtistPageState extends State<ArtistPage> {
-  final RetipAudio player = GetIt.I.get();
+  final JustAudioProvider player = GetIt.I.get();
 
   SortMode sortMode = SortMode.numerically;
 

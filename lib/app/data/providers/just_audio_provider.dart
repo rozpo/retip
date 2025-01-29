@@ -5,7 +5,7 @@ import 'package:retip/app/data/providers/file_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/domain/repositories/audio_repository.dart';
 
-class RetipAudio extends AudioPlayer {
+class JustAudioProvider extends AudioPlayer {
   ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(
     children: [],
   );
