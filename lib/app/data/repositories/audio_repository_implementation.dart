@@ -1,4 +1,4 @@
-import 'package:retip/app/data/providers/just_audio_provider.dart';
+import 'package:retip/app/data/providers/retip_audio.dart';
 import 'package:retip/app/data/providers/retip_permission.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
@@ -18,7 +18,7 @@ class AudioRepositoryImplementation extends AudioRepository {
   // TODO remove this dependency after API cleanup
   final LibraryRepository libraryRepository;
   final SharedPreferencesProvider sharedPreferencesProvider;
-  final JustAudioProvider justAudioProvider;
+  final RetipAudio justAudioProvider;
 
   AudioRepositoryImplementation({
     required this.libraryRepository,
