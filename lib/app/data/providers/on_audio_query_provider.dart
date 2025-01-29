@@ -29,7 +29,7 @@ class OnAudioQueryProvider {
     return await _onAudioQuery.queryAudiosFrom(
       orderType: OrderType.ASC_OR_SMALLER,
       sortType: SongSortType.TITLE,
-      AudiosFromType.GENRE_ID,
+      type,
       id,
     );
   }
@@ -61,7 +61,7 @@ class OnAudioQueryProvider {
     required dynamic args,
   }) async {
     final data = await _onAudioQuery.queryWithFilters(query, type, args: args);
-    final List<T> result = List.from(data);
+    final List<T> result = List.from(data) as List<T>;
 
     return result;
   }
