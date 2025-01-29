@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/data/providers/retip_config.dart';
 
 class DevSwitchListTile extends StatefulWidget {
-  final RetipConfigBoolKey boolKey;
+  final void Function(bool value) onChanged;
+  final String name;
+  final bool value;
 
   const DevSwitchListTile({
-    required this.boolKey,
+    required this.onChanged,
+    required this.name,
+    required this.value,
     super.key,
   });
 
@@ -14,15 +17,22 @@ class DevSwitchListTile extends StatefulWidget {
 }
 
 class _DevSwitchListTileState extends State<DevSwitchListTile> {
+  bool value = false;
+
+  @override
+  void initState() {
+    value = widget.value;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final key = widget.boolKey;
-
     return SwitchListTile(
-      title: Text(key.name),
-      value: RetipConfig.getBool(key),
-      onChanged: (value) async {
-        await RetipConfig.setBool(key, value);
+      title: Text(widget.name),
+      value: value,
+      onChanged: (val) {
+        widget.onChanged(val);
+        value = val;
         setState(() {});
       },
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:retip/app/data/providers/retip_config.dart';
 import 'package:retip/app/presentation/pages/dev/widgets/dev_switch_list_tile.dart';
 import 'package:retip/app/presentation/widgets/buttons/rp_back_button.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
@@ -10,6 +10,8 @@ import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
+
+import '../../../domain/repositories/debug_repository.dart';
 
 class DevPage extends StatefulWidget {
   const DevPage({super.key});
@@ -22,6 +24,7 @@ class _DevPageState extends State<DevPage> {
   @override
   Widget build(BuildContext context) {
     final packageInfo = GetIt.I.get<PackageInfo>();
+    final debugRepository = context.read<DebugRepository>();
 
     return Scaffold(
       appBar: RpAppBar(
@@ -35,17 +38,33 @@ class _DevPageState extends State<DevPage> {
           RpDivider(
             text: RetipL10n.of(context).developer,
           ),
-          const DevSwitchListTile(
-            boolKey: RetipConfigBoolKey.debugShowCheckedModeBanner,
+          DevSwitchListTile(
+            name: 'debugShowCheckedModeBanner',
+            value: debugRepository.getDebugShowCheckedModeBanner(),
+            onChanged: (value) {
+              debugRepository.setDebugShowCheckedModeBanner(value);
+            },
           ),
-          const DevSwitchListTile(
-            boolKey: RetipConfigBoolKey.debugRepaintRainbowEnabled,
+          DevSwitchListTile(
+            name: 'debugRepaintRainbowEnabled',
+            value: debugRepository.getDebugRepaintRainbowEnabled(),
+            onChanged: (value) {
+              debugRepository.setDebugRepaintRainbowEnabled(value);
+            },
           ),
-          const DevSwitchListTile(
-            boolKey: RetipConfigBoolKey.debugInvertOversizedImages,
+          DevSwitchListTile(
+            name: 'debugInvertOversizedImages',
+            value: debugRepository.getDebugInvertOversizedImages(),
+            onChanged: (value) {
+              debugRepository.setDebugInvertOversizedImages(value);
+            },
           ),
-          const DevSwitchListTile(
-            boolKey: RetipConfigBoolKey.showPerformanceOverlay,
+          DevSwitchListTile(
+            name: 'showPerformanceOverlay',
+            value: debugRepository.getShowPerformanceOverlay(),
+            onChanged: (value) {
+              debugRepository.setShowPerformanceOverlay(value);
+            },
           ),
           RpDivider(
             text: RetipL10n.of(context).info,

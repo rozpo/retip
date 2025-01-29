@@ -7,6 +7,7 @@ import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/data/repositories/audio_repository_implementation.dart';
+import 'package:retip/app/data/repositories/debug_repository_implementation.dart';
 import 'package:retip/app/data/repositories/library_repository_implementation.dart';
 import 'package:retip/app/data/repositories/permission_repository_implementation.dart';
 import 'package:retip/app/data/repositories/theme_repository_implementation.dart';
@@ -70,6 +71,9 @@ void main() async {
 
   // Run application
   runApp(RetipApp(
+    debugRepository: DebugRepositoryImplementation(
+      sharedPreferencesProvider: sharedPrefsProvider,
+    ),
     libraryRepository: libraryRepository,
     permissionRepository: PermissionRepositoryImplementation(
       onAudioQueryProvider: onAudioQueryProvider,
