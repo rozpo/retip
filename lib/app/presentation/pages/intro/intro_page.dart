@@ -18,7 +18,7 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IntroBloc introBloc = IntroBloc();
+    final introBloc = context.read<IntroBloc>();
 
     return BlocProvider(
       create: (context) => introBloc..add(IntroCheckPermissionsEvent()),

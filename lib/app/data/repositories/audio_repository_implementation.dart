@@ -1,5 +1,5 @@
 import 'package:retip/app/data/providers/just_audio_provider.dart';
-import 'package:retip/app/data/providers/retip_permission.dart';
+import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/domain/repositories/audio_repository.dart';
@@ -14,16 +14,18 @@ enum Keys {
   audioKeepPlayback,
 }
 
-class AudioRepositoryImplementation extends AudioRepository {
+class AudioRepositoryImplementation implements AudioRepository {
   // TODO remove this dependency after API cleanup
   final LibraryRepository libraryRepository;
   final SharedPreferencesProvider sharedPreferencesProvider;
   final JustAudioProvider justAudioProvider;
+  final OnAudioQueryProvider onAudioQueryProvider;
 
   AudioRepositoryImplementation({
     required this.libraryRepository,
     required this.sharedPreferencesProvider,
     required this.justAudioProvider,
+    required this.onAudioQueryProvider,
   });
 
   @override
@@ -83,7 +85,8 @@ class AudioRepositoryImplementation extends AudioRepository {
         sharedPreferencesProvider.getStringList(Keys.audioTracksList.name) ??
             [];
 
-    if (await RetipPermission.checkAndRequest() == false) {
+    if (await onAudioQueryProvider.permissionsStatus() == false ||
+        await onAudioQueryProvider.permissionsRequest() == false) {
       return [];
     }
 

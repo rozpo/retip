@@ -1,15 +1,23 @@
 import 'package:bloc/bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:retip/app/data/providers/file_provider.dart';
-import 'package:retip/app/data/providers/retip_permission.dart';
 import 'package:retip/app/domain/repositories/library_repository.dart';
+
+import '../../../../domain/repositories/permission_repository.dart';
 
 part 'intro_event.dart';
 part 'intro_state.dart';
 
 class IntroBloc extends Bloc<IntroEvent, IntroState> {
-  IntroBloc() : super(IntroIdle()) {
+  final PermissionRepository _permissionRepository;
+  final LibraryRepository _libraryRepository;
+
+  IntroBloc({
+    required PermissionRepository permissionRepository,
+    required LibraryRepository libraryRepository,
+  })  : _permissionRepository = permissionRepository,
+        _libraryRepository = libraryRepository,
+        super(IntroIdle()) {
     on<IntroCheckPermissionsEvent>(_checkPermissions);
     on<IntroAskPermissionsEvent>(_askPermissions);
     on<IntroLibraryScanEvent>(_onLibraryScan);
@@ -21,7 +29,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
   ) async {
     emit(IntroCheckingPermissions());
 
-    if (await RetipPermission.check()) {
+    if (await _permissionRepository.storagePermissionStatus()) {
       emit(IntroPermissionsGranted());
     } else {
       emit(IntroIdle());
@@ -34,7 +42,8 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
   ) async {
     emit(IntroCheckingPermissions());
 
-    if (await RetipPermission.checkAndRequest()) {
+    if (await _permissionRepository.storagePermissionStatus() ||
+        await _permissionRepository.storagePermissionRequest()) {
       emit(IntroPermissionsGranted());
     } else {
       emit(IntroIdle());
@@ -47,9 +56,7 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
   ) async {
     emit(const IntroLibraryScanning(progress: 0.0));
 
-    final repo = GetIt.I.get<LibraryRepository>();
-
-    final tracks = await repo.getAllTracks();
+    final tracks = await _libraryRepository.getAllTracks();
     final provider = FileProvider();
 
     for (var i = 0; i < tracks.length; i++) {

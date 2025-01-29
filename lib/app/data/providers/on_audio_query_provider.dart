@@ -66,6 +66,18 @@ class OnAudioQueryProvider {
     return result;
   }
 
+// === PERMISSIONS =============================================================
+
+  /// Check the media storage permissions status.
+  Future<bool> permissionsStatus() async {
+    return await _onAudioQuery.permissionsStatus();
+  }
+
+  /// Request the media storage permissions.
+  Future<bool> permissionsRequest() async {
+    return await _onAudioQuery.permissionsRequest();
+  }
+
 // === SONGS ===================================================================
 
   /// Get all songs from the device.

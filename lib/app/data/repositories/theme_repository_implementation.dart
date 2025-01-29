@@ -13,7 +13,7 @@ enum Keys {
   themeMode,
 }
 
-class ThemeRepositoryImplementation extends ThemeRepository {
+class ThemeRepositoryImplementation implements ThemeRepository {
   final SharedPreferencesProvider provider;
 
   ThemeRepositoryImplementation({required this.provider});

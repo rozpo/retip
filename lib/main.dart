@@ -8,6 +8,7 @@ import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
 import 'package:retip/app/data/repositories/audio_repository_implementation.dart';
 import 'package:retip/app/data/repositories/library_repository_implementation.dart';
+import 'package:retip/app/data/repositories/permission_repository_implementation.dart';
 import 'package:retip/app/data/repositories/theme_repository_implementation.dart';
 import 'package:retip/app/domain/repositories/audio_repository.dart';
 import 'package:retip/app/domain/repositories/library_repository.dart';
@@ -37,6 +38,9 @@ void main() async {
   final packageInfo = await PackageInfo.fromPlatform();
   GetIt.I.registerSingleton<PackageInfo>(packageInfo);
 
+  // Register providers
+  final onAudioQueryProvider = OnAudioQueryProvider();
+
   final player =
       GetIt.I.registerSingleton<JustAudioProvider>(JustAudioProvider());
 
@@ -47,7 +51,7 @@ void main() async {
   // Library repository register
   final libraryRepository = GetIt.I.registerSingleton<LibraryRepository>(
     LibraryRepositoryImplementation(
-      onAudioQueryProvider: OnAudioQueryProvider(),
+      onAudioQueryProvider: onAudioQueryProvider,
       sharedPreferencesProvider: sharedPrefsProvider,
     ),
   );
@@ -55,6 +59,7 @@ void main() async {
   GetIt.I.registerSingleton<AudioRepository>(
     AudioRepositoryImplementation(
       sharedPreferencesProvider: sharedPrefsProvider,
+      onAudioQueryProvider: onAudioQueryProvider,
       libraryRepository: libraryRepository,
       justAudioProvider: player,
     ),
@@ -65,6 +70,10 @@ void main() async {
 
   // Run application
   runApp(RetipApp(
+    libraryRepository: libraryRepository,
+    permissionRepository: PermissionRepositoryImplementation(
+      onAudioQueryProvider: onAudioQueryProvider,
+    ),
     audioRepository: GetIt.I.get<AudioRepository>(),
     themeRepository: ThemeRepositoryImplementation(
       provider: SharedPreferencesProvider(),
