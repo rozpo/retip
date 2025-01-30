@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0
+
+- Fix bad tracks index allocation
+
 ## v0.2.11
 
 - Store tracks data for better performance of playlist bottom sheet menu
