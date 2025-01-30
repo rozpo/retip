@@ -29,10 +29,6 @@ class _PlayerWidgetState extends State<PlayerWidget> {
         StreamBuilder(
             stream: player.playerStateStream,
             builder: (context, snapshot) {
-              // if (player.showMiniplayer == false) {
-              //   return const SizedBox();
-              // }
-
               return GestureDetector(
                 onTap: player.tracks.isNotEmpty
                     ? () => Navigator.of(context).push(
@@ -41,15 +37,6 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                           ),
                         )
                     : null,
-                // onHorizontalDragEnd: (details) {
-                //   if ((details.primaryVelocity ?? 0.0) > 0.0) {
-                //     player.previous();
-                //   }
-
-                //   if ((details.primaryVelocity ?? 0.0) < 0.0) {
-                //     player.next();
-                //   }
-                // },
                 child: Dismissible(
                   confirmDismiss: (direction) async {
                     if (direction == DismissDirection.startToEnd) {

@@ -1,9 +1,7 @@
-import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:retip/app/data/providers/file_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/domain/repositories/audio_repository.dart';
 
 class JustAudioProvider extends AudioPlayer {
   final ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(
@@ -11,31 +9,6 @@ class JustAudioProvider extends AudioPlayer {
   );
 
   List<TrackEntity> tracks = [];
-
-  Future<void> init() async {
-    final audio = GetIt.I.get<AudioRepository>();
-
-    final index = audio.getTracksIndex();
-    final tracks = await audio.getTracksList();
-
-    final keepPlayback = audio.getKeepPlayback();
-
-    if (keepPlayback == false) {
-      await audio.setTracksList([]);
-    }
-
-    if (tracks.isNotEmpty && keepPlayback) {
-      await setPlaylist(tracks);
-      await seekToIndex(index);
-
-      if (audio.getAutoplay()) {
-        play();
-      }
-    }
-
-    await setShuffleMode(audio.getShuffleMode());
-    await setRepeatMode(audio.getRepeatMode());
-  }
 
   TrackEntity? get nextArtist {
     return nextIndex != null ? tracks[nextIndex!] : null;
@@ -61,29 +34,6 @@ class JustAudioProvider extends AudioPlayer {
   Future<void> playlistClear() async {
     await _playlist.clear();
     tracks.clear();
-  }
-
-  Future<void> setShuffleMode(bool enabled) async {
-    GetIt.I.get<AudioRepository>().setShuffleMode(enabled);
-    await setShuffleModeEnabled(enabled);
-  }
-
-  Future<void> setRepeatMode(AudioRepeatMode mode) async {
-    GetIt.I.get<AudioRepository>().setRepeatMode(mode);
-    LoopMode loop = LoopMode.off;
-
-    switch (mode) {
-      case AudioRepeatMode.all:
-        loop = LoopMode.all;
-        break;
-      case AudioRepeatMode.one:
-        loop = LoopMode.one;
-        break;
-      default:
-        loop = LoopMode.off;
-    }
-
-    await setLoopMode(loop);
   }
 
   bool get showMiniplayer {

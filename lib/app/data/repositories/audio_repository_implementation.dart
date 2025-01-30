@@ -1,3 +1,4 @@
+import 'package:just_audio/just_audio.dart';
 import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/shared_preferences_provider.dart';
@@ -29,6 +30,30 @@ class AudioRepositoryImplementation implements AudioRepository {
   });
 
   @override
+  Future<void> init() async {
+    final index = getTracksIndex();
+    final tracks = await getTracksList();
+
+    final keepPlayback = getKeepPlayback();
+
+    if (keepPlayback == false) {
+      await setTracksList([]);
+    }
+
+    if (tracks.isNotEmpty && keepPlayback) {
+      await setPlaylist(tracks);
+      await skipToIndex(index);
+
+      if (getAutoplay()) {
+        play();
+      }
+    }
+
+    await setShuffleMode(getShuffleMode());
+    await setRepeatMode(getRepeatMode());
+  }
+
+  @override
   AudioRepeatMode getRepeatMode() {
     final mode = sharedPreferencesProvider.getString(Keys.audioRepeatMode.name);
 
@@ -42,6 +67,13 @@ class AudioRepositoryImplementation implements AudioRepository {
 
   @override
   Future<bool> setRepeatMode(AudioRepeatMode mode) async {
+    await justAudioProvider.setLoopMode(
+      mode == AudioRepeatMode.all
+          ? LoopMode.all
+          : mode == AudioRepeatMode.one
+              ? LoopMode.one
+              : LoopMode.off,
+    );
     return await sharedPreferencesProvider.setString(
       Keys.audioRepeatMode.name,
       mode.name,
@@ -50,6 +82,7 @@ class AudioRepositoryImplementation implements AudioRepository {
 
   @override
   Future<bool> setShuffleMode(bool isEnabled) async {
+    await justAudioProvider.setShuffleModeEnabled(isEnabled);
     return await sharedPreferencesProvider.setBool(
       Keys.audioShuffleMode.name,
       isEnabled,
@@ -165,5 +198,28 @@ class AudioRepositoryImplementation implements AudioRepository {
   @override
   Future<void> stop() async {
     await justAudioProvider.stop();
+  }
+
+  @override
+  Stream<bool> get playingStream => justAudioProvider.playingStream;
+
+  @override
+  Stream<AudioRepeatMode> get repeatModeStream {
+    final mode = justAudioProvider.loopModeStream;
+    return mode.map((event) {
+      switch (event) {
+        case LoopMode.off:
+          return AudioRepeatMode.none;
+        case LoopMode.one:
+          return AudioRepeatMode.one;
+        case LoopMode.all:
+          return AudioRepeatMode.all;
+      }
+    });
+  }
+
+  @override
+  Stream<bool> get shuffleModeStream {
+    return justAudioProvider.shuffleModeEnabledStream;
   }
 }

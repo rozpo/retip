@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
+import 'package:retip/app/domain/repositories/audio_repository.dart';
 
 mixin PlayAudio {
   static void call(
@@ -8,14 +8,14 @@ mixin PlayAudio {
     bool? shuffle,
     int? index,
   }) async {
-    final player = GetIt.I.get<JustAudioProvider>();
+    final repository = GetIt.I.get<AudioRepository>();
 
     if (shuffle != null) {
-      await player.setShuffleMode(shuffle);
+      await repository.setShuffleMode(shuffle);
     }
 
-    await player.setPlaylist(tracks, index ?? 0);
+    await repository.setPlaylist(tracks, index ?? 0);
 
-    player.play();
+    repository.play();
   }
 }

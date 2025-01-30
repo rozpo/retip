@@ -57,7 +57,7 @@ void main() async {
     ),
   );
 
-  GetIt.I.registerSingleton<AudioRepository>(
+  final audioRepository = GetIt.I.registerSingleton<AudioRepository>(
     AudioRepositoryImplementation(
       sharedPreferencesProvider: sharedPrefsProvider,
       onAudioQueryProvider: onAudioQueryProvider,
@@ -66,8 +66,7 @@ void main() async {
     ),
   );
 
-  // TODO Refactor this temporary player manager to proper audio repository
-  await player.init();
+  await audioRepository.init();
 
   // Run application
   runApp(RetipApp(
@@ -78,7 +77,7 @@ void main() async {
     permissionRepository: PermissionRepositoryImplementation(
       onAudioQueryProvider: onAudioQueryProvider,
     ),
-    audioRepository: GetIt.I.get<AudioRepository>(),
+    audioRepository: audioRepository,
     themeRepository: ThemeRepositoryImplementation(
       provider: SharedPreferencesProvider(),
     ),

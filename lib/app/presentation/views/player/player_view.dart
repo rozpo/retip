@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
@@ -373,19 +373,19 @@ class PlaybackButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final player = GetIt.instance.get<JustAudioProvider>();
+    final repository = context.read<AudioRepository>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         StreamBuilder<bool>(
-          stream: player.shuffleModeEnabledStream,
+          stream: repository.shuffleModeStream,
           builder: (context, snapshot) {
             final enabled = snapshot.data ?? false;
 
             return IconButton(
-              onPressed: () => player.setShuffleMode(!enabled),
+              onPressed: () => repository.setShuffleMode(!enabled),
               icon: Icon(
                 Icons.shuffle,
                 color: enabled
@@ -396,54 +396,42 @@ class PlaybackButtons extends StatelessWidget {
           },
         ),
         IconButton.filledTonal(
-          onPressed: () => player.seekToPrevious(),
+          onPressed: () => repository.skipToPrevious(),
           icon: const Icon(Icons.skip_previous),
         ),
         const PlayPauseIcon(size: Sizer.x5),
         IconButton.filledTonal(
-          onPressed: () => player.seekToNext(),
+          onPressed: () => repository.skipToNext(),
           icon: const Icon(Icons.skip_next),
         ),
-        StreamBuilder<LoopMode>(
-          stream: player.loopModeStream,
+        StreamBuilder<AudioRepeatMode>(
+          stream: repository.repeatModeStream,
           builder: (context, snapshot) {
-            final loopMode = snapshot.data ?? LoopMode.off;
-            final index = LoopMode.values.indexOf(loopMode) + 1;
-            final nextIndex = index >= LoopMode.values.length ? 0 : index;
-            final nextLoopMode = LoopMode.values[nextIndex];
+            final loopMode = snapshot.data ?? AudioRepeatMode.none;
+            final index = AudioRepeatMode.values.indexOf(loopMode) + 1;
+            final nextIndex =
+                index >= AudioRepeatMode.values.length ? 0 : index;
+            final nextLoopMode = AudioRepeatMode.values[nextIndex];
 
             final IconData iconData;
             final Color iconColor;
             switch (loopMode) {
-              case LoopMode.all:
+              case AudioRepeatMode.all:
                 iconData = Icons.repeat_on;
                 iconColor = Theme.of(context).colorScheme.primary;
                 break;
-              case LoopMode.one:
+              case AudioRepeatMode.one:
                 iconData = Icons.repeat_one_on_sharp;
                 iconColor = Theme.of(context).colorScheme.primary;
                 break;
-              case LoopMode.off:
+              case AudioRepeatMode.none:
                 iconData = Icons.repeat;
                 iconColor = Theme.of(context).colorScheme.onSurface;
                 break;
             }
 
-            final AudioRepeatMode nextRepeatMode;
-            switch (nextLoopMode) {
-              case LoopMode.all:
-                nextRepeatMode = AudioRepeatMode.all;
-                break;
-              case LoopMode.one:
-                nextRepeatMode = AudioRepeatMode.one;
-                break;
-              case LoopMode.off:
-                nextRepeatMode = AudioRepeatMode.none;
-                break;
-            }
-
             return IconButton(
-              onPressed: () => player.setRepeatMode(nextRepeatMode),
+              onPressed: () => repository.setRepeatMode(nextLoopMode),
               icon: Icon(
                 iconData,
                 color: iconColor,
@@ -472,8 +460,6 @@ class PlayPauseIcon extends StatefulWidget {
 
 class _PlayPauseIconState extends State<PlayPauseIcon>
     with SingleTickerProviderStateMixin {
-  final player = GetIt.instance.get<JustAudioProvider>();
-
   late AnimationController controller;
   late Animation<double> animation;
 
@@ -491,17 +477,19 @@ class _PlayPauseIconState extends State<PlayPauseIcon>
 
   @override
   Widget build(BuildContext context) {
+    final repository = context.read<AudioRepository>();
+
     return StreamBuilder<bool>(
-      stream: player.playingStream,
+      stream: repository.playingStream,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          snapshot.requireData ? controller.forward() : controller.reverse();
-        }
+        final isPlaying = snapshot.data ?? false;
+
+        isPlaying ? controller.forward() : controller.reverse();
 
         return IconButton.filled(
           onPressed: widget.disabled
               ? null
-              : () => player.playing ? player.pause() : player.play(),
+              : () => isPlaying ? repository.pause() : repository.play(),
           icon: AnimatedIcon(
             size: widget.size,
             icon: AnimatedIcons.play_pause,

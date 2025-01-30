@@ -22,6 +22,9 @@ enum AudioRepeatMode {
 }
 
 abstract class AudioRepository {
+  /// Initialize audio player and persistency.
+  Future<void> init();
+
   /// Set shuffle mode for playback to persistency.
   ///
   /// Return [true] when successful, otherwise [false].
@@ -73,4 +76,10 @@ abstract class AudioRepository {
   Future<void> skipToIndex(int index);
 
   Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]);
+
+  Stream<bool> get playingStream;
+
+  Stream<AudioRepeatMode> get repeatModeStream;
+
+  Stream<bool> get shuffleModeStream;
 }
