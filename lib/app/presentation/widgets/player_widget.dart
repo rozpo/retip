@@ -186,12 +186,15 @@ class AudioInfoWidget extends StatelessWidget {
     return StreamBuilder<int?>(
         stream: player.currentIndexStream,
         builder: (context, snapshot) {
-          final index = snapshot.data ?? 0;
-          final track = (index >= 0 && index < player.tracks.length)
-              ? player.tracks[index]
-              : null;
+          final index = snapshot.data;
+          final track =
+              (index != null && index >= 0 && index < player.tracks.length)
+                  ? player.tracks[index]
+                  : null;
 
-          GetIt.I.get<AudioRepository>().setTracksIndex(index);
+          if (index != null) {
+            context.read<AudioRepository>().setTracksIndex(index);
+          }
 
           return SizedBox(
               height: Sizer.x5,

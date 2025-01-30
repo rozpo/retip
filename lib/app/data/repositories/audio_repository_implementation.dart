@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:just_audio/just_audio.dart';
 import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
@@ -31,26 +33,30 @@ class AudioRepositoryImplementation implements AudioRepository {
 
   @override
   Future<void> init() async {
-    final index = getTracksIndex();
-    final tracks = await getTracksList();
+    try {
+      final index = getTracksIndex();
+      final tracks = await getTracksList();
 
-    final keepPlayback = getKeepPlayback();
+      final keepPlayback = getKeepPlayback();
 
-    if (keepPlayback == false) {
-      await setTracksList([]);
-    }
-
-    if (tracks.isNotEmpty && keepPlayback) {
-      await setPlaylist(tracks);
-      await skipToIndex(index);
-
-      if (getAutoplay()) {
-        play();
+      if (keepPlayback == false) {
+        await setTracksList([]);
       }
-    }
 
-    await setShuffleMode(getShuffleMode());
-    await setRepeatMode(getRepeatMode());
+      if (tracks.isNotEmpty && keepPlayback) {
+        await setPlaylist(tracks);
+        await skipToIndex(index.clamp(0, tracks.length - 1));
+
+        if (getAutoplay()) {
+          play();
+        }
+      }
+
+      await setShuffleMode(getShuffleMode());
+      await setRepeatMode(getRepeatMode());
+    } catch (e) {
+      inspect(e);
+    }
   }
 
   @override

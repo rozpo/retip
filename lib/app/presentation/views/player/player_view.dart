@@ -44,146 +44,136 @@ class _PlayerViewState extends State<PlayerView> {
 
   @override
   Widget build(BuildContext context) {
-    currentIndex = widget.player.currentIndex;
-
-    currentTrack =
-        currentIndex != null ? widget.player.tracks[currentIndex!] : null;
-
-    if (currentTrack != null) {
-      isFavourite = IsInFavourites.call(currentTrack!);
-    }
-
     return StreamBuilder<int?>(
-        stream: widget.player.currentIndexStream,
-        builder: (context, snapshot) {
-          currentIndex = widget.player.currentIndex;
+      stream: widget.player.currentIndexStream,
+      builder: (context, snapshot) {
+        currentIndex = snapshot.data;
 
-          currentTrack =
-              currentIndex != null ? widget.player.tracks[currentIndex!] : null;
+        currentTrack =
+            currentIndex != null ? widget.player.tracks[currentIndex!] : null;
 
-          if (currentTrack != null) {
-            isFavourite = IsInFavourites.call(currentTrack!);
-          }
+        if (currentTrack != null) {
+          isFavourite = IsInFavourites.call(currentTrack!);
+        }
 
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back),
-              ),
-              actions: [
-                RpIconButton(
-                  onPressed: () async {
-                    if (currentTrack != null) {
-                      if (isFavourite) {
-                        RemoveFromFavourites.call(currentTrack!);
-                      } else {
-                        AddToFavourites.call(currentTrack!);
-                      }
-
-                      setState(() {});
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back),
+            ),
+            actions: [
+              RpIconButton(
+                onPressed: () async {
+                  if (currentTrack != null) {
+                    if (isFavourite) {
+                      RemoveFromFavourites.call(currentTrack!);
+                    } else {
+                      AddToFavourites.call(currentTrack!);
                     }
-                  },
-                  icon: currentTrack != null && isFavourite
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                ),
-                const HorizontalSpacer(),
-                RpIconButton(
-                  onPressed: () async {
-                    await showModalBottomSheet(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        context:
-                            RetipRouter.rootNavKey.currentContext ?? context,
-                        builder: (context) {
-                          return Column(
-                            children: [
-                              RpListTile(
-                                leading:
-                                    const RpIconButton(icon: Icons.queue_music),
-                                title:
-                                    Text(RetipL10n.of(context).playlingQueue),
-                                trailing: RpIconButton(
-                                  icon: Icons.close,
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                              ),
-                              const RpDivider(),
-                              Expanded(
-                                child: ListView.builder(
-                                  itemCount: widget.player.tracks.length,
-                                  physics: const BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: Sizer.x2),
-                                  itemBuilder: (context, index) {
-                                    final track = widget.player.tracks[index];
-
-                                    return TrackTile(
-                                      track: track,
-                                      onTap: () {
-                                        Navigator.pop(context);
-
-                                        widget.player.seekToIndex(index);
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          );
-                        });
 
                     setState(() {});
-                  },
-                  icon: Icons.queue_music,
+                  }
+                },
+                icon: currentTrack != null && isFavourite
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+              ),
+              const HorizontalSpacer(),
+              RpIconButton(
+                onPressed: () async {
+                  await showModalBottomSheet(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                      context: RetipRouter.rootNavKey.currentContext ?? context,
+                      builder: (context) {
+                        return Column(
+                          children: [
+                            RpListTile(
+                              leading:
+                                  const RpIconButton(icon: Icons.queue_music),
+                              title: Text(RetipL10n.of(context).playlingQueue),
+                              trailing: RpIconButton(
+                                icon: Icons.close,
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ),
+                            const RpDivider(),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: widget.player.tracks.length,
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: Sizer.x2),
+                                itemBuilder: (context, index) {
+                                  final track = widget.player.tracks[index];
+
+                                  return TrackTile(
+                                    track: track,
+                                    onTap: () {
+                                      Navigator.pop(context);
+
+                                      widget.player.seekToIndex(index);
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        );
+                      });
+
+                  setState(() {});
+                },
+                icon: Icons.queue_music,
+              ),
+              const HorizontalSpacer(),
+              if (currentTrack != null) ...[
+                MoreIcon.vertical(
+                  title: currentTrack!.title,
+                  subtitle: currentTrack!.artist,
+                  image: currentTrack!.artwork,
+                  tiles: [
+                    isFavourite
+                        ? RemoveFromFavTile(
+                            currentTrack!,
+                            onTap: () => setState(() {}),
+                          )
+                        : AddToFavTile(
+                            currentTrack!,
+                            onTap: () => setState(() {}),
+                          ),
+                    AddToPlaylistTile(track: currentTrack!),
+                    GoToAlbumTile(currentTrack!.albumId!),
+                    GoToArtistTile(currentTrack!.artistId!),
+                  ],
                 ),
                 const HorizontalSpacer(),
-                if (currentTrack != null) ...[
-                  MoreIcon.vertical(
-                    title: currentTrack!.title,
-                    subtitle: currentTrack!.artist,
-                    image: currentTrack!.artwork,
-                    tiles: [
-                      isFavourite
-                          ? RemoveFromFavTile(
-                              currentTrack!,
-                              onTap: () => setState(() {}),
-                            )
-                          : AddToFavTile(
-                              currentTrack!,
-                              onTap: () => setState(() {}),
-                            ),
-                      AddToPlaylistTile(track: currentTrack!),
-                      GoToAlbumTile(currentTrack!.albumId!),
-                      GoToArtistTile(currentTrack!.artistId!),
-                    ],
-                  ),
-                  const HorizontalSpacer(),
-                ]
+              ]
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: Sizer.x2,
+              horizontal: Sizer.x4,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                PlayerArtworkWidget(player: widget.player),
+                const SizedBox(
+                  height: Sizer.x2,
+                ),
+                AudioInfoWidget(player: widget.player),
               ],
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: Sizer.x2,
-                horizontal: Sizer.x4,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  PlayerArtworkWidget(player: widget.player),
-                  const SizedBox(
-                    height: Sizer.x2,
-                  ),
-                  AudioInfoWidget(player: widget.player),
-                ],
-              ),
-            ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
 
