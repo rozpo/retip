@@ -6,7 +6,7 @@ import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/domain/repositories/audio_repository.dart';
 
 class JustAudioProvider extends AudioPlayer {
-  ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(
+  final ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(
     children: [],
   );
 
@@ -25,7 +25,7 @@ class JustAudioProvider extends AudioPlayer {
     }
 
     if (tracks.isNotEmpty && keepPlayback) {
-      await playlistAddAll(tracks);
+      await setPlaylist(tracks);
       await seekToIndex(index);
 
       if (audio.getAutoplay()) {
@@ -56,45 +56,6 @@ class JustAudioProvider extends AudioPlayer {
       Duration.zero,
       index: index,
     );
-  }
-
-  Future<Duration?> playlistAddAll(
-    List<TrackEntity> tracks, [
-    int? index,
-  ]) async {
-    final children = <AudioSource>[];
-    final fileProvider = FileProvider();
-
-    for (final track in tracks) {
-      String? artworkUrl;
-
-      if (track.artwork != null && track.albumId != null) {
-        artworkUrl = await fileProvider.getFilePath('album_${track.albumId}');
-      }
-
-      final mediaItem = MediaItem(
-        id: track.hashCode.toString(),
-        title: track.title,
-        album: track.album,
-        artist: track.artist,
-        artUri: artworkUrl != null ? Uri.parse('file://$artworkUrl') : null,
-      );
-
-      children.add(AudioSource.uri(track.uri, tag: mediaItem));
-    }
-
-    this.tracks = tracks;
-
-    _playlist = ConcatenatingAudioSource(
-      useLazyPreparation: true,
-      shuffleOrder: DefaultShuffleOrder(),
-      children: children,
-    );
-
-    GetIt.I.get<AudioRepository>().setTracksList(tracks);
-    final result = await setAudioSource(_playlist, initialIndex: index);
-
-    return result;
   }
 
   Future<void> playlistClear() async {

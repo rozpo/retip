@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
-import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/domain/cases/get_all_tracks.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
+
+import '../../../../domain/repositories/audio_repository.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -15,7 +15,12 @@ enum SortType {
 }
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeInitState()) {
+  final AudioRepository _audioRepository;
+
+  HomeBloc({
+    required AudioRepository audioRepository,
+  })  : _audioRepository = audioRepository,
+        super(HomeInitState()) {
     on<HomeGetTracksEvent>(load);
     on<HomeSortTracksEvent>(sort);
     on<HomePlayTrackEvent>(play);
@@ -25,9 +30,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeInitState());
 
     final tracks = await GetAllTracks.call();
-    final audio = GetIt.instance.get<JustAudioProvider>();
-
-    audio.playlistAddAll(tracks);
+    _audioRepository.setPlaylist(tracks);
 
     emit(HomeIdleState(tracks));
   }
@@ -79,9 +82,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         break;
     }
 
-    final audio = GetIt.instance.get<JustAudioProvider>();
-
-    audio.playlistAddAll(tracks);
+    _audioRepository.setPlaylist(tracks);
 
     emit(HomeIdleState(tracks, nextSortType));
   }
@@ -92,10 +93,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
 
     final tracks = (state as HomeIdleState).tracks;
-    final audio = GetIt.instance.get<JustAudioProvider>();
-
-    await audio.seekToIndex(event.index);
-    await audio.play();
+    await _audioRepository.skipToIndex(event.index);
+    _audioRepository.play();
 
     emit(HomeIdleState(tracks));
   }
