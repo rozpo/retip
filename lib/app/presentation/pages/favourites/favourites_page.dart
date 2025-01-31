@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/cases/play_audio.dart';
-import 'package:retip/app/presentation/widgets/buttons/play_button.dart';
-import 'package:retip/app/presentation/widgets/buttons/shuffle_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/play_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/shuffle_button.dart';
 import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/spacer.dart';
 import 'package:retip/app/presentation/widgets/track_tile.dart';

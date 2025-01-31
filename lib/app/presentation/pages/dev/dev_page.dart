@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:retip/app/presentation/pages/dev/widgets/dev_switch_list_tile.dart';
 import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/buttons/rp_back_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/rp_back_button.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
