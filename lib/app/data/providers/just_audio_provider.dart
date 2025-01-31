@@ -4,11 +4,8 @@ import 'package:retip/app/data/providers/file_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 
 class JustAudioProvider extends AudioPlayer {
-  final ConcatenatingAudioSource _playlist = ConcatenatingAudioSource(
-    children: [],
-  );
-
-  List<TrackEntity> tracks = [];
+  final playlist = ConcatenatingAudioSource(children: []);
+  final tracks = <TrackEntity>[];
 
   TrackEntity? get nextArtist {
     return nextIndex != null ? tracks[nextIndex!] : null;
@@ -17,8 +14,6 @@ class JustAudioProvider extends AudioPlayer {
   TrackEntity? get previousArtist {
     return previousIndex != null ? tracks[previousIndex!] : null;
   }
-
-  ConcatenatingAudioSource get playlist => _playlist;
 
   Future<void> next() async => await seekToNext();
 
@@ -29,15 +24,6 @@ class JustAudioProvider extends AudioPlayer {
       Duration.zero,
       index: index,
     );
-  }
-
-  Future<void> playlistClear() async {
-    await _playlist.clear();
-    tracks.clear();
-  }
-
-  bool get showMiniplayer {
-    return playerState.processingState == ProcessingState.ready;
   }
 
   Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]) async {
