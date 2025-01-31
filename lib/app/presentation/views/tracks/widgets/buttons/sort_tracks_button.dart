@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
-import 'package:retip/app/presentation/widgets/rp_snackbar.dart';
+import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_snackbar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import '../../bloc/tracks_bloc.dart';

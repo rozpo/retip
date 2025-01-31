@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
-import 'package:retip/app/presentation/widgets/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
-import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/spacer.dart';
-import 'package:retip/app/presentation/widgets/widgets.dart';
+import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
+import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/debouncer.dart';
 import 'package:retip/core/utils/sizer.dart';
 
+import '../../widgets/atoms/spinner_widget.dart';
 import 'bloc/search_bloc.dart';
 
 class SearchView extends StatefulWidget {

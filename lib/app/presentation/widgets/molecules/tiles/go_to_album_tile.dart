@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/domain/cases/get_album.dart';
 import 'package:retip/app/presentation/pages/album/album_page.dart';
-import 'package:retip/app/presentation/widgets/more/more_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
 

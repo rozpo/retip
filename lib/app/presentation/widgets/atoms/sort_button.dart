@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/modal_bottom_sheet.dart';
-import 'package:retip/app/presentation/widgets/option_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
+import 'package:retip/app/presentation/widgets/organisms/modal_bottom_sheet.dart';
+import 'package:retip/app/presentation/widgets/molecules/option_list_tile.dart';
+import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
 

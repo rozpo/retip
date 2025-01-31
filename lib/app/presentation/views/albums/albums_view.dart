@@ -5,12 +5,13 @@ import 'package:retip/app/domain/cases/get_all_albums.dart';
 import 'package:retip/app/domain/entities/album_entity.dart';
 import 'package:retip/app/presentation/pages/album/album_page.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
-import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
+
+import '../../widgets/atoms/spinner_widget.dart';
 
 class AlbumsView extends StatefulWidget {
   final List<AlbumEntity> albums;

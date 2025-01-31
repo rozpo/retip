@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/rp_icon.dart';
-import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 
 class MoreTile extends StatelessWidget {
   final IconData icon;

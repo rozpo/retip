@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/domain/cases/playlist/update_playlist.dart';
 import 'package:retip/app/domain/entities/playlist_entity.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/widgets/more/more_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_snackbar.dart';
+import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_snackbar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class RemoveFromPlaylistTile extends StatelessWidget {

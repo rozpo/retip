@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/option_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
+import 'package:retip/app/presentation/widgets/molecules/option_list_tile.dart';
+import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/core/utils/sizer.dart';
 
 class ModalBottomSheet extends StatelessWidget {

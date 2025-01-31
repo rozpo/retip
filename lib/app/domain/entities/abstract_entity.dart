@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 
 abstract class AbstractEntity {
   final int id;

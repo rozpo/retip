@@ -7,11 +7,12 @@ import 'package:retip/app/presentation/pages/favourites/favourites_page.dart';
 import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
-import 'package:retip/app/presentation/widgets/widgets.dart';
+import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
+
+import '../../widgets/atoms/spinner_widget.dart';
 
 class PlaylistsView extends StatefulWidget {
   final List<PlaylistEntity> playlists;

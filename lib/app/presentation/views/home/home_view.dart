@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/presentation/views/home/tabs/explore_tab.dart';
-import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class HomeView extends StatelessWidget {

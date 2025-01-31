@@ -13,16 +13,17 @@ import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
 import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
-import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
-import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
-import 'package:retip/app/presentation/widgets/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/track_tile.dart';
-import 'package:retip/app/presentation/widgets/widgets.dart';
+import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
+import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
+import 'package:retip/app/presentation/widgets/organisms/track_tile.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
+
+import '../../../widgets/atoms/spinner_widget.dart';
 
 class ExploreTab extends StatefulWidget {
   const ExploreTab({super.key});

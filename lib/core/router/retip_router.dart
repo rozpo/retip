@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/pages/dev/dev_page.dart';
 import 'package:retip/app/presentation/pages/home/home_page.dart';
 import 'package:retip/app/presentation/pages/intro/intro_page.dart';
-import 'package:retip/app/presentation/widgets/navigation/navigation_widget.dart';
+import 'package:retip/app/presentation/widgets/organisms/navigation_widget.dart';
 import 'package:retip/core/constants/routes_constants.dart';
 
 mixin RetipRouter {
