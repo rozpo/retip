@@ -22,7 +22,7 @@ import 'package:retip/app/presentation/widgets/atoms/sort_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart' hide Spacer;
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_fav_tile.dart';
-import 'package:retip/app/presentation/widgets/organisms/track_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';

@@ -5,7 +5,7 @@ import 'package:retip/app/presentation/widgets/atoms/play_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/shuffle_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/app/presentation/widgets/organisms/track_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tracks_header.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';

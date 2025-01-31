@@ -6,7 +6,7 @@ import 'package:retip/app/domain/cases/get_all_tracks.dart';
 import 'package:retip/app/domain/cases/play_audio.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/presentation/widgets/atoms/favourite_button.dart';
-import 'package:retip/app/presentation/widgets/organisms/track_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 

@@ -18,7 +18,7 @@ import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/organisms/track_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';

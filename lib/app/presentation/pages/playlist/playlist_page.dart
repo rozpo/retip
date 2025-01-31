@@ -18,7 +18,7 @@ import 'package:retip/app/presentation/widgets/molecules/tiles/delete_playlist_t
 import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_playlist_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/rename_playlist_tile.dart';
-import 'package:retip/app/presentation/widgets/organisms/track_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tracks_header.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
