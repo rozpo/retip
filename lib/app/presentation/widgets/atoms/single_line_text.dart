@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class RpText extends StatelessWidget {
-  final String text;
-  final TextStyle? style;
+class SingleLineText extends StatelessWidget {
   final TextAlign? textAlign;
+  final TextStyle? style;
+  final String text;
 
-  const RpText(
+  const SingleLineText(
     this.text, {
-    this.style,
     this.textAlign,
+    this.style,
     super.key,
   });
 
@@ -16,10 +16,10 @@ class RpText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       overflow: TextOverflow.ellipsis,
+      textAlign: textAlign,
+      style: style,
       maxLines: 1,
       text,
-      style: style,
-      textAlign: textAlign,
     );
   }
 }

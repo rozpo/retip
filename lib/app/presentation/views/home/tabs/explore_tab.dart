@@ -14,10 +14,10 @@ import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/app/presentation/widgets/track_tile.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
@@ -202,12 +202,12 @@ class _ExploreTabState extends State<ExploreTab> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RpText(
+                                  SingleLineText(
                                     artist.name,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
-                                  RpText(
+                                  SingleLineText(
                                     '${RetipL10n.of(context).albumsCount(artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracksCount)}',
                                     style:
                                         Theme.of(context).textTheme.bodySmall,
@@ -294,12 +294,12 @@ class _ExploreTabState extends State<ExploreTab> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RpText(
+                                  SingleLineText(
                                     album.title,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
-                                  RpText(
+                                  SingleLineText(
                                     album.artist,
                                     style:
                                         Theme.of(context).textTheme.bodySmall,
@@ -397,12 +397,12 @@ class _ExploreTabState extends State<ExploreTab> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RpText(
+                                  SingleLineText(
                                     playlist.name,
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
-                                  RpText(
+                                  SingleLineText(
                                     RetipL10n.of(context)
                                         .tracksCount(playlist.tracks.length),
                                     style:

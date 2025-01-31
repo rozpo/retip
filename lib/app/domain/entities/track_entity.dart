@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/cases/get_all_tracks.dart';
 import 'package:retip/app/domain/cases/play_audio.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/more/more_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/app/presentation/widgets/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/tiles/go_to_album_tile.dart';
 import 'package:retip/app/presentation/widgets/tiles/go_to_artist_tile.dart';
@@ -124,7 +124,7 @@ abstract class TrackEntity extends AbstractEntity {
         ],
       ),
       title: RetipUtils.getQueryText(context, title, query ?? ''),
-      subtitle: RpText(
+      subtitle: SingleLineText(
         artist,
       ),
     );

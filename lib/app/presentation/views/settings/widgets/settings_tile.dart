@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/rp_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 
 class SettingsTile extends StatelessWidget {
   final String title;
@@ -22,8 +22,8 @@ class SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RpListTile(
-      title: RpText(title),
-      subtitle: subtitle != null ? RpText(subtitle!) : null,
+      title: SingleLineText(title),
+      subtitle: subtitle != null ? SingleLineText(subtitle!) : null,
       trailing: trailing,
       onTap: onTap,
       leading: RpIcon(

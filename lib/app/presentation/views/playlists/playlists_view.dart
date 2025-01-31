@@ -6,8 +6,8 @@ import 'package:retip/app/domain/entities/playlist_entity.dart';
 import 'package:retip/app/presentation/pages/favourites/favourites_page.dart';
 import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -167,11 +167,11 @@ class _PlaylistsViewState extends State<PlaylistsView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            RpText(
+                            SingleLineText(
                               playlist.name,
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
-                            RpText(
+                            SingleLineText(
                               index == 0 && widget.playlists.isEmpty
                                   ? RetipL10n.of(context).generatedPlaylist
                                   : RetipL10n.of(context)

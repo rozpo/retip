@@ -10,6 +10,7 @@ import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/presentation/pages/album/album_page.dart';
 import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/buttons/favourite_button.dart';
 import 'package:retip/app/presentation/widgets/buttons/play_button.dart';
 import 'package:retip/app/presentation/widgets/buttons/rp_back_button.dart';
@@ -17,7 +18,6 @@ import 'package:retip/app/presentation/widgets/buttons/shuffle_button.dart';
 import 'package:retip/app/presentation/widgets/more/more_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/app/presentation/widgets/sort_button.dart';
 import 'package:retip/app/presentation/widgets/spacer.dart' hide Spacer;
 import 'package:retip/app/presentation/widgets/tiles/add_to_fav_tile.dart';
@@ -150,7 +150,7 @@ class _ArtistPageState extends State<ArtistPage> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: RpText(
+                    child: SingleLineText(
                       widget.artist.name,
                       style: Theme.of(context)
                           .textTheme
@@ -160,7 +160,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     ),
                   ),
                 ),
-                RpText(
+                SingleLineText(
                   '${RetipL10n.of(context).albumsCount(widget.artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracks.length)}',
                   textAlign: TextAlign.center,
                 ),
@@ -280,13 +280,13 @@ class _ArtistPageState extends State<ArtistPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    RpText(
+                                    SingleLineText(
                                       album.title,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium,
                                     ),
-                                    RpText(
+                                    SingleLineText(
                                       album.artist,
                                       style:
                                           Theme.of(context).textTheme.bodySmall,
@@ -308,7 +308,7 @@ class _ArtistPageState extends State<ArtistPage> {
                     children: [
                       const Icon(Icons.music_note),
                       const HorizontalSpacer(),
-                      RpText(
+                      SingleLineText(
                         RetipL10n.of(context).tracksCount(tracks.length),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),

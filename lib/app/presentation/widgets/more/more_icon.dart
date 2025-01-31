@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/rp_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/rp_icon_image.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -53,8 +53,9 @@ class MoreIcon extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   RpListTile(
-                    title: RpText(title),
-                    subtitle: subtitle != null ? RpText(subtitle!) : null,
+                    title: SingleLineText(title),
+                    subtitle:
+                        subtitle != null ? SingleLineText(subtitle!) : null,
                     leading: image != null
                         ? RpIconImage(bytes: image!)
                         : const RpIcon(icon: Icons.music_note),

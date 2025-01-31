@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/domain/entities/abstract_entity.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/utils/utils.dart';
@@ -68,7 +68,8 @@ class PlaylistEntity extends AbstractEntity {
         ),
       ),
       title: RetipUtils.getQueryText(context, name, query ?? ''),
-      subtitle: RpText(RetipL10n.of(context).tracksCount(tracks.length)),
+      subtitle:
+          SingleLineText(RetipL10n.of(context).tracksCount(tracks.length)),
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(

@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/more/more_tile.dart';
 import 'package:retip/app/presentation/widgets/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/rp_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/app/presentation/widgets/spacer.dart';
 import 'package:retip/core/extensions/duration_extension.dart';
 import 'package:retip/core/extensions/int_extension.dart';
@@ -42,7 +42,7 @@ class FileDetailsTile extends StatelessWidget {
                 children: [
                   RpListTile(
                     leading: const RpIcon(icon: Icons.info),
-                    title: RpText(l10n.fileDetails),
+                    title: SingleLineText(l10n.fileDetails),
                   ),
                   const RpDivider(),
                   const VerticalSpacer(),
@@ -50,14 +50,14 @@ class FileDetailsTile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                     child: Row(
                       children: [
-                        RpText(
+                        SingleLineText(
                           '${l10n.title} - ',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        RpText(track.title),
+                        SingleLineText(track.title),
                       ],
                     ),
                   ),
@@ -66,14 +66,14 @@ class FileDetailsTile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                     child: Row(
                       children: [
-                        RpText(
+                        SingleLineText(
                           '${l10n.album} - ',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        RpText(track.album),
+                        SingleLineText(track.album),
                       ],
                     ),
                   ),
@@ -82,14 +82,14 @@ class FileDetailsTile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                     child: Row(
                       children: [
-                        RpText(
+                        SingleLineText(
                           '${l10n.artist} - ',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        RpText(track.artist),
+                        SingleLineText(track.artist),
                       ],
                     ),
                   ),
@@ -99,7 +99,7 @@ class FileDetailsTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                       child: Row(
                         children: [
-                          RpText(
+                          SingleLineText(
                             '${l10n.composer} - ',
                             style: Theme.of(context)
                                 .textTheme
@@ -108,7 +108,7 @@ class FileDetailsTile extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                          RpText(track.composer!),
+                          SingleLineText(track.composer!),
                         ],
                       ),
                     ),
@@ -119,7 +119,7 @@ class FileDetailsTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                       child: Row(
                         children: [
-                          RpText(
+                          SingleLineText(
                             '${l10n.genre} - ',
                             style: Theme.of(context)
                                 .textTheme
@@ -128,7 +128,7 @@ class FileDetailsTile extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                          RpText(track.genre!),
+                          SingleLineText(track.genre!),
                         ],
                       ),
                     ),
@@ -138,14 +138,14 @@ class FileDetailsTile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                     child: Row(
                       children: [
-                        RpText(
+                        SingleLineText(
                           '${l10n.duration} - ',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        RpText(track.duration.text),
+                        SingleLineText(track.duration.text),
                       ],
                     ),
                   ),
@@ -154,14 +154,14 @@ class FileDetailsTile extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                     child: Row(
                       children: [
-                        RpText(
+                        SingleLineText(
                           '${l10n.size} - ',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        RpText(track.size.size),
+                        SingleLineText(track.size.size),
                       ],
                     ),
                   ),
@@ -171,7 +171,7 @@ class FileDetailsTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                       child: Row(
                         children: [
-                          RpText(
+                          SingleLineText(
                             '${l10n.dateAdded} - ',
                             style: Theme.of(context)
                                 .textTheme
@@ -194,7 +194,7 @@ class FileDetailsTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: Sizer.x1),
                       child: Row(
                         children: [
-                          RpText(
+                          SingleLineText(
                             '${l10n.dateModified} - ',
                             style: Theme.of(context)
                                 .textTheme
@@ -234,7 +234,7 @@ class FileDetailsTile extends StatelessWidget {
                     const VerticalSpacer(),
                     RpListTile(
                       leading: const RpIcon(icon: Icons.developer_board),
-                      title: RpText(l10n.developer),
+                      title: SingleLineText(l10n.developer),
                     ),
                     const RpDivider(),
                     const VerticalSpacer(),

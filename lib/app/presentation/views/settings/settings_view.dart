@@ -5,13 +5,13 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:retip/app/presentation/views/settings/widgets/settings_tile.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/retip_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/rp_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
 import 'package:retip/app/presentation/widgets/spacer.dart';
 import 'package:retip/core/constants/layout_constants.dart';
 import 'package:retip/core/constants/routes_constants.dart';
@@ -33,7 +33,7 @@ class SettingsView extends StatelessWidget {
     return Scaffold(
       appBar: RpAppBar(
         leading: const Icon(Icons.settings),
-        title: RpText(RetipL10n.of(context).settings),
+        title: SingleLineText(RetipL10n.of(context).settings),
       ),
       body: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (context, state) {

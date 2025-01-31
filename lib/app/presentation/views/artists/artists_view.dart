@@ -6,7 +6,7 @@ import 'package:retip/app/domain/entities/artist_entity.dart';
 import 'package:retip/app/presentation/pages/artist/artist_page.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/presentation/widgets/artwork_widget.dart';
-import 'package:retip/app/presentation/widgets/rp_text.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -132,11 +132,11 @@ class _ArtistsViewState extends State<ArtistsView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            RpText(
+                            SingleLineText(
                               artist.name,
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
-                            RpText(
+                            SingleLineText(
                               '${RetipL10n.of(context).albumsCount(artist.albums.length)} - ${RetipL10n.of(context).tracksCount(tracksCount)}',
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
