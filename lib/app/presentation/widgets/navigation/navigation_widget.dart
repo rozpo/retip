@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/presentation/widgets/player_widget.dart';
-import 'package:retip/app/presentation/widgets/retip_icon.dart';
+import 'package:retip/app/presentation/widgets/atoms/retip_icon.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_router.dart';
 

@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:retip/app/presentation/views/settings/widgets/settings_tile.dart';
 import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/retip_icon.dart';
+import 'package:retip/app/presentation/widgets/atoms/retip_icon.dart';
 import 'package:retip/app/presentation/widgets/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/rp_icon.dart';
