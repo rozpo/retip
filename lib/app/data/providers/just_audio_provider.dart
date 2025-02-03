@@ -4,7 +4,6 @@ import 'package:retip/app/data/providers/file_provider.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 
 class JustAudioProvider extends AudioPlayer {
-  final playlist = ConcatenatingAudioSource(children: []);
   final tracks = <TrackEntity>[];
 
   TrackEntity? get nextArtist {
@@ -52,9 +51,9 @@ class JustAudioProvider extends AudioPlayer {
     this.tracks.clear();
     this.tracks.addAll(tracks);
 
-    playlist.clear();
-    playlist.addAll(children);
-
-    await setAudioSource(playlist, initialIndex: index);
+    await setAudioSource(
+      ConcatenatingAudioSource(children: children),
+      initialIndex: index,
+    );
   }
 }
