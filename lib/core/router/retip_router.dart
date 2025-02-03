@@ -1,16 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/pages/dev/dev_page.dart';
 import 'package:retip/app/presentation/pages/home/home_page.dart';
 import 'package:retip/app/presentation/pages/intro/intro_page.dart';
-import 'package:retip/app/presentation/widgets/organisms/navigation_widget.dart';
+import 'package:retip/app/presentation/widgets/organisms/player_widget.dart';
 import 'package:retip/core/constants/routes_constants.dart';
+
+import '../../app/presentation/pages/home/cubit/home_cubit.dart';
+import '../../app/presentation/widgets/widgets.dart';
 
 mixin RetipRouter {
   static final rootNavKey = GlobalKey<NavigatorState>();
   static final shellNavKey = GlobalKey<NavigatorState>();
-  static final PageController pageController = PageController(initialPage: 1);
 
   static GoRouter router = GoRouter(
     navigatorKey: rootNavKey,
@@ -28,7 +31,7 @@ mixin RetipRouter {
           GoRoute(
             path: RoutesConstants.home,
             builder: (context, state) {
-              return HomePage(pageController: pageController);
+              return const HomePage();
             },
             routes: [
               if (kReleaseMode == false) ...[
@@ -45,8 +48,18 @@ mixin RetipRouter {
         builder: (context, state, child) {
           return Scaffold(
             body: child,
-            bottomNavigationBar: NavigationWidget(
-              pageController: pageController,
+            bottomSheet: const PlayerWidget(),
+            bottomNavigationBar: BottomNavigationBarWidget(
+              onTap: (value) {
+                final bloc = context.read<HomeCubit?>();
+
+                if (bloc?.state.index == value && value == 2) {
+                  // TODO request focus
+                  //context.read<SearchCubit>().state.focusNode.requestFocus();
+                } else {
+                  bloc?.goToPage(value);
+                }
+              },
             ),
           );
         },

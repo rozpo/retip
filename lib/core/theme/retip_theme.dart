@@ -15,13 +15,21 @@ mixin RetipTheme {
         sliderTheme: sliderTheme,
       );
 
-  static dark([Color colorSchemeSeed = primaryColor]) => ThemeData(
-        brightness: Brightness.dark,
-        colorSchemeSeed: colorSchemeSeed,
-        fontFamily: fontFamily,
-        iconButtonTheme: iconButtonFilled,
-        sliderTheme: sliderTheme,
-      );
+  static dark([Color colorSchemeSeed = primaryColor]) {
+    final colorScheme = ColorScheme.fromSeed(
+      brightness: Brightness.dark,
+      seedColor: colorSchemeSeed,
+    );
+
+    return ThemeData(
+      brightness: Brightness.dark,
+      colorScheme: colorScheme,
+      fontFamily: fontFamily,
+      iconButtonTheme: iconButtonFilled,
+      sliderTheme: sliderTheme,
+      bottomNavigationBarTheme: _bottomNavigationBarTheme(colorScheme),
+    );
+  }
 
   static final contrastLight = ThemeData(
     brightness: Brightness.light,
@@ -55,4 +63,14 @@ mixin RetipTheme {
   static const iconButtonStyle = ButtonStyle(
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
+
+  static _bottomNavigationBarTheme(ColorScheme colorScheme) {
+    return BottomNavigationBarThemeData(
+      unselectedItemColor: colorScheme.onSurface,
+      selectedItemColor: colorScheme.onSurface,
+      type: BottomNavigationBarType.shifting,
+      showUnselectedLabels: true,
+      showSelectedLabels: true,
+    );
+  }
 }

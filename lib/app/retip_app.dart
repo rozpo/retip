@@ -15,6 +15,7 @@ import 'domain/repositories/debug_repository.dart';
 import 'domain/repositories/library_repository.dart';
 import 'domain/repositories/permission_repository.dart';
 import 'domain/repositories/theme_repository.dart';
+import 'presentation/pages/home/cubit/home_cubit.dart';
 
 class RetipApp extends StatelessWidget {
   final PermissionRepository permissionRepository;
@@ -50,6 +51,7 @@ class RetipApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(create: (_) => HomeCubit()),
           BlocProvider(create: (_) {
             return IntroBloc(
               permissionRepository: permissionRepository,

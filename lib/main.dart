@@ -64,17 +64,19 @@ void main() async {
   // Initialize the audio repository
   await audioRepository.init();
   // Run application
-  runApp(RetipApp(
-    debugRepository: DebugRepositoryImplementation(
-      sharedPreferencesProvider: sharedPreferencesProvider,
+  runApp(
+    RetipApp(
+      debugRepository: DebugRepositoryImplementation(
+        sharedPreferencesProvider: sharedPreferencesProvider,
+      ),
+      libraryRepository: libraryRepository,
+      permissionRepository: PermissionRepositoryImplementation(
+        onAudioQueryProvider: onAudioQueryProvider,
+      ),
+      audioRepository: audioRepository,
+      themeRepository: ThemeRepositoryImplementation(
+        provider: sharedPreferencesProvider,
+      ),
     ),
-    libraryRepository: libraryRepository,
-    permissionRepository: PermissionRepositoryImplementation(
-      onAudioQueryProvider: onAudioQueryProvider,
-    ),
-    audioRepository: audioRepository,
-    themeRepository: ThemeRepositoryImplementation(
-      provider: sharedPreferencesProvider,
-    ),
-  ));
+  );
 }
