@@ -9,6 +9,7 @@ import 'package:retip/app/presentation/widgets/organisms/player_widget.dart';
 import 'package:retip/core/constants/routes_constants.dart';
 
 import '../../app/presentation/pages/home/cubit/home_cubit.dart';
+import '../../app/presentation/views/search/bloc/search_bloc.dart';
 import '../../app/presentation/widgets/widgets.dart';
 
 mixin RetipRouter {
@@ -54,8 +55,7 @@ mixin RetipRouter {
                 final bloc = context.read<HomeCubit?>();
 
                 if (bloc?.state.index == value && value == 2) {
-                  // TODO request focus
-                  //context.read<SearchCubit>().state.focusNode.requestFocus();
+                  context.read<SearchBloc>().state.focusNode.requestFocus();
                 } else {
                   bloc?.goToPage(value);
                 }

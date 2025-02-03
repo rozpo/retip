@@ -1,7 +1,9 @@
 part of 'search_bloc.dart';
 
 @immutable
-sealed class SearchState {}
+sealed class SearchState {
+  final FocusNode focusNode = FocusNode();
+}
 
 final class SearchIdleState extends SearchState {}
 
