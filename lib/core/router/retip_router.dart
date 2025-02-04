@@ -49,17 +49,22 @@ mixin RetipRouter {
         builder: (context, state, child) {
           return Scaffold(
             body: child,
-            bottomSheet: const PlayerWidget(),
-            bottomNavigationBar: BottomNavigationBarWidget(
-              onTap: (value) {
-                final bloc = context.read<HomeCubit?>();
+            bottomNavigationBar: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const PlayerWidget(),
+                BottomNavigationBarWidget(
+                  onTap: (value) {
+                    final bloc = context.read<HomeCubit?>();
 
-                if (bloc?.state.index == value && value == 2) {
-                  context.read<SearchBloc>().state.focusNode.requestFocus();
-                } else {
-                  bloc?.goToPage(value);
-                }
-              },
+                    if (bloc?.state.index == value && value == 2) {
+                      context.read<SearchBloc>().state.focusNode.requestFocus();
+                    } else {
+                      bloc?.goToPage(value);
+                    }
+                  },
+                ),
+              ],
             ),
           );
         },
