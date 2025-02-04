@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:retip/app/presentation/pages/dev/widgets/dev_switch_list_tile.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_back_button.dart';
-import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -27,7 +27,7 @@ class _DevPageState extends State<DevPage> {
     final debugRepository = context.read<DebugRepository>();
 
     return Scaffold(
-      appBar: RpAppBar(
+      appBar: AppBarWidget(
         leading: const RpBackButton(),
         title: SingleLineText(RetipL10n.of(context).developer),
       ),

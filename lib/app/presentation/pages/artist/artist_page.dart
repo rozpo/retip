@@ -10,19 +10,19 @@ import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/presentation/pages/album/album_page.dart';
 import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/favourite_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
 import 'package:retip/app/presentation/widgets/atoms/play_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_back_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/shuffle_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
-import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/shuffle_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/sort_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart' hide Spacer;
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
+import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -82,7 +82,7 @@ class _ArtistPageState extends State<ArtistPage> {
         MediaQuery.of(context).size.width);
 
     return Scaffold(
-      appBar: RpAppBar(
+      appBar: AppBarWidget(
         title: Text(name),
         leading: const RpBackButton(),
         actions: [
@@ -215,7 +215,7 @@ class _ArtistPageState extends State<ArtistPage> {
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (context) {
                               return Scaffold(
-                                appBar: RpAppBar(
+                                appBar: AppBarWidget(
                                   title: Text(
                                     '${widget.artist.name} - ${l10n.albumsCount(widget.artist.albums.length)}',
                                   ),

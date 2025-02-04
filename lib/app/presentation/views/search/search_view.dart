@@ -4,7 +4,7 @@ import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
-import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/debouncer.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -41,7 +41,7 @@ class _SearchViewState extends State<SearchView> {
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: RpAppBar(
+          appBar: AppBarWidget(
             leading: const Icon(Icons.search),
             actions: [
               const HorizontalSpacer(),

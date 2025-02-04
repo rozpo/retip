@@ -14,11 +14,11 @@ import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
-import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
+import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/extensions/string_extension.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -138,7 +138,7 @@ class _ExploreTabState extends State<ExploreTab> {
                   await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
                       return Scaffold(
-                        appBar: RpAppBar(
+                        appBar: AppBarWidget(
                           title: Text(
                               '${l10n.liked} ${l10n.artists.toLowerCase()}'),
                         ),
@@ -235,7 +235,7 @@ class _ExploreTabState extends State<ExploreTab> {
                   await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
                       return Scaffold(
-                        appBar: RpAppBar(
+                        appBar: AppBarWidget(
                           title: Text(
                               '${l10n.liked} ${l10n.albums.toLowerCase()}'),
                         ),
@@ -327,7 +327,7 @@ class _ExploreTabState extends State<ExploreTab> {
                   await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) {
                       return Scaffold(
-                        appBar: RpAppBar(
+                        appBar: AppBarWidget(
                           title: Text(
                               '${l10n.liked} ${l10n.playlists.toLowerCase()}'),
                         ),

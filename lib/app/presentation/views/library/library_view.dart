@@ -4,7 +4,7 @@ import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/views/tracks/tracks_tab.dart';
-import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
+import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 import 'bloc/library_bloc.dart';
@@ -48,7 +48,7 @@ class _LibraryViewState extends State<LibraryView> {
         return DefaultTabController(
           length: tabs.length,
           child: Scaffold(
-            appBar: RpAppBar(
+            appBar: AppBarWidget(
               leading: const Icon(Icons.library_music),
               title: Text(l10n.library),
               bottom: TabBar(

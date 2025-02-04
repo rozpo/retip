@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RpAppBar extends AppBar {
-  RpAppBar({
+class AppBarWidget extends AppBar {
+  AppBarWidget({
     super.leading,
     super.title,
     super.actions,

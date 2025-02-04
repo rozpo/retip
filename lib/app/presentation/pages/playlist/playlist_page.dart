@@ -6,12 +6,11 @@ import 'package:retip/app/domain/cases/play_audio.dart';
 import 'package:retip/app/domain/cases/playlist/read_playlist.dart';
 import 'package:retip/app/domain/entities/playlist_entity.dart';
 import 'package:retip/app/presentation/widgets/atoms/favourite_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
 import 'package:retip/app/presentation/widgets/atoms/play_button.dart';
+import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_back_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/shuffle_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
-import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
-import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart' hide Spacer;
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/delete_playlist_tile.dart';
@@ -20,6 +19,7 @@ import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_playl
 import 'package:retip/app/presentation/widgets/molecules/tiles/rename_playlist_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tracks_header.dart';
+import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -65,7 +65,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
     final isInFavourites = IsInFavourites.call(playlist);
 
     return Scaffold(
-      appBar: RpAppBar(
+      appBar: AppBarWidget(
         title: Text(title),
         leading: const RpBackButton(),
         actions: [
