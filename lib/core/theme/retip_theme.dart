@@ -11,7 +11,7 @@ mixin RetipTheme {
         brightness: Brightness.light,
         colorSchemeSeed: colorSchemeSeed,
         fontFamily: fontFamily,
-        iconButtonTheme: iconButtonFilled,
+        iconButtonTheme: _iconButtonTheme,
         sliderTheme: sliderTheme,
       );
 
@@ -25,7 +25,7 @@ mixin RetipTheme {
       brightness: Brightness.dark,
       colorScheme: colorScheme,
       fontFamily: fontFamily,
-      iconButtonTheme: iconButtonFilled,
+      iconButtonTheme: _iconButtonTheme,
       sliderTheme: sliderTheme,
       bottomNavigationBarTheme: _bottomNavigationBarTheme(colorScheme),
     );
@@ -43,8 +43,9 @@ mixin RetipTheme {
     fontFamily: fontFamily,
   );
 
-  static final iconButtonFilled = IconButtonThemeData(
+  static final _iconButtonTheme = IconButtonThemeData(
     style: ButtonStyle(
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Sizer.x0_5),
@@ -58,10 +59,6 @@ mixin RetipTheme {
     thumbColor: Colors.white,
     trackShape: RectangularSliderTrackShape(),
     trackHeight: Sizer.x0_5,
-  );
-
-  static const iconButtonStyle = ButtonStyle(
-    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
   static _bottomNavigationBarTheme(ColorScheme colorScheme) {

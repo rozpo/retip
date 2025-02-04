@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/views/tracks/tracks_tab.dart';
-import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
+import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
-
-import 'bloc/library_bloc.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({super.key});
@@ -16,58 +13,77 @@ class LibraryView extends StatefulWidget {
   State<LibraryView> createState() => _LibraryViewState();
 }
 
-class _LibraryViewState extends State<LibraryView> {
+class _LibraryViewState extends State<LibraryView>
+    with SingleTickerProviderStateMixin {
+  late final TabController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(length: 4, vsync: this);
+    controller.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = RetipL10n.of(context);
 
     final tabs = [
-      Tab(
-        text: l10n.playlists,
-        icon: const Icon(Icons.queue_music),
-      ),
-      Tab(
-        text: l10n.artists,
-        icon: const Icon(Icons.person),
-      ),
-      Tab(
-        text: l10n.albums,
-        icon: const Icon(Icons.album),
-      ),
-      Tab(
-        text: l10n.tracks,
-        icon: const Icon(Icons.music_note),
-      ),
+      l10n.playlists,
+      l10n.artists,
+      l10n.albums,
+      l10n.tracks,
     ];
 
-    return BlocConsumer<LibraryBloc, LibraryState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        return DefaultTabController(
-          length: tabs.length,
-          child: Scaffold(
-            appBar: AppBarWidget(
+    final currentTab = tabs[controller.index];
+
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
               leading: const Icon(Icons.library_music),
-              title: Text(l10n.library),
+              title: Text(currentTab),
+              pinned: true,
+              floating: true,
+              snap: true,
+              actions: const [
+                IconButton(icon: Icon(Icons.sort), onPressed: null),
+                HorizontalSpacer(),
+                IconButton(icon: Icon(Icons.grid_view), onPressed: null),
+                HorizontalSpacer(),
+                IconButton(icon: Icon(Icons.more_vert), onPressed: null),
+              ],
               bottom: TabBar(
+                controller: controller,
                 indicatorSize: TabBarIndicatorSize.tab,
-                tabs: tabs,
+                tabAlignment: TabAlignment.fill,
+                tabs: const [
+                  Tab(icon: Icon(Icons.playlist_play)),
+                  Tab(icon: Icon(Icons.person)),
+                  Tab(icon: Icon(Icons.album)),
+                  Tab(icon: Icon(Icons.music_note)),
+                ],
               ),
             ),
-            body: const TabBarView(
-              physics: BouncingScrollPhysics(),
-              children: [
-                PlaylistsView(),
-                ArtistsView(),
-                AlbumsView(),
-                TracksTab(),
-              ],
-            ),
-          ),
-        );
-      },
+          ];
+        },
+        body: TabBarView(
+          controller: controller,
+          children: const [
+            PlaylistsView(),
+            ArtistsView(),
+            AlbumsView(),
+            TracksTab(),
+          ],
+        ),
+      ),
     );
   }
 }
