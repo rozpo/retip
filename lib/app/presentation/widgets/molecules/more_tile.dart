@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 
 class MoreTile extends StatelessWidget {
   final IconData icon;
@@ -16,7 +15,7 @@ class MoreTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RpListTile(
+    return ListTile(
       title: Text(
         overflow: TextOverflow.ellipsis,
         maxLines: 1,

@@ -6,7 +6,6 @@ import 'package:retip/app/presentation/pages/dev/widgets/dev_switch_list_tile.da
 import 'package:retip/app/presentation/widgets/atoms/rp_back_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
@@ -69,11 +68,11 @@ class _DevPageState extends State<DevPage> {
           RpDivider(
             text: RetipL10n.of(context).info,
           ),
-          RpListTile(
+          ListTile(
             leading: const Icon(Icons.shop),
             title: SingleLineText('${packageInfo.installerStore}'),
           ),
-          RpListTile(
+          ListTile(
             leading: const Icon(Icons.key),
             title: Text(packageInfo.buildSignature),
           ),

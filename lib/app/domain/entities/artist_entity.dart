@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:retip/app/presentation/pages/artist/artist_page.dart';
 import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/utils/utils.dart';
@@ -34,7 +33,7 @@ abstract class ArtistEntity extends AbstractEntity {
   }
 
   @override
-  RpListTile toListTile(BuildContext context, [String? query]) {
+  ListTile toListTile(BuildContext context, [String? query]) {
     final theme = Theme.of(context);
 
     int tracksLength = 0;
@@ -43,7 +42,7 @@ abstract class ArtistEntity extends AbstractEntity {
       tracksLength += album.tracks.length;
     }
 
-    return RpListTile(
+    return ListTile(
       leading: Container(
         width: Sizer.x5,
         height: Sizer.x5,

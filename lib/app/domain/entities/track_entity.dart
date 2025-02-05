@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/cases/get_all_tracks.dart';
 import 'package:retip/app/domain/cases/play_audio.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_album_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_artist_tile.dart';
@@ -82,10 +81,10 @@ abstract class TrackEntity extends AbstractEntity {
   }
 
   @override
-  RpListTile toListTile(BuildContext context, [String? query]) {
+  ListTile toListTile(BuildContext context, [String? query]) {
     final theme = Theme.of(context);
 
-    return RpListTile(
+    return ListTile(
       onTap: () async {
         final tracks = await GetAllTracks.call();
         final index = tracks.indexWhere((track) => track.id == id);

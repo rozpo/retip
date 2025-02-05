@@ -28,6 +28,7 @@ mixin RetipTheme {
       iconButtonTheme: _iconButtonTheme,
       sliderTheme: sliderTheme,
       bottomNavigationBarTheme: _bottomNavigationBarTheme(colorScheme),
+      listTileTheme: _listTileThemeData(),
     );
   }
 
@@ -68,6 +69,15 @@ mixin RetipTheme {
       type: BottomNavigationBarType.shifting,
       showUnselectedLabels: true,
       showSelectedLabels: true,
+    );
+  }
+
+  static ListTileThemeData _listTileThemeData() {
+    return const ListTileThemeData(
+      horizontalTitleGap: Sizer.x1,
+      minTileHeight: Sizer.x7,
+      minVerticalPadding: Sizer.x1,
+      contentPadding: EdgeInsets.symmetric(horizontal: Sizer.x1),
     );
   }
 }

@@ -1,12 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon_image.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
+import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
+import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
 import 'package:retip/core/router/retip_router.dart';
 import 'package:retip/core/utils/sizer.dart';
 
@@ -52,7 +51,7 @@ class MoreIcon extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 children: [
-                  RpListTile(
+                  ListTile(
                     title: SingleLineText(title),
                     subtitle:
                         subtitle != null ? SingleLineText(subtitle!) : null,

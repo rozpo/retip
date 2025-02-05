@@ -11,7 +11,6 @@ import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/constants/layout_constants.dart';
 import 'package:retip/core/constants/routes_constants.dart';
@@ -164,7 +163,7 @@ class SettingsView extends StatelessWidget {
               //   trailing: const RpIconButton(icon: Icons.arrow_forward),
               // ),
               RpDivider(text: l10n.library),
-              RpListTile(
+              ListTile(
                 leading: const RpIcon(icon: Icons.grid_on),
                 title: Text(l10n.gridView),
                 subtitle: Text(l10n.columnsCount(state.gridViewColumns)),

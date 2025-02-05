@@ -8,7 +8,6 @@ import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
 import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_snackbar.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -52,7 +51,7 @@ class AddToPlaylistTile extends StatelessWidget {
                     if (index == 0) {
                       return Column(
                         children: [
-                          RpListTile(
+                          ListTile(
                             leading: const RpIcon(icon: Icons.playlist_add),
                             title:
                                 Text(RetipL10n.of(context).createNewPlaylist),
@@ -164,7 +163,7 @@ class AddToPlaylistTile extends StatelessWidget {
 
                     final pl = playlists[index - 1];
 
-                    return RpListTile(
+                    return ListTile(
                       leading: SizedBox.square(
                         dimension: Sizer.x5,
                         child: PlaylistArtwork(images: pl.artworks),

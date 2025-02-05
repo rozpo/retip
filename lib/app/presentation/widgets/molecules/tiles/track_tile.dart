@@ -3,7 +3,6 @@ import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
 import 'package:retip/app/domain/entities/track_entity.dart';
 import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
 import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_playlist_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/file_details.dart';
@@ -48,7 +47,7 @@ class TrackTile extends StatelessWidget {
       index -= 1000;
     }
 
-    return RpListTile(
+    return ListTile(
       onTap: onTap,
       leading: Container(
         width: Sizer.x5,

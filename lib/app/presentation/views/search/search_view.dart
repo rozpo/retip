@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/debouncer.dart';
@@ -126,7 +125,7 @@ class _SearchViewState extends State<SearchView> {
                 );
               }
               final list = bloc.recentSearch
-                  .map((e) => RpListTile(
+                  .map((e) => ListTile(
                         title: Text(e),
                         leading: const Icon(Icons.search),
                         onTap: () {

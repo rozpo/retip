@@ -12,7 +12,6 @@ import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_playlist_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_album_tile.dart';
@@ -90,7 +89,7 @@ class _PlayerViewState extends State<PlayerView> {
                       builder: (context) {
                         return Column(
                           children: [
-                            RpListTile(
+                            ListTile(
                               leading:
                                   const RpIconButton(icon: Icons.queue_music),
                               title: Text(RetipL10n.of(context).playlingQueue),

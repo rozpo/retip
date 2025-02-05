@@ -59,6 +59,7 @@ class _LibraryViewState extends State<LibraryView>
                 IconButton(icon: Icon(Icons.grid_view), onPressed: null),
                 HorizontalSpacer(),
                 IconButton(icon: Icon(Icons.more_vert), onPressed: null),
+                HorizontalSpacer(),
               ],
               bottom: TabBar(
                 controller: controller,
