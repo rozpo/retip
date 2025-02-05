@@ -11,6 +11,8 @@ import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 
+import '../../views/player/widgets/play_pause_icon.dart';
+
 class PlayerWidget extends StatefulWidget {
   const PlayerWidget({super.key});
 
