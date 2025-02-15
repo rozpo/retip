@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/l10n/retip_l10n.dart';
 
-class IntroPage extends StatelessWidget {
-  const IntroPage({super.key});
+class PermissionPage extends StatelessWidget {
+  const PermissionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
