@@ -10,10 +10,11 @@ import 'core/theme/src/button_theme.dart';
 void main() async {
   // Core dependencies
   final retipRouter = RetipRouter();
+  final retipL10n = RetipL10n();
+
   final retipTheme = RetipTheme(
     retipButtonTheme: RetipButtonTheme(),
   );
-  final retipL10n = RetipL10n();
 
   // Cubit dependencies
   final themeCubit = ThemeCubit();

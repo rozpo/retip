@@ -34,6 +34,7 @@ class RetipApp extends StatelessWidget {
           BlocProvider(create: (context) => _themeCubit),
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
+          buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
             return MaterialApp.router(
               localizationsDelegates: _retipL10n.localizationsDelegates,

@@ -15,4 +15,18 @@ class ThemeState {
       primaryColor: primaryColor ?? this.primaryColor,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    if (other is ThemeState) {
+      return other.primaryColor == primaryColor;
+    }
+
+    return false;
+  }
+
+  @override
+  int get hashCode => super.hashCode ^ primaryColor.hashCode;
 }
