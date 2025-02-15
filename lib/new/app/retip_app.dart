@@ -43,8 +43,8 @@ class RetipApp extends StatelessWidget {
               supportedLocales: _retipL10n.supportedLocales,
               themeMode: ThemeMode.system,
               darkTheme: _retipTheme.dark(state.primaryColor),
+              theme: _retipTheme.light(state.primaryColor),
               routerConfig: _retipRouter,
-              theme: _retipTheme.light,
             );
           },
         ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/new/app/presentation/cubits/theme/theme_cubit.dart';
@@ -29,7 +31,10 @@ class PermissionPage extends StatelessWidget {
               Expanded(
                 child: FilledButton(
                   onPressed: () {
-                    context.read<ThemeCubit>().primaryColor = Colors.red;
+                    final index = Random().nextInt(Colors.primaries.length);
+                    final nextColor = Colors.primaries[index];
+
+                    context.read<ThemeCubit>().primaryColor = nextColor;
                   },
                   child: Text(l10n.allow),
                 ),
