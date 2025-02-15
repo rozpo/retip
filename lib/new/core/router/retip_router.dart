@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/presentation/home_page.dart';
+
 class RetipRouter extends GoRouter {
   RetipRouter()
       : super.routingConfig(
@@ -10,11 +12,7 @@ class RetipRouter extends GoRouter {
               routes: [
                 GoRoute(
                   path: '/',
-                  builder: (context, state) => const Scaffold(
-                    body: Center(
-                      child: Text('Home'),
-                    ),
-                  ),
+                  builder: (context, state) => const HomePage(),
                 ),
               ],
             ),
