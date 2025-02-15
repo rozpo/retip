@@ -6,6 +6,7 @@ import 'core/router/retip_router.dart';
 import 'core/theme/retip_theme.dart';
 
 void main() async {
+  // Core dependencies
   final retipRouter = RetipRouter();
   final retipTheme = RetipTheme();
   final retipL10n = RetipL10n();
