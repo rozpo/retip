@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
-import 'package:retip/app/domain/entities/abstract_entity.dart';
-import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_snackbar.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
+import '../../../../domain/cases/favourites/add_to_favourites.dart';
+import '../../../../domain/entities/abstract_entity.dart';
+import '../more_tile.dart';
+import '../rp_snackbar.dart';
+import '../../../../../core/l10n/retip_l10n.dart';
 
 class AddToFavTile extends StatelessWidget {
   final AbstractEntity entity;

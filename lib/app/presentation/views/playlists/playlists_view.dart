@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
-import 'package:retip/app/domain/cases/playlist/get_all_playlists.dart';
-import 'package:retip/app/domain/entities/playlist_entity.dart';
-import 'package:retip/app/presentation/pages/favourites/favourites_page.dart';
-import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
-import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
-import 'package:retip/core/extensions/string_extension.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../domain/cases/favourites/get_all_favourites.dart';
+import '../../../domain/cases/playlist/get_all_playlists.dart';
+import '../../../domain/entities/playlist_entity.dart';
+import '../../pages/favourites/favourites_page.dart';
+import '../../pages/playlist/playlist_page.dart';
+import '../settings/cubit/settings_cubit.dart';
+import '../../widgets/atoms/single_line_text.dart';
+import '../../widgets/atoms/playlist_artwork.dart';
+import '../../../../core/extensions/string_extension.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/utils/sizer.dart';
 
 import '../../widgets/atoms/spinner_widget.dart';
 

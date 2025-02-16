@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../../../core/l10n/retip_l10n.dart';
+import '../../../../../core/utils/sizer.dart';
 
 class IntroSettingsButtonWidget extends StatelessWidget {
   final void Function()? onPressed;

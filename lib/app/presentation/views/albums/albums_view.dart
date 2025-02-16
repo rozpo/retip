@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
-import 'package:retip/app/domain/cases/get_all_albums.dart';
-import 'package:retip/app/domain/entities/album_entity.dart';
-import 'package:retip/app/presentation/pages/album/album_page.dart';
-import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
-import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/core/extensions/string_extension.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../domain/cases/favourites/get_all_favourites.dart';
+import '../../../domain/cases/get_all_albums.dart';
+import '../../../domain/entities/album_entity.dart';
+import '../../pages/album/album_page.dart';
+import '../settings/cubit/settings_cubit.dart';
+import '../../widgets/atoms/artwork_widget.dart';
+import '../../widgets/atoms/single_line_text.dart';
+import '../../../../core/extensions/string_extension.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/utils/sizer.dart';
 
 import '../../widgets/atoms/spinner_widget.dart';
 

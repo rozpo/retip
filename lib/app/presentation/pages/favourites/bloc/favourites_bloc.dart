@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/favourites/get_all_favourites.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
+import '../../../../domain/cases/favourites/get_all_favourites.dart';
+import '../../../../domain/entities/track_entity.dart';
 
 part 'favourites_event.dart';
 part 'favourites_state.dart';

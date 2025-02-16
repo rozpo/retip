@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:retip/core/constants/assets_constants.dart';
+import '../../../../core/constants/assets_constants.dart';
 
 class RetipIcon extends StatelessWidget {
   final Color? color;

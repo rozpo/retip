@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
+import '../atoms/single_line_text.dart';
 
 class RpSnackbar extends SnackBar {
   final String message;

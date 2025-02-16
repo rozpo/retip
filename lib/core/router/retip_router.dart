@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:retip/app/presentation/pages/dev/dev_page.dart';
-import 'package:retip/app/presentation/pages/home/home_page.dart';
-import 'package:retip/app/presentation/pages/intro/intro_page.dart';
-import 'package:retip/app/presentation/widgets/organisms/player_widget.dart';
-import 'package:retip/core/constants/routes_constants.dart';
+import '../../app/presentation/pages/dev/dev_page.dart';
+import '../../app/presentation/pages/home/home_page.dart';
+import '../../app/presentation/pages/intro/intro_page.dart';
+import '../../app/presentation/widgets/organisms/player_widget.dart';
+import '../constants/routes_constants.dart';
 
 import '../../app/presentation/pages/home/cubit/home_cubit.dart';
 import '../../app/presentation/views/search/bloc/search_bloc.dart';

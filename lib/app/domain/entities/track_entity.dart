@@ -1,18 +1,18 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/domain/cases/get_all_tracks.dart';
-import 'package:retip/app/domain/cases/play_audio.dart';
-import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_album_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_artist_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_fav_tile.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
-import 'package:retip/core/utils/utils.dart';
+import '../cases/favourites/is_in_favourites.dart';
+import '../cases/get_all_tracks.dart';
+import '../cases/play_audio.dart';
+import '../../presentation/widgets/atoms/more_icon.dart';
+import '../../presentation/widgets/atoms/single_line_text.dart';
+import '../../presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
+import '../../presentation/widgets/molecules/tiles/go_to_album_tile.dart';
+import '../../presentation/widgets/molecules/tiles/go_to_artist_tile.dart';
+import '../../presentation/widgets/molecules/tiles/remove_from_fav_tile.dart';
+import '../../../core/l10n/retip_l10n.dart';
+import '../../../core/utils/sizer.dart';
+import '../../../core/utils/utils.dart';
 
 import 'abstract_entity.dart';
 

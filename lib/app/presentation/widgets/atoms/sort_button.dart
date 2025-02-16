@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/organisms/modal_bottom_sheet.dart';
-import 'package:retip/app/presentation/widgets/molecules/option_list_tile.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_router.dart';
+import '../organisms/modal_bottom_sheet.dart';
+import '../molecules/option_list_tile.dart';
+import 'rp_icon_button.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/router/retip_router.dart';
 
 enum SortMode {
   numerically(icon: Icons.sort),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/domain/cases/play_audio.dart';
-import 'package:retip/app/presentation/widgets/atoms/play_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/shuffle_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
-import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tracks_header.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../domain/cases/play_audio.dart';
+import '../../widgets/atoms/play_button.dart';
+import '../../widgets/atoms/shuffle_button.dart';
+import '../../widgets/atoms/playlist_artwork.dart';
+import '../../widgets/atoms/spacer.dart';
+import '../../widgets/molecules/tiles/track_tile.dart';
+import '../../widgets/molecules/tracks_header.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/utils/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../widgets/atoms/spinner_widget.dart';

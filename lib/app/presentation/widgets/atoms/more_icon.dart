@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon_image.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/core/router/retip_router.dart';
-import 'package:retip/core/utils/sizer.dart';
+import 'rp_icon.dart';
+import 'rp_icon_button.dart';
+import 'rp_icon_image.dart';
+import 'single_line_text.dart';
+import '../molecules/rp_divider.dart';
+import '../../../../core/router/retip_router.dart';
+import '../../../../core/utils/sizer.dart';
 
 class MoreIcon extends StatelessWidget {
   final Uint8List? image;

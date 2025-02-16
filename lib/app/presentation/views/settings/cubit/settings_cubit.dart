@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/repositories/audio_repository.dart';
-import 'package:retip/app/domain/repositories/theme_repository.dart';
-import 'package:retip/core/constants/layout_constants.dart';
-import 'package:retip/core/theme/retip_theme.dart';
+import '../../../../domain/repositories/audio_repository.dart';
+import '../../../../domain/repositories/theme_repository.dart';
+import '../../../../../core/constants/layout_constants.dart';
+import '../../../../../core/theme/retip_theme.dart';
 
 part 'settings_state.dart';
 

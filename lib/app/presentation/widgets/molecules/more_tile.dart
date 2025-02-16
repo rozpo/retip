@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
+import '../atoms/rp_icon.dart';
 
 class MoreTile extends StatelessWidget {
   final IconData icon;

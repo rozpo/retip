@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/core/extensions/duration_extension.dart';
-import 'package:retip/core/extensions/int_extension.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_router.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../../domain/entities/track_entity.dart';
+import '../../atoms/rp_icon.dart';
+import '../../atoms/single_line_text.dart';
+import '../../atoms/spacer.dart';
+import '../more_tile.dart';
+import '../rp_divider.dart';
+import '../../../../../core/extensions/duration_extension.dart';
+import '../../../../../core/extensions/int_extension.dart';
+import '../../../../../core/l10n/retip_l10n.dart';
+import '../../../../../core/router/retip_router.dart';
+import '../../../../../core/utils/sizer.dart';
 
 class FileDetailsTile extends StatelessWidget {
   final TrackEntity track;

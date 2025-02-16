@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../../core/utils/sizer.dart';
 
 class SpinnerWidget extends StatelessWidget {
   const SpinnerWidget({super.key});

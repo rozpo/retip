@@ -1,7 +1,7 @@
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import 'package:retip/app/data/providers/file_provider.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
+import 'file_provider.dart';
+import '../../domain/entities/track_entity.dart';
 
 class JustAudioProvider extends AudioPlayer {
   final tracks = <TrackEntity>[];

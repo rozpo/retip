@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/debouncer.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../widgets/atoms/rp_icon_button.dart';
+import '../../widgets/atoms/spacer.dart';
+import '../../widgets/molecules/rp_divider.dart';
+import '../../widgets/organisms/app_bar_widget.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/utils/debouncer.dart';
+import '../../../../core/utils/sizer.dart';
 
 import '../../widgets/atoms/spinner_widget.dart';
 import 'bloc/search_bloc.dart';

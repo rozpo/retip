@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../../core/utils/sizer.dart';
 
 enum Direction {
   vertical,

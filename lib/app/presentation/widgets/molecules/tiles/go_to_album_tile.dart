@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/get_album.dart';
-import 'package:retip/app/presentation/pages/album/album_page.dart';
-import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_router.dart';
+import '../../../../domain/cases/get_album.dart';
+import '../../../pages/album/album_page.dart';
+import '../more_tile.dart';
+import '../../../../../core/l10n/retip_l10n.dart';
+import '../../../../../core/router/retip_router.dart';
 
 class GoToAlbumTile extends StatelessWidget {
   final VoidCallback? refresh;

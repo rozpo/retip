@@ -1,15 +1,15 @@
 import 'dart:typed_data';
 
-import 'package:retip/app/data/models/album_model.dart';
-import 'package:retip/app/data/models/artist_model.dart';
-import 'package:retip/app/data/models/track_model.dart';
-import 'package:retip/app/data/providers/file_provider.dart';
-import 'package:retip/app/data/providers/on_audio_query_provider.dart';
-import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/domain/entities/album_entity.dart';
-import 'package:retip/app/domain/entities/artist_entity.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/domain/repositories/library_repository.dart';
+import '../models/album_model.dart';
+import '../models/artist_model.dart';
+import '../models/track_model.dart';
+import '../providers/file_provider.dart';
+import '../providers/on_audio_query_provider.dart';
+import '../providers/shared_preferences_provider.dart';
+import '../../domain/entities/album_entity.dart';
+import '../../domain/entities/artist_entity.dart';
+import '../../domain/entities/track_entity.dart';
+import '../../domain/repositories/library_repository.dart';
 
 class LibraryRepositoryImplementation implements LibraryRepository {
   final OnAudioQueryProvider onAudioQueryProvider;

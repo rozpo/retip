@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/domain/entities/abstract_entity.dart';
+import '../../entities/abstract_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 mixin IsInFavourites {

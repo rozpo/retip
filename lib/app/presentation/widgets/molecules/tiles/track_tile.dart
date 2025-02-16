@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_playlist_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/file_details.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_album_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_artist_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_fav_tile.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../../domain/cases/favourites/is_in_favourites.dart';
+import '../../../../domain/entities/track_entity.dart';
+import '../../atoms/artwork_widget.dart';
+import '../../atoms/more_icon.dart';
+import 'add_to_fav_tile.dart';
+import 'add_to_playlist_tile.dart';
+import 'file_details.dart';
+import 'go_to_album_tile.dart';
+import 'go_to_artist_tile.dart';
+import 'remove_from_fav_tile.dart';
+import '../../../../../core/utils/sizer.dart';
 
 class TrackTile extends StatelessWidget {
   final TrackEntity track;

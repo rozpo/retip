@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/playlist/delete_playlist.dart';
-import 'package:retip/app/domain/entities/playlist_entity.dart';
-import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_snackbar.dart';
-import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_router.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../../domain/cases/playlist/delete_playlist.dart';
+import '../../../../domain/entities/playlist_entity.dart';
+import '../more_tile.dart';
+import '../rp_snackbar.dart';
+import '../../atoms/spacer.dart';
+import '../../../../../core/l10n/retip_l10n.dart';
+import '../../../../../core/router/retip_router.dart';
+import '../../../../../core/utils/sizer.dart';
 
 class DeletePlaylistTile extends StatelessWidget {
   final PlaylistEntity entity;

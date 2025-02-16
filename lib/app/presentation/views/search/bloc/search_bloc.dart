@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/domain/cases/get_all_artists.dart';
-import 'package:retip/app/domain/cases/playlist/get_all_playlists.dart';
-import 'package:retip/app/domain/entities/abstract_entity.dart';
-import 'package:retip/app/domain/entities/album_entity.dart';
-import 'package:retip/app/domain/entities/artist_entity.dart';
-import 'package:retip/app/domain/entities/playlist_entity.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
+import '../../../../data/providers/shared_preferences_provider.dart';
+import '../../../../domain/cases/get_all_artists.dart';
+import '../../../../domain/cases/playlist/get_all_playlists.dart';
+import '../../../../domain/entities/abstract_entity.dart';
+import '../../../../domain/entities/album_entity.dart';
+import '../../../../domain/entities/artist_entity.dart';
+import '../../../../domain/entities/playlist_entity.dart';
+import '../../../../domain/entities/track_entity.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';

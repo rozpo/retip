@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../../core/utils/sizer.dart';
 
 class RpIconImage extends StatelessWidget {
   final Uint8List bytes;

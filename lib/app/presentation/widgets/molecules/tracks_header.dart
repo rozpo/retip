@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
+import '../atoms/spacer.dart';
+import '../../../../core/l10n/retip_l10n.dart';
 
 class TracksHeader extends StatelessWidget {
   final int value;

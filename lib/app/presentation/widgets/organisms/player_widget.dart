@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/data/providers/just_audio_provider.dart';
-import 'package:retip/app/domain/repositories/audio_repository.dart';
-import 'package:retip/app/presentation/views/player/player_view.dart';
-import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
-import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../data/providers/just_audio_provider.dart';
+import '../../../domain/repositories/audio_repository.dart';
+import '../../views/player/player_view.dart';
+import '../../views/settings/cubit/settings_cubit.dart';
+import '../atoms/artwork_widget.dart';
+import '../atoms/rp_icon_button.dart';
+import '../atoms/spacer.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/utils/sizer.dart';
 
 import '../../views/player/widgets/play_pause_icon.dart';
 

@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/domain/cases/playlist/read_playlist.dart';
-import 'package:retip/app/domain/entities/playlist_entity.dart';
+import 'read_playlist.dart';
+import '../../entities/playlist_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 mixin GetAllPlaylists {

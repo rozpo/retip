@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/extensions/duration_extension.dart';
+import '../../../../../core/extensions/duration_extension.dart';
 
 import '../../../../data/providers/just_audio_provider.dart';
 

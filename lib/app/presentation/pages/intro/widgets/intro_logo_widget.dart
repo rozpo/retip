@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:retip/core/constants/assets_constants.dart';
+import '../../../../../core/constants/assets_constants.dart';
 
 class IntroLogoWidget extends StatelessWidget {
   const IntroLogoWidget({super.key});

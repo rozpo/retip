@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/views/albums/albums_view.dart';
-import 'package:retip/app/presentation/views/artists/artists_view.dart';
-import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
-import 'package:retip/app/presentation/views/tracks/tracks_tab.dart';
-import 'package:retip/app/presentation/widgets/atoms/spacer.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
+import '../albums/albums_view.dart';
+import '../artists/artists_view.dart';
+import '../playlists/playlists_view.dart';
+import '../tracks/tracks_tab.dart';
+import '../../widgets/atoms/spacer.dart';
+import '../../../../core/l10n/retip_l10n.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({super.key});

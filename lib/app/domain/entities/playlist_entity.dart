@@ -1,14 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/entities/abstract_entity.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/pages/playlist/playlist_page.dart';
-import 'package:retip/app/presentation/widgets/atoms/playlist_artwork.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
-import 'package:retip/core/utils/utils.dart';
+import 'abstract_entity.dart';
+import 'track_entity.dart';
+import '../../presentation/pages/playlist/playlist_page.dart';
+import '../../presentation/widgets/atoms/playlist_artwork.dart';
+import '../../presentation/widgets/atoms/single_line_text.dart';
+import '../../../core/l10n/retip_l10n.dart';
+import '../../../core/utils/sizer.dart';
+import '../../../core/utils/utils.dart';
 
 class PlaylistEntity extends AbstractEntity {
   String name;

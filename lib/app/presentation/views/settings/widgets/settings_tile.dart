@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_icon.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
+import '../../../widgets/atoms/rp_icon.dart';
+import '../../../widgets/atoms/single_line_text.dart';
 
 class SettingsTile extends StatelessWidget {
   final String title;

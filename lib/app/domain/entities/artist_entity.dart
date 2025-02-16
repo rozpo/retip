@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/pages/artist/artist_page.dart';
-import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
-import 'package:retip/core/utils/utils.dart';
+import '../../presentation/pages/artist/artist_page.dart';
+import '../../presentation/widgets/atoms/artwork_widget.dart';
+import '../../../core/l10n/retip_l10n.dart';
+import '../../../core/utils/sizer.dart';
+import '../../../core/utils/utils.dart';
 
 import 'abstract_entity.dart';
 import 'album_entity.dart';

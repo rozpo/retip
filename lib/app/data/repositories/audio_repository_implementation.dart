@@ -1,12 +1,12 @@
 import 'dart:developer';
 
 import 'package:just_audio/just_audio.dart';
-import 'package:retip/app/data/providers/just_audio_provider.dart';
-import 'package:retip/app/data/providers/on_audio_query_provider.dart';
-import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/domain/repositories/audio_repository.dart';
-import 'package:retip/app/domain/repositories/library_repository.dart';
+import '../providers/just_audio_provider.dart';
+import '../providers/on_audio_query_provider.dart';
+import '../providers/shared_preferences_provider.dart';
+import '../../domain/entities/track_entity.dart';
+import '../../domain/repositories/audio_repository.dart';
+import '../../domain/repositories/library_repository.dart';
 
 enum Keys {
   audioRepeatMode,

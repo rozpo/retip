@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/presentation/pages/favourites/bloc/favourites_bloc.dart';
-import 'package:retip/app/presentation/pages/intro/bloc/intro_bloc.dart';
-import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
-import 'package:retip/app/presentation/views/tracks/bloc/tracks_bloc.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_router.dart';
-import 'package:retip/core/theme/retip_theme.dart';
+import 'presentation/pages/favourites/bloc/favourites_bloc.dart';
+import 'presentation/pages/intro/bloc/intro_bloc.dart';
+import 'presentation/views/settings/cubit/settings_cubit.dart';
+import 'presentation/views/tracks/bloc/tracks_bloc.dart';
+import '../core/l10n/retip_l10n.dart';
+import '../core/router/retip_router.dart';
+import '../core/theme/retip_theme.dart';
 
 import 'domain/repositories/audio_repository.dart';
 import 'domain/repositories/debug_repository.dart';

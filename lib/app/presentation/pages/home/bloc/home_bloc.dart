@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:retip/app/domain/cases/get_all_tracks.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
+import '../../../../domain/cases/get_all_tracks.dart';
+import '../../../../domain/entities/track_entity.dart';
 
 import '../../../../domain/repositories/audio_repository.dart';
 

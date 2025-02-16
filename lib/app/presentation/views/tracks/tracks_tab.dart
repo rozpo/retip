@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/favourites/add_to_favourites.dart';
-import 'package:retip/app/domain/cases/favourites/is_in_favourites.dart';
-import 'package:retip/app/domain/cases/favourites/remove_from_favourites.dart';
-import 'package:retip/app/domain/cases/get_all_tracks.dart';
-import 'package:retip/app/domain/cases/play_audio.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/presentation/widgets/atoms/favourite_button.dart';
-import 'package:retip/app/presentation/widgets/molecules/tiles/track_tile.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../../../domain/cases/favourites/add_to_favourites.dart';
+import '../../../domain/cases/favourites/is_in_favourites.dart';
+import '../../../domain/cases/favourites/remove_from_favourites.dart';
+import '../../../domain/cases/get_all_tracks.dart';
+import '../../../domain/cases/play_audio.dart';
+import '../../../domain/entities/track_entity.dart';
+import '../../widgets/atoms/favourite_button.dart';
+import '../../widgets/molecules/tiles/track_tile.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/utils/sizer.dart';
 
 import '../../widgets/atoms/spinner_widget.dart';
 

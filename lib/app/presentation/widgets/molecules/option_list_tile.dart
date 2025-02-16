@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/widgets/atoms/artwork_widget.dart';
-import 'package:retip/core/utils/sizer.dart';
+import '../atoms/artwork_widget.dart';
+import '../../../../core/utils/sizer.dart';
 
 class OptionListTile extends StatelessWidget {
   final String title;

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:retip/app/data/providers/file_provider.dart';
-import 'package:retip/app/domain/repositories/library_repository.dart';
+import '../../../../data/providers/file_provider.dart';
+import '../../../../domain/repositories/library_repository.dart';
 
 import '../../../../domain/repositories/permission_repository.dart';
 

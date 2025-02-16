@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/presentation/views/home/tabs/explore_tab.dart';
-import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
+import 'tabs/explore_tab.dart';
+import '../../widgets/organisms/app_bar_widget.dart';
+import '../../../../core/l10n/retip_l10n.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

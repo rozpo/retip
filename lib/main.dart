@@ -3,17 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:retip/app/data/providers/just_audio_provider.dart';
-import 'package:retip/app/data/providers/on_audio_query_provider.dart';
-import 'package:retip/app/data/providers/shared_preferences_provider.dart';
-import 'package:retip/app/data/repositories/audio_repository_implementation.dart';
-import 'package:retip/app/data/repositories/debug_repository_implementation.dart';
-import 'package:retip/app/data/repositories/library_repository_implementation.dart';
-import 'package:retip/app/data/repositories/permission_repository_implementation.dart';
-import 'package:retip/app/data/repositories/theme_repository_implementation.dart';
-import 'package:retip/app/domain/repositories/audio_repository.dart';
-import 'package:retip/app/domain/repositories/library_repository.dart';
-import 'package:retip/app/retip_app.dart';
+import 'app/data/providers/just_audio_provider.dart';
+import 'app/data/providers/on_audio_query_provider.dart';
+import 'app/data/providers/shared_preferences_provider.dart';
+import 'app/data/repositories/audio_repository_implementation.dart';
+import 'app/data/repositories/debug_repository_implementation.dart';
+import 'app/data/repositories/library_repository_implementation.dart';
+import 'app/data/repositories/permission_repository_implementation.dart';
+import 'app/data/repositories/theme_repository_implementation.dart';
+import 'app/domain/repositories/audio_repository.dart';
+import 'app/domain/repositories/library_repository.dart';
+import 'app/retip_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

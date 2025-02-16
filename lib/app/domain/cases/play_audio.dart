@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
-import 'package:retip/app/domain/repositories/audio_repository.dart';
+import '../entities/track_entity.dart';
+import '../repositories/audio_repository.dart';
 
 mixin PlayAudio {
   static void call(

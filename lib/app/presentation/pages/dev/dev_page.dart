@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:retip/app/presentation/pages/dev/widgets/dev_switch_list_tile.dart';
-import 'package:retip/app/presentation/widgets/atoms/rp_back_button.dart';
-import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
-import 'package:retip/app/presentation/widgets/molecules/rp_divider.dart';
-import 'package:retip/app/presentation/widgets/organisms/app_bar_widget.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/utils/sizer.dart';
+import 'widgets/dev_switch_list_tile.dart';
+import '../../widgets/atoms/rp_back_button.dart';
+import '../../widgets/atoms/single_line_text.dart';
+import '../../widgets/molecules/rp_divider.dart';
+import '../../widgets/organisms/app_bar_widget.dart';
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/utils/sizer.dart';
 
 import '../../../domain/repositories/debug_repository.dart';
 

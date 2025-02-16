@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/cases/get_artist.dart';
-import 'package:retip/app/presentation/pages/artist/artist_page.dart';
-import 'package:retip/app/presentation/widgets/molecules/more_tile.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_router.dart';
+import '../../../../domain/cases/get_artist.dart';
+import '../../../pages/artist/artist_page.dart';
+import '../more_tile.dart';
+import '../../../../../core/l10n/retip_l10n.dart';
+import '../../../../../core/router/retip_router.dart';
 
 class GoToArtistTile extends StatelessWidget {
   final VoidCallback? refresh;

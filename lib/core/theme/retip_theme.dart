@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/theme/custom/rect_slider_thumb_shape.dart';
-import 'package:retip/core/utils/sizer.dart';
+import 'custom/rect_slider_thumb_shape.dart';
+import '../utils/sizer.dart';
 
 mixin RetipTheme {
   static const fontFamily = 'Play';

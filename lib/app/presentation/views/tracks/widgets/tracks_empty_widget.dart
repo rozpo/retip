@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
+import '../../../../../core/l10n/retip_l10n.dart';
 
 class TracksEmptyWidget extends StatelessWidget {
   const TracksEmptyWidget({super.key});
