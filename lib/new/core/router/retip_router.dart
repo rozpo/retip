@@ -32,7 +32,7 @@ class RetipRouter extends GoRouter {
                 _homeRoute,
                 _permissionRoute,
               ],
-              redirect: (context, state) async {
+              redirect: (context, state) {
                 final cubit = context.read<PermissionCubit>();
                 if (cubit.state.isGranted) {
                   return null;

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../app/data/providers/on_audio_query_provider.dart';
+import '../app/data/providers/shared_preferences_provider.dart';
+import 'app/data/repositories/permission_repository_i.dart';
 import 'app/presentation/cubits/permission/permission_cubit.dart';
 import 'app/presentation/cubits/theme/theme_cubit.dart';
 import 'app/retip_app.dart';
@@ -9,7 +14,13 @@ import 'core/theme/retip_theme.dart';
 import 'core/theme/src/retip_button_theme.dart';
 
 void main() async {
-  // Core dependencies
+  // Init
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+  GetIt.I.registerSingleton(sharedPreferences); // TODO: remove this dependency
+
+  // Core
   final retipRouter = RetipRouter();
   final retipL10n = RetipL10n();
 
@@ -17,8 +28,21 @@ void main() async {
     retipButtonTheme: RetipButtonTheme(),
   );
 
-  // Cubit dependencies
-  final permissionCubit = PermissionCubit();
+  // Providers
+  final sharedPreferencesProvicer = SharedPreferencesProvider();
+  final onAudioQueryProvider = OnAudioQueryProvider();
+
+  // Repositories
+  final permissionRepository = PermissionRepositoryI(
+    sharedPreferencesProvider: sharedPreferencesProvicer,
+    onAudioQueryProvider: onAudioQueryProvider,
+  );
+
+  // Cubits
+  final permissionCubit = PermissionCubit(
+    permissionRepository: permissionRepository,
+  );
+
   final themeCubit = ThemeCubit();
 
   final retipApp = RetipApp(
