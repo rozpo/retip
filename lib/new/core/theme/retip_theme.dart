@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'src/retip_button_theme.dart';
 
 class RetipTheme {
@@ -33,6 +34,13 @@ class RetipTheme {
       ),
       brightness: Brightness.dark,
       fontFamily: _fontFamily,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        backgroundColor: Colors.grey[900],
+        selectedItemColor: primaryColor,
+        unselectedItemColor: Colors.grey[500],
+      ),
     );
   }
 
