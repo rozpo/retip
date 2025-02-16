@@ -1,3 +1,2 @@
-synthetic-package: false
 arb-dir: lib/core/l10n/locales
 template-arb-file: l10n_en.arb
