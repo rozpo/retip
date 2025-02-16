@@ -43,7 +43,7 @@ void main() async {
     JustAudioProvider(),
   );
   final sharedPreferencesProvider = GetIt.I.registerSingleton(
-    SharedPreferencesProvider(),
+    SharedPreferencesProvider(sharedPreferences: sharedPrefs),
   );
 
   // Register repositories

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app/data/providers/on_audio_query_provider.dart';
@@ -18,7 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final sharedPreferences = await SharedPreferences.getInstance();
-  GetIt.I.registerSingleton(sharedPreferences); // TODO: remove this dependency
 
   // Core
   final retipRouter = RetipRouter();
@@ -29,7 +27,9 @@ void main() async {
   );
 
   // Providers
-  final sharedPreferencesProvicer = SharedPreferencesProvider();
+  final sharedPreferencesProvicer = SharedPreferencesProvider(
+    sharedPreferences: sharedPreferences,
+  );
   final onAudioQueryProvider = OnAudioQueryProvider();
 
   // Repositories
