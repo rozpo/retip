@@ -1,5 +1,5 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -161,7 +161,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addToPlaylist => 'Add to playlist';
 
   @override
-  String albumsCount(num count) {
+  String albumsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
@@ -173,7 +173,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String tracksCount(num count) {
+  String tracksCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,

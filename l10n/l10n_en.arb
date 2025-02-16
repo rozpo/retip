@@ -67,13 +67,17 @@
     "albumsCount": "{count, plural, zero{No albums} one{1 Album} other{{count} Albums}}",
     "@albumsCount": {
         "placeholders": {
-            "count": {}
+            "count": {
+                "type": "int"
+            }
         }
     },
     "tracksCount": "{count, plural, zero{No tracks} one{1 Track} other{{count} Tracks}}",
     "@tracksCount": {
         "placeholders": {
-            "count": {}
+            "count": {
+                "type": "int"
+            }
         }
     },
     "recentSearch": "Recent search",

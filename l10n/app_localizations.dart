@@ -390,13 +390,13 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{count, plural, zero{No albums} one{1 Album} other{{count} Albums}}'**
-  String albumsCount(num count);
+  String albumsCount(int count);
 
   /// No description provided for @tracksCount.
   ///
   /// In en, this message translates to:
   /// **'{count, plural, zero{No tracks} one{1 Track} other{{count} Tracks}}'**
-  String tracksCount(num count);
+  String tracksCount(int count);
 
   /// No description provided for @recentSearch.
   ///

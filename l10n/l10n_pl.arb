@@ -67,13 +67,17 @@
     "albumsCount": "{count, plural, zero{Brak albumów} one{1 Album} other{{count} Albumy}}",
     "@albumsCount": {
         "placeholders": {
-            "count": {}
+            "count": {
+                "type": "int"
+            }
         }
     },
     "tracksCount": "{count, plural, zero{Brak utworów} one{1 Utwór} other{{count} Utwory}}",
     "@tracksCount": {
         "placeholders": {
-            "count": {}
+            "count": {
+                "type": "int"
+            }
         }
     },
     "recentSearch": "Ostatnie wyszukiwania",
@@ -144,5 +148,7 @@
     "resumePlaybackOn": "Wznów odtwarzanie od ostatniego utworu",
     "areYouSure": "Czy na pewno? Tej akcji nie można cofnąć",
     "delete": "Usuń",
-    "myAwesomePlaylist": "Moja wspaniała playlista"
+    "myAwesomePlaylist": "Moja wspaniała playlista",
+    "libraryScan": "Skanowanie biblioteki",
+    "scanForMusicDescription": "Skanuj pliki muzyczne na urządzeniu i dodaj je do biblioteki"
 }
