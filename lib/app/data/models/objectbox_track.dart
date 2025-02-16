@@ -21,11 +21,15 @@ class ObjectboxTrack implements Track {
   @override
   String location;
 
+  @override
+  String? artwork;
+
   ObjectboxTrack({
     this.id = 0,
     required this.artist,
     required this.album,
     required this.title,
     required this.location,
+    this.artwork,
   });
 }

@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:8628733266468732975",
-      "lastPropertyId": "5:7910679191234761431",
+      "lastPropertyId": "6:3804091549970317502",
       "name": "ObjectboxTrack",
       "properties": [
         {
@@ -35,6 +35,11 @@
           "type": 9,
           "flags": 2080,
           "indexId": "1:6554449802220389109"
+        },
+        {
+          "id": "6:3804091549970317502",
+          "name": "artwork",
+          "type": 9
         }
       ],
       "relations": []

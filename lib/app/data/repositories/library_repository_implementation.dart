@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
-import 'package:objectbox/objectbox.dart';
 
+import '../../../objectbox.g.dart';
 import '../../domain/entities/album_entity.dart';
 import '../../domain/entities/artist_entity.dart';
 import '../../domain/entities/track_entity.dart';
@@ -179,14 +179,22 @@ class LibraryRepositoryImplementation implements LibraryRepository {
 
       tracks.add(TrackModel.fromSongModel(track, artwork));
       try {
+        final id = tracksBox
+            .query(ObjectboxTrack_.location.equals(track.uri!))
+            .build()
+            .findFirst()
+            ?.id;
+
         tracksBox.put(
           ObjectboxTrack(
+            id: id ?? 0,
             artist: track.artist ?? '',
             album: track.album ?? '',
             title: track.title,
             location: track.uri!,
+            artwork: await _fileProvider.getFilePath('album_$albumId'),
           ),
-          mode: PutMode.insert,
+          mode: id != null ? PutMode.put : PutMode.insert,
         );
       } catch (e) {
         // TODO - Handle error

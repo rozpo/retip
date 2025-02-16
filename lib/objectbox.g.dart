@@ -22,7 +22,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 8628733266468732975),
       name: 'ObjectboxTrack',
-      lastPropertyId: const obx_int.IdUid(5, 7910679191234761431),
+      lastPropertyId: const obx_int.IdUid(6, 3804091549970317502),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -50,7 +50,12 @@ final _entities = <obx_int.ModelEntity>[
             name: 'location',
             type: 9,
             flags: 2080,
-            indexId: const obx_int.IdUid(1, 6554449802220389109))
+            indexId: const obx_int.IdUid(1, 6554449802220389109)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 3804091549970317502),
+            name: 'artwork',
+            type: 9,
+            flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
@@ -117,12 +122,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final albumOffset = fbb.writeString(object.album);
           final titleOffset = fbb.writeString(object.title);
           final locationOffset = fbb.writeString(object.location);
-          fbb.startTable(6);
+          final artworkOffset =
+              object.artwork == null ? null : fbb.writeString(object.artwork!);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, artistOffset);
           fbb.addOffset(2, albumOffset);
           fbb.addOffset(3, titleOffset);
           fbb.addOffset(4, locationOffset);
+          fbb.addOffset(5, artworkOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -139,12 +147,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 10, '');
           final locationParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 12, '');
+          final artworkParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 14);
           final object = ObjectboxTrack(
               id: idParam,
               artist: artistParam,
               album: albumParam,
               title: titleParam,
-              location: locationParam);
+              location: locationParam,
+              artwork: artworkParam);
 
           return object;
         })
@@ -174,4 +185,8 @@ class ObjectboxTrack_ {
   /// See [ObjectboxTrack.location].
   static final location =
       obx.QueryStringProperty<ObjectboxTrack>(_entities[0].properties[4]);
+
+  /// See [ObjectboxTrack.artwork].
+  static final artwork =
+      obx.QueryStringProperty<ObjectboxTrack>(_entities[0].properties[5]);
 }

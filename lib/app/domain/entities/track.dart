@@ -4,6 +4,7 @@ abstract class Track {
   final String album;
   final String title;
   final String location;
+  final String? artwork;
 
   Track({
     required this.id,
@@ -11,5 +12,6 @@ abstract class Track {
     required this.album,
     required this.title,
     required this.location,
+    required this.artwork,
   });
 }
