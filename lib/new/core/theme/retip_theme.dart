@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retip/new/core/theme/src/button_theme.dart';
+import 'package:retip/new/core/theme/src/retip_button_theme.dart';
 
 class RetipTheme {
   final RetipButtonTheme _retipButtonTheme;

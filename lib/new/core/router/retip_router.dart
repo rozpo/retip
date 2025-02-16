@@ -1,10 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/presentation/pages/home_page.dart';
-import '../../app/presentation/pages/permission_page.dart';
+import '../../app/presentation/cubits/permission/permission_cubit.dart';
+import '../../app/presentation/pages/home/home_page.dart';
+import '../../app/presentation/pages/permission/permission_page.dart';
 
 class RetipRouter extends GoRouter {
   static const _homePath = '/';
@@ -32,11 +32,12 @@ class RetipRouter extends GoRouter {
                 _homeRoute,
                 _permissionRoute,
               ],
-              redirect: (context, state) {
-                if (Random().nextBool()) {
-                  return _permissionPath;
+              redirect: (context, state) async {
+                final cubit = context.read<PermissionCubit>();
+                if (cubit.state.isGranted) {
+                  return null;
                 }
-                return null;
+                return _permissionPath;
               },
             ),
           ),
