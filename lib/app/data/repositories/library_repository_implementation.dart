@@ -1,15 +1,19 @@
 import 'dart:typed_data';
 
-import '../models/album_model.dart';
-import '../models/artist_model.dart';
-import '../models/track_model.dart';
-import '../providers/file_provider.dart';
-import '../providers/on_audio_query_provider.dart';
-import '../providers/shared_preferences_provider.dart';
+import 'package:get_it/get_it.dart';
+import 'package:objectbox/objectbox.dart';
+
 import '../../domain/entities/album_entity.dart';
 import '../../domain/entities/artist_entity.dart';
 import '../../domain/entities/track_entity.dart';
 import '../../domain/repositories/library_repository.dart';
+import '../models/album_model.dart';
+import '../models/artist_model.dart';
+import '../models/objectbox_track.dart';
+import '../models/track_model.dart';
+import '../providers/file_provider.dart';
+import '../providers/on_audio_query_provider.dart';
+import '../providers/shared_preferences_provider.dart';
 
 class LibraryRepositoryImplementation implements LibraryRepository {
   final OnAudioQueryProvider onAudioQueryProvider;
@@ -143,6 +147,7 @@ class LibraryRepositoryImplementation implements LibraryRepository {
 
   @override
   Future<List<TrackEntity>> getAllTracks() async {
+    final tracksBox = GetIt.I.get<Store>().box<ObjectboxTrack>();
     final data = await onAudioQueryProvider.getAllSongs();
 
     final artworks = <int, Uint8List>{};
@@ -173,6 +178,19 @@ class LibraryRepositoryImplementation implements LibraryRepository {
       }
 
       tracks.add(TrackModel.fromSongModel(track, artwork));
+      try {
+        tracksBox.put(
+          ObjectboxTrack(
+            artist: track.artist ?? '',
+            album: track.album ?? '',
+            title: track.title,
+            location: track.uri!,
+          ),
+          mode: PutMode.insert,
+        );
+      } catch (e) {
+        // TODO - Handle error
+      }
     }
 
     return tracks;
