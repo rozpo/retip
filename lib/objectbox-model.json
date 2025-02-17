@@ -4,49 +4,128 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:8628733266468732975",
-      "lastPropertyId": "6:3804091549970317502",
+      "id": "1:4567172474523976725",
+      "lastPropertyId": "6:2281026813396061139",
       "name": "ObjectboxTrack",
       "properties": [
         {
-          "id": "1:4829770760447059960",
+          "id": "1:3939920585467893840",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:4091894946750053941",
+          "id": "2:805499632379490263",
           "name": "artist",
           "type": 9
         },
         {
-          "id": "3:6559330446911807740",
+          "id": "3:2464926771274860164",
           "name": "album",
           "type": 9
         },
         {
-          "id": "4:1307712285081220774",
+          "id": "4:3826665281037569057",
           "name": "title",
           "type": 9
         },
         {
-          "id": "5:7910679191234761431",
+          "id": "5:6796015340161000018",
           "name": "location",
           "type": 9,
           "flags": 2080,
-          "indexId": "1:6554449802220389109"
+          "indexId": "1:1947356258381918388"
         },
         {
-          "id": "6:3804091549970317502",
+          "id": "6:2281026813396061139",
           "name": "artwork",
           "type": 9
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:6334629032870853428",
+      "lastPropertyId": "3:5038218124246525154",
+      "name": "Album",
+      "properties": [
+        {
+          "id": "1:7660622188596593582",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7226763994535470859",
+          "name": "artist",
+          "type": 9
+        },
+        {
+          "id": "3:5038218124246525154",
+          "name": "title",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:5953606207081290695",
+      "lastPropertyId": "2:6457087967785666147",
+      "name": "Artist",
+      "properties": [
+        {
+          "id": "1:668493937328284304",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6457087967785666147",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:2045598808023429272",
+      "lastPropertyId": "5:4384596570738127504",
+      "name": "Track",
+      "properties": [
+        {
+          "id": "1:6577218385643939044",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1075810443361945125",
+          "name": "artist",
+          "type": 9
+        },
+        {
+          "id": "3:3928235669412314413",
+          "name": "album",
+          "type": 9
+        },
+        {
+          "id": "4:5234770567951417312",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "5:4384596570738127504",
+          "name": "location",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "2:3355567844374604927"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:8628733266468732975",
-  "lastIndexId": "1:6554449802220389109",
+  "lastEntityId": "4:2045598808023429272",
+  "lastIndexId": "2:3355567844374604927",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
