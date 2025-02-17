@@ -21,7 +21,6 @@ void main() async {
 }
 
 Future<void> initObjectbox() async {
-  // Objectbox setup
   final appDir = await getApplicationDocumentsDirectory();
   final dbPath = join(appDir.path, 'objectbox');
 
