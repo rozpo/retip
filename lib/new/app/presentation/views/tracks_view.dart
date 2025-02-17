@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:objectbox/objectbox.dart';
 
-import '../../domain/entities/track.dart';
+import '../../data/models/track_model.dart';
+import '../../domain/entities/track_entity.dart';
 
 class TracksView extends StatelessWidget {
   const TracksView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Track>>(
+    return StreamBuilder<List<TrackEntity>>(
       stream: GetIt.I
           .get<Store>()
-          .box<Track>()
+          .box<TrackModel>()
           .query()
           .watch(triggerImmediately: true)
           .map((query) => query.find()),
