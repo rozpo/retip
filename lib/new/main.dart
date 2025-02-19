@@ -3,11 +3,17 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../objectbox.g.dart';
-import 'app/domain/repositories/library_repository.dart';
+import 'app/data/models/track_model.dart';
+import 'app/data/providers/objectbox_provider.dart';
+import 'app/data/providers/on_audio_query_provider.dart';
+import 'app/data/repositories/library_repository_i.dart';
+import 'app/domain/usecases/scan_library_usecase.dart';
+import 'app/domain/usecases/tracks_stream_usecase.dart';
 import 'app/retip_app.dart';
 
 void main() async {
@@ -15,9 +21,40 @@ void main() async {
 
   await initObjectbox();
 
-  LibraryRepository().scan();
+  // Third party dependencies
+  final store = GetIt.I.get<Store>();
+  final onAudioQuery = OnAudioQuery();
 
-  runApp(const RetipApp());
+  // Providers initialization
+  final onAudioQueryProvider = OnAudioQueryProvider(
+    onAudioQuery: onAudioQuery,
+  );
+  final trackObjectboxProvider = ObjectboxProvider(
+    box: store.box<TrackModel>(),
+  );
+
+  // Repositories initialization
+  final libraryRepository = LibraryRepositoryI(
+    trackObjectboxProvider: trackObjectboxProvider,
+    onAudioQueryProvider: onAudioQueryProvider,
+  );
+
+  // Usecases initialization
+  final scanLibraryUsecase = ScanLibraryUsecase(
+    libraryRepository: libraryRepository,
+  )..call();
+
+  final tracksStreamUsecase = TracksStreamUsecase(
+    libraryRepository: libraryRepository,
+  );
+
+  // App initialization
+  final retipApp = RetipApp(
+    tracksStreamUsecase: tracksStreamUsecase,
+    scanLibraryUsecase: scanLibraryUsecase,
+  );
+
+  runApp(retipApp);
 }
 
 Future<void> initObjectbox() async {
