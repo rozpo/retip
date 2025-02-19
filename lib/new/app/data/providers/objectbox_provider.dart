@@ -1,22 +1,22 @@
 import 'package:objectbox/objectbox.dart';
 
-class ObjectboxProvider<T> {
-  final Box<T> _box;
+class ObjectboxProvider {
+  final Store _store;
 
   const ObjectboxProvider({
-    required Box<T> box,
-  }) : _box = box;
+    required Store store,
+  }) : _store = store;
 
-  Future<int> insert(T entity) async {
-    return await _box.putAsync(entity, mode: PutMode.insert);
+  Future<int> insert<T>(T entity) async {
+    return await _store.box<T>().putAsync(entity, mode: PutMode.insert);
   }
 
-  Future<T?> findFirst(Condition<T> condition) async {
-    return await _box.query(condition).build().findFirstAsync();
+  Future<T?> findFirst<T>(Condition<T> condition) async {
+    return await _store.box<T>().query(condition).build().findFirstAsync();
   }
 
-  Stream<List<T>> stream() {
-    final query = _box.query().watch(triggerImmediately: true);
+  Stream<List<T>> stream<T>() {
+    final query = _store.box<T>().query().watch(triggerImmediately: true);
     return query.map((query) => query.find());
   }
 }

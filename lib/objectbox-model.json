@@ -79,9 +79,38 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "6:6698286509338440517",
+      "lastPropertyId": "4:5731626520917055794",
+      "name": "AlbumModel",
+      "properties": [
+        {
+          "id": "1:1442975783549633956",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:371786949613865233",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:7062794887495378100",
+          "name": "artist",
+          "type": 9
+        },
+        {
+          "id": "4:5731626520917055794",
+          "name": "artwork",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "5:6455620754473793060",
+  "lastEntityId": "6:6698286509338440517",
   "lastIndexId": "3:8971268668138376077",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

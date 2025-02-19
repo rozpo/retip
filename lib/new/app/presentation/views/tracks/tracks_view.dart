@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/track_entity.dart';
-import '../../domain/usecases/tracks_stream_usecase.dart';
+import '../../../domain/entities/track_entity.dart';
+import '../../../domain/usecases/tracks_stream_usecase.dart';
 
 class TracksView extends StatelessWidget {
   const TracksView({super.key});

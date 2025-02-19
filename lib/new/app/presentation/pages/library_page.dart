@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:objectbox/objectbox.dart';
 
 import '../../data/models/track_model.dart';
-import '../views/tracks_view.dart';
+import '../views/tracks/tracks_view.dart';
 
 class LibraryPage extends StatelessWidget {
   const LibraryPage({super.key});

@@ -6,31 +6,41 @@ import '../providers/objectbox_provider.dart';
 import '../providers/on_audio_query_provider.dart';
 
 class LibraryRepositoryI implements LibraryRepository {
-  final ObjectboxProvider<TrackModel> _trackObjectboxProvider;
+  final ObjectboxProvider _objectboxProvider;
   final OnAudioQueryProvider _onAudioQueryProvider;
 
   const LibraryRepositoryI({
-    required ObjectboxProvider<TrackModel> trackObjectboxProvider,
+    required ObjectboxProvider objectboxProvider,
     required OnAudioQueryProvider onAudioQueryProvider,
-  })  : _trackObjectboxProvider = trackObjectboxProvider,
+  })  : _objectboxProvider = objectboxProvider,
         _onAudioQueryProvider = onAudioQueryProvider;
 
   @override
   Future<void> scan() async {
-    final tracks = await _onAudioQueryProvider.getTracks();
+    final tracks = await _onAudioQueryProvider.getAllTracks();
 
     for (final track in tracks) {
-      final condition = TrackModel_.location.equals(track.location);
-      final entity = await _trackObjectboxProvider.findFirst(condition);
+      if (track.uri == null) continue;
+
+      final condition = TrackModel_.location.equals(track.uri!);
+      TrackModel? entity =
+          await _objectboxProvider.findFirst<TrackModel>(condition);
 
       if (entity != null) continue;
 
-      _trackObjectboxProvider.insert(track);
+      entity = TrackModel(
+        title: track.title,
+        album: track.album ?? 'Unknown',
+        artist: track.artist ?? 'Unknown',
+        location: track.uri!,
+      );
+
+      _objectboxProvider.insert<TrackModel>(entity);
     }
   }
 
   @override
   Stream<List<TrackEntity>> tracksStream() {
-    return _trackObjectboxProvider.stream();
+    return _objectboxProvider.stream<TrackModel>();
   }
 }

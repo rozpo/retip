@@ -8,7 +8,6 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../objectbox.g.dart';
-import 'app/data/models/track_model.dart';
 import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/repositories/library_repository_i.dart';
@@ -30,12 +29,12 @@ void main() async {
     onAudioQuery: onAudioQuery,
   );
   final trackObjectboxProvider = ObjectboxProvider(
-    box: store.box<TrackModel>(),
+    store: store,
   );
 
   // Repositories initialization
   final libraryRepository = LibraryRepositoryI(
-    trackObjectboxProvider: trackObjectboxProvider,
+    objectboxProvider: trackObjectboxProvider,
     onAudioQueryProvider: onAudioQueryProvider,
   );
 
