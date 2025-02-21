@@ -3,6 +3,7 @@ import '../../domain/entities/track_entity.dart';
 import '../../domain/repositories/library_repository.dart';
 import '../models/album_model.dart';
 import '../models/artist_model.dart';
+import '../models/genre_model.dart';
 import '../models/track_model.dart';
 import '../providers/objectbox_provider.dart';
 import '../providers/on_audio_query_provider.dart';
@@ -22,6 +23,7 @@ class LibraryRepositoryI implements LibraryRepository {
     final tracks = await _onAudioQueryProvider.getAllTracks();
     final albums = await _onAudioQueryProvider.getAllAlbums();
     final artists = await _onAudioQueryProvider.getAllArtists();
+    final genres = await _onAudioQueryProvider.getAllGenres();
 
     for (final artist in artists) {
       final condition = ArtistModel_.name.equals(artist.artist);
@@ -55,6 +57,16 @@ class LibraryRepositoryI implements LibraryRepository {
       _objectboxProvider.insert<AlbumModel>(albumEntity);
     }
 
+    for (final genre in genres) {
+      final condition = GenreModel_.name.equals(genre.genre);
+      final entity = await _objectboxProvider.findFirst<GenreModel>(condition);
+
+      if (entity != null) continue;
+
+      final genreEntity = GenreModel(name: genre.genre);
+      _objectboxProvider.insert<GenreModel>(genreEntity);
+    }
+
     for (final track in tracks) {
       if (track.uri == null) continue;
 
@@ -82,6 +94,14 @@ class LibraryRepositoryI implements LibraryRepository {
             await _objectboxProvider.findFirst<ArtistModel>(artistCondition);
 
         trackEntity.artistDb.target = artistEntity;
+      }
+
+      if (track.genre != null) {
+        final genreCondition = GenreModel_.name.equals(track.genre!);
+        final genreEntity =
+            await _objectboxProvider.findFirst<GenreModel>(genreCondition);
+
+        trackEntity.genreDb.target = genreEntity;
       }
 
       _objectboxProvider.insert<TrackModel>(trackEntity);
