@@ -25,7 +25,8 @@ class TracksView extends StatelessWidget {
 
               return ListTile(
                 title: Text(track.title),
-                subtitle: Text(track.artist),
+                subtitle:
+                    track.artist != null ? Text(track.artist!.name) : null,
               );
             },
           ),

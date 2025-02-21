@@ -46,7 +46,7 @@
     },
     {
       "id": "5:6455620754473793060",
-      "lastPropertyId": "5:8828855697088257581",
+      "lastPropertyId": "7:8017473571243621617",
       "name": "TrackModel",
       "properties": [
         {
@@ -61,28 +61,34 @@
           "type": 9
         },
         {
-          "id": "3:4379212304095004378",
-          "name": "album",
-          "type": 9
-        },
-        {
-          "id": "4:24743021625447469",
-          "name": "artist",
-          "type": 9
-        },
-        {
           "id": "5:8828855697088257581",
           "name": "location",
           "type": 9,
           "flags": 2080,
           "indexId": "3:8971268668138376077"
+        },
+        {
+          "id": "6:6378106692841644178",
+          "name": "albumModelId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "5:7791012736050371592",
+          "relationTarget": "AlbumModel"
+        },
+        {
+          "id": "7:8017473571243621617",
+          "name": "artistModelId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "6:8755263680508807636",
+          "relationTarget": "ArtistModel"
         }
       ],
       "relations": []
     },
     {
       "id": "6:6698286509338440517",
-      "lastPropertyId": "4:5731626520917055794",
+      "lastPropertyId": "5:3347069702703274239",
       "name": "AlbumModel",
       "properties": [
         {
@@ -97,21 +103,43 @@
           "type": 9
         },
         {
-          "id": "3:7062794887495378100",
-          "name": "artist",
+          "id": "4:5731626520917055794",
+          "name": "artwork",
           "type": 9
         },
         {
-          "id": "4:5731626520917055794",
-          "name": "artwork",
+          "id": "5:3347069702703274239",
+          "name": "artistModelId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:6112177303978664744",
+          "relationTarget": "ArtistModel"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:3877588960111878824",
+      "lastPropertyId": "2:4192933160748121637",
+      "name": "ArtistModel",
+      "properties": [
+        {
+          "id": "1:7470342456858142308",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4192933160748121637",
+          "name": "name",
           "type": 9
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "6:6698286509338440517",
-  "lastIndexId": "3:8971268668138376077",
+  "lastEntityId": "7:3877588960111878824",
+  "lastIndexId": "6:8755263680508807636",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
@@ -132,7 +160,10 @@
     1075810443361945125,
     3928235669412314413,
     5234770567951417312,
-    4384596570738127504
+    4384596570738127504,
+    7062794887495378100,
+    4379212304095004378,
+    24743021625447469
   ],
   "retiredRelationUids": [],
   "version": 1

@@ -1,6 +1,8 @@
 import 'package:objectbox/objectbox.dart';
 
 import '../../domain/entities/track_entity.dart';
+import 'album_model.dart';
+import 'artist_model.dart';
 
 @Entity()
 class TrackModel implements TrackEntity {
@@ -8,24 +10,28 @@ class TrackModel implements TrackEntity {
   @override
   int id;
 
+  final ToOne<AlbumModel> albumModel = ToOne();
+
+  final ToOne<ArtistModel> artistModel = ToOne();
+
   @override
   String title;
-
-  @override
-  String album;
-
-  @override
-  String artist;
 
   @Unique()
   @override
   String location;
 
   TrackModel({
-    this.id = 0,
-    required this.album,
-    required this.artist,
-    required this.title,
     required this.location,
+    required this.title,
+    this.id = 0,
   });
+
+  @Transient()
+  @override
+  AlbumModel? get album => albumModel.target;
+
+  @Transient()
+  @override
+  ArtistModel? get artist => artistModel.target;
 }

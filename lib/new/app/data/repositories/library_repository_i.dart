@@ -30,8 +30,6 @@ class LibraryRepositoryI implements LibraryRepository {
 
       entity = TrackModel(
         title: track.title,
-        album: track.album ?? 'Unknown',
-        artist: track.artist ?? 'Unknown',
         location: track.uri!,
       );
 
