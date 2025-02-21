@@ -11,6 +11,7 @@ import '../objectbox.g.dart';
 import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/repositories/library_repository_i.dart';
+import 'app/data/repositories/track_repository_i.dart';
 import 'app/domain/usecases/scan_library_usecase.dart';
 import 'app/domain/usecases/tracks_stream_usecase.dart';
 import 'app/retip_app.dart';
@@ -28,21 +29,25 @@ void main() async {
   final onAudioQueryProvider = OnAudioQueryProvider(
     onAudioQuery: onAudioQuery,
   );
-  final trackObjectboxProvider = ObjectboxProvider(
+  final objectboxProvider = ObjectboxProvider(
     store: store,
   );
 
   // Repositories initialization
   final libraryRepository = LibraryRepositoryI(
-    objectboxProvider: trackObjectboxProvider,
     onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
+  );
+  final trackRepository = TrackRepositoryI(
+    onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
   );
 
   // Usecases initialization
   final scanLibraryUsecase = ScanLibraryUsecase(
     libraryRepository: libraryRepository,
+    trackRepository: trackRepository,
   )..call();
-
   final tracksStreamUsecase = TracksStreamUsecase(
     libraryRepository: libraryRepository,
   );

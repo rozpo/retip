@@ -1,4 +1,7 @@
 import '../../../../objectbox.g.dart';
+import '../../domain/entities/album_entity.dart';
+import '../../domain/entities/artist_entity.dart';
+import '../../domain/entities/genre_entity.dart';
 import '../../domain/entities/track_entity.dart';
 import '../../domain/repositories/library_repository.dart';
 import '../models/album_model.dart';
@@ -20,7 +23,6 @@ class LibraryRepositoryI implements LibraryRepository {
 
   @override
   Future<void> scan() async {
-    final tracks = await _onAudioQueryProvider.getAllTracks();
     final albums = await _onAudioQueryProvider.getAllAlbums();
     final artists = await _onAudioQueryProvider.getAllArtists();
     final genres = await _onAudioQueryProvider.getAllGenres();
@@ -43,7 +45,6 @@ class LibraryRepositoryI implements LibraryRepository {
 
       final albumEntity = AlbumModel(
         title: album.album,
-        artwork: null, // TODO get artwork
       );
 
       if (album.artist != null) {
@@ -66,50 +67,25 @@ class LibraryRepositoryI implements LibraryRepository {
       final genreEntity = GenreModel(name: genre.genre);
       _objectboxProvider.insert<GenreModel>(genreEntity);
     }
-
-    for (final track in tracks) {
-      if (track.uri == null) continue;
-
-      final condition = TrackModel_.location.equals(track.uri!);
-      final entity = await _objectboxProvider.findFirst<TrackModel>(condition);
-
-      if (entity != null) continue;
-
-      final trackEntity = TrackModel(
-        location: track.uri!,
-        title: track.title,
-      );
-
-      if (track.album != null) {
-        final albumCondition = AlbumModel_.title.equals(track.album!);
-        final albumEntity =
-            await _objectboxProvider.findFirst<AlbumModel>(albumCondition);
-
-        trackEntity.albumDb.target = albumEntity;
-      }
-
-      if (track.artist != null) {
-        final artistCondition = ArtistModel_.name.equals(track.artist!);
-        final artistEntity =
-            await _objectboxProvider.findFirst<ArtistModel>(artistCondition);
-
-        trackEntity.artistDb.target = artistEntity;
-      }
-
-      if (track.genre != null) {
-        final genreCondition = GenreModel_.name.equals(track.genre!);
-        final genreEntity =
-            await _objectboxProvider.findFirst<GenreModel>(genreCondition);
-
-        trackEntity.genreDb.target = genreEntity;
-      }
-
-      _objectboxProvider.insert<TrackModel>(trackEntity);
-    }
   }
 
   @override
   Stream<List<TrackEntity>> tracksStream() {
     return _objectboxProvider.stream<TrackModel>();
+  }
+
+  @override
+  Stream<List<AlbumEntity>> albumsStream() {
+    return _objectboxProvider.stream<AlbumModel>();
+  }
+
+  @override
+  Stream<List<ArtistEntity>> artistsStream() {
+    return _objectboxProvider.stream<ArtistModel>();
+  }
+
+  @override
+  Stream<List<GenreEntity>> genresStream() {
+    return _objectboxProvider.stream<GenreModel>();
   }
 }
