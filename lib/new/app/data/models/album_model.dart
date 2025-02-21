@@ -10,10 +10,10 @@ class AlbumModel implements AlbumEntity {
   @override
   int id;
 
-  final ToOne<ArtistModel> artistModel = ToOne();
+  final ToOne<ArtistModel> artistDb = ToOne();
 
-  @Backlink('albumModel')
-  final ToMany<TrackModel> tracksModel = ToMany();
+  @Backlink('albumDb')
+  final ToMany<TrackModel> tracksDb = ToMany();
 
   @override
   String title;
@@ -29,9 +29,9 @@ class AlbumModel implements AlbumEntity {
 
   @Transient()
   @override
-  ArtistModel? get artist => artistModel.target;
+  ArtistModel? get artist => artistDb.target;
 
   @Transient()
   @override
-  List<TrackModel> get tracks => tracksModel.toList();
+  List<TrackModel> get tracks => tracksDb.toList();
 }

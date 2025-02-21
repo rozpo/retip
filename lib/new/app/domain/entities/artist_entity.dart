@@ -7,11 +7,13 @@ abstract class ArtistEntity {
   final List<TrackEntity> tracks;
 
   final String name;
+  final String? photo;
 
   ArtistEntity({
     this.albums = const [],
     this.tracks = const [],
     required this.name,
     required this.id,
+    this.photo,
   });
 }

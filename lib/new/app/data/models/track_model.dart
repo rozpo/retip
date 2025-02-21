@@ -10,9 +10,9 @@ class TrackModel implements TrackEntity {
   @override
   int id;
 
-  final ToOne<AlbumModel> albumModel = ToOne();
+  final ToOne<AlbumModel> albumDb = ToOne();
 
-  final ToOne<ArtistModel> artistModel = ToOne();
+  final ToOne<ArtistModel> artistDb = ToOne();
 
   @override
   String title;
@@ -29,9 +29,9 @@ class TrackModel implements TrackEntity {
 
   @Transient()
   @override
-  AlbumModel? get album => albumModel.target;
+  AlbumModel? get album => albumDb.target;
 
   @Transient()
   @override
-  ArtistModel? get artist => artistModel.target;
+  ArtistModel? get artist => artistDb.target;
 }

@@ -10,14 +10,17 @@ class ArtistModel implements ArtistEntity {
   @override
   int id;
 
-  @Backlink('artistModel')
-  final albumsModel = ToMany<AlbumModel>();
+  @Backlink('artistDb')
+  final albumsDb = ToMany<AlbumModel>();
 
-  @Backlink('artistModel')
-  final tracksModel = ToMany<TrackModel>();
+  @Backlink('artistDb')
+  final tracksDb = ToMany<TrackModel>();
 
   @override
   String name;
+
+  @override
+  String? photo;
 
   ArtistModel({
     this.id = 0,
@@ -25,8 +28,8 @@ class ArtistModel implements ArtistEntity {
   });
 
   @override
-  List<AlbumModel> get albums => albumsModel.toList();
+  List<AlbumModel> get albums => albumsDb.toList();
 
   @override
-  List<TrackModel> get tracks => tracksModel.toList();
+  List<TrackModel> get tracks => tracksDb.toList();
 }

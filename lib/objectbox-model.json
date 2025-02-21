@@ -4,40 +4,96 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:4567172474523976725",
-      "lastPropertyId": "6:2281026813396061139",
-      "name": "ObjectboxTrack",
+      "id": "1:4204871476361217258",
+      "lastPropertyId": "4:6456526975696077793",
+      "name": "AlbumModel",
       "properties": [
         {
-          "id": "1:3939920585467893840",
+          "id": "1:1883657183637681748",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:805499632379490263",
+          "id": "2:2011110716133845095",
+          "name": "artistDbId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:7350586393184227623",
+          "relationTarget": "ArtistModel"
+        },
+        {
+          "id": "3:4323506890314204927",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "4:6456526975696077793",
+          "name": "artwork",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:9016319850234251391",
+      "lastPropertyId": "3:2647468271840406727",
+      "name": "ArtistModel",
+      "properties": [
+        {
+          "id": "1:8694548754711894636",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5698205944297041306",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:2647468271840406727",
+          "name": "photo",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4646576309446624509",
+      "lastPropertyId": "6:1308584236057220865",
+      "name": "ObjectboxTrack",
+      "properties": [
+        {
+          "id": "1:4929376554127480410",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6394508117724863737",
           "name": "artist",
           "type": 9
         },
         {
-          "id": "3:2464926771274860164",
+          "id": "3:1188132836968811846",
           "name": "album",
           "type": 9
         },
         {
-          "id": "4:3826665281037569057",
+          "id": "4:2216751505938854664",
           "name": "title",
           "type": 9
         },
         {
-          "id": "5:6796015340161000018",
+          "id": "5:8552550422562447023",
           "name": "location",
           "type": 9,
           "flags": 2080,
-          "indexId": "1:1947356258381918388"
+          "indexId": "2:2913450440857414786"
         },
         {
-          "id": "6:2281026813396061139",
+          "id": "6:1308584236057220865",
           "name": "artwork",
           "type": 9
         }
@@ -45,126 +101,57 @@
       "relations": []
     },
     {
-      "id": "5:6455620754473793060",
-      "lastPropertyId": "7:8017473571243621617",
+      "id": "4:3095593132366236483",
+      "lastPropertyId": "5:9109914477836395547",
       "name": "TrackModel",
       "properties": [
         {
-          "id": "1:7252864455021996056",
+          "id": "1:6003312437446532716",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:3195382272336426200",
-          "name": "title",
-          "type": 9
-        },
-        {
-          "id": "5:8828855697088257581",
-          "name": "location",
-          "type": 9,
-          "flags": 2080,
-          "indexId": "3:8971268668138376077"
-        },
-        {
-          "id": "6:6378106692841644178",
-          "name": "albumModelId",
+          "id": "2:9146165768944770642",
+          "name": "albumDbId",
           "type": 11,
           "flags": 520,
-          "indexId": "5:7791012736050371592",
+          "indexId": "3:1580423665017041469",
           "relationTarget": "AlbumModel"
         },
         {
-          "id": "7:8017473571243621617",
-          "name": "artistModelId",
+          "id": "3:536532572320178479",
+          "name": "artistDbId",
           "type": 11,
           "flags": 520,
-          "indexId": "6:8755263680508807636",
+          "indexId": "4:4162056139970448062",
           "relationTarget": "ArtistModel"
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "6:6698286509338440517",
-      "lastPropertyId": "5:3347069702703274239",
-      "name": "AlbumModel",
-      "properties": [
-        {
-          "id": "1:1442975783549633956",
-          "name": "id",
-          "type": 6,
-          "flags": 1
         },
         {
-          "id": "2:371786949613865233",
+          "id": "4:4034913258428713516",
           "name": "title",
           "type": 9
         },
         {
-          "id": "4:5731626520917055794",
-          "name": "artwork",
-          "type": 9
-        },
-        {
-          "id": "5:3347069702703274239",
-          "name": "artistModelId",
-          "type": 11,
-          "flags": 520,
-          "indexId": "4:6112177303978664744",
-          "relationTarget": "ArtistModel"
-        }
-      ],
-      "relations": []
-    },
-    {
-      "id": "7:3877588960111878824",
-      "lastPropertyId": "2:4192933160748121637",
-      "name": "ArtistModel",
-      "properties": [
-        {
-          "id": "1:7470342456858142308",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:4192933160748121637",
-          "name": "name",
-          "type": 9
+          "id": "5:9109914477836395547",
+          "name": "location",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "5:8708074448657253735"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "7:3877588960111878824",
-  "lastIndexId": "6:8755263680508807636",
+  "lastEntityId": "4:3095593132366236483",
+  "lastIndexId": "5:8708074448657253735",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [
-    6334629032870853428,
-    5953606207081290695,
-    2045598808023429272
-  ],
+  "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    7660622188596593582,
-    7226763994535470859,
-    5038218124246525154,
-    668493937328284304,
-    6457087967785666147,
-    6577218385643939044,
-    1075810443361945125,
-    3928235669412314413,
-    5234770567951417312,
-    4384596570738127504,
-    7062794887495378100,
-    4379212304095004378,
-    24743021625447469
-  ],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }
