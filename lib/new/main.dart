@@ -10,10 +10,12 @@ import 'package:path_provider/path_provider.dart';
 import '../objectbox.g.dart';
 import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
-import 'app/data/repositories/library_repository_i.dart';
+import 'app/data/repositories/album_repository_i.dart';
+import 'app/data/repositories/artist_repository_i.dart';
+import 'app/data/repositories/genre_repository_i.dart';
 import 'app/data/repositories/track_repository_i.dart';
-import 'app/domain/usecases/scan_library_usecase.dart';
-import 'app/domain/usecases/tracks_stream_usecase.dart';
+import 'app/domain/usecases/library_usecase.dart';
+import 'app/domain/usecases/track_usecase.dart';
 import 'app/retip_app.dart';
 
 void main() async {
@@ -34,7 +36,15 @@ void main() async {
   );
 
   // Repositories initialization
-  final libraryRepository = LibraryRepositoryI(
+  final artistRepository = ArtistRepositoryI(
+    onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
+  );
+  final albumRepository = AlbumRepositoryI(
+    onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
+  );
+  final genreRepository = GenreRepositoryI(
     onAudioQueryProvider: onAudioQueryProvider,
     objectboxProvider: objectboxProvider,
   );
@@ -44,18 +54,20 @@ void main() async {
   );
 
   // Usecases initialization
-  final scanLibraryUsecase = ScanLibraryUsecase(
-    libraryRepository: libraryRepository,
+  final libraryUsecase = LibraryUsecase(
+    artistRepository: artistRepository,
+    albumRepository: albumRepository,
+    genreRepository: genreRepository,
     trackRepository: trackRepository,
   )..call();
-  final tracksStreamUsecase = TracksStreamUsecase(
-    libraryRepository: libraryRepository,
+  final trackUsecase = TrackUsecase(
+    trackRepository: trackRepository,
   );
 
   // App initialization
   final retipApp = RetipApp(
-    tracksStreamUsecase: tracksStreamUsecase,
-    scanLibraryUsecase: scanLibraryUsecase,
+    libraryUsecase: libraryUsecase,
+    trackUsecase: trackUsecase,
   );
 
   runApp(retipApp);

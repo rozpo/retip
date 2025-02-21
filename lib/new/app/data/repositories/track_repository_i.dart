@@ -1,5 +1,4 @@
 import '../../../../objectbox.g.dart';
-import '../../domain/entities/track_entity.dart';
 import '../../domain/repositories/track_repository.dart';
 import '../models/album_model.dart';
 import '../models/artist_model.dart';
@@ -19,25 +18,24 @@ class TrackRepositoryI implements TrackRepository {
         _objectboxProvider = objectboxProvider;
 
   @override
-  Stream<List<TrackEntity>> allStream() {
-    // TODO: implement allStream
-    throw UnimplementedError();
+  Stream<List<TrackModel>> allStream() {
+    return _objectboxProvider.stream<TrackModel>();
   }
 
   @override
-  Stream<List<TrackEntity>> byAlbumStream(int albumId) {
+  Stream<List<TrackModel>> byAlbumStream(int albumId) {
     // TODO: implement byAlbumStream
     throw UnimplementedError();
   }
 
   @override
-  Stream<List<TrackEntity>> byArtistStream(int artistId) {
+  Stream<List<TrackModel>> byArtistStream(int artistId) {
     // TODO: implement byArtistStream
     throw UnimplementedError();
   }
 
   @override
-  Stream<List<TrackEntity>> byGenreStream(int genreId) {
+  Stream<List<TrackModel>> byGenreStream(int genreId) {
     // TODO: implement byGenreStream
     throw UnimplementedError();
   }

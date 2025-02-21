@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'domain/usecases/scan_library_usecase.dart';
-import 'domain/usecases/tracks_stream_usecase.dart';
+import 'domain/usecases/library_usecase.dart';
+import 'domain/usecases/track_usecase.dart';
 import 'presentation/pages/library_page.dart';
 
 class RetipApp extends StatelessWidget {
-  final TracksStreamUsecase tracksStreamUsecase;
-  final ScanLibraryUsecase scanLibraryUsecase;
+  final LibraryUsecase libraryUsecase;
+  final TrackUsecase trackUsecase;
 
   const RetipApp({
-    required this.tracksStreamUsecase,
-    required this.scanLibraryUsecase,
+    required this.libraryUsecase,
+    required this.trackUsecase,
     super.key,
   });
 
@@ -19,8 +19,8 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => tracksStreamUsecase),
-        RepositoryProvider(create: (_) => scanLibraryUsecase),
+        RepositoryProvider(create: (_) => libraryUsecase),
+        RepositoryProvider(create: (_) => trackUsecase),
       ],
       child: MaterialApp(
         themeMode: ThemeMode.system,
