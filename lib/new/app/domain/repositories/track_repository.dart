@@ -10,4 +10,6 @@ abstract class TrackRepository {
   Stream<List<TrackEntity>> byArtistStream(int artistId);
 
   Stream<List<TrackEntity>> byGenreStream(int genreId);
+
+  Future<void> toggleFavorite(int id);
 }

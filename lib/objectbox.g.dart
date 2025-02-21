@@ -186,7 +186,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(6, 3123855614318435392),
       name: 'TrackModel',
-      lastPropertyId: const obx_int.IdUid(6, 2035719392625997768),
+      lastPropertyId: const obx_int.IdUid(7, 1327630611591459398),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -225,7 +225,12 @@ final _entities = <obx_int.ModelEntity>[
             name: 'location',
             type: 9,
             flags: 2080,
-            indexId: const obx_int.IdUid(6, 6610027212423034249))
+            indexId: const obx_int.IdUid(6, 6610027212423034249)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 1327630611591459398),
+            name: 'isFavorite',
+            type: 1,
+            flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
@@ -511,19 +516,22 @@ obx_int.ModelDefinition getObjectBoxModel() {
         objectToFB: (TrackModel object, fb.Builder fbb) {
           final titleOffset = fbb.writeString(object.title);
           final locationOffset = fbb.writeString(object.location);
-          fbb.startTable(7);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.albumDb.targetId);
           fbb.addInt64(2, object.artistDb.targetId);
           fbb.addInt64(3, object.genreDb.targetId);
           fbb.addOffset(4, titleOffset);
           fbb.addOffset(5, locationOffset);
+          fbb.addBool(6, object.isFavorite);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
+          final isFavoriteParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false);
           final locationParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 14, '');
           final titleParam = const fb.StringReader(asciiOptimization: true)
@@ -531,7 +539,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final object = TrackModel(
-              location: locationParam, title: titleParam, id: idParam);
+              isFavorite: isFavoriteParam,
+              location: locationParam,
+              title: titleParam,
+              id: idParam);
           object.albumDb.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
           object.albumDb.attach(store);
@@ -684,4 +695,8 @@ class TrackModel_ {
   /// See [TrackModel.location].
   static final location =
       obx.QueryStringProperty<TrackModel>(_entities[5].properties[5]);
+
+  /// See [TrackModel.isFavorite].
+  static final isFavorite =
+      obx.QueryBooleanProperty<TrackModel>(_entities[5].properties[6]);
 }

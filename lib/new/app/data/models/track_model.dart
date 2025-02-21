@@ -24,7 +24,11 @@ class TrackModel implements TrackEntity {
   @override
   String location;
 
+  @override
+  bool isFavorite;
+
   TrackModel({
+    this.isFavorite = false,
     required this.location,
     required this.title,
     this.id = 0,

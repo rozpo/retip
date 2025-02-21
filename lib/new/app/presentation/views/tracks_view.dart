@@ -56,6 +56,14 @@ class _TracksViewState extends State<TracksView> {
                 title: Text(track.title),
                 subtitle:
                     track.artist != null ? Text(track.artist!.name) : null,
+                trailing: IconButton(
+                  onPressed: () {
+                    context.read<TrackUsecase>().toggleFavorite(track.id);
+                  },
+                  icon: Icon(
+                    track.isFavorite ? Icons.favorite : Icons.favorite_border,
+                  ),
+                ),
               );
             },
           ),

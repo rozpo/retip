@@ -23,4 +23,8 @@ class TrackUsecase {
   Stream<List<TrackEntity>> byGenreStream(int genreId) {
     return _trackRepository.byGenreStream(genreId);
   }
+
+  Future<void> toggleFavorite(int id) {
+    return _trackRepository.toggleFavorite(id);
+  }
 }

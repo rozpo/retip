@@ -156,7 +156,7 @@
     },
     {
       "id": "6:3123855614318435392",
-      "lastPropertyId": "6:2035719392625997768",
+      "lastPropertyId": "7:1327630611591459398",
       "name": "TrackModel",
       "properties": [
         {
@@ -200,6 +200,11 @@
           "type": 9,
           "flags": 2080,
           "indexId": "6:6610027212423034249"
+        },
+        {
+          "id": "7:1327630611591459398",
+          "name": "isFavorite",
+          "type": 1
         }
       ],
       "relations": []

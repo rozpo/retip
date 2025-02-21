@@ -10,8 +10,10 @@ abstract class TrackEntity {
 
   final String title;
   final String location;
+  final bool isFavorite;
 
   TrackEntity({
+    this.isFavorite = false,
     required this.location,
     required this.title,
     required this.id,

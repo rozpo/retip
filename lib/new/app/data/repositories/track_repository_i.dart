@@ -84,4 +84,14 @@ class TrackRepositoryI implements TrackRepository {
       _objectboxProvider.insert<TrackModel>(trackEntity);
     }
   }
+
+  @override
+  Future<void> toggleFavorite(int id) async {
+    final entity = await _objectboxProvider.get<TrackModel>(id);
+
+    if (entity == null) return;
+
+    entity.isFavorite = !entity.isFavorite;
+    _objectboxProvider.update<TrackModel>(entity);
+  }
 }
