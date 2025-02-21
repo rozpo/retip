@@ -19,4 +19,8 @@ class TrackUsecase {
   Stream<List<TrackEntity>> byArtistStream(int artistId) {
     return _trackRepository.byArtistStream(artistId);
   }
+
+  Stream<List<TrackEntity>> byGenreStream(int genreId) {
+    return _trackRepository.byGenreStream(genreId);
+  }
 }

@@ -15,8 +15,9 @@ class ObjectboxProvider {
     return await _store.box<T>().query(condition).build().findFirstAsync();
   }
 
-  Stream<List<T>> stream<T>() {
-    final query = _store.box<T>().query().watch(triggerImmediately: true);
+  Stream<List<T>> stream<T>([Condition<T>? condition]) {
+    final query =
+        _store.box<T>().query(condition).watch(triggerImmediately: true);
     return query.map((query) => query.find());
   }
 }

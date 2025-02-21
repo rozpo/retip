@@ -24,20 +24,20 @@ class TrackRepositoryI implements TrackRepository {
 
   @override
   Stream<List<TrackModel>> byAlbumStream(int albumId) {
-    // TODO: implement byAlbumStream
-    throw UnimplementedError();
+    final condition = TrackModel_.albumDb.equals(albumId);
+    return _objectboxProvider.stream<TrackModel>(condition);
   }
 
   @override
   Stream<List<TrackModel>> byArtistStream(int artistId) {
-    // TODO: implement byArtistStream
-    throw UnimplementedError();
+    final condition = TrackModel_.artistDb.equals(artistId);
+    return _objectboxProvider.stream<TrackModel>(condition);
   }
 
   @override
   Stream<List<TrackModel>> byGenreStream(int genreId) {
-    // TODO: implement byGenreStream
-    throw UnimplementedError();
+    final condition = TrackModel_.genreDb.equals(genreId);
+    return _objectboxProvider.stream<TrackModel>(condition);
   }
 
   @override

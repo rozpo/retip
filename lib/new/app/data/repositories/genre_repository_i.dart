@@ -1,5 +1,4 @@
 import '../../../../objectbox.g.dart';
-import '../../domain/entities/genre_entity.dart';
 import '../../domain/repositories/genre_repository.dart';
 import '../models/genre_model.dart';
 import '../providers/objectbox_provider.dart';
@@ -16,13 +15,12 @@ class GenreRepositoryI implements GenreRepository {
         _objectboxProvider = objectboxProvider;
 
   @override
-  Stream<List<GenreEntity>> allStream() {
-    // TODO: implement allStream
-    throw UnimplementedError();
+  Stream<List<GenreModel>> allStream() {
+    return _objectboxProvider.stream<GenreModel>();
   }
 
   @override
-  Stream<GenreEntity?> byIdStream(int id) {
+  Stream<GenreModel?> byIdStream(int id) {
     // TODO: implement byIdStream
     throw UnimplementedError();
   }

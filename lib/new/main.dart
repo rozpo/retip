@@ -14,6 +14,9 @@ import 'app/data/repositories/album_repository_i.dart';
 import 'app/data/repositories/artist_repository_i.dart';
 import 'app/data/repositories/genre_repository_i.dart';
 import 'app/data/repositories/track_repository_i.dart';
+import 'app/domain/usecases/album_usecase.dart';
+import 'app/domain/usecases/artist_usecase.dart';
+import 'app/domain/usecases/genre_usecase.dart';
 import 'app/domain/usecases/library_usecase.dart';
 import 'app/domain/usecases/track_usecase.dart';
 import 'app/retip_app.dart';
@@ -63,10 +66,22 @@ void main() async {
   final trackUsecase = TrackUsecase(
     trackRepository: trackRepository,
   );
+  final albumUsecase = AlbumUsecase(
+    albumRepository: albumRepository,
+  );
+  final artistUsecase = ArtistUsecase(
+    artistRepository: artistRepository,
+  );
+  final genreUsecase = GenreUsecase(
+    genreRepository: genreRepository,
+  );
 
   // App initialization
   final retipApp = RetipApp(
     libraryUsecase: libraryUsecase,
+    artistUsecase: artistUsecase,
+    albumUsecase: albumUsecase,
+    genreUsecase: genreUsecase,
     trackUsecase: trackUsecase,
   );
 

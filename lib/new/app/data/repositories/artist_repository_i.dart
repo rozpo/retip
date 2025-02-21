@@ -1,5 +1,4 @@
 import '../../../../objectbox.g.dart';
-import '../../domain/entities/artist_entity.dart';
 import '../../domain/repositories/artist_repository.dart';
 import '../models/artist_model.dart';
 import '../providers/objectbox_provider.dart';
@@ -16,13 +15,12 @@ class ArtistRepositoryI implements ArtistRepository {
         _objectboxProvider = objectboxProvider;
 
   @override
-  Stream<List<ArtistEntity>> allStream() {
-    // TODO: implement allStream
-    throw UnimplementedError();
+  Stream<List<ArtistModel>> allStream() {
+    return _objectboxProvider.stream<ArtistModel>();
   }
 
   @override
-  Stream<ArtistEntity?> byIdStream(int id) {
+  Stream<ArtistModel?> byIdStream(int id) {
     // TODO: implement byIdStream
     throw UnimplementedError();
   }

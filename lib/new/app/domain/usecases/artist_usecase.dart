@@ -5,8 +5,8 @@ class ArtistUsecase {
   final ArtistRepository _artistRepository;
 
   const ArtistUsecase({
-    required ArtistRepository albumRepository,
-  }) : _artistRepository = albumRepository;
+    required ArtistRepository artistRepository,
+  }) : _artistRepository = artistRepository;
 
   Stream<List<ArtistEntity>> allStream() {
     return _artistRepository.allStream();

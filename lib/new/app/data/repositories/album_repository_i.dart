@@ -1,5 +1,4 @@
 import '../../../../objectbox.g.dart';
-import '../../domain/entities/album_entity.dart';
 import '../../domain/repositories/album_repository.dart';
 import '../models/album_model.dart';
 import '../models/artist_model.dart';
@@ -17,19 +16,18 @@ class AlbumRepositoryI implements AlbumRepository {
         _objectboxProvider = objectboxProvider;
 
   @override
-  Stream<List<AlbumEntity>> allStream() {
-    // TODO: implement allStream
-    throw UnimplementedError();
+  Stream<List<AlbumModel>> allStream() {
+    return _objectboxProvider.stream<AlbumModel>();
   }
 
   @override
-  Stream<List<AlbumEntity>> byArtistStream(int artistId) {
-    // TODO: implement byArtistStream
-    throw UnimplementedError();
+  Stream<List<AlbumModel>> byArtistStream(int artistId) {
+    final condition = AlbumModel_.artistDb.equals(artistId);
+    return _objectboxProvider.stream<AlbumModel>(condition);
   }
 
   @override
-  Stream<AlbumEntity?> byIdStream(int id) {
+  Stream<AlbumModel?> byIdStream(int id) {
     // TODO: implement byIdStream
     throw UnimplementedError();
   }
