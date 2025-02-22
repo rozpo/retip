@@ -5,18 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../objectbox.g.dart';
 import 'app/data/providers/app_settings_provider.dart';
 import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
+import 'app/data/providers/shared_preferences_provider.dart';
 import 'app/data/repositories/album_repository_i.dart';
 import 'app/data/repositories/artist_repository_i.dart';
+import 'app/data/repositories/config_repository_i.dart';
 import 'app/data/repositories/genre_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/track_repository_i.dart';
+import 'app/domain/repositories/config_repository.dart';
 import 'app/domain/usecases/album_usecase.dart';
 import 'app/domain/usecases/artist_usecase.dart';
+import 'app/domain/usecases/config_usecase.dart';
 import 'app/domain/usecases/genre_usecase.dart';
 import 'app/domain/usecases/library_usecase.dart';
 import 'app/domain/usecases/permission_usecase.dart';
@@ -27,10 +32,9 @@ import 'app/retip_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initObjectbox();
-
   // Third party dependencies
-  final store = GetIt.I.get<Store>();
+  final prefs = await SharedPreferences.getInstance();
+  final store = await initObjectbox();
 
   // Providers initialization
   final appSettingsProvider = AppSettingsProvider();
@@ -38,6 +42,9 @@ void main() async {
     store: store,
   );
   final onAudioQueryProvider = OnAudioQueryProvider();
+  final sharedPreferencesProvider = SharedPreferencesProvider(
+    sharedPreferences: prefs,
+  );
 
   // Repositories initialization
   final artistRepository = ArtistRepositoryI(
@@ -51,6 +58,9 @@ void main() async {
   final genreRepository = GenreRepositoryI(
     onAudioQueryProvider: onAudioQueryProvider,
     objectboxProvider: objectboxProvider,
+  );
+  final ConfigRepository configRepository = ConfigRepositoryI(
+    sharedPreferencesProvider: sharedPreferencesProvider,
   );
   final permissionRepository = PermissionRepositoryI(
     onAudioQueryProvider: onAudioQueryProvider,
@@ -67,6 +77,9 @@ void main() async {
   );
   final artistUsecase = ArtistUsecase(
     artistRepository: artistRepository,
+  );
+  final configUsecase = ConfigUsecase(
+    configRepository: configRepository,
   );
   final genreUsecase = GenreUsecase(
     genreRepository: genreRepository,
@@ -95,6 +108,7 @@ void main() async {
     libraryUsecase: libraryUsecase,
     permissionBloc: permissionBloc,
     artistUsecase: artistUsecase,
+    configUsecase: configUsecase,
     albumUsecase: albumUsecase,
     genreUsecase: genreUsecase,
     trackUsecase: trackUsecase,
@@ -103,7 +117,7 @@ void main() async {
   runApp(retipApp);
 }
 
-Future<void> initObjectbox() async {
+Future<Store> initObjectbox() async {
   final appDir = await getApplicationDocumentsDirectory();
   final dbPath = join(appDir.path, 'objectbox');
 
@@ -130,4 +144,6 @@ Future<void> initObjectbox() async {
       GetIt.I.registerSingleton<Admin>(Admin(store));
     }
   }
+
+  return store;
 }

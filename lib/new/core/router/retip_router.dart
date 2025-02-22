@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/domain/usecases/config_usecase.dart';
 import '../../app/domain/usecases/permission_usecase.dart';
 import '../../app/presentation/pages/library_page.dart';
+import '../../app/presentation/pages/onboarding/onboarding_page.dart';
 import '../../app/presentation/pages/permission/permission_page.dart';
 import 'retip_route.dart';
 
@@ -18,8 +20,13 @@ class RetipRouter extends GoRouter {
           routingConfig: ValueNotifier(
             RoutingConfig(
               redirect: (context, state) async {
-                final usecase = context.read<PermissionUsecase>();
-                final hasPermission = await usecase.hasMediaPermission();
+                final config = context.read<ConfigUsecase>();
+                final showOnboarding = config.showOnboarding();
+
+                if (showOnboarding) return RetipRoute.onboarding;
+
+                final permission = context.read<PermissionUsecase>();
+                final hasPermission = await permission.hasMediaPermission();
 
                 return hasPermission == false ? RetipRoute.permission : null;
               },
@@ -43,6 +50,12 @@ class RetipRouter extends GoRouter {
                       },
                     )
                   ],
+                ),
+                RetipRoute(
+                  path: RetipRoute.onboarding,
+                  builder: (context, state) {
+                    return const OnboardingPage();
+                  },
                 ),
                 RetipRoute(
                   path: RetipRoute.permission,

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../core/router/retip_router.dart';
 import 'domain/usecases/album_usecase.dart';
 import 'domain/usecases/artist_usecase.dart';
+import 'domain/usecases/config_usecase.dart';
 import 'domain/usecases/genre_usecase.dart';
 import 'domain/usecases/library_usecase.dart';
 import 'domain/usecases/permission_usecase.dart';
@@ -14,6 +15,7 @@ class RetipApp extends StatelessWidget {
   final PermissionUsecase permissionUsecase;
   final LibraryUsecase libraryUsecase;
   final ArtistUsecase artistUsecase;
+  final ConfigUsecase configUsecase;
   final AlbumUsecase albumUsecase;
   final GenreUsecase genreUsecase;
   final TrackUsecase trackUsecase;
@@ -25,6 +27,7 @@ class RetipApp extends StatelessWidget {
     required this.libraryUsecase,
     required this.permissionBloc,
     required this.artistUsecase,
+    required this.configUsecase,
     required this.albumUsecase,
     required this.genreUsecase,
     required this.trackUsecase,
@@ -38,6 +41,7 @@ class RetipApp extends StatelessWidget {
         RepositoryProvider(create: (_) => permissionUsecase),
         RepositoryProvider(create: (_) => libraryUsecase),
         RepositoryProvider(create: (_) => artistUsecase),
+        RepositoryProvider(create: (_) => configUsecase),
         RepositoryProvider(create: (_) => albumUsecase),
         RepositoryProvider(create: (_) => genreUsecase),
         RepositoryProvider(create: (_) => trackUsecase),

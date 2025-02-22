@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 
 class RetipRoute extends GoRoute {
   static const String home = '/';
+  static const String onboarding = '/intro';
   static const String permission = '/permission';
 
   RetipRoute({
