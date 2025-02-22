@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../core/router/retip_router.dart';
 import 'domain/usecases/album_usecase.dart';
 import 'domain/usecases/artist_usecase.dart';
 import 'domain/usecases/genre_usecase.dart';
 import 'domain/usecases/library_usecase.dart';
 import 'domain/usecases/track_usecase.dart';
-import 'presentation/pages/library_page.dart';
 
 class RetipApp extends StatelessWidget {
   final LibraryUsecase libraryUsecase;
@@ -34,10 +34,10 @@ class RetipApp extends StatelessWidget {
         RepositoryProvider(create: (_) => genreUsecase),
         RepositoryProvider(create: (_) => trackUsecase),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: RetipRouter(),
         themeMode: ThemeMode.system,
         darkTheme: ThemeData.dark(),
-        home: const LibraryPage(),
         theme: ThemeData.light(),
       ),
     );
