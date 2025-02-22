@@ -28,8 +28,11 @@ class AlbumRepositoryI implements AlbumRepository {
 
   @override
   Stream<AlbumModel?> byIdStream(int id) {
-    // TODO: implement byIdStream
-    throw UnimplementedError();
+    final condition = AlbumModel_.id.equals(id);
+    return _objectboxProvider.stream<AlbumModel>(condition).map((event) {
+      if (event.isEmpty) return null;
+      return event.first;
+    });
   }
 
   @override

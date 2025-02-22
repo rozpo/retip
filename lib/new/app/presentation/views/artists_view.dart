@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/artist_entity.dart';
 import '../../domain/usecases/artist_usecase.dart';
-import 'albums_view.dart';
+import '../pages/artist_page.dart';
 
 class ArtistsView extends StatelessWidget {
   const ArtistsView({super.key});
@@ -32,7 +32,7 @@ class ArtistsView extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return AlbumsView(artistId: artist.id);
+                        return ArtistPage(id: artist.id);
                       },
                     ),
                   );

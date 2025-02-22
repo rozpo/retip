@@ -21,8 +21,11 @@ class GenreRepositoryI implements GenreRepository {
 
   @override
   Stream<GenreModel?> byIdStream(int id) {
-    // TODO: implement byIdStream
-    throw UnimplementedError();
+    final condition = GenreModel_.id.equals(id);
+    return _objectboxProvider.stream<GenreModel>(condition).map((event) {
+      if (event.isEmpty) return null;
+      return event.first;
+    });
   }
 
   @override

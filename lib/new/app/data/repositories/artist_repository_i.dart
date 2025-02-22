@@ -21,8 +21,11 @@ class ArtistRepositoryI implements ArtistRepository {
 
   @override
   Stream<ArtistModel?> byIdStream(int id) {
-    // TODO: implement byIdStream
-    throw UnimplementedError();
+    final condition = ArtistModel_.id.equals(id);
+    return _objectboxProvider.stream<ArtistModel>(condition).map((event) {
+      if (event.isEmpty) return null;
+      return event.first;
+    });
   }
 
   @override
