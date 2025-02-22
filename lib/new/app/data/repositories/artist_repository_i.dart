@@ -30,7 +30,7 @@ class ArtistRepositoryI implements ArtistRepository {
 
   @override
   Future<void> scan() async {
-    final artists = await _onAudioQueryProvider.getAllArtists();
+    final artists = await _onAudioQueryProvider.queryArtists();
 
     for (final artist in artists) {
       final condition = ArtistModel_.name.equals(artist.artist);

@@ -42,7 +42,7 @@ class TrackRepositoryI implements TrackRepository {
 
   @override
   Future<void> scan() async {
-    final tracks = await _onAudioQueryProvider.getAllTracks();
+    final tracks = await _onAudioQueryProvider.querySongs();
 
     for (final track in tracks) {
       if (track.uri == null) continue;

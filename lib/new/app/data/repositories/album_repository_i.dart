@@ -37,7 +37,7 @@ class AlbumRepositoryI implements AlbumRepository {
 
   @override
   Future<void> scan() async {
-    final albums = await _onAudioQueryProvider.getAllAlbums();
+    final albums = await _onAudioQueryProvider.queryAlbums();
     for (final album in albums) {
       final condition = AlbumModel_.title.equals(album.album);
       final entity = await _objectboxProvider.findFirst<AlbumModel>(condition);

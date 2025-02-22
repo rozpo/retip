@@ -30,7 +30,7 @@ class GenreRepositoryI implements GenreRepository {
 
   @override
   Future<void> scan() async {
-    final genres = await _onAudioQueryProvider.getAllGenres();
+    final genres = await _onAudioQueryProvider.queryGenres();
     for (final genre in genres) {
       final condition = GenreModel_.name.equals(genre.genre);
       final entity = await _objectboxProvider.findFirst<GenreModel>(condition);
