@@ -30,6 +30,7 @@ import 'app/presentation/pages/library/bloc/library_bloc.dart';
 import 'app/presentation/pages/permission/bloc/permission_bloc.dart';
 import 'app/retip_app.dart';
 import 'core/router/retip_router.dart';
+import 'core/theme/retip_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final router = RetipRouter();
   final store = await initObjectbox();
+  final theme = RetipTheme();
 
   // Providers initialization
   final appSettingsProvider = AppSettingsProvider();
@@ -120,6 +122,7 @@ void main() async {
     trackUsecase: trackUsecase,
     libraryBloc: libraryBloc,
     retipRouter: router,
+    retipTheme: theme,
   );
 
   runApp(retipApp);

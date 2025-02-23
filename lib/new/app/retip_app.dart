@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/router/retip_router.dart';
+import '../core/theme/retip_theme.dart';
 import 'domain/usecases/album_usecase.dart';
 import 'domain/usecases/artist_usecase.dart';
 import 'domain/usecases/config_usecase.dart';
@@ -14,6 +15,7 @@ import 'presentation/pages/permission/bloc/permission_bloc.dart';
 
 class RetipApp extends StatelessWidget {
   final RetipRouter retipRouter;
+  final RetipTheme retipTheme;
 
   final PermissionUsecase permissionUsecase;
   final LibraryUsecase libraryUsecase;
@@ -37,6 +39,7 @@ class RetipApp extends StatelessWidget {
     required this.trackUsecase,
     required this.libraryBloc,
     required this.retipRouter,
+    required this.retipTheme,
     super.key,
   });
 
@@ -59,7 +62,7 @@ class RetipApp extends StatelessWidget {
         ],
         child: MaterialApp.router(
           themeMode: ThemeMode.system,
-          darkTheme: ThemeData.dark(),
+          darkTheme: retipTheme.darkTheme,
           routerConfig: retipRouter,
           theme: ThemeData.light(),
         ),
