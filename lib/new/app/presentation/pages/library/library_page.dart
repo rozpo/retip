@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/usecases/library_usecase.dart';
-import '../views/albums_view.dart';
-import '../views/artists_view.dart';
-import '../views/genres_view.dart';
-import '../views/tracks_view.dart';
+import '../../../domain/usecases/library_usecase.dart';
+import '../../views/albums_view.dart';
+import '../../views/artists_view.dart';
+import '../../views/genres_view.dart';
+import '../../views/tracks_view.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});
