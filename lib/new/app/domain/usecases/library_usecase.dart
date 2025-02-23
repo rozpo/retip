@@ -19,7 +19,7 @@ class LibraryUsecase {
         _genreRepository = genreRepository,
         _trackRepository = trackRepository;
 
-  Future<void> call() async {
+  Future<void> scan() async {
     await _artistRepository.scan();
     await _albumRepository.scan();
     await _genreRepository.scan();

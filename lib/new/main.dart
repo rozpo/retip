@@ -26,6 +26,7 @@ import 'app/domain/usecases/genre_usecase.dart';
 import 'app/domain/usecases/library_usecase.dart';
 import 'app/domain/usecases/permission_usecase.dart';
 import 'app/domain/usecases/track_usecase.dart';
+import 'app/presentation/pages/library/bloc/library_bloc.dart';
 import 'app/presentation/pages/permission/bloc/permission_bloc.dart';
 import 'app/retip_app.dart';
 
@@ -98,6 +99,9 @@ void main() async {
   );
 
   // Blocs initialization
+  final libraryBloc = LibraryBloc(
+    libraryUsecase: libraryUsecase,
+  );
   final permissionBloc = PermissionBloc(
     permissionUsecase: permissionUsecase,
   );
@@ -112,6 +116,7 @@ void main() async {
     albumUsecase: albumUsecase,
     genreUsecase: genreUsecase,
     trackUsecase: trackUsecase,
+    libraryBloc: libraryBloc,
   );
 
   runApp(retipApp);
