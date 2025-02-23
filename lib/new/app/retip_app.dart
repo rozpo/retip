@@ -13,6 +13,8 @@ import 'presentation/pages/library/bloc/library_bloc.dart';
 import 'presentation/pages/permission/bloc/permission_bloc.dart';
 
 class RetipApp extends StatelessWidget {
+  final RetipRouter retipRouter;
+
   final PermissionUsecase permissionUsecase;
   final LibraryUsecase libraryUsecase;
   final ArtistUsecase artistUsecase;
@@ -34,6 +36,7 @@ class RetipApp extends StatelessWidget {
     required this.genreUsecase,
     required this.trackUsecase,
     required this.libraryBloc,
+    required this.retipRouter,
     super.key,
   });
 
@@ -55,9 +58,9 @@ class RetipApp extends StatelessWidget {
           BlocProvider(create: (_) => libraryBloc),
         ],
         child: MaterialApp.router(
-          routerConfig: RetipRouter(),
           themeMode: ThemeMode.system,
           darkTheme: ThemeData.dark(),
+          routerConfig: retipRouter,
           theme: ThemeData.light(),
         ),
       ),

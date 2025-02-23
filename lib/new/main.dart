@@ -29,12 +29,14 @@ import 'app/domain/usecases/track_usecase.dart';
 import 'app/presentation/pages/library/bloc/library_bloc.dart';
 import 'app/presentation/pages/permission/bloc/permission_bloc.dart';
 import 'app/retip_app.dart';
+import 'core/router/retip_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Third party dependencies
   final prefs = await SharedPreferences.getInstance();
+  final router = RetipRouter();
   final store = await initObjectbox();
 
   // Providers initialization
@@ -117,6 +119,7 @@ void main() async {
     genreUsecase: genreUsecase,
     trackUsecase: trackUsecase,
     libraryBloc: libraryBloc,
+    retipRouter: router,
   );
 
   runApp(retipApp);

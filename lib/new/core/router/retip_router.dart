@@ -11,7 +11,7 @@ import '../../app/presentation/pages/onboarding/onboarding_page.dart';
 import '../../app/presentation/pages/permission/permission_page.dart';
 import '../../app/presentation/pages/search/search_page.dart';
 import '../../app/presentation/pages/settings/settings_page.dart';
-import '../../app/presentation/widgets/bottom_navigation_bar_widget.dart';
+import '../../app/presentation/widgets/organisms/bottom_navigation_bar_widget.dart';
 import 'retip_route.dart';
 
 class RetipRouter extends GoRouter {
