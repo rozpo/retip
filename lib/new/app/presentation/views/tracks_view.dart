@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/track_entity.dart';
 import '../../domain/usecases/track_usecase.dart';
-import '../widgets/tiles/track_tile.dart';
+import '../widgets/molecules/list_tile_molecule.dart';
 import '../widgets/track_options.dart';
 
 class TracksView extends StatefulWidget {
@@ -54,22 +54,22 @@ class _TracksViewState extends State<TracksView> {
             itemBuilder: (context, index) {
               final track = snapshot.data![index];
 
-              return TrackTile(
-                title: track.title,
+              return ListTileMolecule(
+                onMore: () => TrackOptions(track).show(context),
                 subtitle: track.artist?.name,
-                onMore: () {
-                  final trackOptions = TrackOptions(track);
-                  trackOptions.show(context);
-                },
-                // trailing: IconButton(
-                //   onPressed: () {
-                //     context.read<TrackUsecase>().toggleFavorite(track.id);
-                //   },
-                //   icon: Icon(
-                //     track.isFavorite ? Icons.favorite : Icons.favorite_border,
-                //   ),
-                // ),
+                icon: Icons.music_note,
+                title: track.title,
               );
+              // onMore: () {
+              // },
+              // trailing: IconButton(
+              //   onPressed: () {
+              //     context.read<TrackUsecase>().toggleFavorite(track.id);
+              //   },
+              //   icon: Icon(
+              //     track.isFavorite ? Icons.favorite : Icons.favorite_border,
+              //   ),
+              // ),
             },
           ),
         );

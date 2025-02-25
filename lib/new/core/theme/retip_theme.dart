@@ -18,6 +18,17 @@ class RetipTheme {
         contentPadding: EdgeInsets.all(8),
         minVerticalPadding: 0,
         minTileHeight: 40,
+        horizontalTitleGap: 8,
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+        ),
       ),
     );
   }

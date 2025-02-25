@@ -14,8 +14,8 @@ class TrackOptions extends StatelessWidget {
 
   Future<void> show(BuildContext context) async {
     return showModalBottomSheet(
-      useRootNavigator: true,
       builder: (context) => this,
+      useRootNavigator: true,
       useSafeArea: true,
       context: context,
     );
@@ -46,6 +46,10 @@ class TrackOptions extends StatelessWidget {
               shrinkWrap: true,
               children: const [
                 ListTile(
+                  leading: IconAtom(Icons.play_arrow),
+                  title: Text('Play next'),
+                ),
+                ListTile(
                   leading: IconAtom(Icons.queue_music),
                   title: Text('Add to queue'),
                 ),
@@ -68,6 +72,18 @@ class TrackOptions extends StatelessWidget {
                 ListTile(
                   leading: IconAtom(Icons.album),
                   title: Text('Go to album'),
+                ),
+                Divider(
+                  height: 1,
+                  thickness: 1,
+                ),
+                ListTile(
+                  leading: IconAtom(Icons.sort),
+                  title: Text('Sort by'),
+                ),
+                ListTile(
+                  leading: IconAtom(Icons.grid_view),
+                  title: Text('Grid view'),
                 ),
               ],
             ),
