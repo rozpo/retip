@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/track_entity.dart';
-import 'atoms/icon_atom.dart';
+import '../../../../widgets/atoms/icon_atom.dart';
 import 'atoms/short_text_atom.dart';
 
 class TrackOptions extends StatelessWidget {

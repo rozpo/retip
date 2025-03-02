@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../atoms/icon_atom.dart';
+import '../../../../../widgets/atoms/icon_atom.dart';
 import '../atoms/short_text_atom.dart';
 
 class ListTileMolecule extends StatelessWidget {
