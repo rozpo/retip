@@ -5,7 +5,7 @@ import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/utils/sizer.dart';
 import '../../domain/entities/artist_entity.dart';
 import '../../domain/usecases/artist_usecase.dart';
-import '../pages/artist_page.dart';
+import '../pages/artist/artist_page.dart';
 import '../widgets/molecules/list_tile_molecule.dart';
 
 class ArtistsView extends StatelessWidget {

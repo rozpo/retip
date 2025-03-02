@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/artist_entity.dart';
-import '../../domain/usecases/artist_usecase.dart';
-import '../views/tracks_view.dart';
+import '../../../domain/entities/artist_entity.dart';
+import '../../../domain/usecases/artist_usecase.dart';
+import '../../views/tracks_view.dart';
 
 class ArtistPage extends StatefulWidget {
   final int id;

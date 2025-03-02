@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/sizer.dart';
 import '../../domain/entities/album_entity.dart';
 import '../../domain/usecases/album_usecase.dart';
+import '../pages/album/album_page.dart';
 import '../widgets/molecules/list_tile_molecule.dart';
-import 'tracks_view.dart';
 
 class AlbumsView extends StatefulWidget {
   final int? artistId;
@@ -54,7 +54,10 @@ class _AlbumsViewState extends State<AlbumsView> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return TracksView(albumId: album.id);
+                        return AlbumPage(
+                          title: album.title,
+                          albumId: album.id,
+                        );
                       },
                     ),
                   );
