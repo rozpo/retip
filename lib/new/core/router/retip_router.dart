@@ -12,6 +12,7 @@ import '../../app/presentation/pages/permission/permission_page.dart';
 import '../../app/presentation/pages/search/search_page.dart';
 import '../../app/presentation/pages/settings/settings_page.dart';
 import '../../app/presentation/widgets/organisms/bottom_navigation_bar_widget.dart';
+import '../../app/presentation/widgets/organisms/bottom_player_widget.dart';
 import 'retip_route.dart';
 
 class RetipRouter extends GoRouter {
@@ -41,6 +42,7 @@ class RetipRouter extends GoRouter {
                   builder: (context, state, child) {
                     return Scaffold(
                       body: child,
+                      bottomSheet: const BottomPlayerWidget(),
                       bottomNavigationBar: const BottomNavigationBarWidget(),
                     );
                   },

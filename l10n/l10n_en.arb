@@ -150,5 +150,6 @@
     "delete": "Delete",
     "myAwesomePlaylist": "My awesome playlist",
     "libraryScan": "Library scan",
-    "scanForMusicDescription": "Scan for music files on your device and add them to the library"
+    "scanForMusicDescription": "Scan for music files on your device and add them to the library",
+    "genres": "Genres"
 }

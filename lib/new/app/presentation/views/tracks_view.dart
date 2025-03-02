@@ -45,33 +45,28 @@ class _TracksViewState extends State<TracksView> {
     return StreamBuilder<List<TrackEntity>>(
       stream: _stream,
       builder: (context, snapshot) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Tracks (${snapshot.data?.length ?? 0})'),
-          ),
-          body: ListView.builder(
-            itemCount: snapshot.data?.length ?? 0,
-            itemBuilder: (context, index) {
-              final track = snapshot.data![index];
+        return ListView.builder(
+          itemCount: snapshot.data?.length ?? 0,
+          itemBuilder: (context, index) {
+            final track = snapshot.data![index];
 
-              return ListTileMolecule(
-                onMore: () => TrackOptions(track).show(context),
-                subtitle: track.artist?.name,
-                icon: Icons.music_note,
-                title: track.title,
-              );
-              // onMore: () {
-              // },
-              // trailing: IconButton(
-              //   onPressed: () {
-              //     context.read<TrackUsecase>().toggleFavorite(track.id);
-              //   },
-              //   icon: Icon(
-              //     track.isFavorite ? Icons.favorite : Icons.favorite_border,
-              //   ),
-              // ),
-            },
-          ),
+            return ListTileMolecule(
+              onMore: () => TrackOptions(track).show(context),
+              subtitle: track.artist?.name,
+              icon: Icons.music_note,
+              title: track.title,
+            );
+            // onMore: () {
+            // },
+            // trailing: IconButton(
+            //   onPressed: () {
+            //     context.read<TrackUsecase>().toggleFavorite(track.id);
+            //   },
+            //   icon: Icon(
+            //     track.isFavorite ? Icons.favorite : Icons.favorite_border,
+            //   ),
+            // ),
+          },
         );
       },
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../core/l10n/retip_l10n.dart';
 import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
 import 'domain/usecases/album_usecase.dart';
@@ -61,8 +62,10 @@ class RetipApp extends StatelessWidget {
           BlocProvider(create: (_) => libraryBloc),
         ],
         child: MaterialApp.router(
-          themeMode: ThemeMode.system,
+          localizationsDelegates: RetipL10n.localizationsDelegates,
+          supportedLocales: RetipL10n.supportedLocales,
           darkTheme: retipTheme.darkTheme,
+          themeMode: ThemeMode.system,
           routerConfig: retipRouter,
           theme: ThemeData.light(),
         ),
