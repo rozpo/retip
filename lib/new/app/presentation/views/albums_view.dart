@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utils/sizer.dart';
 import '../../domain/entities/album_entity.dart';
 import '../../domain/usecases/album_usecase.dart';
+import '../widgets/molecules/list_tile_molecule.dart';
 import 'tracks_view.dart';
 
 class AlbumsView extends StatefulWidget {
@@ -37,18 +39,16 @@ class _AlbumsViewState extends State<AlbumsView> {
       stream: _stream,
       builder: (context, snapshot) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text('Albums (${snapshot.data?.length ?? 0})'),
-          ),
           body: ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: Sizer.small),
             itemCount: snapshot.data?.length ?? 0,
             itemBuilder: (context, index) {
               final album = snapshot.data![index];
 
-              return ListTile(
-                title: Text(album.title),
-                subtitle:
-                    album.artist != null ? Text(album.artist!.name) : null,
+              return ListTileMolecule(
+                icon: Icons.album,
+                title: album.title,
+                subtitle: album.artist?.name,
                 onTap: () {
                   Navigator.push(
                     context,

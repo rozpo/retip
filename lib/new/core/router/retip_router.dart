@@ -42,8 +42,13 @@ class RetipRouter extends GoRouter {
                   builder: (context, state, child) {
                     return Scaffold(
                       body: child,
-                      bottomSheet: const BottomPlayerWidget(),
-                      bottomNavigationBar: const BottomNavigationBarWidget(),
+                      bottomNavigationBar: const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          BottomPlayerWidget(),
+                          BottomNavigationBarWidget(),
+                        ],
+                      ),
                     );
                   },
                   routes: [

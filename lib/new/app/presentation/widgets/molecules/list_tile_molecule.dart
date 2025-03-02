@@ -8,12 +8,14 @@ class ListTileMolecule extends StatelessWidget {
   final String? subtitle;
   final IconData icon;
   final VoidCallback? onMore;
+  final VoidCallback? onTap;
 
   const ListTileMolecule({
     required this.title,
     required this.icon,
     this.subtitle,
     this.onMore,
+    this.onTap,
     super.key,
   });
 
@@ -23,11 +25,14 @@ class ListTileMolecule extends StatelessWidget {
       leading: IconAtom(icon),
       subtitle: subtitle != null ? ShortTextAtom(subtitle!) : null,
       title: ShortTextAtom(title),
-      trailing: IconButton(
-        style: Theme.of(context).iconButtonTheme.style,
-        icon: const Icon(Icons.more_vert),
-        onPressed: onMore,
-      ),
+      onTap: onTap,
+      trailing: onMore != null
+          ? IconButton(
+              style: Theme.of(context).iconButtonTheme.style,
+              icon: const Icon(Icons.more_vert),
+              onPressed: onMore,
+            )
+          : null,
     );
   }
 }

@@ -64,6 +64,7 @@ class RetipApp extends StatelessWidget {
         child: MaterialApp.router(
           localizationsDelegates: RetipL10n.localizationsDelegates,
           supportedLocales: RetipL10n.supportedLocales,
+          scrollBehavior: retipTheme.scrollBehavior,
           darkTheme: retipTheme.darkTheme,
           themeMode: ThemeMode.system,
           routerConfig: retipRouter,

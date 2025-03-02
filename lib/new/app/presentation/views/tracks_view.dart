@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utils/sizer.dart';
 import '../../domain/entities/track_entity.dart';
 import '../../domain/usecases/track_usecase.dart';
 import '../widgets/molecules/list_tile_molecule.dart';
@@ -46,6 +47,7 @@ class _TracksViewState extends State<TracksView> {
       stream: _stream,
       builder: (context, snapshot) {
         return ListView.builder(
+          padding: const EdgeInsets.symmetric(vertical: Sizer.small),
           itemCount: snapshot.data?.length ?? 0,
           itemBuilder: (context, index) {
             final track = snapshot.data![index];
@@ -56,16 +58,6 @@ class _TracksViewState extends State<TracksView> {
               icon: Icons.music_note,
               title: track.title,
             );
-            // onMore: () {
-            // },
-            // trailing: IconButton(
-            //   onPressed: () {
-            //     context.read<TrackUsecase>().toggleFavorite(track.id);
-            //   },
-            //   icon: Icon(
-            //     track.isFavorite ? Icons.favorite : Icons.favorite_border,
-            //   ),
-            // ),
           },
         );
       },

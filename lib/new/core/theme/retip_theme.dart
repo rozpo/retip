@@ -32,4 +32,12 @@ class RetipTheme {
       ),
     );
   }
+
+  ScrollBehavior get scrollBehavior {
+    return const ScrollBehavior().copyWith(
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
+    );
+  }
 }

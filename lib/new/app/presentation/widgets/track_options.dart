@@ -42,7 +42,6 @@ class TrackOptions extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               children: const [
                 ListTile(
