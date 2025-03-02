@@ -1,0 +1,155 @@
+{
+    "@@locale": "en",
+    "allow": "Allow",
+    "album": "Album",
+    "artist": "Artist",
+    "cancel": "Cancel",
+    "favourites": "Favourites",
+    "grantPermission": "Grant permission to access storage for a seamless music playback experience",
+    "home": "Home",
+    "library": "Library",
+    "openAppSettings": "Open app settings",
+    "remove": "Remove",
+    "retip": "Retip",
+    "retipMusicPlayer": "Retip Music Player",
+    "retipDescription": "Retip is a beautiful and intuitive music player built using the Flutter. It provides a seamless and immersive experience for music enthusiasts, allowing them to enjoy their favorite tracks with ease.",
+    "retipMotto": "If you think that in the era of streaming, the art of offline listening to music has not disappeared. It's a sure sign that you need a RETIP!",
+    "search": "Search",
+    "searchForMusic": "Search for music...",
+    "storagePermission": "Storage access",
+    "track": "Track",
+    "unknownTitle": "Unknown Title",
+    "unknownAlbum": "Unknown Album",
+    "unknownArtist": "Unknown Artist",
+    "alertRemoveFromFavTitle": "Remove from favourites",
+    "alertRemoveFromFavMsg": "Are you sure to remove a track from favourites list?",
+    "albums": "Albums",
+    "artists": "Artists",
+    "tracks": "Tracks",
+    "noAlbums": "No albums found",
+    "noArtists": "No artists found",
+    "noTracks": "No tracks found",
+    "noPlaylists": "No playlists found",
+    "addToTheFavourites": "Add to the favourites",
+    "addToTheQueue": "Add to the queue",
+    "addToThePlaylist": "Add to the playlist",
+    "showAlbumArtist": "Show album artist",
+    "showArtist": "Show artist",
+    "viewAlbum": "View album",
+    "sortAlphabetically": "Sort alphabetically",
+    "sortByIndex": "Sort by index",
+    "duration": "Duration",
+    "addedTo": "Added to {name}",
+    "@addedTo": {
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "favourite"
+            }
+        }
+    },
+    "removedFrom": "Removed from {name}",
+    "@removedFrom": {
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "favourite"
+            }
+        }
+    },
+    "play": "Play",
+    "shuffle": "Shuffle",
+    "addToFavourites": "Add to favourites",
+    "removeFromFavourites": "Remove from favourites",
+    "goToArtist": "Go to artist",
+    "goToAlbum": "Go to album",
+    "addToPlaylist": "Add to playlist",
+    "albumsCount": "{count, plural, zero{No albums} one{1 Album} other{{count} Albums}}",
+    "@albumsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "tracksCount": "{count, plural, zero{No tracks} one{1 Track} other{{count} Tracks}}",
+    "@tracksCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "recentSearch": "Recent search",
+    "playlist": "Playlist",
+    "playlists": "Playlists",
+    "explore": "Explore",
+    "deletePlaylist": "Delete playlist",
+    "renamePlaylist": "Rename playlist",
+    "playlistDeleted": "Playlist deleted",
+    "removeFromPlaylist": "Remove from playlist",
+    "suggestedArtists": "Artists for you",
+    "suggestedAlbums": "Albums for you",
+    "somethingGotWrong": "Something got wrong",
+    "settings": "Settings",
+    "developer": "Developer",
+    "info": "Info",
+    "version": "Version",
+    "liked": "Liked",
+    "noFavYet": "No favourites yet, add something from library",
+    "createNewPlaylist": "Create new playlist",
+    "create": "Create",
+    "rename": "Rename",
+    "nameNewPlaylist": "Name a new playlist",
+    "playlingQueue": "Playing queue",
+    "nothingFound": "Nothing found",
+    "checkForUpdate": "Check for update",
+    "privacyPolicy": "Privacy policy",
+    "termsAndConditions": "Terms and conditions",
+    "legalese": "Copyright (c) 2024 Piotr Rozpończyk",
+    "licenses": "Licenses",
+    "aboutApp": "About application",
+    "appearance": "Appearance",
+    "darkMode": "Dark mode",
+    "batterySaver": "Battery saver",
+    "reduceApplicationAnimations": "Reduce application animations",
+    "developerMenu": "Developer menu",
+    "playback": "Playback",
+    "autoplay": "Autoplay",
+    "crossfade": "Crossfade",
+    "equalizer": "Equalizer",
+    "themeMode": "Theme mode",
+    "dark": "Dark",
+    "light": "Light",
+    "on": "On",
+    "off": "Off",
+    "nothingIsPlaying": "Nothing is playing",
+    "fileDetails": "File details",
+    "title": "Title",
+    "location": "Location",
+    "genre": "Genre",
+    "composer": "Composer",
+    "dateAdded": "Date added",
+    "dateModified": "Date modified",
+    "size": "Size",
+    "gridView": "Grid view",
+    "columnsCount": "Display {count} columns",
+    "@columnsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "generatedPlaylist": "Generated playlist",
+    "showAll": "Show all",
+    "keepPlayback": "Keep playing queue",
+    "playOnAppStart": "Start playing on app startup",
+    "resumePlaybackOn": "Resume playback from last track",
+    "areYouSure": "Are you sure? This action can't be undone",
+    "delete": "Delete",
+    "myAwesomePlaylist": "My awesome playlist",
+    "libraryScan": "Library scan",
+    "scanForMusicDescription": "Scan for music files on your device and add them to the library",
+    "genres": "Genres"
+}
