@@ -1,0 +1,11 @@
+export 'album/album_page.dart';
+export 'artist/artist_page.dart';
+export 'error/error_page.dart';
+export 'explore/explore_page.dart';
+export 'genre/genre_page.dart';
+export 'home/home_page.dart';
+export 'library/library_page.dart';
+export 'player/player_page.dart';
+export 'playlist/playlist_page.dart';
+export 'profile/profile_page.dart';
+export 'search/search_page.dart';
