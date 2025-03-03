@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../app/presentation/pages/pages.dart';
 import '../../app/presentation/views/navigation_view.dart';
 
+bool showOnboarding = true;
+bool hasPermission = false;
+
 class RetipRouter extends GoRouter {
   // Routes
   static const home = '/';
@@ -19,6 +22,9 @@ class RetipRouter extends GoRouter {
   static const genre = '/genre/:id';
 
   static const player = '/player';
+  static const permission = '/permission';
+  static const onboarding = '/onboarding';
+  static const settings = '/settings';
 
   // Route definitions
   static final _home = GoRoute(
@@ -41,7 +47,7 @@ class RetipRouter extends GoRouter {
     path: library,
   );
 
-  static final _settings = GoRoute(
+  static final _profile = GoRoute(
     builder: (context, state) => const ProfilePage(),
     path: profile,
   );
@@ -82,9 +88,24 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static final _settings = GoRoute(
+    path: settings,
+    builder: (context, state) => const SettingsPage(),
+  );
+
   static final _player = GoRoute(
     path: player,
     builder: (context, state) => const PlayerPage(),
+  );
+
+  static final _permission = GoRoute(
+    path: permission,
+    builder: (context, state) => const PermissionPage(),
+  );
+
+  static final _onboarding = GoRoute(
+    path: onboarding,
+    builder: (context, state) => const OnboardingPage(),
   );
 
   // Constructor
@@ -94,8 +115,15 @@ class RetipRouter extends GoRouter {
           initialLocation: home,
           routingConfig: ValueNotifier(
             RoutingConfig(
+              redirect: (context, state) async {
+                if (showOnboarding) return RetipRouter.onboarding;
+                return hasPermission == false ? RetipRouter.permission : null;
+              },
               routes: [
+                _onboarding,
+                _permission,
                 _player,
+                _settings,
                 ShellRoute(
                   builder: (context, state, child) {
                     return Scaffold(
@@ -108,7 +136,7 @@ class RetipRouter extends GoRouter {
                     _explore,
                     _search,
                     _library,
-                    _settings,
+                    _profile,
                     _artist,
                     _album,
                     _playlist,

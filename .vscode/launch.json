@@ -9,21 +9,21 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-            "program": "lib/new/main.dart"
+            "program": "lib/main.dart"
         },
         {
             "name": "profile",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
-            "program": "lib/new/main.dart"
+            "program": "lib/main.dart"
         },
         {
             "name": "release",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",
-            "program": "lib/new/main.dart"
+            "program": "lib/main.dart"
         }
     ]
 }

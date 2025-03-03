@@ -7,7 +7,10 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search Page'),
+        title: const SearchBar(
+          leading: Icon(Icons.search),
+          trailing: [Icon(Icons.close)],
+        ),
       ),
     );
   }
