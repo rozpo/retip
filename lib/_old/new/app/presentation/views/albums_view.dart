@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/sizer.dart';
-import '../../domain/entities/album_entity.dart';
+import '../../../../../app/domain/entities/album_entity.dart';
 import '../../domain/usecases/album_usecase.dart';
 import '../pages/album/album_page.dart';
 import '../widgets/molecules/list_tile_molecule.dart';

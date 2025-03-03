@@ -1,4 +1,4 @@
-import '../entities/track_entity.dart';
+import '../../../../../app/domain/entities/track_entity.dart';
 import '../repositories/track_repository.dart';
 
 class TrackUsecase {

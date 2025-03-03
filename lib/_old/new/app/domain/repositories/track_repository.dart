@@ -1,4 +1,4 @@
-import '../entities/track_entity.dart';
+import '../../../../../app/domain/entities/track_entity.dart';
 
 abstract class TrackRepository {
   Future<void> scan();

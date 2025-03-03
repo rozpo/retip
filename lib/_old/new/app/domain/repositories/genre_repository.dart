@@ -1,4 +1,4 @@
-import '../entities/genre_entity.dart';
+import '../../../../../app/domain/entities/genre_entity.dart';
 
 abstract class GenreRepository {
   Future<void> scan();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../new/app/domain/entities/track_entity.dart';
+import '../../../../app/domain/entities/track_entity.dart';
 import '../../atoms/icon_atom.dart';
 import '../../atoms/icon_button_atom.dart';
 import '../../molecules/list_tile_molecule.dart';
