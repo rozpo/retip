@@ -10,9 +10,6 @@ class TracksView extends StatelessWidget {
     return ListView.builder(
       itemCount: 1000,
       itemBuilder: (context, index) {
-
-
-        
         return ListTile(
           title: Text('Track $index'),
           leading: const Icon(Icons.music_note),
