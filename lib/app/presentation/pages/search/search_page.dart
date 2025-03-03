@@ -8,6 +8,7 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const SearchBar(
+          autoFocus: true,
           leading: Icon(Icons.search),
           trailing: [Icon(Icons.close)],
         ),

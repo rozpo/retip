@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/router/retip_router.dart';
 import '../widgets/player_widget.dart';
 
@@ -16,6 +17,8 @@ class _NavigationViewState extends State<NavigationView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = RetipL10n.of(context);
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -40,26 +43,26 @@ class _NavigationViewState extends State<NavigationView> {
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+              icon: const Icon(Icons.home),
+              label: l10n.home,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.explore),
-              label: 'Explore',
+              icon: const Icon(Icons.explore),
+              label: l10n.explore,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
+              icon: const Icon(Icons.search),
+              label: l10n.search,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.library_music),
-              label: 'Library',
+              icon: const Icon(Icons.library_music),
+              label: l10n.library,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: const Icon(Icons.person),
+              label: l10n.profile,
             ),
           ],
         ),

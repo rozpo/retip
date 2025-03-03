@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/retip_router.dart';
+import 'buttons/play_pause_button_widget.dart';
 
 class PlayerWidget extends StatelessWidget {
   const PlayerWidget({super.key});
@@ -31,9 +32,9 @@ class PlayerWidget extends StatelessWidget {
           leading: const Icon(Icons.music_note),
           title: const Text('Track title'),
           subtitle: const Text('Artist name'),
-          trailing: IconButton.outlined(
-            onPressed: () {},
-            icon: const Icon(Icons.play_arrow),
+          trailing: PlayPauseButtonWidget(
+            stream: Stream.value(true),
+            onPressed: () => context.push(RetipRouter.player),
           ),
           onTap: () => context.push(RetipRouter.player),
         ),
