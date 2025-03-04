@@ -8,7 +8,7 @@ import '../../app/presentation/pages/intro/intro_page.dart';
 mixin RetipRouter {
   static final router = GoRouter(
     redirect: (context, state) {
-      return context.read<IntroFacade>().isEnabled() ? '/intro' : null;
+      return context.read<IntroFacade>().isIntroPageEnabled() ? '/intro' : null;
     },
     routes: [
       GoRoute(

@@ -6,11 +6,11 @@ class IntroFacade {
   IntroFacade(ConfigRepository configRepository)
       : _configRepository = configRepository;
 
-  bool isEnabled() {
+  bool isIntroPageEnabled() {
     return _configRepository.getOnboardingValue();
   }
 
-  Future<void> disable() async {
+  Future<void> disableIntroPage() async {
     await _configRepository.setOnboardingValue(false);
   }
 }

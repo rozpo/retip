@@ -18,7 +18,7 @@ class IntroPage extends StatelessWidget {
           icon: const Icon(Icons.arrow_right),
           label: const Text('Get Started'),
           onPressed: () {
-            context.read<IntroFacade>().disable();
+            context.read<IntroFacade>().disableIntroPage();
             context.go('/');
           },
         ),
