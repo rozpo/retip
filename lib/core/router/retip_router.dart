@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/domain/repositories/config_repository.dart';
+import '../../app/domain/repositories/permission_repository.dart';
 import '../../app/presentation/pages/pages.dart';
 import 'retip_routes.dart';
 
@@ -22,17 +23,29 @@ class RetipRouter extends GoRouter {
     path: RetipRoutes.permission,
   );
 
+  static Future<String?> _redirect(
+    BuildContext context,
+    GoRouterState state,
+  ) async {
+    final permissionRepository = context.read<PermissionRepository>();
+    final configRepository = context.read<ConfigRepository>();
+
+    if (configRepository.getOnboardingStatus() == true) {
+      return RetipRoutes.onboarding;
+    }
+
+    if (await permissionRepository.getMediaPermissionStatus() == false) {
+      return RetipRoutes.permission;
+    }
+
+    return null;
+  }
+
   RetipRouter()
       : super.routingConfig(
           routingConfig: ValueNotifier(
             RoutingConfig(
-              redirect: (context, state) {
-                if (context.read<ConfigRepository>().getOnboardingStatus()) {
-                  return RetipRoutes.onboarding;
-                }
-
-                return null;
-              },
+              redirect: _redirect,
               routes: [
                 _home,
                 _onboarding,

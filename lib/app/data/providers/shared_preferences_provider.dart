@@ -3,9 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPreferencesProvider {
   final SharedPreferencesWithCache _sharedPreferences;
 
-  SharedPreferencesProvider(
-    SharedPreferencesWithCache sharedPreferences,
-  ) : _sharedPreferences = sharedPreferences;
+  SharedPreferencesProvider(SharedPreferencesWithCache sharedPreferences)
+      : _sharedPreferences = sharedPreferences;
 
   static Future<SharedPreferencesProvider> init() async {
     final sharedPreferences = await SharedPreferencesWithCache.create(
