@@ -1,9 +1,9 @@
 import '../../../../objectbox.g.dart';
 import '../../domain/repositories/track_repository.dart';
-import '../models/album_model.dart';
-import '../models/artist_model.dart';
-import '../models/genre_model.dart';
-import '../models/track_model.dart';
+import '../../../../../../../last/app/data/models/album_model.dart';
+import '../../../../../../../last/app/data/models/artist_model.dart';
+import '../../../../../../../last/app/data/models/genre_model.dart';
+import '../../../../../../../last/app/data/models/track_model.dart';
 import '../providers/objectbox_provider.dart';
 import '../providers/on_audio_query_provider.dart';
 

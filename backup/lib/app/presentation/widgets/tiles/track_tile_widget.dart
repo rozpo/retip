@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/track_entity.dart';
+import '../../../../../../last/app/domain/entities/track_entity.dart';
 import '../atoms/icon_button_widget.dart';
 
 class TrackTileWidget extends StatelessWidget {

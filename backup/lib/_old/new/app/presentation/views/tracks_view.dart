@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../widgets/organisms/tiles/track_tile_organism.dart';
 import '../../../core/utils/sizer.dart';
-import '../../../../../app/domain/entities/track_entity.dart';
+import '../../../../../../../last/app/domain/entities/track_entity.dart';
 import '../../domain/usecases/track_usecase.dart';
 
 class TracksView extends StatefulWidget {

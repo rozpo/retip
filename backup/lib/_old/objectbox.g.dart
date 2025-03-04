@@ -15,11 +15,11 @@ import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'app/data/models/objectbox_track.dart';
-import 'new/app/data/models/album_model.dart';
-import 'new/app/data/models/artist_model.dart';
-import 'new/app/data/models/genre_model.dart';
-import 'new/app/data/models/playlist_model.dart';
-import 'new/app/data/models/track_model.dart';
+import '../../../last/app/data/models/album_model.dart';
+import '../../../last/app/data/models/artist_model.dart';
+import '../../../last/app/data/models/genre_model.dart';
+import '../../../last/app/data/models/playlist_model.dart';
+import '../../../last/app/data/models/track_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 

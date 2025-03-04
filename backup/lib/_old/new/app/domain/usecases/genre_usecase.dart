@@ -1,4 +1,4 @@
-import '../../../../../app/domain/entities/genre_entity.dart';
+import '../../../../../../../last/app/domain/entities/genre_entity.dart';
 import '../repositories/genre_repository.dart';
 
 class GenreUsecase {

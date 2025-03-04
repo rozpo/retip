@@ -1,4 +1,4 @@
-import '../../../../../app/domain/entities/album_entity.dart';
+import '../../../../../../../last/app/domain/entities/album_entity.dart';
 
 abstract class AlbumRepository {
   Future<void> scan();

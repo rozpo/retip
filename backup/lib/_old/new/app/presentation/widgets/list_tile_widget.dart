@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../app/domain/entities/track_entity.dart';
+import '../../../../../../../last/app/domain/entities/track_entity.dart';
 
 class ListTileWidget extends StatelessWidget {
   final String? subtitle;

@@ -1,6 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
-import '../../../../../app/domain/entities/playlist_entity.dart';
+import '../../domain/entities/playlist_entity.dart';
 import 'track_model.dart';
 
 @Entity()

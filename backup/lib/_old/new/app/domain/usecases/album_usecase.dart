@@ -1,4 +1,4 @@
-import '../../../../../app/domain/entities/album_entity.dart';
+import '../../../../../../../last/app/domain/entities/album_entity.dart';
 import '../repositories/album_repository.dart';
 
 class AlbumUsecase {

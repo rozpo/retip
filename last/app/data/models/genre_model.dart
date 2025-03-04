@@ -1,6 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
-import '../../../../../app/domain/entities/genre_entity.dart';
+import '../../domain/entities/genre_entity.dart';
 import 'track_model.dart';
 
 @Entity()

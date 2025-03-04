@@ -1,6 +1,6 @@
 import '../../../../objectbox.g.dart';
 import '../../domain/repositories/artist_repository.dart';
-import '../models/artist_model.dart';
+import '../../../../../../../last/app/data/models/artist_model.dart';
 import '../providers/objectbox_provider.dart';
 import '../providers/on_audio_query_provider.dart';
 

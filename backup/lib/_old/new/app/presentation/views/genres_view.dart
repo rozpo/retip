@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/utils/sizer.dart';
-import '../../../../../app/domain/entities/genre_entity.dart';
+import '../../../../../../../last/app/domain/entities/genre_entity.dart';
 import '../../domain/usecases/genre_usecase.dart';
 import '../widgets/molecules/list_tile_molecule.dart';
 import 'tracks_view.dart';

@@ -1,6 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
-import '../../../../../app/domain/entities/track_entity.dart';
+import '../../domain/entities/track_entity.dart';
 import 'album_model.dart';
 import 'artist_model.dart';
 import 'genre_model.dart';
