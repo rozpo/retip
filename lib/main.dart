@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app/domain/usecases/intro_usecases.dart';
+import 'app/data/providers/shared_preferences_provider.dart';
+import 'app/data/repositories/config_repository_i.dart';
+import 'app/domain/facades/intro_facade.dart';
 import 'app/retip_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final getIt = GetIt.instance;
 
-  final sharedPreferences = await SharedPreferences.getInstance();
+  // Providers
+  final sharedPreferencesProvider = await SharedPreferencesProvider.init();
 
-  getIt.registerSingleton(sharedPreferences);
+  // Repositories
+  final configRepository = ConfigRepositoryI(sharedPreferencesProvider);
 
-  getIt.registerSingleton(IntroUsecases());
+  // Facades
+  final onboardingFacade = IntroFacade(configRepository);
 
-  runApp(const RetipApp());
+  // App
+  final app = RetipApp(
+    onboardingFacade: onboardingFacade,
+  );
+
+  runApp(app);
 }

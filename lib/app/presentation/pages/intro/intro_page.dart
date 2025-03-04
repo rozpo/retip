@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../domain/usecases/intro_usecases.dart';
+import '../../../domain/facades/intro_facade.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -11,14 +11,14 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Intro Page'),
+        title: const Text('Onboarding Page'),
       ),
       body: Center(
         child: FilledButton.icon(
           icon: const Icon(Icons.arrow_right),
           label: const Text('Get Started'),
           onPressed: () {
-            GetIt.I.get<IntroUsecases>().disableIntroPage();
+            context.read<IntroFacade>().disable();
             context.go('/');
           },
         ),

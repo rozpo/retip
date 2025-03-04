@@ -1,21 +1,14 @@
-import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/domain/usecases/intro_usecases.dart';
+import '../../app/domain/facades/intro_facade.dart';
 import '../../app/presentation/pages/home/home_page.dart';
 import '../../app/presentation/pages/intro/intro_page.dart';
 
 mixin RetipRouter {
   static final router = GoRouter(
     redirect: (context, state) {
-      final isIntroPageEnabled =
-          GetIt.I.get<IntroUsecases>().isIntroPageEnabled();
-
-      if (isIntroPageEnabled) {
-        return '/intro';
-      }
-
-      return null;
+      return context.read<IntroFacade>().isEnabled() ? '/intro' : null;
     },
     routes: [
       GoRoute(
