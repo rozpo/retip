@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'app/data/providers/shared_preferences_provider.dart';
 import 'app/data/repositories/config_repository_i.dart';
-import 'app/domain/facades/intro_facade.dart';
 import 'app/retip_app.dart';
 
 void main() async {
@@ -14,12 +13,9 @@ void main() async {
   // Repositories
   final configRepository = ConfigRepositoryI(sharedPreferencesProvider);
 
-  // Facades
-  final onboardingFacade = IntroFacade(configRepository);
-
   // App
   final app = RetipApp(
-    onboardingFacade: onboardingFacade,
+    configRepository: configRepository,
   );
 
   runApp(app);

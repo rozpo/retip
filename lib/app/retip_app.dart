@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/router/retip_router.dart';
-import 'domain/facades/intro_facade.dart';
+import 'domain/repositories/config_repository.dart';
 
 class RetipApp extends StatelessWidget {
-  final IntroFacade onboardingFacade;
+  final ConfigRepository configRepository;
 
   const RetipApp({
-    required this.onboardingFacade,
+    required this.configRepository,
     super.key,
   });
 
@@ -16,7 +16,7 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context) => onboardingFacade),
+        RepositoryProvider(create: (context) => configRepository),
       ],
       child: MaterialApp.router(
         routerConfig: RetipRouter.router,

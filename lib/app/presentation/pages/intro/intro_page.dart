@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../domain/facades/intro_facade.dart';
+import '../../../domain/repositories/config_repository.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -18,7 +18,7 @@ class IntroPage extends StatelessWidget {
           icon: const Icon(Icons.arrow_right),
           label: const Text('Get Started'),
           onPressed: () {
-            context.read<IntroFacade>().disableIntroPage();
+            context.read<ConfigRepository>().setOnboardingValue(false);
             context.go('/');
           },
         ),
