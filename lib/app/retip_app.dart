@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/router/retip_router.dart';
+import 'domain/repositories/config_repository.dart';
 
 class RetipApp extends StatelessWidget {
+  final ConfigRepository configRepository;
   final RetipRouter router;
 
   const RetipApp({
+    required this.configRepository,
     required this.router,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.dark,
-      routerConfig: router,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => configRepository),
+      ],
+      child: MaterialApp.router(
+        darkTheme: ThemeData.dark(),
+        themeMode: ThemeMode.dark,
+        routerConfig: router,
+      ),
     );
   }
 }
