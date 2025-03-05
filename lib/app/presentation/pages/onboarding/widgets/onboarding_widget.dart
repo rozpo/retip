@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 
 class OnboardingWidget extends StatelessWidget {
-  final VoidCallback onNext;
   final String description;
   final IconData iconData;
-  final String buttonText;
-  final String subtitle;
   final String title;
+  final bool isQuote;
 
   const OnboardingWidget({
     required this.description,
-    required this.buttonText,
     required this.iconData,
-    required this.subtitle,
-    required this.onNext,
+    this.isQuote = false,
     required this.title,
     super.key,
   });
@@ -43,9 +39,11 @@ class OnboardingWidget extends StatelessWidget {
               color: Theme.of(context).colorScheme.tertiary,
             )),
             Text(
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontStyle: isQuote ? FontStyle.italic : FontStyle.normal,
+                  ),
               textAlign: TextAlign.center,
-              description,
+              isQuote ? '"$description"' : description,
             ),
           ],
         ),

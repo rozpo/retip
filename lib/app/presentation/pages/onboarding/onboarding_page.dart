@@ -48,39 +48,25 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: PageView(
               onPageChanged: (value) => setState(() => currentPage = value),
               controller: controller,
-              children: [
+              children: const [
                 OnboardingWidget(
                   iconData: Icons.headphones,
                   title: 'Welcome to Retip!',
-                  subtitle: 'Music player',
                   description:
                       'Your music, your way. Enjoy your local music library, offline and uninterrupted.',
-                  buttonText: 'Get started',
-                  onNext: () => controller.nextPage(
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.easeInOut,
-                  ),
                 ),
                 OnboardingWidget(
                   iconData: Icons.wifi_off,
                   title: 'How it works?',
-                  subtitle: 'Music player',
                   description:
                       'Retip scans your device for music files, letting you browse and play your collection instantly.',
-                  buttonText: 'Next',
-                  onNext: () => controller.nextPage(
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.easeInOut,
-                  ),
                 ),
                 OnboardingWidget(
+                  isQuote: true,
                   iconData: Icons.album,
                   title: 'Our motton',
-                  subtitle: 'Music player',
                   description:
                       "If you think that in the era of streaming, the art of offline listening to music has not disappeared. It's a sure sign that you need a RETIP!",
-                  buttonText: "Let's go",
-                  onNext: () async {},
                 ),
               ],
             ),
