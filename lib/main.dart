@@ -8,6 +8,7 @@ import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/settings_repository_i.dart';
 import 'app/retip_app.dart';
 import 'core/router/retip_router.dart';
+import 'core/theme/retip_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,12 +33,14 @@ void main() async {
 
   // Core
   final router = RetipRouter();
+  final theme = RetipTheme();
 
   final app = RetipApp(
     permissionRepository: permissionRepository,
     settingsRepository: settingsRepository,
     configRepository: configRepository,
     router: router,
+    theme: theme,
   );
 
   runApp(app);
