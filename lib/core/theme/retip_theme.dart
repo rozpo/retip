@@ -12,6 +12,8 @@ class RetipTheme {
         brightness: Brightness.dark,
         seedColor: primaryColor,
       ),
+      filledButtonTheme: filledButtonTheme(),
+      textButtonTheme: textButtonTheme(),
     );
   }
 
@@ -23,6 +25,26 @@ class RetipTheme {
         brightness: Brightness.light,
         seedColor: primaryColor,
       ),
+      filledButtonTheme: filledButtonTheme(),
+      textButtonTheme: textButtonTheme(),
     );
+  }
+
+  ButtonStyle buttonStyle() {
+    return ButtonStyle(
+      shape: WidgetStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    );
+  }
+
+  FilledButtonThemeData filledButtonTheme() {
+    return FilledButtonThemeData(style: buttonStyle());
+  }
+
+  TextButtonThemeData textButtonTheme() {
+    return TextButtonThemeData(style: buttonStyle());
   }
 }
