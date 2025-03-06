@@ -1,4 +1,4 @@
-arb-dir: backup/lib/_old/core/l10n/locales
+arb-dir: lib/core/l10n/locales
 template-arb-file: l10n_en.arb
 output-localization-file: app_localizations.dart
-untranslated-messages-file: backup/lib/_old/core/l10n/locales/untranslated.json
+untranslated-messages-file: lib/core/l10n/locales/untranslated.json

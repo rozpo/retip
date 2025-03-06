@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../core/l10n/retip_l10n.dart';
 import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
 import 'domain/repositories/config_repository.dart';
 import 'domain/repositories/permission_repository.dart';
 import 'domain/repositories/settings_repository.dart';
+import 'presentation/cubits/onboarding/onboarding_cubit.dart';
 
 class RetipApp extends StatelessWidget {
   final PermissionRepository permissionRepository;
   final SettingsRepository settingsRepository;
   final ConfigRepository configRepository;
+  final OnboardingCubit onboardingCubit;
   final RetipRouter router;
   final RetipTheme theme;
+  final RetipL10n l10n;
 
   const RetipApp({
     required this.permissionRepository,
     required this.settingsRepository,
     required this.configRepository,
+    required this.onboardingCubit,
     required this.router,
     required this.theme,
+    required this.l10n,
     super.key,
   });
 
@@ -27,14 +33,26 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context) => permissionRepository),
-        RepositoryProvider(create: (context) => settingsRepository),
-        RepositoryProvider(create: (context) => configRepository),
+        RepositoryProvider(create: (context) => l10n),
       ],
-      child: MaterialApp.router(
-        themeMode: ThemeMode.system,
-        darkTheme: theme.dark(),
-        routerConfig: router,
+      child: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(create: (context) => permissionRepository),
+          RepositoryProvider(create: (context) => settingsRepository),
+          RepositoryProvider(create: (context) => configRepository),
+        ],
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => onboardingCubit),
+          ],
+          child: MaterialApp.router(
+            localizationsDelegates: l10n.localizationsDelegates,
+            supportedLocales: l10n.supportedLocales,
+            themeMode: ThemeMode.system,
+            darkTheme: theme.dark(),
+            routerConfig: router,
+          ),
+        ),
       ),
     );
   }

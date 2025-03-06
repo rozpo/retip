@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/domain/repositories/config_repository.dart';
 import '../../app/domain/repositories/permission_repository.dart';
+import '../../app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import '../../app/presentation/pages/pages.dart';
 import 'retip_routes.dart';
 
@@ -28,9 +28,9 @@ class RetipRouter extends GoRouter {
     GoRouterState state,
   ) async {
     final permissionRepository = context.read<PermissionRepository>();
-    final configRepository = context.read<ConfigRepository>();
+    final onboardingCubit = context.read<OnboardingCubit>();
 
-    if (configRepository.getOnboardingStatus() == true) {
+    if (onboardingCubit.state is! OnboardingFinished) {
       return RetipRoutes.onboarding;
     }
 

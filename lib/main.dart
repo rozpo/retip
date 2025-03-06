@@ -6,7 +6,9 @@ import 'app/data/providers/shared_preferences_provider.dart';
 import 'app/data/repositories/config_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/settings_repository_i.dart';
+import 'app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'app/retip_app.dart';
+import 'core/l10n/retip_l10n.dart';
 import 'core/router/retip_router.dart';
 import 'core/theme/retip_theme.dart';
 
@@ -31,16 +33,24 @@ void main() async {
     appSettingsProvider: appSettingsProvider,
   );
 
+  // Cubits
+  final onboardingCubit = OnboardingCubit(
+    configRepository: configRepository,
+  );
+
   // Core
   final router = RetipRouter();
   final theme = RetipTheme();
+  final l10n = RetipL10n();
 
   final app = RetipApp(
     permissionRepository: permissionRepository,
     settingsRepository: settingsRepository,
     configRepository: configRepository,
+    onboardingCubit: onboardingCubit,
     router: router,
     theme: theme,
+    l10n: l10n,
   );
 
   runApp(app);
