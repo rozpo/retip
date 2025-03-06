@@ -12,6 +12,7 @@ class RetipTheme {
         brightness: Brightness.dark,
         seedColor: primaryColor,
       ),
+      outlinedButtonTheme: outlinedButtonTheme(),
       filledButtonTheme: filledButtonTheme(),
       textButtonTheme: textButtonTheme(),
     );
@@ -25,6 +26,7 @@ class RetipTheme {
         brightness: Brightness.light,
         seedColor: primaryColor,
       ),
+      outlinedButtonTheme: outlinedButtonTheme(),
       filledButtonTheme: filledButtonTheme(),
       textButtonTheme: textButtonTheme(),
     );
@@ -46,5 +48,9 @@ class RetipTheme {
 
   TextButtonThemeData textButtonTheme() {
     return TextButtonThemeData(style: buttonStyle());
+  }
+
+  OutlinedButtonThemeData outlinedButtonTheme() {
+    return OutlinedButtonThemeData(style: buttonStyle());
   }
 }

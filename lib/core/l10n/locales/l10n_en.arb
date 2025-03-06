@@ -1,12 +1,16 @@
 {
     "@@locale": "en",
+    "allowAccess": "Allow access",
     "finish": "Finish",
     "howItWorks": "How it works?",
     "howItWorksDescription": "Retip scans your device for music files and organizes them into albums, artists, and tracks. You can search for your favorite music, create playlists, and enjoy a seamless music playback experience.",
+    "mediaPermission": "Media permission",
     "next": "Next",
+    "openAppSettings": "Open app settings",
     "ourMottoDescription": "If you think that in the era of streaming, the art of offline listening to music has not disappeared. It's a sure sign that you need a RETIP!",
     "ourMottto": "Our motto",
     "skip": "Skip",
+    "storageAccessIsRequired": "Storage access is required to play music, please allow access to continue.",
     "welcomeToRetip": "Welcome to Retip!",
     "welcomeToRetipDescription": "Your music, your way. Enjoy your local music library, offline and uninterrupted."
 }

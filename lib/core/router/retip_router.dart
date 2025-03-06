@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/domain/repositories/permission_repository.dart';
 import '../../app/presentation/cubits/onboarding/onboarding_cubit.dart';
-import '../../app/presentation/pages/pages.dart';
+import '../../app/presentation/pages/home_page.dart';
+import '../../app/presentation/pages/onboarding_page.dart';
+import '../../app/presentation/pages/permission_page.dart';
 import 'retip_routes.dart';
 
 class RetipRouter extends GoRouter {

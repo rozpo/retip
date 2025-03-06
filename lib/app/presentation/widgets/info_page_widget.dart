@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class OnboardingWidget extends StatelessWidget {
+class InfoPageWidget extends StatelessWidget {
   final String description;
   final IconData iconData;
   final String title;
   final bool isQuote;
 
-  const OnboardingWidget({
+  const InfoPageWidget({
     required this.description,
     required this.iconData,
     this.isQuote = false,
@@ -22,7 +22,7 @@ class OnboardingWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
@@ -32,12 +32,15 @@ class OnboardingWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               title,
             ),
+            const SizedBox(height: 16),
             Center(
-                child: Icon(
-              iconData,
-              size: size.shortestSide * 0.5,
-              color: Theme.of(context).colorScheme.tertiary,
-            )),
+              child: Icon(
+                iconData,
+                size: size.shortestSide * 0.5,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+            ),
+            const SizedBox(height: 16),
             Text(
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontStyle: isQuote ? FontStyle.italic : FontStyle.normal,

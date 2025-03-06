@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../../core/l10n/retip_l10n.dart';
-import '../../../../core/router/retip_routes.dart';
-import '../../cubits/onboarding/onboarding_cubit.dart';
-import 'widgets/onboarding_widget.dart';
+import '../../../core/l10n/retip_l10n.dart';
+import '../../../core/router/retip_routes.dart';
+import '../cubits/onboarding/onboarding_cubit.dart';
+import '../widgets/info_page_widget.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -31,40 +31,40 @@ class _OnboardingPageState extends State<OnboardingPage> {
     final cubit = context.read<OnboardingCubit>();
     final l10n = context.read<RetipL10n>().of(context);
 
-    return BlocConsumer<OnboardingCubit, OnboardingState>(
+    return BlocListener<OnboardingCubit, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingFinished) {
           context.go(RetipRoutes.home);
         }
       },
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            actions: [
-              TextButton(
-                onPressed: () => cubit.finishOnboarding(),
-                child: Text(l10n.skip.toUpperCase()),
-              ),
-            ],
-          ),
-          body: Column(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            TextButton(
+              onPressed: () => cubit.finishOnboarding(),
+              child: Text(l10n.skip.toUpperCase()),
+            ),
+          ],
+        ),
+        body: SafeArea(
+          child: Column(
             children: [
               Expanded(
                 child: PageView(
                   onPageChanged: (value) => setState(() => currentPage = value),
                   controller: controller,
                   children: [
-                    OnboardingWidget(
+                    InfoPageWidget(
                       description: l10n.welcomeToRetipDescription,
                       title: l10n.welcomeToRetip,
                       iconData: Icons.headphones,
                     ),
-                    OnboardingWidget(
+                    InfoPageWidget(
                       iconData: Icons.wifi_off,
                       title: l10n.howItWorks,
                       description: l10n.howItWorksDescription,
                     ),
-                    OnboardingWidget(
+                    InfoPageWidget(
                       isQuote: true,
                       iconData: Icons.album,
                       title: l10n.ourMottto,
@@ -118,8 +118,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

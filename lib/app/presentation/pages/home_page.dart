@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/repositories/settings_repository.dart';
+import '../../domain/repositories/settings_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

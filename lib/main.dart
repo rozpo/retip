@@ -7,6 +7,7 @@ import 'app/data/repositories/config_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/settings_repository_i.dart';
 import 'app/presentation/cubits/onboarding/onboarding_cubit.dart';
+import 'app/presentation/cubits/permission/permission_cubit.dart';
 import 'app/retip_app.dart';
 import 'core/l10n/retip_l10n.dart';
 import 'core/router/retip_router.dart';
@@ -38,6 +39,11 @@ void main() async {
     configRepository: configRepository,
   );
 
+  final permissionCubit = PermissionCubit(
+    permissionRepository: permissionRepository,
+    settingsRepository: settingsRepository,
+  );
+
   // Core
   final router = RetipRouter();
   final theme = RetipTheme();
@@ -48,6 +54,7 @@ void main() async {
     settingsRepository: settingsRepository,
     configRepository: configRepository,
     onboardingCubit: onboardingCubit,
+    permissionCubit: permissionCubit,
     router: router,
     theme: theme,
     l10n: l10n,
