@@ -69,6 +69,10 @@ class ObjectboxProvider {
     return await _store.box<T>().putManyAsync(entities, mode: PutMode.insert);
   }
 
+  Future<int> insert<T>(T entity) async {
+    return await _store.box<T>().putAsync(entity, mode: PutMode.insert);
+  }
+
   Future<int> update<T>(T entity) async {
     return await _store.box<T>().putAsync(entity, mode: PutMode.update);
   }
@@ -87,5 +91,9 @@ class ObjectboxProvider {
         .map((query) {
       return query.findFirst();
     });
+  }
+
+  Future<T?> findFirst<T>(Condition<T> condition) async {
+    return await _store.box<T>().query(condition).build().findFirstAsync();
   }
 }

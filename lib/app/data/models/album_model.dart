@@ -1,4 +1,5 @@
 import 'package:objectbox/objectbox.dart';
+import 'package:on_audio_query/on_audio_query.dart' as on_audio_query;
 
 import '../../domain/entities/album_entity.dart';
 import 'artist_model.dart';
@@ -34,4 +35,10 @@ class AlbumModel implements AlbumEntity {
   @Transient()
   @override
   List<TrackModel> get tracks => tracksDb.toList();
+
+  factory AlbumModel.fromOnAudioQuery(on_audio_query.AlbumModel data) {
+    return AlbumModel(
+      title: data.album,
+    );
+  }
 }

@@ -90,6 +90,8 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   }
 
   void _onAudioIndexChanged(AudioIndexChanged event, Emitter<AudioState> emit) {
+    if (event.index < 0 || event.index >= state.playlist.length) return;
+
     _trackSubscription?.cancel();
     _trackSubscription = _trackRepository
         .trackStream(state.playlist[event.index].id)
