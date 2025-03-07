@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/audio/audio_bloc.dart';
 import '../blocs/track/track_bloc.dart';
 
 class TracksView extends StatelessWidget {
@@ -8,7 +9,7 @@ class TracksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<TrackBloc>(context);
+    final audioBloc = BlocProvider.of<AudioBloc>(context);
 
     return BlocBuilder<TrackBloc, TrackState>(
       builder: (context, state) {
@@ -20,7 +21,7 @@ class TracksView extends StatelessWidget {
               final track = state.tracks[index];
 
               return ListTile(
-                onTap: () => bloc.add(TrackPlay(state.tracks, index)),
+                onTap: () => audioBloc.add(AudioPlay(state.tracks, index)),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,

@@ -11,6 +11,7 @@ import 'app/data/repositories/library_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/settings_repository_i.dart';
 import 'app/data/repositories/track_repository_i.dart';
+import 'app/presentation/blocs/audio/audio_bloc.dart';
 import 'app/presentation/blocs/track/track_bloc.dart';
 import 'app/presentation/cubits/library/library_cubit.dart';
 import 'app/presentation/cubits/onboarding/onboarding_cubit.dart';
@@ -71,6 +72,10 @@ void main() async {
   );
 
   // Blocs
+  final audioBloc = AudioBloc(
+    audioRepository: audioRepository,
+  );
+
   final trackBloc = TrackBloc(
     audioRepository: audioRepository,
     trackRepository: trackRepository,
@@ -88,6 +93,7 @@ void main() async {
     onboardingCubit: onboardingCubit,
     permissionCubit: permissionCubit,
     libraryCubit: libraryCubit,
+    audioBloc: audioBloc,
     trackBloc: trackBloc,
     router: router,
     theme: theme,
