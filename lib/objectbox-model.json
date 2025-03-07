@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7752318775264821867",
-      "lastPropertyId": "4:8340092925108959954",
+      "lastPropertyId": "5:3966078162657636586",
       "name": "TrackModel",
       "properties": [
         {
@@ -30,6 +30,11 @@
           "type": 9,
           "flags": 2080,
           "indexId": "1:4031752736418694797"
+        },
+        {
+          "id": "5:3966078162657636586",
+          "name": "isFavorite",
+          "type": 1
         }
       ],
       "relations": []

@@ -19,6 +19,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
   })  : _trackRepository = trackRepository,
         super(TrackInitial(const [])) {
     on<TrackRefresh>(_onTrackRefresh);
+    on<TrackToggleFavorite>(_onTrackToggleFavorite);
 
     _subscription = _trackRepository.stream().listen((tracks) {
       add(TrackRefresh(tracks));
@@ -35,5 +36,10 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
 
   void _onTrackRefresh(TrackRefresh event, Emitter<TrackState> emit) {
     emit(TrackInitial(event.tracks));
+  }
+
+  void _onTrackToggleFavorite(
+      TrackToggleFavorite event, Emitter<TrackState> emit) {
+    _trackRepository.toggleFavorite(event.track);
   }
 }

@@ -22,7 +22,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 7752318775264821867),
       name: 'TrackModel',
-      lastPropertyId: const obx_int.IdUid(4, 8340092925108959954),
+      lastPropertyId: const obx_int.IdUid(5, 3966078162657636586),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -45,7 +45,12 @@ final _entities = <obx_int.ModelEntity>[
             name: 'location',
             type: 9,
             flags: 2080,
-            indexId: const obx_int.IdUid(1, 4031752736418694797))
+            indexId: const obx_int.IdUid(1, 4031752736418694797)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 3966078162657636586),
+            name: 'isFavorite',
+            type: 1,
+            flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
@@ -111,11 +116,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final artistOffset = fbb.writeString(object.artist);
           final titleOffset = fbb.writeString(object.title);
           final locationOffset = fbb.writeString(object.location);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, artistOffset);
           fbb.addOffset(2, titleOffset);
           fbb.addOffset(3, locationOffset);
+          fbb.addBool(4, object.isFavorite);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -130,11 +136,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
               .vTableGet(buffer, rootOffset, 8, '');
           final locationParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 10, '');
+          final isFavoriteParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
           final object = TrackModel(
               id: idParam,
               artist: artistParam,
               title: titleParam,
-              location: locationParam);
+              location: locationParam,
+              isFavorite: isFavoriteParam);
 
           return object;
         })
@@ -160,4 +169,8 @@ class TrackModel_ {
   /// See [TrackModel.location].
   static final location =
       obx.QueryStringProperty<TrackModel>(_entities[0].properties[3]);
+
+  /// See [TrackModel.isFavorite].
+  static final isFavorite =
+      obx.QueryBooleanProperty<TrackModel>(_entities[0].properties[4]);
 }

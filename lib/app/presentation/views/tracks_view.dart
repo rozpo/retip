@@ -10,6 +10,7 @@ class TracksView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final audioBloc = BlocProvider.of<AudioBloc>(context);
+    final trackBloc = BlocProvider.of<TrackBloc>(context);
 
     return BlocBuilder<TrackBloc, TrackState>(
       builder: (context, state) {
@@ -40,8 +41,10 @@ class TracksView extends StatelessWidget {
                 ),
                 trailing: IconButton(
                   style: Theme.of(context).iconButtonTheme.style,
-                  onPressed: () {},
-                  icon: const Icon(Icons.more_vert),
+                  onPressed: () => trackBloc.add(TrackToggleFavorite(track)),
+                  icon: Icon(
+                    track.isFavorite ? Icons.favorite : Icons.favorite_border,
+                  ),
                 ),
               );
             },

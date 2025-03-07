@@ -14,4 +14,14 @@ class TrackRepositoryI implements TrackRepository {
   Stream<List<TrackEntity>> stream() {
     return _objectboxProvider.stream<TrackModel>();
   }
+
+  @override
+  void toggleFavorite(TrackEntity track) async {
+    final entity = await _objectboxProvider.get<TrackModel>(track.id);
+
+    if (entity == null) return;
+
+    entity.isFavorite = !entity.isFavorite;
+    _objectboxProvider.update(entity);
+  }
 }

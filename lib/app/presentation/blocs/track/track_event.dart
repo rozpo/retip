@@ -8,3 +8,9 @@ final class TrackRefresh extends TrackEvent {
 
   TrackRefresh(this.tracks);
 }
+
+final class TrackToggleFavorite extends TrackEvent {
+  final TrackEntity track;
+
+  TrackToggleFavorite(this.track);
+}

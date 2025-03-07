@@ -19,11 +19,15 @@ class TrackModel implements TrackEntity {
   @override
   String location;
 
+  @override
+  bool isFavorite;
+
   TrackModel({
     this.id = 0,
     required this.artist,
     required this.title,
     required this.location,
+    this.isFavorite = false,
   });
 
   factory TrackModel.fromOnAudioQuery(on_audio_query.SongModel data) {

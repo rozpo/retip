@@ -61,8 +61,16 @@ class ObjectboxProvider {
     return await _store.box<T>().getAllAsync();
   }
 
+  Future<T?> get<T>(int id) async {
+    return await _store.box<T>().getAsync(id);
+  }
+
   Future<List<int>> insertMany<T>(List<T> entities) async {
     return await _store.box<T>().putManyAsync(entities, mode: PutMode.insert);
+  }
+
+  Future<int> update<T>(T entity) async {
+    return await _store.box<T>().putAsync(entity, mode: PutMode.update);
   }
 
   Stream<List<T>> stream<T>() {
