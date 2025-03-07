@@ -5,16 +5,20 @@ import 'package:meta/meta.dart';
 
 import '../../../domain/entities/track_entity.dart';
 import '../../../domain/repositories/audio_repository.dart';
+import '../../../domain/repositories/track_repository.dart';
 
 part 'audio_event.dart';
 part 'audio_state.dart';
 
 class AudioBloc extends Bloc<AudioEvent, AudioState> {
   final AudioRepository _audioRepository;
+  final TrackRepository _trackRepository;
 
   AudioBloc({
     required AudioRepository audioRepository,
+    required TrackRepository trackRepository,
   })  : _audioRepository = audioRepository,
+        _trackRepository = trackRepository,
         super(AudioState.initial()) {
     on<AudioPlay>(_onAudioPlay);
     on<AudioPause>(_onAudioPause);
@@ -25,6 +29,7 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     on<AudioDurationChanged>(_onAudioDurationChanged);
     on<AudioNext>(_onAudioNext);
     on<AudioPrevious>(_onAudioPrevious);
+    on<AudioTrackChanged>(_onAudioTrackChanged);
 
     _indexSubscription = _audioRepository.index.listen((index) {
       add(AudioIndexChanged(index));
@@ -47,6 +52,7 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   StreamSubscription? _isPlayingSubscription;
   StreamSubscription? _positionSubscription;
   StreamSubscription? _durationSubscription;
+  StreamSubscription? _trackSubscription;
 
   @override
   Future<void> close() {
@@ -54,10 +60,19 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     _isPlayingSubscription?.cancel();
     _positionSubscription?.cancel();
     _durationSubscription?.cancel();
+    _trackSubscription?.cancel();
     return super.close();
   }
 
   void _onAudioPlay(AudioPlay event, Emitter<AudioState> emit) {
+    _trackSubscription?.cancel();
+    _trackSubscription = _trackRepository
+        .trackStream(event.tracks[event.index].id)
+        .listen((track) {
+      if (track == null) return;
+      add(AudioTrackChanged(track));
+    });
+
     _audioRepository.play(event.tracks, event.index);
     emit(state.copyWith(playlist: event.tracks));
   }
@@ -75,6 +90,14 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
   }
 
   void _onAudioIndexChanged(AudioIndexChanged event, Emitter<AudioState> emit) {
+    _trackSubscription?.cancel();
+    _trackSubscription = _trackRepository
+        .trackStream(state.playlist[event.index].id)
+        .listen((track) {
+      if (track == null) return;
+      add(AudioTrackChanged(track));
+    });
+
     emit(state.copyWith(index: event.index));
   }
 
@@ -95,5 +118,9 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
 
   void _onAudioResume(AudioResume event, Emitter<AudioState> emit) {
     _audioRepository.resume();
+  }
+
+  void _onAudioTrackChanged(AudioTrackChanged event, Emitter<AudioState> emit) {
+    emit(state.copyWith(currentTrack: event.track));
   }
 }

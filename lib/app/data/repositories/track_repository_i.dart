@@ -1,3 +1,4 @@
+import '../../../objectbox.g.dart';
 import '../../domain/entities/track_entity.dart';
 import '../../domain/repositories/track_repository.dart';
 import '../models/track_model.dart';
@@ -23,5 +24,10 @@ class TrackRepositoryI implements TrackRepository {
 
     entity.isFavorite = !entity.isFavorite;
     _objectboxProvider.update(entity);
+  }
+
+  @override
+  Stream<TrackEntity?> trackStream(int id) {
+    return _objectboxProvider.streamOne<TrackModel>(TrackModel_.id.equals(id));
   }
 }

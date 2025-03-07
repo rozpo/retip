@@ -18,6 +18,12 @@ class AudioNext extends AudioEvent {}
 
 class AudioPrevious extends AudioEvent {}
 
+class AudioTrackChanged extends AudioEvent {
+  final TrackEntity track;
+
+  AudioTrackChanged(this.track);
+}
+
 class AudioIndexChanged extends AudioEvent {
   final int index;
 

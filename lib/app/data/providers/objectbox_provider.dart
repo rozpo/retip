@@ -78,4 +78,14 @@ class ObjectboxProvider {
       return query.find();
     });
   }
+
+  Stream<T?> streamOne<T>(Condition<T> condition) {
+    return _store
+        .box<T>()
+        .query(condition)
+        .watch(triggerImmediately: true)
+        .map((query) {
+      return query.findFirst();
+    });
+  }
 }

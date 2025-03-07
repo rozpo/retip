@@ -74,6 +74,7 @@ void main() async {
   // Blocs
   final audioBloc = AudioBloc(
     audioRepository: audioRepository,
+    trackRepository: trackRepository,
   );
 
   final trackBloc = TrackBloc(

@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/audio/audio_bloc.dart';
+import '../blocs/track/track_bloc.dart';
 
 class PlayerWidget extends StatelessWidget {
   const PlayerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<AudioBloc>();
+    final audioBloc = context.read<AudioBloc>();
+    final trackBloc = context.read<TrackBloc>();
 
     return BlocBuilder<AudioBloc, AudioState>(
       builder: (context, state) {
@@ -42,17 +44,37 @@ class PlayerWidget extends StatelessWidget {
                 height: 40,
                 child: const Icon(Icons.music_note),
               ),
-              title: Text(state.currentTrack?.title ?? ''),
-              subtitle: Text(state.currentTrack?.artist ?? ''),
+              title: Text(
+                state.currentTrack?.title ?? '',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(
+                state.currentTrack?.artist ?? '',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
                     style: Theme.of(context).iconButtonTheme.style,
+                    icon: Icon(
+                      state.currentTrack?.isFavorite == true
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                    ),
+                    onPressed: () {
+                      if (state.currentTrack == null) return;
+                      trackBloc.add(TrackToggleFavorite(state.currentTrack!));
+                    },
+                  ),
+                  IconButton(
+                    style: Theme.of(context).iconButtonTheme.style,
                     icon: const Icon(
                       Icons.skip_previous,
                     ),
-                    onPressed: () => bloc.add(AudioPrevious()),
+                    onPressed: () => audioBloc.add(AudioPrevious()),
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
@@ -63,8 +85,8 @@ class PlayerWidget extends StatelessWidget {
                     ),
                     onPressed: () {
                       state.isPlaying
-                          ? bloc.add(AudioPause())
-                          : bloc.add(AudioResume());
+                          ? audioBloc.add(AudioPause())
+                          : audioBloc.add(AudioResume());
                     },
                   ),
                   const SizedBox(width: 8),
@@ -73,7 +95,7 @@ class PlayerWidget extends StatelessWidget {
                     icon: const Icon(
                       Icons.skip_next,
                     ),
-                    onPressed: () => bloc.add(AudioNext()),
+                    onPressed: () => audioBloc.add(AudioNext()),
                   ),
                 ],
               ),
