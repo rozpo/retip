@@ -53,4 +53,12 @@ class RetipTheme {
   OutlinedButtonThemeData outlinedButtonTheme() {
     return OutlinedButtonThemeData(style: buttonStyle());
   }
+
+  ScrollBehavior get scrollBehavior {
+    return const ScrollBehavior().copyWith(
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
+    );
+  }
 }

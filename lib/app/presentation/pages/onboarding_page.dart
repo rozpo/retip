@@ -84,8 +84,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       count: pagesCount,
                       effect: WormEffect(
                         activeDotColor: Theme.of(context).colorScheme.primary,
-                        dotColor:
-                            Theme.of(context).colorScheme.surfaceContainer,
+                        dotColor: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
                       ),
                       onDotClicked: (index) {
                         controller.animateToPage(
