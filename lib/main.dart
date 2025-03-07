@@ -5,12 +5,14 @@ import 'app/data/providers/just_audio_provider.dart';
 import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/providers/shared_preferences_provider.dart';
+import 'app/data/repositories/album_repository_i.dart';
 import 'app/data/repositories/audio_repository_i.dart';
 import 'app/data/repositories/config_repository_i.dart';
 import 'app/data/repositories/library_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/settings_repository_i.dart';
 import 'app/data/repositories/track_repository_i.dart';
+import 'app/presentation/blocs/album/album_bloc.dart';
 import 'app/presentation/blocs/audio/audio_bloc.dart';
 import 'app/presentation/blocs/track/track_bloc.dart';
 import 'app/presentation/cubits/library/library_cubit.dart';
@@ -57,6 +59,10 @@ void main() async {
     justAudioProvider: justAudioProvider,
   );
 
+  final albumRepository = AlbumRepositoryI(
+    objectboxProvider: objectboxProvider,
+  );
+
   // Cubits
   final onboardingCubit = OnboardingCubit(
     configRepository: configRepository,
@@ -75,6 +81,10 @@ void main() async {
   final audioBloc = AudioBloc(
     audioRepository: audioRepository,
     trackRepository: trackRepository,
+  );
+
+  final albumBloc = AlbumBloc(
+    albumRepository: albumRepository,
   );
 
   final trackBloc = TrackBloc(
@@ -96,6 +106,7 @@ void main() async {
     libraryCubit: libraryCubit,
     audioBloc: audioBloc,
     trackBloc: trackBloc,
+    albumBloc: albumBloc,
     router: router,
     theme: theme,
     l10n: l10n,

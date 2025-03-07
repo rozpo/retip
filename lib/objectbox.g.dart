@@ -77,7 +77,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(2, 684081498485187712),
       name: 'AlbumModel',
-      lastPropertyId: const obx_int.IdUid(4, 8732514178785969522),
+      lastPropertyId: const obx_int.IdUid(5, 667594044578306521),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -101,6 +101,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(4, 8732514178785969522),
             name: 'artwork',
             type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 667594044578306521),
+            name: 'isFavorite',
+            type: 1,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -308,25 +313,31 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final titleOffset = fbb.writeString(object.title);
           final artworkOffset =
               object.artwork == null ? null : fbb.writeString(object.artwork!);
-          fbb.startTable(5);
+          fbb.startTable(6);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.artistDb.targetId);
           fbb.addOffset(2, titleOffset);
           fbb.addOffset(3, artworkOffset);
+          fbb.addBool(4, object.isFavorite);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final isFavoriteParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
           final titleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
           final artworkParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 10);
-          final object =
-              AlbumModel(id: idParam, title: titleParam, artwork: artworkParam);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final object = AlbumModel(
+              isFavorite: isFavoriteParam,
+              title: titleParam,
+              artwork: artworkParam,
+              id: idParam);
           object.artistDb.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
           object.artistDb.attach(store);
@@ -516,6 +527,10 @@ class AlbumModel_ {
   /// See [AlbumModel.artwork].
   static final artwork =
       obx.QueryStringProperty<AlbumModel>(_entities[1].properties[3]);
+
+  /// See [AlbumModel.isFavorite].
+  static final isFavorite =
+      obx.QueryBooleanProperty<AlbumModel>(_entities[1].properties[4]);
 
   /// see [AlbumModel.tracksDb]
   static final tracksDb =

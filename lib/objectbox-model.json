@@ -60,7 +60,7 @@
     },
     {
       "id": "2:684081498485187712",
-      "lastPropertyId": "4:8732514178785969522",
+      "lastPropertyId": "5:667594044578306521",
       "name": "AlbumModel",
       "properties": [
         {
@@ -86,6 +86,11 @@
           "id": "4:8732514178785969522",
           "name": "artwork",
           "type": 9
+        },
+        {
+          "id": "5:667594044578306521",
+          "name": "isFavorite",
+          "type": 1
         }
       ],
       "relations": []

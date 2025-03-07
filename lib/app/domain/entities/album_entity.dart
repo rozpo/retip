@@ -9,7 +9,10 @@ abstract class AlbumEntity {
   final String title;
   final String? artwork;
 
+  final bool isFavorite;
+
   AlbumEntity({
+    this.isFavorite = false,
     this.tracks = const [],
     required this.artist,
     required this.title,

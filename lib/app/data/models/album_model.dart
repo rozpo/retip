@@ -22,10 +22,14 @@ class AlbumModel implements AlbumEntity {
   @override
   String? artwork;
 
+  @override
+  bool isFavorite;
+
   AlbumModel({
-    this.id = 0,
+    this.isFavorite = false,
     required this.title,
     this.artwork,
+    this.id = 0,
   });
 
   @Transient()
