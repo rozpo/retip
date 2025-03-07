@@ -7,6 +7,7 @@ import '../core/theme/retip_theme.dart';
 import 'domain/repositories/config_repository.dart';
 import 'domain/repositories/permission_repository.dart';
 import 'domain/repositories/settings_repository.dart';
+import 'presentation/cubits/library/library_cubit.dart';
 import 'presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'presentation/cubits/permission/permission_cubit.dart';
 
@@ -16,6 +17,7 @@ class RetipApp extends StatelessWidget {
   final ConfigRepository configRepository;
   final OnboardingCubit onboardingCubit;
   final PermissionCubit permissionCubit;
+  final LibraryCubit libraryCubit;
   final RetipRouter router;
   final RetipTheme theme;
   final RetipL10n l10n;
@@ -26,6 +28,7 @@ class RetipApp extends StatelessWidget {
     required this.configRepository,
     required this.onboardingCubit,
     required this.permissionCubit,
+    required this.libraryCubit,
     required this.router,
     required this.theme,
     required this.l10n,
@@ -48,6 +51,7 @@ class RetipApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => onboardingCubit),
             BlocProvider(create: (context) => permissionCubit),
+            BlocProvider(create: (context) => libraryCubit),
           ],
           child: MaterialApp.router(
             localizationsDelegates: l10n.localizationsDelegates,

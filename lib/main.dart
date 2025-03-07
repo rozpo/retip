@@ -4,8 +4,10 @@ import 'app/data/providers/app_settings_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/providers/shared_preferences_provider.dart';
 import 'app/data/repositories/config_repository_i.dart';
+import 'app/data/repositories/library_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/settings_repository_i.dart';
+import 'app/presentation/cubits/library/library_cubit.dart';
 import 'app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'app/presentation/cubits/permission/permission_cubit.dart';
 import 'app/retip_app.dart';
@@ -34,6 +36,8 @@ void main() async {
     appSettingsProvider: appSettingsProvider,
   );
 
+  final libraryRepository = LibraryRepositoryI();
+
   // Cubits
   final onboardingCubit = OnboardingCubit(
     configRepository: configRepository,
@@ -42,6 +46,10 @@ void main() async {
   final permissionCubit = PermissionCubit(
     permissionRepository: permissionRepository,
     settingsRepository: settingsRepository,
+  );
+
+  final libraryCubit = LibraryCubit(
+    libraryRepository: libraryRepository,
   );
 
   // Core
@@ -55,6 +63,7 @@ void main() async {
     configRepository: configRepository,
     onboardingCubit: onboardingCubit,
     permissionCubit: permissionCubit,
+    libraryCubit: libraryCubit,
     router: router,
     theme: theme,
     l10n: l10n,
