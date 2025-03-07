@@ -18,6 +18,7 @@ class TracksView extends StatelessWidget {
               final track = state.tracks[index];
 
               return ListTile(
+                onTap: () {},
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,

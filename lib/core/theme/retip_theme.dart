@@ -104,7 +104,7 @@ class RetipTheme {
       shape: BeveledRectangleBorder(),
       minTileHeight: 40,
       minVerticalPadding: 8,
-      horizontalTitleGap: 8,
+      horizontalTitleGap: 16,
     );
   }
 

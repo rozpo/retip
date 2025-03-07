@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/router/retip_routes.dart';
+import '../widgets/player_widget.dart';
 import '../widgets/retip_logo_widget.dart';
-// import '../widgets/player_widget.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
@@ -24,7 +24,7 @@ class _NavigationViewState extends State<NavigationView> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // const PlayerWidget(),
+        const PlayerWidget(),
         Theme(
           data: Theme.of(context).copyWith(
             splashFactory: NoSplash.splashFactory,
