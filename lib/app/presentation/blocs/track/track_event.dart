@@ -8,3 +8,10 @@ final class TrackRefresh extends TrackEvent {
 
   TrackRefresh(this.tracks);
 }
+
+final class TrackPlay extends TrackEvent {
+  final List<TrackEntity> tracks;
+  final int index;
+
+  TrackPlay(this.tracks, this.index);
+}

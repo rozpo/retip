@@ -8,6 +8,8 @@ class TracksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<TrackBloc>(context);
+
     return BlocBuilder<TrackBloc, TrackState>(
       builder: (context, state) {
         if (state is TrackInitial) {
@@ -18,7 +20,7 @@ class TracksView extends StatelessWidget {
               final track = state.tracks[index];
 
               return ListTile(
-                onTap: () {},
+                onTap: () => bloc.add(TrackPlay(state.tracks, index)),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,

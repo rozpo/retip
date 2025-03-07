@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'app/data/providers/app_settings_provider.dart';
+import 'app/data/providers/just_audio_provider.dart';
 import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/providers/shared_preferences_provider.dart';
+import 'app/data/repositories/audio_repository_i.dart';
 import 'app/data/repositories/config_repository_i.dart';
 import 'app/data/repositories/library_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
@@ -25,6 +27,7 @@ void main() async {
   final sharedPreferencesProvider = await SharedPreferencesProvider.init();
   final onAudioQueryProvider = await OnAudioQueryProvider.init();
   final appSettingsProvider = await AppSettingsProvider.init();
+  final justAudioProvider = await JustAudioProvider.init();
   final objectboxProvider = await ObjectboxProvider.init();
 
   // Repositories
@@ -49,6 +52,10 @@ void main() async {
     objectboxProvider: objectboxProvider,
   );
 
+  final audioRepository = AudioRepositoryI(
+    justAudioProvider: justAudioProvider,
+  );
+
   // Cubits
   final onboardingCubit = OnboardingCubit(
     configRepository: configRepository,
@@ -65,6 +72,7 @@ void main() async {
 
   // Blocs
   final trackBloc = TrackBloc(
+    audioRepository: audioRepository,
     trackRepository: trackRepository,
   );
 
