@@ -64,4 +64,10 @@ class ObjectboxProvider {
   Future<List<int>> insertMany<T>(List<T> entities) async {
     return await _store.box<T>().putManyAsync(entities, mode: PutMode.insert);
   }
+
+  Stream<List<T>> stream<T>() {
+    return _store.box<T>().query().watch(triggerImmediately: true).map((query) {
+      return query.find();
+    });
+  }
 }

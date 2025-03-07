@@ -15,28 +15,34 @@ class RetipTheme {
     final colors = colorScheme(Brightness.dark);
 
     return ThemeData(
-        fontFamily: fontFamily,
-        colorScheme: colors,
-        outlinedButtonTheme: outlinedButtonTheme(),
-        filledButtonTheme: filledButtonTheme(),
-        textButtonTheme: textButtonTheme(),
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
-        snackBarTheme: snackBarTheme(colors));
+      fontFamily: fontFamily,
+      colorScheme: colors,
+      outlinedButtonTheme: outlinedButtonTheme(),
+      filledButtonTheme: filledButtonTheme(),
+      textButtonTheme: textButtonTheme(),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
+      iconButtonTheme: iconButtonTheme(colors),
+      snackBarTheme: snackBarTheme(colors),
+      listTileTheme: listTileTheme(colors),
+    );
   }
 
   ThemeData light() {
     final colors = colorScheme(Brightness.light);
 
     return ThemeData(
-        fontFamily: fontFamily,
-        colorScheme: colors,
-        outlinedButtonTheme: outlinedButtonTheme(),
-        filledButtonTheme: filledButtonTheme(),
-        textButtonTheme: textButtonTheme(),
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
-        snackBarTheme: snackBarTheme(colors));
+      fontFamily: fontFamily,
+      colorScheme: colors,
+      outlinedButtonTheme: outlinedButtonTheme(),
+      filledButtonTheme: filledButtonTheme(),
+      textButtonTheme: textButtonTheme(),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
+      iconButtonTheme: iconButtonTheme(colors),
+      snackBarTheme: snackBarTheme(colors),
+      listTileTheme: listTileTheme(colors),
+    );
   }
 
   ButtonStyle buttonStyle() {
@@ -90,5 +96,19 @@ class RetipTheme {
       backgroundColor: colorScheme.surfaceContainer,
       behavior: SnackBarBehavior.fixed,
     );
+  }
+
+  ListTileThemeData listTileTheme(ColorScheme colorScheme) {
+    return const ListTileThemeData(
+      contentPadding: EdgeInsets.symmetric(horizontal: 16),
+      shape: BeveledRectangleBorder(),
+      minTileHeight: 40,
+      minVerticalPadding: 8,
+      horizontalTitleGap: 8,
+    );
+  }
+
+  IconButtonThemeData iconButtonTheme(ColorScheme colorScheme) {
+    return IconButtonThemeData(style: buttonStyle());
   }
 }

@@ -42,6 +42,18 @@ class LibraryPage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(l10n.library),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.sort),
+              ),
+              const SizedBox(width: 8),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.grid_view),
+              ),
+              const SizedBox(width: 16),
+            ],
             bottom: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
