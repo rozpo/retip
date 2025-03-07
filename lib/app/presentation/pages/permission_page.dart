@@ -40,16 +40,16 @@ class PermissionPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: OutlinedButton(
+                        child: TextButton(
                           onPressed: () => cubit.openAppSettings(),
-                          child: Text(l10n.openAppSettings),
+                          child: Text(l10n.openAppSettings.toUpperCase()),
                         ),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: FilledButton(
                           onPressed: () => cubit.requestMediaPermission(),
-                          child: Text(l10n.allowAccess),
+                          child: Text(l10n.allowAccess.toUpperCase()),
                         ),
                       ),
                     ],

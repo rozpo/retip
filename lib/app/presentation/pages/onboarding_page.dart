@@ -44,6 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               onPressed: () => cubit.finishOnboarding(),
               child: Text(l10n.skip.toUpperCase()),
             ),
+            const SizedBox(width: 16),
           ],
         ),
         body: SafeArea(

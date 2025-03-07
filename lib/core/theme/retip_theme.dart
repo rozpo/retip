@@ -36,7 +36,7 @@ class RetipTheme {
     return ButtonStyle(
       shape: WidgetStateProperty.all(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(0),
         ),
       ),
     );
