@@ -80,4 +80,11 @@ class RetipTheme {
       unselectedItemColor: colorScheme.onSurface,
     );
   }
+
+  TabBarTheme tabBarTheme(ColorScheme colorScheme) {
+    return TabBarTheme(
+      labelColor: colorScheme.primary,
+      unselectedLabelColor: colorScheme.onSurface,
+    );
+  }
 }

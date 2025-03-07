@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../views/albums_view.dart';
+import '../views/artists_view.dart';
+import '../views/genres_view.dart';
+import '../views/playlists_view.dart';
+import '../views/tracks_view.dart';
+
 class LibraryPage extends StatelessWidget {
   const LibraryPage({super.key});
 
@@ -22,6 +28,17 @@ class LibraryPage extends StatelessWidget {
               Tab(text: 'Tracks'),
             ],
           ),
+        ),
+        body: const TabBarView(
+          // TODO: Inherit the physics from the ThemeData
+          physics: BouncingScrollPhysics(),
+          children: [
+            PlaylistsView(),
+            ArtistsView(),
+            AlbumsView(),
+            GenresView(),
+            TracksView(),
+          ],
         ),
       ),
     );
