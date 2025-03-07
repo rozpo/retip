@@ -36,7 +36,9 @@ void main() async {
     appSettingsProvider: appSettingsProvider,
   );
 
-  final libraryRepository = LibraryRepositoryI();
+  final libraryRepository = LibraryRepositoryI(
+    onAudioQueryProvider: onAudioQueryProvider,
+  );
 
   // Cubits
   final onboardingCubit = OnboardingCubit(

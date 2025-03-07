@@ -18,4 +18,8 @@ class OnAudioQueryProvider {
   Future<bool> permissionStatus() async {
     return await _onAudioQuery.permissionsStatus();
   }
+
+  Future<List<SongModel>> querySongs() async {
+    return await _onAudioQuery.querySongs();
+  }
 }
