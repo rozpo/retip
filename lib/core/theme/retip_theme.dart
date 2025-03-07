@@ -15,6 +15,8 @@ class RetipTheme {
       outlinedButtonTheme: outlinedButtonTheme(),
       filledButtonTheme: filledButtonTheme(),
       textButtonTheme: textButtonTheme(),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      bottomNavigationBarTheme: bottomNavigationBarTheme,
     );
   }
 
@@ -29,6 +31,8 @@ class RetipTheme {
       outlinedButtonTheme: outlinedButtonTheme(),
       filledButtonTheme: filledButtonTheme(),
       textButtonTheme: textButtonTheme(),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      bottomNavigationBarTheme: bottomNavigationBarTheme,
     );
   }
 
@@ -59,6 +63,14 @@ class RetipTheme {
       physics: const BouncingScrollPhysics(
         parent: AlwaysScrollableScrollPhysics(),
       ),
+    );
+  }
+
+  BottomNavigationBarThemeData get bottomNavigationBarTheme {
+    return const BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      showUnselectedLabels: true,
+      showSelectedLabels: true,
     );
   }
 }
