@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/router/retip_routes.dart';
+import '../widgets/retip_logo_widget.dart';
 // import '../widgets/player_widget.dart';
 
 class NavigationView extends StatefulWidget {
@@ -33,23 +34,40 @@ class _NavigationViewState extends State<NavigationView> {
           child: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
-                icon: const Icon(Icons.home),
+                icon: RetipLogoWidget(
+                  width: 24,
+                  height: 24,
+                  color: Theme.of(context)
+                      .bottomNavigationBarTheme
+                      .unselectedItemColor,
+                ),
+                activeIcon: RetipLogoWidget(
+                  width: 24,
+                  height: 24,
+                  color: Theme.of(context)
+                      .bottomNavigationBarTheme
+                      .selectedItemColor,
+                ),
                 label: l10n.home,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.explore),
+                icon: const Icon(Icons.explore_outlined),
+                activeIcon: const Icon(Icons.explore),
                 label: l10n.explore,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.search),
+                icon: const Icon(Icons.search_outlined),
+                activeIcon: const Icon(Icons.search),
                 label: l10n.search,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.library_music),
+                icon: const Icon(Icons.library_music_outlined),
+                activeIcon: const Icon(Icons.library_music),
                 label: l10n.library,
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.person),
+                icon: const Icon(Icons.person_outline),
+                activeIcon: const Icon(Icons.person),
                 label: l10n.profile,
               ),
             ],

@@ -5,9 +5,24 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Library Page'),
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Library Page'),
+          bottom: const TabBar(
+            indicatorSize: TabBarIndicatorSize.tab,
+            isScrollable: true,
+            tabAlignment: TabAlignment.start,
+            tabs: [
+              Tab(text: 'Playlists'),
+              Tab(text: 'Artists'),
+              Tab(text: 'Albums'),
+              Tab(text: 'Genres'),
+              Tab(text: 'Tracks'),
+            ],
+          ),
+        ),
       ),
     );
   }

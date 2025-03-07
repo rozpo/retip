@@ -4,35 +4,39 @@ class RetipTheme {
   static const fontFamily = 'Play';
   static const primaryColor = Colors.blue;
 
+  ColorScheme colorScheme(Brightness brightness) {
+    return ColorScheme.fromSeed(
+      brightness: brightness,
+      seedColor: primaryColor,
+    );
+  }
+
   ThemeData dark() {
+    final colors = colorScheme(Brightness.dark);
+
     return ThemeData(
-      brightness: Brightness.dark,
       fontFamily: fontFamily,
-      colorScheme: ColorScheme.fromSeed(
-        brightness: Brightness.dark,
-        seedColor: primaryColor,
-      ),
+      colorScheme: colors,
       outlinedButtonTheme: outlinedButtonTheme(),
       filledButtonTheme: filledButtonTheme(),
       textButtonTheme: textButtonTheme(),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      bottomNavigationBarTheme: bottomNavigationBarTheme,
+      bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
     );
   }
 
   ThemeData light() {
+    final colors = colorScheme(Brightness.light);
+
     return ThemeData(
       primaryColor: primaryColor,
       fontFamily: fontFamily,
-      colorScheme: ColorScheme.fromSeed(
-        brightness: Brightness.light,
-        seedColor: primaryColor,
-      ),
+      colorScheme: colors,
       outlinedButtonTheme: outlinedButtonTheme(),
       filledButtonTheme: filledButtonTheme(),
       textButtonTheme: textButtonTheme(),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      bottomNavigationBarTheme: bottomNavigationBarTheme,
+      bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
     );
   }
 
@@ -66,11 +70,14 @@ class RetipTheme {
     );
   }
 
-  BottomNavigationBarThemeData get bottomNavigationBarTheme {
-    return const BottomNavigationBarThemeData(
+  BottomNavigationBarThemeData bottomNavigationBarTheme(
+      ColorScheme colorScheme) {
+    return BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       showUnselectedLabels: true,
       showSelectedLabels: true,
+      selectedItemColor: colorScheme.primary,
+      unselectedItemColor: colorScheme.onSurface,
     );
   }
 }
