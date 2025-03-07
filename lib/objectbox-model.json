@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7752318775264821867",
-      "lastPropertyId": "5:3966078162657636586",
+      "lastPropertyId": "8:5026748568316419951",
       "name": "TrackModel",
       "properties": [
         {
@@ -13,11 +13,6 @@
           "name": "id",
           "type": 6,
           "flags": 1
-        },
-        {
-          "id": "2:4876302815174240193",
-          "name": "artist",
-          "type": 9
         },
         {
           "id": "3:8183575521074009946",
@@ -35,20 +30,156 @@
           "id": "5:3966078162657636586",
           "name": "isFavorite",
           "type": 1
+        },
+        {
+          "id": "6:2362111686233053003",
+          "name": "albumDbId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "3:4042431021145273339",
+          "relationTarget": "AlbumModel"
+        },
+        {
+          "id": "7:7023745822989847657",
+          "name": "artistDbId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:8924660307624777313",
+          "relationTarget": "ArtistModel"
+        },
+        {
+          "id": "8:5026748568316419951",
+          "name": "genreDbId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "5:5052118487537662752",
+          "relationTarget": "GenreModel"
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:684081498485187712",
+      "lastPropertyId": "4:8732514178785969522",
+      "name": "AlbumModel",
+      "properties": [
+        {
+          "id": "1:6485315798590288281",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1583398741962419724",
+          "name": "artistDbId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:8802845299196483956",
+          "relationTarget": "ArtistModel"
+        },
+        {
+          "id": "3:2822565971989187530",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "4:8732514178785969522",
+          "name": "artwork",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4512758171170554955",
+      "lastPropertyId": "3:7028757966426060125",
+      "name": "ArtistModel",
+      "properties": [
+        {
+          "id": "1:7680577428914149124",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3010245327977269993",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7028757966426060125",
+          "name": "photo",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:1497927118071281231",
+      "lastPropertyId": "3:8316030438189052514",
+      "name": "GenreModel",
+      "properties": [
+        {
+          "id": "1:3924723018841450519",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1111220252068429745",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:8316030438189052514",
+          "name": "photo",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:7957098896197022941",
+      "lastPropertyId": "3:7611586190691738766",
+      "name": "PlaylistModel",
+      "properties": [
+        {
+          "id": "1:4772900634436446302",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:705512014762434682",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7611586190691738766",
+          "name": "photo",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:5279861045058362972",
+          "name": "tracksDb",
+          "targetId": "1:7752318775264821867"
+        }
+      ]
     }
   ],
-  "lastEntityId": "1:7752318775264821867",
-  "lastIndexId": "1:4031752736418694797",
-  "lastRelationId": "0:0",
+  "lastEntityId": "5:7957098896197022941",
+  "lastIndexId": "5:5052118487537662752",
+  "lastRelationId": "1:5279861045058362972",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    4876302815174240193
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

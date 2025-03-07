@@ -35,7 +35,7 @@ class TracksView extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Text(
-                  track.artist,
+                  track.artist?.name ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

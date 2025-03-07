@@ -31,12 +31,9 @@ class JustAudioProvider {
         return AudioSource.uri(
           Uri.parse(track.location),
           tag: MediaItem(
-            displayDescription: track.artist,
             id: track.id.toString(),
             title: track.title,
-            artist: track.artist,
-            displayTitle: track.title,
-            displaySubtitle: track.artist,
+            artist: track.artist?.name,
           ),
         );
       }).toList(),

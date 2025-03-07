@@ -14,6 +14,10 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'app/data/models/album_model.dart';
+import 'app/data/models/artist_model.dart';
+import 'app/data/models/genre_model.dart';
+import 'app/data/models/playlist_model.dart';
 import 'app/data/models/track_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -22,7 +26,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(1, 7752318775264821867),
       name: 'TrackModel',
-      lastPropertyId: const obx_int.IdUid(5, 3966078162657636586),
+      lastPropertyId: const obx_int.IdUid(8, 5026748568316419951),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -30,11 +34,6 @@ final _entities = <obx_int.ModelEntity>[
             name: 'id',
             type: 6,
             flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 4876302815174240193),
-            name: 'artist',
-            type: 9,
-            flags: 0),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(3, 8183575521074009946),
             name: 'title',
@@ -50,9 +49,149 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(5, 3966078162657636586),
             name: 'isFavorite',
             type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 2362111686233053003),
+            name: 'albumDbId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(3, 4042431021145273339),
+            relationTarget: 'AlbumModel'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 7023745822989847657),
+            name: 'artistDbId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(4, 8924660307624777313),
+            relationTarget: 'ArtistModel'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 5026748568316419951),
+            name: 'genreDbId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(5, 5052118487537662752),
+            relationTarget: 'GenreModel')
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(2, 684081498485187712),
+      name: 'AlbumModel',
+      lastPropertyId: const obx_int.IdUid(4, 8732514178785969522),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 6485315798590288281),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 1583398741962419724),
+            name: 'artistDbId',
+            type: 11,
+            flags: 520,
+            indexId: const obx_int.IdUid(2, 8802845299196483956),
+            relationTarget: 'ArtistModel'),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 2822565971989187530),
+            name: 'title',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 8732514178785969522),
+            name: 'artwork',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[
+        obx_int.ModelBacklink(
+            name: 'tracksDb', srcEntity: 'TrackModel', srcField: 'albumDb')
+      ]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(3, 4512758171170554955),
+      name: 'ArtistModel',
+      lastPropertyId: const obx_int.IdUid(3, 7028757966426060125),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 7680577428914149124),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 3010245327977269993),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 7028757966426060125),
+            name: 'photo',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[
+        obx_int.ModelBacklink(
+            name: 'albumsDb', srcEntity: 'AlbumModel', srcField: 'artistDb'),
+        obx_int.ModelBacklink(
+            name: 'tracksDb', srcEntity: 'TrackModel', srcField: 'artistDb')
+      ]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(4, 1497927118071281231),
+      name: 'GenreModel',
+      lastPropertyId: const obx_int.IdUid(3, 8316030438189052514),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 3924723018841450519),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 1111220252068429745),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 8316030438189052514),
+            name: 'photo',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[
+        obx_int.ModelBacklink(
+            name: 'tracksDb', srcEntity: 'TrackModel', srcField: 'genreDb')
+      ]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(5, 7957098896197022941),
+      name: 'PlaylistModel',
+      lastPropertyId: const obx_int.IdUid(3, 7611586190691738766),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 4772900634436446302),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 705512014762434682),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 7611586190691738766),
+            name: 'photo',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[
+        obx_int.ModelRelation(
+            id: const obx_int.IdUid(1, 5279861045058362972),
+            name: 'tracksDb',
+            targetId: const obx_int.IdUid(1, 7752318775264821867))
+      ],
       backlinks: <obx_int.ModelBacklink>[])
 ];
 
@@ -91,13 +230,13 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(1, 7752318775264821867),
-      lastIndexId: const obx_int.IdUid(1, 4031752736418694797),
-      lastRelationId: const obx_int.IdUid(0, 0),
+      lastEntityId: const obx_int.IdUid(5, 7957098896197022941),
+      lastIndexId: const obx_int.IdUid(5, 5052118487537662752),
+      lastRelationId: const obx_int.IdUid(1, 5279861045058362972),
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [4876302815174240193],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -106,22 +245,74 @@ obx_int.ModelDefinition getObjectBoxModel() {
   final bindings = <Type, obx_int.EntityDefinition>{
     TrackModel: obx_int.EntityDefinition<TrackModel>(
         model: _entities[0],
-        toOneRelations: (TrackModel object) => [],
+        toOneRelations: (TrackModel object) =>
+            [object.albumDb, object.artistDb, object.genreDb],
         toManyRelations: (TrackModel object) => {},
         getId: (TrackModel object) => object.id,
         setId: (TrackModel object, int id) {
           object.id = id;
         },
         objectToFB: (TrackModel object, fb.Builder fbb) {
-          final artistOffset = fbb.writeString(object.artist);
           final titleOffset = fbb.writeString(object.title);
           final locationOffset = fbb.writeString(object.location);
-          fbb.startTable(6);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
-          fbb.addOffset(1, artistOffset);
           fbb.addOffset(2, titleOffset);
           fbb.addOffset(3, locationOffset);
           fbb.addBool(4, object.isFavorite);
+          fbb.addInt64(5, object.albumDb.targetId);
+          fbb.addInt64(6, object.artistDb.targetId);
+          fbb.addInt64(7, object.genreDb.targetId);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final isFavoriteParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
+          final locationParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 10, '');
+          final titleParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final object = TrackModel(
+              isFavorite: isFavoriteParam,
+              location: locationParam,
+              title: titleParam,
+              id: idParam);
+          object.albumDb.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0);
+          object.albumDb.attach(store);
+          object.artistDb.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
+          object.artistDb.attach(store);
+          object.genreDb.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
+          object.genreDb.attach(store);
+          return object;
+        }),
+    AlbumModel: obx_int.EntityDefinition<AlbumModel>(
+        model: _entities[1],
+        toOneRelations: (AlbumModel object) => [object.artistDb],
+        toManyRelations: (AlbumModel object) => {
+              obx_int.RelInfo<TrackModel>.toOneBacklink(6, object.id,
+                  (TrackModel srcObject) => srcObject.albumDb): object.tracksDb
+            },
+        getId: (AlbumModel object) => object.id,
+        setId: (AlbumModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (AlbumModel object, fb.Builder fbb) {
+          final titleOffset = fbb.writeString(object.title);
+          final artworkOffset =
+              object.artwork == null ? null : fbb.writeString(object.artwork!);
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id);
+          fbb.addInt64(1, object.artistDb.targetId);
+          fbb.addOffset(2, titleOffset);
+          fbb.addOffset(3, artworkOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -130,21 +321,146 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final artistParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
           final titleParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 8, '');
-          final locationParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 10, '');
-          final isFavoriteParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
-          final object = TrackModel(
-              id: idParam,
-              artist: artistParam,
-              title: titleParam,
-              location: locationParam,
-              isFavorite: isFavoriteParam);
-
+          final artworkParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 10);
+          final object =
+              AlbumModel(id: idParam, title: titleParam, artwork: artworkParam);
+          object.artistDb.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
+          object.artistDb.attach(store);
+          obx_int.InternalToManyAccess.setRelInfo<AlbumModel>(
+              object.tracksDb,
+              store,
+              obx_int.RelInfo<TrackModel>.toOneBacklink(
+                  6, object.id, (TrackModel srcObject) => srcObject.albumDb));
+          return object;
+        }),
+    ArtistModel: obx_int.EntityDefinition<ArtistModel>(
+        model: _entities[2],
+        toOneRelations: (ArtistModel object) => [],
+        toManyRelations: (ArtistModel object) => {
+              obx_int.RelInfo<AlbumModel>.toOneBacklink(2, object.id,
+                      (AlbumModel srcObject) => srcObject.artistDb):
+                  object.albumsDb,
+              obx_int.RelInfo<TrackModel>.toOneBacklink(7, object.id,
+                  (TrackModel srcObject) => srcObject.artistDb): object.tracksDb
+            },
+        getId: (ArtistModel object) => object.id,
+        setId: (ArtistModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (ArtistModel object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final photoOffset =
+              object.photo == null ? null : fbb.writeString(object.photo!);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, photoOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final object = ArtistModel(id: idParam, name: nameParam)
+            ..photo = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 8);
+          obx_int.InternalToManyAccess.setRelInfo<ArtistModel>(
+              object.albumsDb,
+              store,
+              obx_int.RelInfo<AlbumModel>.toOneBacklink(
+                  2, object.id, (AlbumModel srcObject) => srcObject.artistDb));
+          obx_int.InternalToManyAccess.setRelInfo<ArtistModel>(
+              object.tracksDb,
+              store,
+              obx_int.RelInfo<TrackModel>.toOneBacklink(
+                  7, object.id, (TrackModel srcObject) => srcObject.artistDb));
+          return object;
+        }),
+    GenreModel: obx_int.EntityDefinition<GenreModel>(
+        model: _entities[3],
+        toOneRelations: (GenreModel object) => [],
+        toManyRelations: (GenreModel object) => {
+              obx_int.RelInfo<TrackModel>.toOneBacklink(8, object.id,
+                  (TrackModel srcObject) => srcObject.genreDb): object.tracksDb
+            },
+        getId: (GenreModel object) => object.id,
+        setId: (GenreModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (GenreModel object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final photoOffset =
+              object.photo == null ? null : fbb.writeString(object.photo!);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, photoOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final photoParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 8);
+          final object =
+              GenreModel(name: nameParam, id: idParam, photo: photoParam);
+          obx_int.InternalToManyAccess.setRelInfo<GenreModel>(
+              object.tracksDb,
+              store,
+              obx_int.RelInfo<TrackModel>.toOneBacklink(
+                  8, object.id, (TrackModel srcObject) => srcObject.genreDb));
+          return object;
+        }),
+    PlaylistModel: obx_int.EntityDefinition<PlaylistModel>(
+        model: _entities[4],
+        toOneRelations: (PlaylistModel object) => [],
+        toManyRelations: (PlaylistModel object) => {
+              obx_int.RelInfo<PlaylistModel>.toMany(1, object.id):
+                  object.tracksDb
+            },
+        getId: (PlaylistModel object) => object.id,
+        setId: (PlaylistModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (PlaylistModel object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final photoOffset =
+              object.photo == null ? null : fbb.writeString(object.photo!);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, photoOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final photoParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 8);
+          final object =
+              PlaylistModel(name: nameParam, id: idParam, photo: photoParam);
+          obx_int.InternalToManyAccess.setRelInfo<PlaylistModel>(
+              object.tracksDb,
+              store,
+              obx_int.RelInfo<PlaylistModel>.toMany(1, object.id));
           return object;
         })
   };
@@ -158,19 +474,111 @@ class TrackModel_ {
   static final id =
       obx.QueryIntegerProperty<TrackModel>(_entities[0].properties[0]);
 
-  /// See [TrackModel.artist].
-  static final artist =
-      obx.QueryStringProperty<TrackModel>(_entities[0].properties[1]);
-
   /// See [TrackModel.title].
   static final title =
-      obx.QueryStringProperty<TrackModel>(_entities[0].properties[2]);
+      obx.QueryStringProperty<TrackModel>(_entities[0].properties[1]);
 
   /// See [TrackModel.location].
   static final location =
-      obx.QueryStringProperty<TrackModel>(_entities[0].properties[3]);
+      obx.QueryStringProperty<TrackModel>(_entities[0].properties[2]);
 
   /// See [TrackModel.isFavorite].
   static final isFavorite =
-      obx.QueryBooleanProperty<TrackModel>(_entities[0].properties[4]);
+      obx.QueryBooleanProperty<TrackModel>(_entities[0].properties[3]);
+
+  /// See [TrackModel.albumDb].
+  static final albumDb = obx.QueryRelationToOne<TrackModel, AlbumModel>(
+      _entities[0].properties[4]);
+
+  /// See [TrackModel.artistDb].
+  static final artistDb = obx.QueryRelationToOne<TrackModel, ArtistModel>(
+      _entities[0].properties[5]);
+
+  /// See [TrackModel.genreDb].
+  static final genreDb = obx.QueryRelationToOne<TrackModel, GenreModel>(
+      _entities[0].properties[6]);
+}
+
+/// [AlbumModel] entity fields to define ObjectBox queries.
+class AlbumModel_ {
+  /// See [AlbumModel.id].
+  static final id =
+      obx.QueryIntegerProperty<AlbumModel>(_entities[1].properties[0]);
+
+  /// See [AlbumModel.artistDb].
+  static final artistDb = obx.QueryRelationToOne<AlbumModel, ArtistModel>(
+      _entities[1].properties[1]);
+
+  /// See [AlbumModel.title].
+  static final title =
+      obx.QueryStringProperty<AlbumModel>(_entities[1].properties[2]);
+
+  /// See [AlbumModel.artwork].
+  static final artwork =
+      obx.QueryStringProperty<AlbumModel>(_entities[1].properties[3]);
+
+  /// see [AlbumModel.tracksDb]
+  static final tracksDb =
+      obx.QueryBacklinkToMany<TrackModel, AlbumModel>(TrackModel_.albumDb);
+}
+
+/// [ArtistModel] entity fields to define ObjectBox queries.
+class ArtistModel_ {
+  /// See [ArtistModel.id].
+  static final id =
+      obx.QueryIntegerProperty<ArtistModel>(_entities[2].properties[0]);
+
+  /// See [ArtistModel.name].
+  static final name =
+      obx.QueryStringProperty<ArtistModel>(_entities[2].properties[1]);
+
+  /// See [ArtistModel.photo].
+  static final photo =
+      obx.QueryStringProperty<ArtistModel>(_entities[2].properties[2]);
+
+  /// see [ArtistModel.albumsDb]
+  static final albumsDb =
+      obx.QueryBacklinkToMany<AlbumModel, ArtistModel>(AlbumModel_.artistDb);
+
+  /// see [ArtistModel.tracksDb]
+  static final tracksDb =
+      obx.QueryBacklinkToMany<TrackModel, ArtistModel>(TrackModel_.artistDb);
+}
+
+/// [GenreModel] entity fields to define ObjectBox queries.
+class GenreModel_ {
+  /// See [GenreModel.id].
+  static final id =
+      obx.QueryIntegerProperty<GenreModel>(_entities[3].properties[0]);
+
+  /// See [GenreModel.name].
+  static final name =
+      obx.QueryStringProperty<GenreModel>(_entities[3].properties[1]);
+
+  /// See [GenreModel.photo].
+  static final photo =
+      obx.QueryStringProperty<GenreModel>(_entities[3].properties[2]);
+
+  /// see [GenreModel.tracksDb]
+  static final tracksDb =
+      obx.QueryBacklinkToMany<TrackModel, GenreModel>(TrackModel_.genreDb);
+}
+
+/// [PlaylistModel] entity fields to define ObjectBox queries.
+class PlaylistModel_ {
+  /// See [PlaylistModel.id].
+  static final id =
+      obx.QueryIntegerProperty<PlaylistModel>(_entities[4].properties[0]);
+
+  /// See [PlaylistModel.name].
+  static final name =
+      obx.QueryStringProperty<PlaylistModel>(_entities[4].properties[1]);
+
+  /// See [PlaylistModel.photo].
+  static final photo =
+      obx.QueryStringProperty<PlaylistModel>(_entities[4].properties[2]);
+
+  /// see [PlaylistModel.tracksDb]
+  static final tracksDb = obx.QueryRelationToMany<PlaylistModel, TrackModel>(
+      _entities[4].relations[0]);
 }

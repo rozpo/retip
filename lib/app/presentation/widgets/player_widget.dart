@@ -50,7 +50,7 @@ class PlayerWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               subtitle: Text(
-                state.currentTrack?.artist ?? '',
+                state.currentTrack?.artist?.name ?? '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
