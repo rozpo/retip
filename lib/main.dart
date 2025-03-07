@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app/data/providers/app_settings_provider.dart';
+import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/providers/shared_preferences_provider.dart';
 import 'app/data/repositories/config_repository_i.dart';
@@ -22,6 +23,7 @@ void main() async {
   final sharedPreferencesProvider = await SharedPreferencesProvider.init();
   final onAudioQueryProvider = await OnAudioQueryProvider.init();
   final appSettingsProvider = await AppSettingsProvider.init();
+  final objectboxProvider = await ObjectboxProvider.init();
 
   // Repositories
   final configRepository = ConfigRepositoryI(
@@ -38,6 +40,7 @@ void main() async {
 
   final libraryRepository = LibraryRepositoryI(
     onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
   );
 
   // Cubits

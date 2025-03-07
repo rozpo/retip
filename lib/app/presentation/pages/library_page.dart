@@ -15,12 +15,25 @@ class LibraryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.read<RetipL10n>().of(context);
+    final cubit = context.read<LibraryCubit>();
+
+    if (cubit.state is LibraryInitial) {
+      cubit.scanLibrary();
+    }
 
     return BlocListener<LibraryCubit, LibraryState>(
       listener: (context, state) {
-        if (state is LibraryScanned) {
+        if (state is LibraryScanned && state.count > 0) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.libraryScanned)),
+            SnackBar(
+              content: ListTile(
+                trailing: IconButton(
+                    onPressed: () =>
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+                    icon: const Icon(Icons.close)),
+                title: Text('${l10n.libraryScanned} (${state.count})'),
+              ),
+            ),
           );
         }
       },

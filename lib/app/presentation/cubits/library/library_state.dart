@@ -7,4 +7,8 @@ final class LibraryInitial extends LibraryState {}
 
 final class LibraryScanning extends LibraryState {}
 
-final class LibraryScanned extends LibraryState {}
+final class LibraryScanned extends LibraryState {
+  final int count;
+
+  LibraryScanned(this.count);
+}

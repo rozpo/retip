@@ -6,8 +6,8 @@ class RetipTheme {
 
   ColorScheme colorScheme(Brightness brightness) {
     return ColorScheme.fromSeed(
-      brightness: brightness,
       seedColor: primaryColor,
+      brightness: brightness,
     );
   }
 
@@ -15,29 +15,28 @@ class RetipTheme {
     final colors = colorScheme(Brightness.dark);
 
     return ThemeData(
-      fontFamily: fontFamily,
-      colorScheme: colors,
-      outlinedButtonTheme: outlinedButtonTheme(),
-      filledButtonTheme: filledButtonTheme(),
-      textButtonTheme: textButtonTheme(),
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
-    );
+        fontFamily: fontFamily,
+        colorScheme: colors,
+        outlinedButtonTheme: outlinedButtonTheme(),
+        filledButtonTheme: filledButtonTheme(),
+        textButtonTheme: textButtonTheme(),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
+        snackBarTheme: snackBarTheme(colors));
   }
 
   ThemeData light() {
     final colors = colorScheme(Brightness.light);
 
     return ThemeData(
-      primaryColor: primaryColor,
-      fontFamily: fontFamily,
-      colorScheme: colors,
-      outlinedButtonTheme: outlinedButtonTheme(),
-      filledButtonTheme: filledButtonTheme(),
-      textButtonTheme: textButtonTheme(),
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
-    );
+        fontFamily: fontFamily,
+        colorScheme: colors,
+        outlinedButtonTheme: outlinedButtonTheme(),
+        filledButtonTheme: filledButtonTheme(),
+        textButtonTheme: textButtonTheme(),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
+        snackBarTheme: snackBarTheme(colors));
   }
 
   ButtonStyle buttonStyle() {
@@ -74,8 +73,6 @@ class RetipTheme {
       ColorScheme colorScheme) {
     return BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
-      showUnselectedLabels: true,
-      showSelectedLabels: true,
       selectedItemColor: colorScheme.primary,
       unselectedItemColor: colorScheme.onSurface,
     );
@@ -85,6 +82,13 @@ class RetipTheme {
     return TabBarTheme(
       labelColor: colorScheme.primary,
       unselectedLabelColor: colorScheme.onSurface,
+    );
+  }
+
+  SnackBarThemeData snackBarTheme(ColorScheme colorScheme) {
+    return SnackBarThemeData(
+      backgroundColor: colorScheme.surfaceContainer,
+      behavior: SnackBarBehavior.fixed,
     );
   }
 }

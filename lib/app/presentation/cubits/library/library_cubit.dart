@@ -11,13 +11,11 @@ class LibraryCubit extends Cubit<LibraryState> {
   LibraryCubit({
     required LibraryRepository libraryRepository,
   })  : _libraryRepository = libraryRepository,
-        super(LibraryInitial()) {
-    scanLibrary();
-  }
+        super(LibraryInitial());
 
   Future<void> scanLibrary() async {
     emit(LibraryScanning());
-    await _libraryRepository.scan();
-    emit(LibraryScanned());
+    final count = await _libraryRepository.scan();
+    emit(LibraryScanned(count));
   }
 }

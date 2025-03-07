@@ -1,3 +1,3 @@
 abstract class LibraryRepository {
-  Future<void> scan();
+  Future<int> scan();
 }

@@ -59,6 +59,7 @@ class RetipApp extends StatelessWidget {
             scrollBehavior: theme.scrollBehavior,
             themeMode: ThemeMode.system,
             darkTheme: theme.dark(),
+            theme: theme.light(),
             routerConfig: router,
           ),
         ),
