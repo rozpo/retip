@@ -8,8 +8,10 @@ abstract class ArtistEntity {
 
   final String name;
   final String? photo;
+  final bool isFavorite;
 
   ArtistEntity({
+    this.isFavorite = false,
     this.albums = const [],
     this.tracks = const [],
     required this.name,

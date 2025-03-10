@@ -22,9 +22,13 @@ class ArtistModel implements ArtistEntity {
   @override
   String? photo;
 
+  @override
+  bool isFavorite;
+
   ArtistModel({
-    this.id = 0,
+    this.isFavorite = false,
     required this.name,
+    this.id = 0,
   });
 
   @override

@@ -5,5 +5,5 @@ abstract class AlbumRepository {
 
   void toggleFavorite(AlbumEntity track);
 
-  Stream<AlbumEntity?> trackStream(int id);
+  Stream<AlbumEntity?> albumStream(int id);
 }

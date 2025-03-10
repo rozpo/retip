@@ -8,7 +8,7 @@ class AlbumsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<AlbumBloc>(context);
+    final bloc = context.read<AlbumBloc>();
 
     return BlocBuilder<AlbumBloc, AlbumState>(
       builder: (context, state) {
