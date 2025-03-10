@@ -13,7 +13,8 @@ class ArtistRepositoryI implements ArtistRepository {
 
   @override
   Stream<ArtistEntity?> artistStream(int id) {
-    return _objectboxProvider.streamOne(ArtistModel_.id.equals(id));
+    return _objectboxProvider
+        .streamOne<ArtistModel>(ArtistModel_.id.equals(id));
   }
 
   @override
@@ -22,7 +23,7 @@ class ArtistRepositoryI implements ArtistRepository {
   }
 
   @override
-  Future<void> toggleFavorite(ArtistEntity artist) async {
+  void toggleFavorite(ArtistEntity artist) async {
     final entity = await _objectboxProvider.get<ArtistModel>(artist.id);
 
     if (entity == null) return;

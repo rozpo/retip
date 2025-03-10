@@ -6,8 +6,10 @@ abstract class GenreEntity {
 
   final String name;
   final String? photo;
+  final bool isFavorite;
 
   GenreEntity({
+    this.isFavorite = false,
     this.tracks = const [],
     required this.name,
     required this.id,

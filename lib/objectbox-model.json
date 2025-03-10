@@ -126,7 +126,7 @@
     },
     {
       "id": "4:1497927118071281231",
-      "lastPropertyId": "3:8316030438189052514",
+      "lastPropertyId": "4:8493721008251284594",
       "name": "GenreModel",
       "properties": [
         {
@@ -144,6 +144,11 @@
           "id": "3:8316030438189052514",
           "name": "photo",
           "type": 9
+        },
+        {
+          "id": "4:8493721008251284594",
+          "name": "isFavorite",
+          "type": 1
         }
       ],
       "relations": []

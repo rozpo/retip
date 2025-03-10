@@ -20,7 +20,6 @@ class ArtistsView extends StatelessWidget {
               final artist = state.artists[index];
 
               return ListTile(
-                onTap: () => bloc.add(ArtistToggleFavorite(artist)),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,

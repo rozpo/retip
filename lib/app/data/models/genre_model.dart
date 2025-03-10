@@ -17,7 +17,11 @@ class GenreModel implements GenreEntity {
   @override
   String? photo;
 
+  @override
+  bool isFavorite;
+
   GenreModel({
+    this.isFavorite = false,
     required this.name,
     this.id = 0,
     this.photo,

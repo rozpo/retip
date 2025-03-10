@@ -9,6 +9,7 @@ import 'app/data/repositories/album_repository_i.dart';
 import 'app/data/repositories/artist_repository_i.dart';
 import 'app/data/repositories/audio_repository_i.dart';
 import 'app/data/repositories/config_repository_i.dart';
+import 'app/data/repositories/genre_repository_i.dart';
 import 'app/data/repositories/library_repository_i.dart';
 import 'app/data/repositories/permission_repository_i.dart';
 import 'app/data/repositories/settings_repository_i.dart';
@@ -16,6 +17,7 @@ import 'app/data/repositories/track_repository_i.dart';
 import 'app/presentation/blocs/album/album_bloc.dart';
 import 'app/presentation/blocs/artist/artist_bloc.dart';
 import 'app/presentation/blocs/audio/audio_bloc.dart';
+import 'app/presentation/blocs/genre/genre_bloc.dart';
 import 'app/presentation/blocs/track/track_bloc.dart';
 import 'app/presentation/cubits/library/library_cubit.dart';
 import 'app/presentation/cubits/onboarding/onboarding_cubit.dart';
@@ -69,6 +71,10 @@ void main() async {
     objectboxProvider: objectboxProvider,
   );
 
+  final genreRepository = GenreRepositoryI(
+    objectboxProvider: objectboxProvider,
+  );
+
   // Cubits
   final onboardingCubit = OnboardingCubit(
     configRepository: configRepository,
@@ -102,6 +108,10 @@ void main() async {
     artistRepository: artistRepository,
   );
 
+  final genreBloc = GenreBloc(
+    genreRepository: genreRepository,
+  );
+
   // Core
   final router = RetipRouter();
   final theme = RetipTheme();
@@ -116,6 +126,7 @@ void main() async {
     libraryCubit: libraryCubit,
     artistBloc: artistBloc,
     audioBloc: audioBloc,
+    genreBloc: genreBloc,
     trackBloc: trackBloc,
     albumBloc: albumBloc,
     router: router,

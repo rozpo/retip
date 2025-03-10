@@ -20,7 +20,6 @@ class AlbumsView extends StatelessWidget {
               final album = state.albums[index];
 
               return ListTile(
-                onTap: () => bloc.add(AlbumToggleFavorite(album)),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,
