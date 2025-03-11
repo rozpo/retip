@@ -17,7 +17,11 @@ class PlaylistModel implements PlaylistEntity {
   @override
   String? photo;
 
+  @override
+  bool isFavorite;
+
   PlaylistModel({
+    this.isFavorite = false,
     required this.name,
     this.id = 0,
     this.photo,

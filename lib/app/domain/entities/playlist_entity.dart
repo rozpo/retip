@@ -6,8 +6,10 @@ abstract class PlaylistEntity {
 
   final String name;
   final String? photo;
+  final bool isFavorite;
 
   PlaylistEntity({
+    this.isFavorite = false,
     this.tracks = const [],
     required this.name,
     required this.id,

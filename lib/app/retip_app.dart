@@ -11,6 +11,7 @@ import 'presentation/blocs/album/album_bloc.dart';
 import 'presentation/blocs/artist/artist_bloc.dart';
 import 'presentation/blocs/audio/audio_bloc.dart';
 import 'presentation/blocs/genre/genre_bloc.dart';
+import 'presentation/blocs/playlist/playlist_bloc.dart';
 import 'presentation/blocs/track/track_bloc.dart';
 import 'presentation/cubits/library/library_cubit.dart';
 import 'presentation/cubits/onboarding/onboarding_cubit.dart';
@@ -23,6 +24,7 @@ class RetipApp extends StatelessWidget {
   final OnboardingCubit onboardingCubit;
   final PermissionCubit permissionCubit;
   final LibraryCubit libraryCubit;
+  final PlaylistBloc playlistBloc;
   final ArtistBloc artistBloc;
   final AudioBloc audioBloc;
   final TrackBloc trackBloc;
@@ -39,6 +41,7 @@ class RetipApp extends StatelessWidget {
     required this.onboardingCubit,
     required this.permissionCubit,
     required this.libraryCubit,
+    required this.playlistBloc,
     required this.artistBloc,
     required this.audioBloc,
     required this.genreBloc,
@@ -70,6 +73,7 @@ class RetipApp extends StatelessWidget {
           ],
           child: MultiBlocProvider(
             providers: [
+              BlocProvider(create: (context) => playlistBloc),
               BlocProvider(create: (context) => artistBloc),
               BlocProvider(create: (context) => audioBloc),
               BlocProvider(create: (context) => albumBloc),

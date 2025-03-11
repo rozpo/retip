@@ -65,6 +65,10 @@ class ObjectboxProvider {
     return await _store.box<T>().getAsync(id);
   }
 
+  Future<List<T?>> getMany<T>(List<int> ids) async {
+    return await _store.box<T>().getManyAsync(ids);
+  }
+
   Future<List<int>> insertMany<T>(List<T> entities) async {
     return await _store.box<T>().putManyAsync(entities, mode: PutMode.insert);
   }
@@ -75,6 +79,10 @@ class ObjectboxProvider {
 
   Future<int> update<T>(T entity) async {
     return await _store.box<T>().putAsync(entity, mode: PutMode.update);
+  }
+
+  Future<bool> remove<T>(int id) async {
+    return await _store.box<T>().removeAsync(id);
   }
 
   Stream<List<T>> stream<T>() {
