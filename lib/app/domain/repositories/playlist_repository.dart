@@ -13,4 +13,8 @@ abstract class PlaylistRepository {
   void update(PlaylistEntity playlist);
 
   void delete(int id);
+
+  void addTrack(int playlistId, int trackId);
+
+  void removeTrack(int playlistId, int trackId);
 }

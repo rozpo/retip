@@ -14,6 +14,7 @@ class GenresView extends StatelessWidget {
       builder: (context, state) {
         if (state is GenreInitial) {
           return ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 8),
             itemCount: state.genres.length,
             itemBuilder: (context, index) {
               final genre = state.genres[index];

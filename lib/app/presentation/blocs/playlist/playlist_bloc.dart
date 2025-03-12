@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../domain/entities/playlist_entity.dart';
 import '../../../domain/repositories/playlist_repository.dart';
@@ -19,6 +20,8 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
         super(PlaylistInitial(const [])) {
     on<PlaylistRefresh>(_onPlaylistRefresh);
     on<PlaylistToggleFavorite>(_onPlaylistToggleFavorite);
+    on<PlaylistCreate>(_onPlaylistCreate);
+    on<PlaylistRemove>(_onPlaylistRemove);
 
     _subscription = _playlistRepository.stream().listen((playlists) {
       add(PlaylistRefresh(playlists));
@@ -38,5 +41,13 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
   void _onPlaylistToggleFavorite(
       PlaylistToggleFavorite event, Emitter<PlaylistState> emit) {
     _playlistRepository.toggleFavorite(event.playlist);
+  }
+
+  void _onPlaylistCreate(PlaylistCreate event, Emitter<PlaylistState> emit) {
+    _playlistRepository.create(const Uuid().v4());
+  }
+
+  void _onPlaylistRemove(PlaylistRemove event, Emitter<PlaylistState> emit) {
+    _playlistRepository.delete(event.playlistId);
   }
 }

@@ -14,3 +14,11 @@ class PlaylistToggleFavorite extends PlaylistEvent {
 
   PlaylistToggleFavorite(this.playlist);
 }
+
+class PlaylistCreate extends PlaylistEvent {}
+
+class PlaylistRemove extends PlaylistEvent {
+  final int playlistId;
+
+  PlaylistRemove(this.playlistId);
+}

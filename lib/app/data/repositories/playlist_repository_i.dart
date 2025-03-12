@@ -45,11 +45,33 @@ class PlaylistRepositoryI implements PlaylistRepository {
 
   @override
   void delete(int id) {
-    _objectboxProvider.remove(id);
+    _objectboxProvider.remove<PlaylistModel>(id);
   }
 
   @override
   void update(PlaylistEntity playlist) async {
     _objectboxProvider.update(playlist as PlaylistModel);
+  }
+
+  @override
+  void addTrack(int playlistId, int trackId) async {
+    final playlist = await _objectboxProvider.get<PlaylistModel>(playlistId);
+    final track = await _objectboxProvider.get<TrackModel>(trackId);
+
+    if (playlist == null || track == null) return;
+
+    playlist.tracksDb.add(track);
+    _objectboxProvider.update(playlist);
+  }
+
+  @override
+  void removeTrack(int playlistId, int trackId) async {
+    final playlist = await _objectboxProvider.get<PlaylistModel>(playlistId);
+    final track = await _objectboxProvider.get<TrackModel>(trackId);
+
+    if (playlist == null || track == null) return;
+
+    playlist.tracksDb.remove(track);
+    _objectboxProvider.update(playlist);
   }
 }

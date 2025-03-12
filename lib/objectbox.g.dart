@@ -182,7 +182,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(5, 7957098896197022941),
       name: 'PlaylistModel',
-      lastPropertyId: const obx_int.IdUid(3, 7611586190691738766),
+      lastPropertyId: const obx_int.IdUid(4, 6292629231912725231),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -199,6 +199,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(3, 7611586190691738766),
             name: 'photo',
             type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 6292629231912725231),
+            name: 'isFavorite',
+            type: 1,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[
@@ -470,24 +475,30 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final nameOffset = fbb.writeString(object.name);
           final photoOffset =
               object.photo == null ? null : fbb.writeString(object.photo!);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addOffset(2, photoOffset);
+          fbb.addBool(3, object.isFavorite);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
+          final isFavoriteParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
           final nameParam = const fb.StringReader(asciiOptimization: true)
               .vTableGet(buffer, rootOffset, 6, '');
           final idParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final photoParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 8);
-          final object =
-              PlaylistModel(name: nameParam, id: idParam, photo: photoParam);
+          final object = PlaylistModel(
+              isFavorite: isFavoriteParam,
+              name: nameParam,
+              id: idParam,
+              photo: photoParam);
           obx_int.InternalToManyAccess.setRelInfo<PlaylistModel>(
               object.tracksDb,
               store,
@@ -620,6 +631,10 @@ class PlaylistModel_ {
   /// See [PlaylistModel.photo].
   static final photo =
       obx.QueryStringProperty<PlaylistModel>(_entities[4].properties[2]);
+
+  /// See [PlaylistModel.isFavorite].
+  static final isFavorite =
+      obx.QueryBooleanProperty<PlaylistModel>(_entities[4].properties[3]);
 
   /// see [PlaylistModel.tracksDb]
   static final tracksDb = obx.QueryRelationToMany<PlaylistModel, TrackModel>(

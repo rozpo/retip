@@ -155,7 +155,7 @@
     },
     {
       "id": "5:7957098896197022941",
-      "lastPropertyId": "3:7611586190691738766",
+      "lastPropertyId": "4:6292629231912725231",
       "name": "PlaylistModel",
       "properties": [
         {
@@ -173,6 +173,11 @@
           "id": "3:7611586190691738766",
           "name": "photo",
           "type": 9
+        },
+        {
+          "id": "4:6292629231912725231",
+          "name": "isFavorite",
+          "type": 1
         }
       ],
       "relations": [
