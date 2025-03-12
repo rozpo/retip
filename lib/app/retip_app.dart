@@ -6,6 +6,7 @@ import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
 import 'domain/repositories/config_repository.dart';
 import 'domain/repositories/permission_repository.dart';
+import 'domain/repositories/playlist_repository.dart';
 import 'domain/repositories/settings_repository.dart';
 import 'presentation/blocs/album/album_bloc.dart';
 import 'presentation/blocs/artist/artist_bloc.dart';
@@ -19,6 +20,7 @@ import 'presentation/cubits/permission/permission_cubit.dart';
 
 class RetipApp extends StatelessWidget {
   final PermissionRepository permissionRepository;
+  final PlaylistRepository playlistRepository;
   final SettingsRepository settingsRepository;
   final ConfigRepository configRepository;
   final OnboardingCubit onboardingCubit;
@@ -36,6 +38,7 @@ class RetipApp extends StatelessWidget {
 
   const RetipApp({
     required this.permissionRepository,
+    required this.playlistRepository,
     required this.settingsRepository,
     required this.configRepository,
     required this.onboardingCubit,
@@ -62,6 +65,7 @@ class RetipApp extends StatelessWidget {
       child: MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (context) => permissionRepository),
+          RepositoryProvider(create: (context) => playlistRepository),
           RepositoryProvider(create: (context) => settingsRepository),
           RepositoryProvider(create: (context) => configRepository),
         ],

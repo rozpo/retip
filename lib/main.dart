@@ -131,6 +131,7 @@ void main() async {
 
   final app = RetipApp(
     permissionRepository: permissionRepository,
+    playlistRepository: playlistRepository,
     settingsRepository: settingsRepository,
     configRepository: configRepository,
     onboardingCubit: onboardingCubit,

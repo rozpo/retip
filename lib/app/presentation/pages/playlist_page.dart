@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../main.dart';
-import '../../data/repositories/playlist_repository_i.dart';
+import '../../domain/repositories/playlist_repository.dart';
 
 class PlaylistPage extends StatelessWidget {
   final int playlistId;
@@ -13,10 +13,10 @@ class PlaylistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final repository = context.read<PlaylistRepository>();
+
     return StreamBuilder(
-      stream: PlaylistRepositoryI(
-        objectboxProvider: objectboxProvider,
-      ).read(playlistId),
+      stream: repository.read(playlistId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final playlist = snapshot.data!;
@@ -31,11 +31,7 @@ class PlaylistPage extends StatelessWidget {
                 final track = playlist.tracks[index];
 
                 return ListTile(
-                  onTap: () {
-                    PlaylistRepositoryI(
-                      objectboxProvider: objectboxProvider,
-                    ).removeTrack(playlistId, track.id);
-                  },
+                  onTap: () => repository.removeTrack(playlistId, track.id),
                   leading: Container(
                     color: Theme.of(context).colorScheme.surfaceContainer,
                     width: 40,

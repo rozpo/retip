@@ -48,7 +48,7 @@ class PlaylistsView extends StatelessWidget {
                     color: Theme.of(context).colorScheme.surfaceContainer,
                     width: 40,
                     height: 40,
-                    child: const Icon(Icons.playlist_add),
+                    child: const Icon(Icons.playlist_play),
                   ),
                   title: Text(
                     playlist.name,
