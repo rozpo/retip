@@ -17,4 +17,6 @@ abstract class PlaylistRepository {
   void addTrack(int playlistId, int trackId);
 
   void removeTrack(int playlistId, int trackId);
+
+  Future<List<PlaylistEntity>> getAll();
 }

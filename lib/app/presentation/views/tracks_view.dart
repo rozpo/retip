@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/audio/audio_bloc.dart';
 import '../blocs/track/track_bloc.dart';
+import '../widgets/track_bottom_sheet.dart';
 
 class TracksView extends StatelessWidget {
   const TracksView({super.key});
@@ -10,7 +11,6 @@ class TracksView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final audioBloc = BlocProvider.of<AudioBloc>(context);
-    final trackBloc = BlocProvider.of<TrackBloc>(context);
 
     return BlocBuilder<TrackBloc, TrackState>(
       builder: (context, state) {
@@ -41,10 +41,8 @@ class TracksView extends StatelessWidget {
                 ),
                 trailing: IconButton(
                   style: Theme.of(context).iconButtonTheme.style,
-                  onPressed: () => trackBloc.add(TrackToggleFavorite(track)),
-                  icon: Icon(
-                    track.isFavorite ? Icons.favorite : Icons.favorite_border,
-                  ),
+                  onPressed: () => TrackBottomSheet(track).show(context),
+                  icon: const Icon(Icons.more_vert),
                 ),
               );
             },

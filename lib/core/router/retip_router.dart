@@ -9,6 +9,7 @@ import '../../app/presentation/pages/home_page.dart';
 import '../../app/presentation/pages/library_page.dart';
 import '../../app/presentation/pages/onboarding_page.dart';
 import '../../app/presentation/pages/permission_page.dart';
+import '../../app/presentation/pages/playlist_page.dart';
 import '../../app/presentation/pages/profile_page.dart';
 import '../../app/presentation/pages/search_page.dart';
 import '../../app/presentation/views/navigation_view.dart';
@@ -50,6 +51,15 @@ class RetipRouter extends GoRouter {
     path: RetipRoutes.profile,
   );
 
+  static final _playlist = GoRoute(
+    path: RetipRoutes.playlist,
+    name: RetipRoutes.playlist,
+    builder: (context, state) {
+      final playlistId = state.pathParameters['id']!;
+      return PlaylistPage(int.parse(playlistId));
+    },
+  );
+
   static Future<String?> _redirect(
     BuildContext context,
     GoRouterState state,
@@ -87,6 +97,7 @@ class RetipRouter extends GoRouter {
                     _search,
                     _library,
                     _profile,
+                    _playlist,
                   ],
                 ),
                 _onboarding,

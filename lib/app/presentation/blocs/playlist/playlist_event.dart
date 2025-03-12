@@ -22,3 +22,10 @@ class PlaylistRemove extends PlaylistEvent {
 
   PlaylistRemove(this.playlistId);
 }
+
+class PlaylistAddTrack extends PlaylistEvent {
+  final int playlistId;
+  final int trackId;
+
+  PlaylistAddTrack(this.playlistId, this.trackId);
+}

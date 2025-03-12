@@ -29,6 +29,8 @@ import 'core/l10n/retip_l10n.dart';
 import 'core/router/retip_router.dart';
 import 'core/theme/retip_theme.dart';
 
+late final ObjectboxProvider objectboxProvider;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -37,7 +39,7 @@ void main() async {
   final onAudioQueryProvider = await OnAudioQueryProvider.init();
   final appSettingsProvider = await AppSettingsProvider.init();
   final justAudioProvider = await JustAudioProvider.init();
-  final objectboxProvider = await ObjectboxProvider.init();
+  objectboxProvider = await ObjectboxProvider.init();
 
   // Repositories
   final configRepository = ConfigRepositoryI(

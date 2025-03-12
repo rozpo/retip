@@ -14,7 +14,8 @@ class PlaylistRepositoryI implements PlaylistRepository {
 
   @override
   Stream<PlaylistEntity?> read(int id) {
-    return _objectboxProvider.streamOne(PlaylistModel_.id.equals(id));
+    return _objectboxProvider
+        .streamOne<PlaylistModel>(PlaylistModel_.id.equals(id));
   }
 
   @override
@@ -73,5 +74,10 @@ class PlaylistRepositoryI implements PlaylistRepository {
 
     playlist.tracksDb.remove(track);
     _objectboxProvider.update(playlist);
+  }
+
+  @override
+  Future<List<PlaylistEntity>> getAll() {
+    return _objectboxProvider.getAll<PlaylistModel>();
   }
 }

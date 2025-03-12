@@ -7,4 +7,6 @@ mixin RetipRoutes {
   static const search = '/search';
   static const library = '/library';
   static const profile = '/profile';
+
+  static const playlist = '/playlist/:id';
 }

@@ -22,6 +22,7 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
     on<PlaylistToggleFavorite>(_onPlaylistToggleFavorite);
     on<PlaylistCreate>(_onPlaylistCreate);
     on<PlaylistRemove>(_onPlaylistRemove);
+    on<PlaylistAddTrack>(_onPlaylistAddTrack);
 
     _subscription = _playlistRepository.stream().listen((playlists) {
       add(PlaylistRefresh(playlists));
@@ -49,5 +50,10 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
 
   void _onPlaylistRemove(PlaylistRemove event, Emitter<PlaylistState> emit) {
     _playlistRepository.delete(event.playlistId);
+  }
+
+  void _onPlaylistAddTrack(
+      PlaylistAddTrack event, Emitter<PlaylistState> emit) {
+    _playlistRepository.addTrack(event.playlistId, event.trackId);
   }
 }

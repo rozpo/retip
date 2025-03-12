@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/router/retip_routes.dart';
 import '../blocs/playlist/playlist_bloc.dart';
 
 class PlaylistsView extends StatelessWidget {
-  const PlaylistsView({super.key});
+  final bool showFab;
+  final void Function(int playlistId)? onTap;
+
+  const PlaylistsView({
+    this.showFab = true,
+    this.onTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +23,12 @@ class PlaylistsView extends StatelessWidget {
       builder: (context, state) {
         if (state is PlaylistInitial) {
           return Scaffold(
-            floatingActionButton: FloatingActionButton(
-              onPressed: () => bloc.add(PlaylistCreate()),
-              child: const Icon(Icons.add),
-            ),
+            floatingActionButton: showFab
+                ? FloatingActionButton(
+                    onPressed: () => bloc.add(PlaylistCreate()),
+                    child: const Icon(Icons.add),
+                  )
+                : null,
             body: ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 8),
               itemCount: state.playlists.length,
@@ -25,6 +36,14 @@ class PlaylistsView extends StatelessWidget {
                 final playlist = state.playlists[index];
 
                 return ListTile(
+                  onTap: onTap != null
+                      ? () => onTap?.call(playlist.id)
+                      : () {
+                          context.pushNamed(
+                            RetipRoutes.playlist,
+                            pathParameters: {'id': playlist.id.toString()},
+                          );
+                        },
                   leading: Container(
                     color: Theme.of(context).colorScheme.surfaceContainer,
                     width: 40,
@@ -45,13 +64,17 @@ class PlaylistsView extends StatelessWidget {
                     bloc.add(PlaylistRemove(playlist.id));
                   },
                   trailing: IconButton(
-                    onPressed: () {
-                      bloc.add(PlaylistToggleFavorite(playlist));
-                    },
+                    onPressed: onTap != null
+                        ? () => onTap?.call(playlist.id)
+                        : () {
+                            bloc.add(PlaylistToggleFavorite(playlist));
+                          },
                     icon: Icon(
-                      playlist.isFavorite
-                          ? Icons.favorite
-                          : Icons.favorite_outline_outlined,
+                      showFab
+                          ? playlist.isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_outline_outlined
+                          : Icons.playlist_add,
                     ),
                   ),
                 );
