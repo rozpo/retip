@@ -72,7 +72,7 @@ class PlaylistRepositoryI implements PlaylistRepository {
 
     if (playlist == null || track == null) return;
 
-    playlist.tracksDb.remove(track);
+    playlist.tracksDb.removeWhere((element) => element.id == track.id);
     _objectboxProvider.update(playlist);
   }
 

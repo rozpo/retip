@@ -31,6 +31,11 @@ class PlaylistPage extends StatelessWidget {
                 final track = playlist.tracks[index];
 
                 return ListTile(
+                  onTap: () {
+                    PlaylistRepositoryI(
+                      objectboxProvider: objectboxProvider,
+                    ).removeTrack(playlistId, track.id);
+                  },
                   leading: Container(
                     color: Theme.of(context).colorScheme.surfaceContainer,
                     width: 40,
