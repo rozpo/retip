@@ -23,6 +23,12 @@ class PlaylistPage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(playlist.name),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.more_vert),
+                  onPressed: () {},
+                ),
+              ],
             ),
             body: ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 8),

@@ -25,6 +25,7 @@ class RetipTheme {
       iconButtonTheme: iconButtonTheme(colors),
       snackBarTheme: snackBarTheme(colors),
       listTileTheme: listTileTheme(colors),
+      appBarTheme: appBarTheme(colors),
     );
   }
 
@@ -100,15 +101,22 @@ class RetipTheme {
 
   ListTileThemeData listTileTheme(ColorScheme colorScheme) {
     return const ListTileThemeData(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16),
+      contentPadding: EdgeInsets.symmetric(horizontal: 8),
       shape: BeveledRectangleBorder(),
       minTileHeight: 40,
       minVerticalPadding: 8,
-      horizontalTitleGap: 16,
+      horizontalTitleGap: 8,
     );
   }
 
   IconButtonThemeData iconButtonTheme(ColorScheme colorScheme) {
     return IconButtonThemeData(style: buttonStyle());
+  }
+
+  AppBarTheme appBarTheme(ColorScheme colorScheme) {
+    return const AppBarTheme(
+      actionsPadding: EdgeInsets.all(8),
+      titleSpacing: 8,
+    );
   }
 }

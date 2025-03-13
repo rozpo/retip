@@ -52,7 +52,6 @@ class LibraryPage extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.grid_view),
               ),
-              const SizedBox(width: 16),
             ],
             bottom: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,

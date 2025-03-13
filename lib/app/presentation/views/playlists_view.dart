@@ -64,6 +64,7 @@ class PlaylistsView extends StatelessWidget {
                     bloc.add(PlaylistRemove(playlist.id));
                   },
                   trailing: IconButton(
+                    style: Theme.of(context).iconButtonTheme.style,
                     onPressed: onTap != null
                         ? () => onTap?.call(playlist.id)
                         : () {
