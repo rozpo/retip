@@ -43,6 +43,7 @@ class RetipTheme {
       iconButtonTheme: iconButtonTheme(colors),
       snackBarTheme: snackBarTheme(colors),
       listTileTheme: listTileTheme(colors),
+      appBarTheme: appBarTheme(colors),
     );
   }
 
