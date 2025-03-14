@@ -52,4 +52,9 @@ class TrackRepositoryI implements TrackRepository {
       TrackModel_.genreDb.equals(genreId),
     );
   }
+
+  @override
+  Stream<List<TrackEntity>> streamByIds(List<int> ids) {
+    return _objectboxProvider.stream<TrackModel>(TrackModel_.id.oneOf(ids));
+  }
 }
