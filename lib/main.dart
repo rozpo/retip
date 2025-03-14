@@ -134,6 +134,8 @@ void main() async {
     playlistRepository: playlistRepository,
     settingsRepository: settingsRepository,
     configRepository: configRepository,
+    albumRepository: albumRepository,
+    genreRepository: genreRepository,
     onboardingCubit: onboardingCubit,
     permissionCubit: permissionCubit,
     trackRepository: trackRepository,

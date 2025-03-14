@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/router/retip_routes.dart';
 import '../blocs/album/album_bloc.dart';
 
 class AlbumsView extends StatelessWidget {
@@ -20,6 +22,10 @@ class AlbumsView extends StatelessWidget {
               final album = state.albums[index];
 
               return ListTile(
+                onTap: () => context.pushNamed(
+                  pathParameters: {'id': album.id.toString()},
+                  RetipRoutes.album,
+                ),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,

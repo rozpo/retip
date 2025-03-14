@@ -116,6 +116,8 @@ class RetipTheme {
 
   AppBarTheme appBarTheme(ColorScheme colorScheme) {
     return const AppBarTheme(
+      surfaceTintColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
       actionsPadding: EdgeInsets.all(8),
       titleSpacing: 8,
     );

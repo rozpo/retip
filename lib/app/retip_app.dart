@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../core/l10n/retip_l10n.dart';
 import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
+import 'domain/repositories/album_repository.dart';
 import 'domain/repositories/config_repository.dart';
+import 'domain/repositories/genre_repository.dart';
 import 'domain/repositories/permission_repository.dart';
 import 'domain/repositories/playlist_repository.dart';
 import 'domain/repositories/settings_repository.dart';
@@ -24,6 +26,8 @@ class RetipApp extends StatelessWidget {
   final PlaylistRepository playlistRepository;
   final SettingsRepository settingsRepository;
   final ConfigRepository configRepository;
+  final AlbumRepository albumRepository;
+  final GenreRepository genreRepository;
   final OnboardingCubit onboardingCubit;
   final PermissionCubit permissionCubit;
   final TrackRepository trackRepository;
@@ -43,6 +47,8 @@ class RetipApp extends StatelessWidget {
     required this.playlistRepository,
     required this.settingsRepository,
     required this.configRepository,
+    required this.albumRepository,
+    required this.genreRepository,
     required this.onboardingCubit,
     required this.permissionCubit,
     required this.trackRepository,
@@ -71,6 +77,8 @@ class RetipApp extends StatelessWidget {
           RepositoryProvider(create: (context) => playlistRepository),
           RepositoryProvider(create: (context) => settingsRepository),
           RepositoryProvider(create: (context) => configRepository),
+          RepositoryProvider(create: (context) => albumRepository),
+          RepositoryProvider(create: (context) => genreRepository),
           RepositoryProvider(create: (context) => trackRepository),
         ],
         child: MultiBlocProvider(

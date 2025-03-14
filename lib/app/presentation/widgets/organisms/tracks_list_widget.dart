@@ -20,6 +20,7 @@ class TracksListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       itemCount: tracks.length,
       itemBuilder: (context, index) {
         final track = tracks[index];
