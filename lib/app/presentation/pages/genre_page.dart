@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/repositories/track_repository.dart';
+import '../blocs/audio/audio_bloc.dart';
+import '../widgets/organisms/play_shuffle_buttons_widget.dart';
 import '../widgets/organisms/tracks_list_widget.dart';
 
 class GenrePage extends StatelessWidget {
@@ -12,25 +14,43 @@ class GenrePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trackRepository = context.read<TrackRepository>();
+    final audioBloc = context.read<AudioBloc>();
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: StreamBuilder(
-        stream: trackRepository.streamByGenre(genreId),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Center(child: Text('Error'));
-          }
+    return StreamBuilder(
+      stream: trackRepository.streamByGenre(genreId),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Center(child: Text('Error'));
+        }
 
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-          final tracks = snapshot.requireData;
+        final tracks = snapshot.requireData;
 
-          return TracksListWidget(tracks: tracks);
-        },
-      ),
+        return Scaffold(
+          appBar: AppBar(
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(48),
+              child: Column(
+                children: [
+                  ShufflePlayButtonsWidget(
+                    onPlayTap: () => audioBloc.add(
+                      AudioPlay(tracks, 0),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+          ),
+          body: TracksListWidget(
+            onTap: (index) => audioBloc.add(AudioPlay(tracks, index)),
+            tracks: tracks,
+          ),
+        );
+      },
     );
   }
 }
