@@ -1,6 +1,7 @@
 mixin RetipRoutes {
   static const onboarding = '/onboarding';
   static const permission = '/permission';
+  static const player = '/player';
 
   static const home = '/';
   static const explore = '/explore';

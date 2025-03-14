@@ -9,6 +9,7 @@ import '../../app/presentation/pages/home_page.dart';
 import '../../app/presentation/pages/library_page.dart';
 import '../../app/presentation/pages/onboarding_page.dart';
 import '../../app/presentation/pages/permission_page.dart';
+import '../../app/presentation/pages/player_page.dart';
 import '../../app/presentation/pages/playlist_page.dart';
 import '../../app/presentation/pages/profile_page.dart';
 import '../../app/presentation/pages/search_page.dart';
@@ -24,6 +25,11 @@ class RetipRouter extends GoRouter {
   static final _permission = GoRoute(
     builder: (context, state) => const PermissionPage(),
     path: RetipRoutes.permission,
+  );
+
+  static final _player = GoRoute(
+    builder: (context, state) => const PlayerPage(),
+    path: RetipRoutes.player,
   );
 
   static final _home = GoRoute(
@@ -102,6 +108,7 @@ class RetipRouter extends GoRouter {
                 ),
                 _onboarding,
                 _permission,
+                _player,
               ],
             ),
           ),
