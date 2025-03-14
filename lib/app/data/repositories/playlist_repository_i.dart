@@ -15,7 +15,7 @@ class PlaylistRepositoryI implements PlaylistRepository {
   @override
   Stream<PlaylistEntity?> read(int id) {
     return _objectboxProvider
-        .streamOne<PlaylistModel>(PlaylistModel_.id.equals(id));
+        .streamFirst<PlaylistModel>(PlaylistModel_.id.equals(id));
   }
 
   @override

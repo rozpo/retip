@@ -14,7 +14,7 @@ class ArtistRepositoryI implements ArtistRepository {
   @override
   Stream<ArtistEntity?> artistStream(int id) {
     return _objectboxProvider
-        .streamOne<ArtistModel>(ArtistModel_.id.equals(id));
+        .streamFirst<ArtistModel>(ArtistModel_.id.equals(id));
   }
 
   @override

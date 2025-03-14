@@ -12,7 +12,7 @@ class TrackRepositoryI implements TrackRepository {
   }) : _objectboxProvider = objectboxProvider;
 
   @override
-  Stream<List<TrackEntity>> stream() {
+  Stream<List<TrackEntity>> streamAll() {
     return _objectboxProvider.stream<TrackModel>();
   }
 
@@ -28,6 +28,28 @@ class TrackRepositoryI implements TrackRepository {
 
   @override
   Stream<TrackEntity?> trackStream(int id) {
-    return _objectboxProvider.streamOne<TrackModel>(TrackModel_.id.equals(id));
+    return _objectboxProvider
+        .streamFirst<TrackModel>(TrackModel_.id.equals(id));
+  }
+
+  @override
+  Stream<List<TrackEntity>> streamByAlbum(int albumId) {
+    return _objectboxProvider.stream<TrackModel>(
+      TrackModel_.albumDb.equals(albumId),
+    );
+  }
+
+  @override
+  Stream<List<TrackEntity>> streamByArtist(int artistId) {
+    return _objectboxProvider.stream<TrackModel>(
+      TrackModel_.artistDb.equals(artistId),
+    );
+  }
+
+  @override
+  Stream<List<TrackEntity>> streamByGenre(int genreId) {
+    return _objectboxProvider.stream<TrackModel>(
+      TrackModel_.genreDb.equals(genreId),
+    );
   }
 }

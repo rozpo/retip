@@ -13,7 +13,8 @@ class GenreRepositoryI implements GenreRepository {
 
   @override
   Stream<GenreEntity?> genreStream(int id) {
-    return _objectboxProvider.streamOne<GenreModel>(GenreModel_.id.equals(id));
+    return _objectboxProvider
+        .streamFirst<GenreModel>(GenreModel_.id.equals(id));
   }
 
   @override

@@ -28,6 +28,7 @@ class AlbumRepositoryI implements AlbumRepository {
 
   @override
   Stream<AlbumEntity?> albumStream(int id) {
-    return _objectboxProvider.streamOne<AlbumModel>(AlbumModel_.id.equals(id));
+    return _objectboxProvider
+        .streamFirst<AlbumModel>(AlbumModel_.id.equals(id));
   }
 }

@@ -85,13 +85,17 @@ class ObjectboxProvider {
     return await _store.box<T>().removeAsync(id);
   }
 
-  Stream<List<T>> stream<T>() {
-    return _store.box<T>().query().watch(triggerImmediately: true).map((query) {
+  Stream<List<T>> stream<T>([Condition<T>? condition]) {
+    return _store
+        .box<T>()
+        .query(condition)
+        .watch(triggerImmediately: true)
+        .map((query) {
       return query.find();
     });
   }
 
-  Stream<T?> streamOne<T>(Condition<T> condition) {
+  Stream<T?> streamFirst<T>([Condition<T>? condition]) {
     return _store
         .box<T>()
         .query(condition)

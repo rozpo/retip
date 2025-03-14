@@ -21,7 +21,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
     on<TrackRefresh>(_onTrackRefresh);
     on<TrackToggleFavorite>(_onTrackToggleFavorite);
 
-    _subscription = _trackRepository.stream().listen((tracks) {
+    _subscription = _trackRepository.streamAll().listen((tracks) {
       add(TrackRefresh(tracks));
     });
   }

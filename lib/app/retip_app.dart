@@ -8,6 +8,7 @@ import 'domain/repositories/config_repository.dart';
 import 'domain/repositories/permission_repository.dart';
 import 'domain/repositories/playlist_repository.dart';
 import 'domain/repositories/settings_repository.dart';
+import 'domain/repositories/track_repository.dart';
 import 'presentation/blocs/album/album_bloc.dart';
 import 'presentation/blocs/artist/artist_bloc.dart';
 import 'presentation/blocs/audio/audio_bloc.dart';
@@ -25,6 +26,7 @@ class RetipApp extends StatelessWidget {
   final ConfigRepository configRepository;
   final OnboardingCubit onboardingCubit;
   final PermissionCubit permissionCubit;
+  final TrackRepository trackRepository;
   final LibraryCubit libraryCubit;
   final PlaylistBloc playlistBloc;
   final ArtistBloc artistBloc;
@@ -43,6 +45,7 @@ class RetipApp extends StatelessWidget {
     required this.configRepository,
     required this.onboardingCubit,
     required this.permissionCubit,
+    required this.trackRepository,
     required this.libraryCubit,
     required this.playlistBloc,
     required this.artistBloc,
@@ -68,6 +71,7 @@ class RetipApp extends StatelessWidget {
           RepositoryProvider(create: (context) => playlistRepository),
           RepositoryProvider(create: (context) => settingsRepository),
           RepositoryProvider(create: (context) => configRepository),
+          RepositoryProvider(create: (context) => trackRepository),
         ],
         child: MultiBlocProvider(
           providers: [

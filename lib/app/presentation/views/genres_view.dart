@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/router/retip_routes.dart';
 import '../blocs/genre/genre_bloc.dart';
 
 class GenresView extends StatelessWidget {
@@ -19,6 +21,10 @@ class GenresView extends StatelessWidget {
             itemBuilder: (context, index) {
               final genre = state.genres[index];
               return ListTile(
+                onTap: () => context.pushNamed(
+                  RetipRoutes.genre,
+                  pathParameters: {'id': genre.id.toString()},
+                ),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,

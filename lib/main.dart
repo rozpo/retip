@@ -136,6 +136,7 @@ void main() async {
     configRepository: configRepository,
     onboardingCubit: onboardingCubit,
     permissionCubit: permissionCubit,
+    trackRepository: trackRepository,
     libraryCubit: libraryCubit,
     playlistBloc: playlistBloc,
     artistBloc: artistBloc,
