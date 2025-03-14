@@ -36,70 +36,72 @@ class PlayerWidget extends StatelessWidget {
                 ),
               ],
             ),
-            ListTile(
-              onTap: () {},
-              leading: Container(
-                color: Theme.of(context).colorScheme.surfaceContainer,
-                width: 40,
-                height: 40,
-                child: const Icon(Icons.music_note),
-              ),
-              title: Text(
-                state.currentTrack?.title ?? '',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              subtitle: Text(
-                state.currentTrack?.artist?.name ?? '',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    style: Theme.of(context).iconButtonTheme.style,
-                    icon: Icon(
-                      state.currentTrack?.isFavorite == true
-                          ? Icons.favorite
-                          : Icons.favorite_border,
+            if (state.currentTrack != null) ...[
+              ListTile(
+                onTap: () {},
+                leading: Container(
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                  width: 40,
+                  height: 40,
+                  child: const Icon(Icons.music_note),
+                ),
+                title: Text(
+                  state.currentTrack?.title ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                subtitle: Text(
+                  state.currentTrack?.artist?.name ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      style: Theme.of(context).iconButtonTheme.style,
+                      icon: Icon(
+                        state.currentTrack?.isFavorite == true
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                      ),
+                      onPressed: () {
+                        if (state.currentTrack == null) return;
+                        trackBloc.add(TrackToggleFavorite(state.currentTrack!));
+                      },
                     ),
-                    onPressed: () {
-                      if (state.currentTrack == null) return;
-                      trackBloc.add(TrackToggleFavorite(state.currentTrack!));
-                    },
-                  ),
-                  IconButton(
-                    style: Theme.of(context).iconButtonTheme.style,
-                    icon: const Icon(
-                      Icons.skip_previous,
+                    IconButton(
+                      style: Theme.of(context).iconButtonTheme.style,
+                      icon: const Icon(
+                        Icons.skip_previous,
+                      ),
+                      onPressed: () => audioBloc.add(AudioPrevious()),
                     ),
-                    onPressed: () => audioBloc.add(AudioPrevious()),
-                  ),
-                  const SizedBox(width: 8),
-                  IconButton.filled(
-                    style: Theme.of(context).iconButtonTheme.style,
-                    icon: Icon(
-                      state.isPlaying ? Icons.pause : Icons.play_arrow,
-                      color: Theme.of(context).colorScheme.onPrimary,
+                    const SizedBox(width: 8),
+                    IconButton.filled(
+                      style: Theme.of(context).iconButtonTheme.style,
+                      icon: Icon(
+                        state.isPlaying ? Icons.pause : Icons.play_arrow,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                      onPressed: () {
+                        state.isPlaying
+                            ? audioBloc.add(AudioPause())
+                            : audioBloc.add(AudioResume());
+                      },
                     ),
-                    onPressed: () {
-                      state.isPlaying
-                          ? audioBloc.add(AudioPause())
-                          : audioBloc.add(AudioResume());
-                    },
-                  ),
-                  const SizedBox(width: 8),
-                  IconButton(
-                    style: Theme.of(context).iconButtonTheme.style,
-                    icon: const Icon(
-                      Icons.skip_next,
+                    const SizedBox(width: 8),
+                    IconButton(
+                      style: Theme.of(context).iconButtonTheme.style,
+                      icon: const Icon(
+                        Icons.skip_next,
+                      ),
+                      onPressed: () => audioBloc.add(AudioNext()),
                     ),
-                    onPressed: () => audioBloc.add(AudioNext()),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ],
           ],
         );
       },
