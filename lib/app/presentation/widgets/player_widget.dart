@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/router/retip_routes.dart';
 import '../blocs/audio/audio_bloc.dart';
 import '../blocs/track/track_bloc.dart';
 
@@ -38,7 +40,7 @@ class PlayerWidget extends StatelessWidget {
             ),
             if (state.currentTrack != null) ...[
               ListTile(
-                onTap: () {},
+                onTap: () => context.push(RetipRoutes.player),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,
@@ -70,13 +72,6 @@ class PlayerWidget extends StatelessWidget {
                         trackBloc.add(TrackToggleFavorite(state.currentTrack!));
                       },
                     ),
-                    IconButton(
-                      style: Theme.of(context).iconButtonTheme.style,
-                      icon: const Icon(
-                        Icons.skip_previous,
-                      ),
-                      onPressed: () => audioBloc.add(AudioPrevious()),
-                    ),
                     const SizedBox(width: 8),
                     IconButton.filled(
                       style: Theme.of(context).iconButtonTheme.style,
@@ -89,14 +84,6 @@ class PlayerWidget extends StatelessWidget {
                             ? audioBloc.add(AudioPause())
                             : audioBloc.add(AudioResume());
                       },
-                    ),
-                    const SizedBox(width: 8),
-                    IconButton(
-                      style: Theme.of(context).iconButtonTheme.style,
-                      icon: const Icon(
-                        Icons.skip_next,
-                      ),
-                      onPressed: () => audioBloc.add(AudioNext()),
                     ),
                   ],
                 ),
