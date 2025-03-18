@@ -23,7 +23,7 @@ class RetipTheme {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
       iconButtonTheme: iconButtonTheme(colors),
-      snackBarTheme: snackBarTheme(colors),
+      // snackBarTheme: snackBarTheme(colors),
       listTileTheme: listTileTheme(colors),
       appBarTheme: appBarTheme(colors),
     );
@@ -41,7 +41,7 @@ class RetipTheme {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       bottomNavigationBarTheme: bottomNavigationBarTheme(colors),
       iconButtonTheme: iconButtonTheme(colors),
-      snackBarTheme: snackBarTheme(colors),
+      // snackBarTheme: snackBarTheme(colors),
       listTileTheme: listTileTheme(colors),
       appBarTheme: appBarTheme(colors),
     );
@@ -95,6 +95,7 @@ class RetipTheme {
 
   SnackBarThemeData snackBarTheme(ColorScheme colorScheme) {
     return SnackBarThemeData(
+      showCloseIcon: true,
       backgroundColor: colorScheme.surfaceContainer,
       behavior: SnackBarBehavior.fixed,
     );

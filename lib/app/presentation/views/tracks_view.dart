@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/audio/audio_bloc.dart';
 import '../blocs/track/track_bloc.dart';
-import '../widgets/organisms/track_sheet_widget.dart';
+import '../widgets/organisms/sheets/track_sheet_widget.dart';
 import '../widgets/organisms/track_tile_widget.dart';
 
 class TracksView extends StatelessWidget {

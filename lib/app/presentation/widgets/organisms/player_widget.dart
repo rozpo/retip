@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/router/retip_routes.dart';
-import '../blocs/audio/audio_bloc.dart';
-import '../blocs/track/track_bloc.dart';
+import '../../../../core/router/retip_routes.dart';
+import '../../blocs/audio/audio_bloc.dart';
+import '../../blocs/track/track_bloc.dart';
 
 class PlayerWidget extends StatelessWidget {
   const PlayerWidget({super.key});
