@@ -6,6 +6,8 @@
     "explore": "Explore",
     "finish": "Finish",
     "genres": "Genres",
+    "goToAlbum": "Go to album",
+    "goToArtist": "Go to artist",
     "home": "Home",
     "howItWorks": "How it works?",
     "howItWorksDescription": "Retip scans your device for music files and organizes them into albums, artists, and tracks.",
