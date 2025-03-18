@@ -9,6 +9,7 @@ mixin RetipRoutes {
   static const library = '/library';
   static const profile = '/profile';
 
+  static const artist = '/artist/:id';
   static const album = '/album/:id';
   static const genre = '/genre/:id';
   static const playlist = '/playlist/:id';

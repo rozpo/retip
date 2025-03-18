@@ -5,6 +5,7 @@ import '../core/l10n/retip_l10n.dart';
 import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
 import 'domain/repositories/album_repository.dart';
+import 'domain/repositories/artist_repository.dart';
 import 'domain/repositories/config_repository.dart';
 import 'domain/repositories/genre_repository.dart';
 import 'domain/repositories/permission_repository.dart';
@@ -25,6 +26,7 @@ class RetipApp extends StatelessWidget {
   final PermissionRepository permissionRepository;
   final PlaylistRepository playlistRepository;
   final SettingsRepository settingsRepository;
+  final ArtistRepository artistRepository;
   final ConfigRepository configRepository;
   final AlbumRepository albumRepository;
   final GenreRepository genreRepository;
@@ -46,6 +48,7 @@ class RetipApp extends StatelessWidget {
     required this.permissionRepository,
     required this.playlistRepository,
     required this.settingsRepository,
+    required this.artistRepository,
     required this.configRepository,
     required this.albumRepository,
     required this.genreRepository,
@@ -76,6 +79,7 @@ class RetipApp extends StatelessWidget {
           RepositoryProvider(create: (context) => permissionRepository),
           RepositoryProvider(create: (context) => playlistRepository),
           RepositoryProvider(create: (context) => settingsRepository),
+          RepositoryProvider(create: (context) => artistRepository),
           RepositoryProvider(create: (context) => configRepository),
           RepositoryProvider(create: (context) => albumRepository),
           RepositoryProvider(create: (context) => genreRepository),

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/domain/repositories/permission_repository.dart';
 import '../../app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import '../../app/presentation/pages/album_page.dart';
+import '../../app/presentation/pages/artist_page.dart';
 import '../../app/presentation/pages/explore_page.dart';
 import '../../app/presentation/pages/genre_page.dart';
 import '../../app/presentation/pages/home_page.dart';
@@ -68,6 +69,15 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static final _artist = GoRoute(
+    path: RetipRoutes.artist,
+    name: RetipRoutes.artist,
+    builder: (context, state) {
+      final artistId = state.pathParameters['id']!;
+      return ArtistPage(int.parse(artistId));
+    },
+  );
+
   static final _album = GoRoute(
     path: RetipRoutes.album,
     name: RetipRoutes.album,
@@ -123,6 +133,7 @@ class RetipRouter extends GoRouter {
                     _search,
                     _library,
                     _profile,
+                    _artist,
                     _album,
                     _genre,
                     _playlist,

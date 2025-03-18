@@ -133,6 +133,7 @@ void main() async {
     permissionRepository: permissionRepository,
     playlistRepository: playlistRepository,
     settingsRepository: settingsRepository,
+    artistRepository: artistRepository,
     configRepository: configRepository,
     albumRepository: albumRepository,
     genreRepository: genreRepository,
