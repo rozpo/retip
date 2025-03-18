@@ -104,7 +104,7 @@ class RetipTheme {
     return const ListTileThemeData(
       contentPadding: EdgeInsets.symmetric(horizontal: 8),
       shape: BeveledRectangleBorder(),
-      minTileHeight: 40,
+      minTileHeight: 56,
       minVerticalPadding: 8,
       horizontalTitleGap: 8,
     );
