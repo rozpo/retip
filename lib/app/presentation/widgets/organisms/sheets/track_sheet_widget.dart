@@ -10,6 +10,7 @@ import '../../../../domain/repositories/track_repository.dart';
 import '../../atoms/divider_widget.dart';
 import '../../atoms/spacer_widget.dart';
 import '../../molecules/list_tile_widget.dart';
+import 'save_to_playlist_sheet_widget.dart';
 
 class TrackSheetWidget extends StatelessWidget with ShowBottomSheetAction {
   final TrackEntity track;
@@ -63,6 +64,10 @@ class TrackSheetWidget extends StatelessWidget with ShowBottomSheetAction {
         ListTileWidget(
           tileIcon: Icons.playlist_add,
           title: l10n.saveToPlaylist,
+          onTap: () {
+            Navigator.pop(context);
+            SaveToPlaylistSheetWidget(track.id).show(context);
+          },
         ),
         if (artist != null || album != null) ...[
           const SpacerWidget(),
