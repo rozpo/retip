@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/router/retip_routes.dart';
 import '../blocs/artist/artist_bloc.dart';
 
 class ArtistsView extends StatelessWidget {
@@ -20,6 +22,10 @@ class ArtistsView extends StatelessWidget {
               final artist = state.artists[index];
 
               return ListTile(
+                onTap: () => context.pushNamed(
+                  pathParameters: {'id': artist.id.toString()},
+                  RetipRoutes.artist,
+                ),
                 leading: Container(
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   width: 40,
