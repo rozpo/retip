@@ -6,7 +6,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/router/retip_routes.dart';
 import '../cubits/onboarding/onboarding_cubit.dart';
-import '../widgets/info_page_widget.dart';
+import '../widgets/organisms/info_page_widget.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

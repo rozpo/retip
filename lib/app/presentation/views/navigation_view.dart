@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/router/retip_routes.dart';
-import '../widgets/player_widget.dart';
-import '../widgets/retip_logo_widget.dart';
+import '../widgets/atoms/logo_widget.dart';
+import '../widgets/organisms/player_widget.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
@@ -34,14 +34,14 @@ class _NavigationViewState extends State<NavigationView> {
           child: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
-                icon: RetipLogoWidget(
+                icon: LogoWidget(
                   width: 24,
                   height: 24,
                   color: Theme.of(context)
                       .bottomNavigationBarTheme
                       .unselectedItemColor,
                 ),
-                activeIcon: RetipLogoWidget(
+                activeIcon: LogoWidget(
                   width: 24,
                   height: 24,
                   color: Theme.of(context)

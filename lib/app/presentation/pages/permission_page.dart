@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/l10n/retip_l10n.dart';
 import '../../../core/router/retip_routes.dart';
 import '../cubits/permission/permission_cubit.dart';
-import '../widgets/info_page_widget.dart';
+import '../widgets/organisms/info_page_widget.dart';
 
 class PermissionPage extends StatelessWidget {
   const PermissionPage({super.key});
