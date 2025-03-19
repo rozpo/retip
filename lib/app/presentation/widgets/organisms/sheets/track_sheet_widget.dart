@@ -30,6 +30,7 @@ class TrackSheetWidget extends StatelessWidget with ShowBottomSheetAction {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SpacerWidget(),
           ListTileWidget(
             subtitle: artist?.name,
             tileIcon: Icons.music_note,

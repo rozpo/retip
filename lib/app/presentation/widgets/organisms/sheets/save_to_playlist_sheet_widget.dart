@@ -26,6 +26,7 @@ class SaveToPlaylistSheetWidget extends StatelessWidget
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SpacerWidget(),
           ListTileWidget(
             tileIcon: Icons.playlist_add,
             title: l10n.createPlaylist,
