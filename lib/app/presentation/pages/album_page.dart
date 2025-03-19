@@ -5,6 +5,7 @@ import '../../domain/repositories/album_repository.dart';
 import '../../domain/repositories/track_repository.dart';
 import '../blocs/audio/audio_bloc.dart';
 import '../widgets/atoms/divider_widget.dart';
+import '../widgets/organisms/sheets/track_sheet_widget.dart';
 import '../widgets/organisms/tracks_list_widget.dart';
 
 class AlbumPage extends StatelessWidget {
@@ -52,6 +53,8 @@ class AlbumPage extends StatelessWidget {
               return TracksListWidget(
                 tracks: tracks,
                 onTap: (index) => audioBloc.add(AudioPlay(tracks, index)),
+                onActionTap: (index) =>
+                    TrackSheetWidget(tracks[index]).show(context),
               );
             },
           ),
