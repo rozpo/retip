@@ -4,7 +4,7 @@ abstract class PlaylistEntity {
   final int id;
   final List<TrackEntity> tracks;
 
-  final String name;
+  String name;
   final String? photo;
   final bool isFavorite;
 

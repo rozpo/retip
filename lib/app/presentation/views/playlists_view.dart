@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/router/retip_routes.dart';
 import '../blocs/playlist/playlist_bloc.dart';
+import '../widgets/molecules/list_tile_widget.dart';
+import '../widgets/organisms/sheets/playlist_sheet_widget.dart';
 
 class PlaylistsView extends StatelessWidget {
   final bool showFab;
@@ -35,7 +37,7 @@ class PlaylistsView extends StatelessWidget {
               itemBuilder: (context, index) {
                 final playlist = state.playlists[index];
 
-                return ListTile(
+                return ListTileWidget(
                   onTap: onTap != null
                       ? () => onTap?.call(playlist.id)
                       : () {
@@ -44,40 +46,27 @@ class PlaylistsView extends StatelessWidget {
                             pathParameters: {'id': playlist.id.toString()},
                           );
                         },
-                  leading: Container(
-                    color: Theme.of(context).colorScheme.surfaceContainer,
-                    width: 40,
-                    height: 40,
-                    child: const Icon(Icons.playlist_play),
-                  ),
-                  title: Text(
-                    playlist.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    playlist.tracks.length.toString(),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  onLongPress: () {
-                    bloc.add(PlaylistRemove(playlist.id));
-                  },
-                  trailing: IconButton(
-                    style: Theme.of(context).iconButtonTheme.style,
-                    onPressed: onTap != null
-                        ? () => onTap?.call(playlist.id)
-                        : () {
-                            bloc.add(PlaylistToggleFavorite(playlist));
-                          },
-                    icon: Icon(
-                      showFab
-                          ? playlist.isFavorite
-                              ? Icons.favorite
-                              : Icons.favorite_outline_outlined
-                          : Icons.playlist_add,
-                    ),
-                  ),
+                  tileIcon: Icons.playlist_play,
+                  title: playlist.name,
+                  subtitle: playlist.tracks.length.toString(),
+                  // onLongPress: () => bloc.add(PlaylistRemove(playlist.id)),
+
+                  actionIcon: Icons.more_vert,
+                  onActionTap: () =>
+                      PlaylistSheetWidget(playlist.id).show(context),
+                  // trailing: IconButton(
+                  //   style: Theme.of(context).iconButtonTheme.style,
+                  //   onPressed: onTap != null
+                  //       ? () => onTap?.call(playlist.id)
+                  //       : () {
+                  //           bloc.add(PlaylistToggleFavorite(playlist));
+                  //         },
+                  //   icon: Icon(
+                  //     showFab
+                  //         ? playlist.isFavorite
+                  //             ? Icons.favorite
+                  //             : Icons.favorite_outline_outlined
+                  //         : Icons.playlist_add,
                 );
               },
             ),
