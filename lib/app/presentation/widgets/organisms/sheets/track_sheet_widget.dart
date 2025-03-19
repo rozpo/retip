@@ -26,89 +26,91 @@ class TrackSheetWidget extends StatelessWidget with ShowBottomSheetAction {
     final album = track.album;
     final artist = track.artist;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ListTileWidget(
-          subtitle: artist?.name,
-          tileIcon: Icons.music_note,
-          title: track.title,
-          actionIcon:
-              track.isFavorite ? Icons.favorite : Icons.favorite_outline,
-          onActionTap: () {
-            context.read<TrackRepository>().toggleFavorite(track);
-            Navigator.pop(context);
-            ScaffoldMessenger.of(context).clearSnackBars();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  track.isFavorite
-                      ? l10n.removedFromFavourites
-                      : l10n.addedToFavourites,
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTileWidget(
+            subtitle: artist?.name,
+            tileIcon: Icons.music_note,
+            title: track.title,
+            actionIcon:
+                track.isFavorite ? Icons.favorite : Icons.favorite_outline,
+            onActionTap: () {
+              context.read<TrackRepository>().toggleFavorite(track);
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    track.isFavorite
+                        ? l10n.removedFromFavourites
+                        : l10n.addedToFavourites,
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 8),
-        const DividerWidget(),
-        const SizedBox(height: 8),
-        ListTileWidget(
-          tileIcon: Icons.playlist_play,
-          title: l10n.playNext,
-        ),
-        ListTileWidget(
-          tileIcon: Icons.queue_music,
-          title: l10n.addToQueue,
-        ),
-        ListTileWidget(
-          tileIcon: Icons.playlist_add,
-          title: l10n.saveToPlaylist,
-          onTap: () {
-            Navigator.pop(context);
-            SaveToPlaylistSheetWidget(track.id).show(context);
-          },
-        ),
-        if (artist != null || album != null) ...[
+              );
+            },
+          ),
+          const SizedBox(height: 8),
+          const DividerWidget(),
+          const SizedBox(height: 8),
+          ListTileWidget(
+            tileIcon: Icons.playlist_play,
+            title: l10n.playNext,
+          ),
+          ListTileWidget(
+            tileIcon: Icons.queue_music,
+            title: l10n.addToQueue,
+          ),
+          ListTileWidget(
+            tileIcon: Icons.playlist_add,
+            title: l10n.saveToPlaylist,
+            onTap: () {
+              Navigator.pop(context);
+              SaveToPlaylistSheetWidget(track.id).show(context);
+            },
+          ),
+          if (artist != null || album != null) ...[
+            const SpacerWidget(),
+            const DividerWidget(),
+            const SpacerWidget(),
+          ],
+          if (album != null) ...[
+            ListTileWidget(
+              tileIcon: Icons.album,
+              title: l10n.goToAlbum,
+              onTap: () {
+                Navigator.pop(context);
+                context.pushNamed(
+                  pathParameters: {'id': '${album.id}'},
+                  RetipRoutes.album,
+                );
+              },
+            ),
+          ],
+          if (artist != null) ...[
+            ListTileWidget(
+              tileIcon: Icons.person,
+              title: l10n.goToArtist,
+              onTap: () {
+                Navigator.pop(context);
+                context.pushNamed(
+                  pathParameters: {'id': '${artist.id}'},
+                  RetipRoutes.artist,
+                );
+              },
+            ),
+          ],
           const SpacerWidget(),
           const DividerWidget(),
           const SpacerWidget(),
-        ],
-        if (album != null) ...[
           ListTileWidget(
-            tileIcon: Icons.album,
-            title: l10n.goToAlbum,
-            onTap: () {
-              Navigator.pop(context);
-              context.pushNamed(
-                pathParameters: {'id': '${album.id}'},
-                RetipRoutes.album,
-              );
-            },
+            tileIcon: Icons.info,
+            title: l10n.showInfo,
           ),
+          const SpacerWidget(),
         ],
-        if (artist != null) ...[
-          ListTileWidget(
-            tileIcon: Icons.person,
-            title: l10n.goToArtist,
-            onTap: () {
-              Navigator.pop(context);
-              context.pushNamed(
-                pathParameters: {'id': '${artist.id}'},
-                RetipRoutes.artist,
-              );
-            },
-          ),
-        ],
-        const SpacerWidget(),
-        const DividerWidget(),
-        const SpacerWidget(),
-        ListTileWidget(
-          tileIcon: Icons.info,
-          title: l10n.showInfo,
-        ),
-        const SpacerWidget(),
-      ],
+      ),
     );
   }
 }
