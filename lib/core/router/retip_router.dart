@@ -12,7 +12,7 @@ import '../../app/presentation/pages/home_page.dart';
 import '../../app/presentation/pages/library_page.dart';
 import '../../app/presentation/pages/onboarding_page.dart';
 import '../../app/presentation/pages/permission_page.dart';
-import '../../app/presentation/pages/player_page.dart';
+import '../../app/presentation/pages/player/player_page.dart';
 import '../../app/presentation/pages/playlist_page.dart';
 import '../../app/presentation/pages/profile_page.dart';
 import '../../app/presentation/pages/search_page.dart';
