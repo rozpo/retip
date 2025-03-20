@@ -17,13 +17,21 @@ class PlayerTrackInfoWidget extends StatelessWidget {
         return Column(
           children: [
             Text(
+              textAlign: TextAlign.center,
               track?.title ?? '',
               style: textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(track?.artist?.name ?? '', style: textTheme.bodyLarge),
-            Text(track?.album?.title ?? ''),
+            Text(
+              textAlign: TextAlign.center,
+              track?.artist?.name ?? '',
+              style: textTheme.headlineSmall,
+            ),
+            // Text(
+            //   textAlign: TextAlign.center,
+            //   track?.album?.title ?? '',
+            // ),
           ],
         );
       },

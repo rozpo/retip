@@ -10,20 +10,19 @@ class PlayerProgressBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AudioBloc, AudioState>(
       builder: (context, state) {
-        final position = state.position;
-        final duration = state.duration;
+        final progress = state.position.inSeconds / state.duration.inSeconds;
 
         return Column(
           children: [
             Slider(
-              value: (position.inSeconds / duration.inSeconds).toDouble(),
+              value: progress.clamp(0, 1),
               onChanged: (value) {},
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('00:00'),
-                Text('00:00'),
+                Text(state.position.toString()),
+                Text(state.duration.toString()),
               ],
             ),
           ],
