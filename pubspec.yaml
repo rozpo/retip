@@ -1,7 +1,7 @@
 name: retip
 description: "Retip is a beautiful and intuitive music player built using the Flutter."
 publish_to: 'none'
-version: 0.3.1+18
+version: 0.3.2+19
 
 environment:
   sdk: ^3.5.1

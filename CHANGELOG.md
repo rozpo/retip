@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.2
+
+- Fix shuffle button
+
 ## v0.3.1
 
 - Audio player cleanups
