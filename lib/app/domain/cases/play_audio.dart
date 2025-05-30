@@ -14,7 +14,7 @@ mixin PlayAudio {
       await repository.setShuffleMode(shuffle);
     }
 
-    await repository.setPlaylist(tracks, index ?? 0);
+    await repository.setPlaylist(tracks, index);
 
     repository.play();
   }

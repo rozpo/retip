@@ -75,7 +75,7 @@ abstract class AudioRepository {
 
   Future<void> skipToIndex(int index);
 
-  Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]);
+  Future<void> setPlaylist(List<TrackEntity> tracks, [int? index]);
 
   Stream<bool> get playingStream;
 

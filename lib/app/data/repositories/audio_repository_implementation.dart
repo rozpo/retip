@@ -179,7 +179,7 @@ class AudioRepositoryImplementation implements AudioRepository {
   }
 
   @override
-  Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]) async {
+  Future<void> setPlaylist(List<TrackEntity> tracks, [int? index]) async {
     // Set the playlist to the just audio provider
     await justAudioProvider.setPlaylist(tracks, index);
     // Save the tracks list to the shared preferences

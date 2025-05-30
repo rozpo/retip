@@ -25,7 +25,7 @@ class JustAudioProvider extends AudioPlayer {
     );
   }
 
-  Future<void> setPlaylist(List<TrackEntity> tracks, [int index = 0]) async {
+  Future<void> setPlaylist(List<TrackEntity> tracks, [int? index]) async {
     final fileProvider = FileProvider();
 
     final children = <AudioSource>[];
