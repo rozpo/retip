@@ -54,7 +54,7 @@ android {
 
         profile {
             signingConfig signingConfigs.debug
-            applicationIdSuffix ".profile"
+            // applicationIdSuffix ".profile" TODO https://github.com/flutter/flutter/issues/169215
             versionNameSuffix "-profile"
         }
 
