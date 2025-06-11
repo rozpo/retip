@@ -43,4 +43,4 @@ app.*.map.json
 /android/app/release
 
 # Generated code
-lib/core/l10n/locales/app_localizations*
+lib/core/l10n/generated/

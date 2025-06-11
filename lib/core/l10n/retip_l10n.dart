@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'locales/app_localizations.dart';
+import 'generated/app_localizations.dart';
 
 mixin RetipL10n {
   static AppLocalizations of(BuildContext context) {
