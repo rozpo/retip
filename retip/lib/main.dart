@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       showPerformanceOverlay: kProfileMode,
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Play',
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see

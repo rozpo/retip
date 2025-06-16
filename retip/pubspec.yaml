@@ -18,3 +18,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/
+
+  fonts:
+    - family: Play
+      fonts:
+        - asset: assets/fonts/Play-Regular.ttf
+        - asset: assets/fonts/Play-Bold.ttf
+          weight: 700
