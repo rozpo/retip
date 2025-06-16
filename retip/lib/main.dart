@@ -1,6 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
+  debugRepaintRainbowEnabled = kDebugMode;
+  debugInvertOversizedImages = kDebugMode;
+
   runApp(const MyApp());
 }
 
@@ -11,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      showPerformanceOverlay: kProfileMode,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
