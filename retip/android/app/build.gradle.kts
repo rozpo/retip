@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "dev.rozpo.retip"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -39,7 +39,8 @@ android {
 
         getByName("profile") {
             signingConfig = signingConfigs.getByName("debug")
-            applicationIdSuffix = ".profile"
+            // TODO uncomment after resolve https://github.com/flutter/flutter/issues/169215
+            // applicationIdSuffix = ".profile"
             versionNameSuffix = "-profile"
         }
 

@@ -1,10 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:retip/core/logger/retip_logger.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 void main() {
   debugRepaintRainbowEnabled = kDebugMode;
   debugInvertOversizedImages = kDebugMode;
+
+  RetipLogger().info('App started!');
 
   runApp(const MyApp());
 }
@@ -84,6 +88,19 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      TalkerScreen(talker: RetipLogger().talker),
+                ),
+              );
+            },
+            icon: Icon(Icons.developer_board),
+          ),
+        ],
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
