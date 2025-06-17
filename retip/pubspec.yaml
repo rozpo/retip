@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  go_router: ^15.2.0
   talker_flutter: ^4.8.4
 
 dev_dependencies:
