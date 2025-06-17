@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:retip/core/logger/retip_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
+import '../../../../core/l10n/retip_l10n.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
 
@@ -63,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(RetipL10n.of(context).helloWorld),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it

@@ -1,0 +1,8 @@
+arb-dir: l10n
+template-arb-file: l10n_en.arb
+output-localization-file: retip_l10n.dart
+synthetic-package: false
+output-dir: lib/core/l10n
+nullable-getter: false
+output-class: RetipL10n
+required-resource-attributes: false
