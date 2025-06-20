@@ -1,4 +1,9 @@
-arb-dir: lib/core/l10n/locales
+output-localization-file: retip_l10n.dart
+required-resource-attributes: false
 template-arb-file: l10n_en.arb
-output-localization-file: app_localizations.dart
-untranslated-messages-file: lib/core/l10n/locales/untranslated.json
+output-dir: lib/core/l10n
+synthetic-package: false
+output-class: RetipL10n
+nullable-getter: false
+arb-dir: l10n
+format: true
