@@ -2,24 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/utils/run_mode.dart';
-import '../../cubits/dev/dev_cubit.dart';
+import '../../../../../core/utils/run_mode.dart';
+import '../../../cubits/dev/dev_cubit.dart';
 
-class DevView extends StatelessWidget {
-  final DevCubit cubit;
-
-  const DevView({required this.cubit, super.key});
+class DevEnabledView extends StatelessWidget {
+  const DevEnabledView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DevCubit, DevState>(
-      bloc: cubit,
-
+      bloc: context.read(),
       builder: (context, state) {
         if (state is! DevEnabled) return SizedBox();
 
+        final cubit = context.read<DevCubit>();
         return Scaffold(
-          appBar: AppBar(title: Text('DevView')),
+          appBar: AppBar(title: Text('Developer')),
           body: ListView(
             children: [
               if (RunMode.isDebug) ...[
@@ -107,7 +105,6 @@ class DevView extends StatelessWidget {
                           FilledButton(
                             onPressed: () {
                               context.pop(true);
-                              context.pop();
                             },
                             child: Text('Confirm'),
                           ),
