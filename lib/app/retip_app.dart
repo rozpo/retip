@@ -6,6 +6,7 @@ import 'package:retip/core/logger/retip_logger.dart';
 
 import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
+import 'presentation/cubits/theme/theme_cubit.dart';
 
 class RetipApp extends StatelessWidget {
   final RetipLogger logger;
@@ -23,7 +24,10 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return logger.wrapper(
       child: MultiBlocProvider(
-        providers: [BlocProvider(create: (context) => DevCubit())],
+        providers: [
+          BlocProvider(create: (context) => DevCubit()),
+          BlocProvider(create: (context) => ThemeCubit()),
+        ],
         child: BlocBuilder<DevCubit, DevState>(
           bloc: context.read(),
           builder: (context, state) {
@@ -37,13 +41,17 @@ class RetipApp extends StatelessWidget {
               showPerformanceOverlay = state.showPerformanceOverlay;
             }
 
-            return MaterialApp.router(
-              debugShowCheckedModeBanner: debugShowCheckedModeBanner,
-              showPerformanceOverlay: showPerformanceOverlay,
-              themeMode: ThemeMode.system,
-              darkTheme: theme.dark,
-              routerConfig: router,
-              theme: theme.light,
+            return BlocBuilder<ThemeCubit, ThemeState>(
+              builder: (context, state) {
+                return MaterialApp.router(
+                  debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+                  showPerformanceOverlay: showPerformanceOverlay,
+                  themeMode: state.themeMode,
+                  darkTheme: theme.dark,
+                  routerConfig: router,
+                  theme: theme.light,
+                );
+              },
             );
           },
         ),
