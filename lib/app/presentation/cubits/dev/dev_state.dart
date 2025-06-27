@@ -9,6 +9,11 @@ final class DevDisabled extends DevState {
   final int stepsToBeDev;
 
   const DevDisabled([this.stepsToBeDev = 0]);
+
+  @override
+  String toString() {
+    return '$runtimeType: [stepsToBeDev = $stepsToBeDev]';
+  }
 }
 
 final class DevEnabled extends DevState {
@@ -21,6 +26,24 @@ final class DevEnabled extends DevState {
   final bool debugPaintPointersEnabled;
   final bool showPerformanceOverlay;
   final bool debugPaintSizeEnabled;
+
+  @override
+  String toString() {
+    var msg = '$runtimeType';
+    msg +=
+        '\n[debugRepaintTextRainbowEnabled = $debugRepaintTextRainbowEnabled ]';
+    msg +=
+        '\n[debugPaintLayerBordersEnabled = $debugPaintLayerBordersEnabled ]';
+    msg += '\n[debugInvertedOversizedImages = $debugInvertedOversizedImages ]';
+    msg += '\n[debugPaintBaselinesEnabled = $debugPaintBaselinesEnabled ]';
+    msg += '\n[debugRepaintRainbowEnabled = $debugRepaintRainbowEnabled ]';
+    msg += '\n[debugShowCheckedModeBanner = $debugShowCheckedModeBanner ]';
+    msg += '\n[debugPaintPointersEnabled = $debugPaintPointersEnabled ]';
+    msg += '\n[showPerformanceOverlay = $showPerformanceOverlay ]';
+    msg += '\n[debugPaintSizeEnabled = $debugPaintSizeEnabled ]';
+
+    return msg;
+  }
 
   const DevEnabled({
     this.debugRepaintTextRainbowEnabled = false,
