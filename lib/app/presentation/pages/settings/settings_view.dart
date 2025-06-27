@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../cubits/dev/dev_cubit.dart';
 import '../../cubits/theme/theme_cubit.dart';
 
 class SettingsView extends StatelessWidget {
@@ -14,22 +14,42 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SettingsView'),
+        title: BlocBuilder<DevCubit, DevState>(
+          bloc: context.read(),
+          builder: (context, state) {
+            return GestureDetector(
+              onTap: () => context.read<DevCubit>().stepToDevMode(),
+              child: Text('SettingsView'),
+            );
+          },
+        ),
         actions: [
-          if (kReleaseMode == false) ...[
-            IconButton(
-              onPressed: () {
-                context.push('/logger');
-              },
-              icon: Icon(Icons.troubleshoot),
-            ),
-            IconButton(
-              onPressed: () {
-                context.push('/dev');
-              },
-              icon: Icon(Icons.developer_board),
-            ),
-          ],
+          BlocBuilder<DevCubit, DevState>(
+            bloc: context.read(),
+            builder: (context, state) {
+              if (state is! DevEnabled) return SizedBox();
+
+              return IconButton(
+                onPressed: () {
+                  context.push('/logger');
+                },
+                icon: Icon(Icons.troubleshoot),
+              );
+            },
+          ),
+          BlocBuilder<DevCubit, DevState>(
+            bloc: context.read(),
+            builder: (context, state) {
+              if (state is! DevEnabled) return SizedBox();
+
+              return IconButton(
+                onPressed: () {
+                  context.push('/dev');
+                },
+                icon: Icon(Icons.developer_board),
+              );
+            },
+          ),
         ],
       ),
       body: ListView(
@@ -57,14 +77,6 @@ class SettingsView extends StatelessWidget {
               );
             },
           ),
-
-          // SwitchListTile(
-          //   value: state.showPerformanceOverlay,
-          //   title: Text('showPerformanceOverlay'),
-          //   onChanged: (bool value) {
-          //     cubit.update(showPerformanceOverlay: value);
-          //   },
-          // ),
         ],
       ),
     );

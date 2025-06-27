@@ -13,10 +13,13 @@ class RetipApp extends StatelessWidget {
   final RetipRouter router;
   final RetipTheme theme;
 
+  final DevCubit devCubit;
+
   const RetipApp({
     required this.logger,
     required this.router,
     required this.theme,
+    required this.devCubit,
     super.key,
   });
 
@@ -25,7 +28,7 @@ class RetipApp extends StatelessWidget {
     return logger.wrapper(
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => DevCubit()),
+          BlocProvider(create: (context) => devCubit),
           BlocProvider(create: (context) => ThemeCubit()),
         ],
         child: BlocBuilder<DevCubit, DevState>(
@@ -35,10 +38,26 @@ class RetipApp extends StatelessWidget {
             bool showPerformanceOverlay = false;
 
             if (state is DevEnabled) {
-              debugRepaintTextRainbowEnabled = state.debugRepaintRainbowEnabled;
-              debugInvertOversizedImages = state.debugInvertedOversizedImages;
               debugShowCheckedModeBanner = state.debugShowCheckedModeBanner;
               showPerformanceOverlay = state.showPerformanceOverlay;
+
+              debugRepaintTextRainbowEnabled =
+                  state.debugRepaintTextRainbowEnabled;
+              debugPaintLayerBordersEnabled =
+                  state.debugPaintLayerBordersEnabled;
+              debugInvertOversizedImages = state.debugInvertedOversizedImages;
+              debugPaintBaselinesEnabled = state.debugPaintBaselinesEnabled;
+              debugRepaintRainbowEnabled = state.debugRepaintRainbowEnabled;
+              debugPaintPointersEnabled = state.debugPaintPointersEnabled;
+              debugPaintSizeEnabled = state.debugPaintSizeEnabled;
+            } else {
+              debugRepaintTextRainbowEnabled = false;
+              debugPaintLayerBordersEnabled = false;
+              debugInvertOversizedImages = false;
+              debugPaintBaselinesEnabled = false;
+              debugRepaintRainbowEnabled = false;
+              debugPaintPointersEnabled = false;
+              debugPaintSizeEnabled = false;
             }
 
             return BlocBuilder<ThemeCubit, ThemeState>(
