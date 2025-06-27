@@ -1,5 +1,7 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:retip/core/utils/run_mode.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 class RetipLogger {
@@ -17,6 +19,19 @@ class RetipLogger {
   Widget get widget => TalkerScreen(talker: _talker);
 
   NavigatorObserver get navigatorObserver => TalkerRouteObserver(_talker);
+
+  BlocObserver get blocObserver => TalkerBlocObserver(
+    talker: _talker,
+
+    settings: TalkerBlocLoggerSettings(
+      enabled: true,
+      printChanges: true,
+      printClosings: true,
+      printCreations: true,
+      printEvents: true,
+      printTransitions: true,
+    ),
+  );
 
   Widget wrapper({required Widget child}) => TalkerWrapper(
     talker: _talker,

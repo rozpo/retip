@@ -1,3 +1,4 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'app/retip_app.dart';
@@ -9,6 +10,10 @@ import 'core/utils/run_mode.dart';
 final logger = RetipLogger();
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Bloc.observer = logger.blocObserver;
+
   final router = RetipRouter(observers: [logger.navigatorObserver]);
   final theme = RetipTheme();
 
