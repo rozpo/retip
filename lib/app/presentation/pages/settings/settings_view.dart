@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../cubits/dev/dev_cubit.dart';
-import '../../cubits/theme/theme_cubit.dart';
+import '../../cubits/settings/settings_cubit.dart';
 
 class SettingsView extends StatelessWidget {
-  final ThemeCubit themeCubit;
+  final SettingsCubit themeCubit;
 
   const SettingsView({required this.themeCubit, super.key});
 
@@ -54,7 +54,7 @@ class SettingsView extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          BlocBuilder<ThemeCubit, ThemeState>(
+          BlocBuilder<SettingsCubit, SettingsState>(
             bloc: themeCubit,
             builder: (context, state) {
               return DropdownButton<ThemeMode>(
