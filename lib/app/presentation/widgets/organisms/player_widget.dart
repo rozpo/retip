@@ -124,7 +124,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                                           height: 4,
                                           color: Theme.of(context)
                                               .colorScheme
-                                              .surface,
+                                              .surfaceBright,
                                         ),
                                       )
                                     ],
