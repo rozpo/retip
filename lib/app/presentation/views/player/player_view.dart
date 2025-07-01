@@ -253,7 +253,18 @@ class PlayerArtworkWidget extends StatelessWidget {
             ? player.tracks[index]
             : null;
 
-        return ArtworkWidget(bytes: track?.artwork);
+        return Dismissible(
+            confirmDismiss: (direction) {
+              if (direction == DismissDirection.endToStart) {
+                player.next();
+              } else if (direction == DismissDirection.startToEnd) {
+                player.previous();
+              }
+
+              return Future.value(false);
+            },
+            key: GlobalKey(),
+            child: ArtworkWidget(bytes: track?.artwork));
       },
     );
   }
