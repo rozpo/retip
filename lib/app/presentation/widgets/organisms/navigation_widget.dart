@@ -64,11 +64,6 @@ class _NavigationWidgetState extends State<NavigationWidget> {
               icon: const Icon(Icons.library_music_outlined),
               label: l10n.library,
             ),
-            BottomNavigationBarItem(
-              activeIcon: const Icon(Icons.settings),
-              icon: const Icon(Icons.settings_outlined),
-              label: l10n.settings,
-            ),
           ],
           currentIndex: index,
           onTap: (value) {

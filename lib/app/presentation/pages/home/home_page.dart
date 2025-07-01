@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/presentation/views/home/home_view.dart';
 import 'package:retip/app/presentation/views/library/library_view.dart';
 import 'package:retip/app/presentation/views/search/search_view.dart';
-import 'package:retip/app/presentation/views/settings/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   final PageController pageController;
@@ -27,7 +26,6 @@ class _HomePageState extends State<HomePage> {
           SearchView(isSelected: () => true),
           const HomeView(),
           const LibraryView(),
-          const SettingsPage(),
         ],
       ),
     );

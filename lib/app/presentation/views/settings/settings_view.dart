@@ -32,7 +32,6 @@ class SettingsView extends StatelessWidget {
 
     return Scaffold(
       appBar: RpAppBar(
-        leading: const Icon(Icons.settings),
         title: SingleLineText(RetipL10n.of(context).settings),
       ),
       body: BlocBuilder<SettingsCubit, SettingsState>(
