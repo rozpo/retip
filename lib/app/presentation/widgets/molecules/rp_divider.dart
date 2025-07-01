@@ -43,16 +43,9 @@ class RpDivider extends StatelessWidget {
             onTap: showAll,
             child: Padding(
               padding: const EdgeInsets.only(right: Sizer.x1),
-              child: Row(
-                children: [
-                  Text(
-                    RetipL10n.of(context).showAll,
-                  ),
-                  RpIconButton(
-                    icon: Icons.arrow_forward,
-                    onPressed: showAll,
-                  ),
-                ],
+              child: RpIconButton(
+                icon: Icons.arrow_forward,
+                onPressed: showAll,
               ),
             ),
           )
