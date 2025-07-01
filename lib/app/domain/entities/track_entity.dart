@@ -8,6 +8,7 @@ import 'package:retip/app/presentation/widgets/atoms/single_line_text.dart';
 import 'package:retip/app/presentation/widgets/atoms/more_icon.dart';
 import 'package:retip/app/presentation/widgets/molecules/rp_list_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_fav_tile.dart';
+import 'package:retip/app/presentation/widgets/molecules/tiles/add_to_playlist_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_album_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/go_to_artist_tile.dart';
 import 'package:retip/app/presentation/widgets/molecules/tiles/remove_from_fav_tile.dart';
@@ -15,6 +16,7 @@ import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/utils/sizer.dart';
 import 'package:retip/core/utils/utils.dart';
 
+import '../../presentation/widgets/molecules/tiles/file_details.dart';
 import 'abstract_entity.dart';
 
 abstract class TrackEntity extends AbstractEntity {
@@ -82,13 +84,46 @@ abstract class TrackEntity extends AbstractEntity {
   }
 
   @override
-  RpListTile toListTile(BuildContext context, [String? query]) {
-    final theme = Theme.of(context);
+  Widget toListTile(BuildContext context, [String? query]) {
+    return TrackWidget(
+      entity: this,
+      query: query,
+    );
+  }
+}
 
+class TrackWidget extends StatefulWidget {
+  final TrackEntity entity;
+  final String? query;
+
+  const TrackWidget({
+    required this.entity,
+    this.query,
+    super.key,
+  });
+
+  @override
+  State<TrackWidget> createState() => _TrackWidgetState();
+}
+
+class _TrackWidgetState extends State<TrackWidget> {
+  bool isFav = false;
+  late TrackEntity track;
+
+  @override
+  void initState() {
+    super.initState();
+    track = widget.entity;
+    isFav = track.isFavourite;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return RpListTile(
       onTap: () async {
         final tracks = await GetAllTracks.call();
-        final index = tracks.indexWhere((track) => track.id == id);
+        final index = tracks.indexWhere((track) => track.id == this.track.id);
 
         PlayAudio.call(tracks, index: index);
       },
@@ -96,8 +131,8 @@ abstract class TrackEntity extends AbstractEntity {
         width: Sizer.x5,
         height: Sizer.x5,
         decoration: BoxDecoration(
-          image: artwork != null
-              ? DecorationImage(image: Image.memory(artwork!).image)
+          image: track.artwork != null
+              ? DecorationImage(image: Image.memory(track.artwork!).image)
               : null,
           borderRadius: BorderRadius.circular(Sizer.x0_5),
           color: theme.colorScheme.surfaceBright,
@@ -108,24 +143,34 @@ abstract class TrackEntity extends AbstractEntity {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           MoreIcon.vertical(
-            title: title,
-            subtitle: artist,
-            image: artwork,
+            title: track.title,
+            subtitle: track.artist,
+            image: track.artwork,
             tiles: [
-              IsInFavourites.call(this)
+              IsInFavourites.call(track)
                   ? RemoveFromFavTile(
-                      this,
+                      track,
+                      onTap: () => setState(() {
+                        track.isFavourite = false;
+                      }),
                     )
-                  : AddToFavTile(this),
-              if (albumId != null) GoToAlbumTile(albumId!),
-              if (artistId != null) GoToArtistTile(artistId!),
+                  : AddToFavTile(
+                      track,
+                      onTap: () => setState(() {
+                        track.isFavourite = true;
+                      }),
+                    ),
+              AddToPlaylistTile(track: track),
+              if (track.albumId != null) GoToAlbumTile(track.albumId!),
+              if (track.artistId != null) GoToArtistTile(track.artistId!),
+              FileDetailsTile(track: track),
             ],
           ),
         ],
       ),
-      title: RetipUtils.getQueryText(context, title, query ?? ''),
+      title: RetipUtils.getQueryText(context, track.title, widget.query ?? ''),
       subtitle: SingleLineText(
-        artist,
+        track.artist,
       ),
     );
   }
