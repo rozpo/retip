@@ -83,7 +83,7 @@ class TrackTile extends StatelessWidget {
           //   quickAction!,
           //   const HorizontalSpacer(),
           // ],
-          MoreIcon.horizontal(
+          MoreIcon.vertical(
             title: track.title,
             subtitle: track.artist,
             image: track.artwork,

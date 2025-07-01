@@ -107,7 +107,7 @@ abstract class TrackEntity extends AbstractEntity {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          MoreIcon.horizontal(
+          MoreIcon.vertical(
             title: title,
             subtitle: artist,
             image: artwork,
