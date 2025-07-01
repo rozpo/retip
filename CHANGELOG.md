@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.3.3
+
+- Sweep artwork on player view for previous/next track
+- Add more contrast to bottom mini player
+- Move settings page to home view
+- Remove show all label from divider on home view
+- Change more icon from horizontal to vertical variant
+- Extend track tile menu for search results
+
 ## v0.3.2
 
 - Fix shuffle button
