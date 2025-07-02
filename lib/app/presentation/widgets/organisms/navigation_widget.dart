@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/widgets/organisms/player_widget.dart';
 import 'package:retip/app/presentation/widgets/atoms/retip_icon.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_router.dart';
+import 'package:retip/core/router/retip_route.dart';
 
 class NavigationWidget extends StatefulWidget {
   final PageController pageController;
@@ -67,29 +68,18 @@ class _NavigationWidgetState extends State<NavigationWidget> {
           ],
           currentIndex: index,
           onTap: (value) {
-            index = value;
+            setState(() {
+              index = value;
+            });
 
-            final shellContext = RetipRouter.shellNavKey.currentContext;
+            var newRoute = switch (value) {
+              0 => RetipRoute.search,
+              1 => RetipRoute.home,
+              2 => RetipRoute.library,
+              _ => RetipRoute.home,
+            };
 
-            bool jump = false;
-            while (shellContext != null && Navigator.canPop(shellContext)) {
-              Navigator.pop(shellContext);
-              jump = true;
-            }
-
-            setState(() {});
-
-            if (jump) {
-              widget.pageController.jumpToPage(
-                index,
-              );
-            } else {
-              widget.pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-              );
-            }
+            context.go(newRoute);
           },
         ),
       ],

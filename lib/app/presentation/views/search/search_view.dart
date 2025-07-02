@@ -13,10 +13,7 @@ import '../../widgets/atoms/spinner_widget.dart';
 import 'bloc/search_bloc.dart';
 
 class SearchView extends StatefulWidget {
-  final bool Function()? isSelected;
-
   const SearchView({
-    this.isSelected,
     super.key,
   });
 
@@ -37,15 +34,9 @@ class _SearchViewState extends State<SearchView> {
 
   final bloc = SearchBloc();
 
-  void requestFocus() {
-    if (widget.isSelected?.call() == true) {
-      _focus.requestFocus();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    requestFocus();
+    _focus.requestFocus();
 
     return BlocProvider(
       create: (context) => bloc,

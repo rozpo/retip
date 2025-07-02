@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/views/tracks/tracks_tab.dart';
 import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
-
-import 'bloc/library_bloc.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({super.key});
@@ -40,34 +37,27 @@ class _LibraryViewState extends State<LibraryView> {
       ),
     ];
 
-    return BlocConsumer<LibraryBloc, LibraryState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        return DefaultTabController(
-          length: tabs.length,
-          child: Scaffold(
-            appBar: RpAppBar(
-              leading: const Icon(Icons.library_music),
-              title: Text(l10n.library),
-              bottom: TabBar(
-                indicatorSize: TabBarIndicatorSize.tab,
-                tabs: tabs,
-              ),
-            ),
-            body: const TabBarView(
-              physics: BouncingScrollPhysics(),
-              children: [
-                PlaylistsView(),
-                ArtistsView(),
-                AlbumsView(),
-                TracksTab(),
-              ],
-            ),
+    return DefaultTabController(
+      length: tabs.length,
+      child: Scaffold(
+        appBar: RpAppBar(
+          leading: const Icon(Icons.library_music),
+          title: Text(l10n.library),
+          bottom: TabBar(
+            indicatorSize: TabBarIndicatorSize.tab,
+            tabs: tabs,
           ),
-        );
-      },
+        ),
+        body: const TabBarView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            PlaylistsView(),
+            ArtistsView(),
+            AlbumsView(),
+            TracksTab(),
+          ],
+        ),
+      ),
     );
   }
 }

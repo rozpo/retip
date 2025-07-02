@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/presentation/pages/favourites/bloc/favourites_bloc.dart';
 import 'package:retip/app/presentation/pages/intro/bloc/intro_bloc.dart';
-import 'package:retip/app/presentation/views/library/bloc/library_bloc.dart';
 import 'package:retip/app/presentation/views/settings/cubit/settings_cubit.dart';
 import 'package:retip/app/presentation/views/tracks/bloc/tracks_bloc.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
@@ -65,7 +64,6 @@ class RetipApp extends StatelessWidget {
           BlocProvider(create: (_) {
             return TracksBloc()..add(FetchTracksEvent());
           }),
-          BlocProvider(create: (_) => LibraryBloc()),
           BlocProvider(create: (_) => FavouritesBloc()),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(
