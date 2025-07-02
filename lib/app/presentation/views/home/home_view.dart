@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/views/home/tabs/explore_tab.dart';
-import 'package:retip/app/presentation/views/settings/settings_page.dart';
 import 'package:retip/app/presentation/widgets/atoms/rp_icon_button.dart';
 import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+import 'package:retip/core/router/retip_route.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -17,14 +18,7 @@ class HomeView extends StatelessWidget {
         actions: [
           RpIconButton(
             icon: Icons.settings,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SettingsPage(),
-                ),
-              );
-            },
+            onPressed: () => context.push(RetipRoute.settings),
           ),
           const SizedBox(width: 8),
         ],

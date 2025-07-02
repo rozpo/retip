@@ -6,6 +6,7 @@ import 'package:retip/app/presentation/pages/intro/intro_page.dart';
 import 'package:retip/app/presentation/views/home/home_view.dart';
 import 'package:retip/app/presentation/views/library/library_view.dart';
 import 'package:retip/app/presentation/views/search/search_view.dart';
+import 'package:retip/app/presentation/views/settings/settings_view.dart';
 import 'package:retip/app/presentation/widgets/organisms/navigation_widget.dart';
 import 'package:retip/core/constants/routes_constants.dart';
 
@@ -24,6 +25,12 @@ mixin RetipRouter {
         path: RoutesConstants.intro,
         builder: (context, state) {
           return const IntroPage();
+        },
+      ),
+      GoRoute(
+        path: RetipRoute.settings,
+        builder: (context, state) {
+          return const SettingsView();
         },
       ),
       ShellRoute(
