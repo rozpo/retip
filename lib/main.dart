@@ -23,6 +23,7 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
   // Initialize the background audio player
   await JustAudioBackground.init(
     androidNotificationChannelId: 'dev.rozpo.retip.audio',
@@ -30,6 +31,7 @@ void main() async {
     androidStopForegroundOnPause: true,
     androidNotificationOngoing: true,
   );
+
   // Setup shared preferences
   final sharedPrefs = await SharedPreferences.getInstance();
   GetIt.I.registerSingleton<SharedPreferences>(sharedPrefs);
