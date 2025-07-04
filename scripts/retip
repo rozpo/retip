@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+if [ $1 == "build" ]; then
+    COMMIT=$(git log --oneline -1 | cut -d " " -f 1)
+    TAG=v$(grep "version:" pubspec.yaml | cut -d " " -f 2 | cut -d "+" -f 1)
+
+    flutter build apk --release
+
+    mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/retip-release-$TAG_$COMMIT.apk
+    realpath "build/app/outputs/flutter-apk/retip-release-$TAG_$COMMIT.apk"
+fi;
