@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/views/albums/albums_view.dart';
 import 'package:retip/app/presentation/views/artists/artists_view.dart';
 import 'package:retip/app/presentation/views/playlists/playlists_view.dart';
 import 'package:retip/app/presentation/views/tracks/tracks_tab.dart';
 import 'package:retip/app/presentation/widgets/organisms/rp_app_bar.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
+
+import '../../../../core/router/retip_route.dart';
+import '../../widgets/atoms/rp_icon_button.dart';
 
 class LibraryView extends StatefulWidget {
   const LibraryView({super.key});
@@ -47,6 +51,13 @@ class _LibraryViewState extends State<LibraryView> {
             indicatorSize: TabBarIndicatorSize.tab,
             tabs: tabs,
           ),
+          actions: [
+            RpIconButton(
+              icon: Icons.settings,
+              onPressed: () => context.push(RetipRoute.settings),
+            ),
+            const SizedBox(width: 8),
+          ],
         ),
         body: const TabBarView(
           physics: BouncingScrollPhysics(),
