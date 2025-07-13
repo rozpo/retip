@@ -374,9 +374,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get myAwesomePlaylist => 'Moja wspaniała playlista';
 
   @override
-  String get libraryScan => 'Library scan';
+  String get libraryScan => 'Skan biblioteki';
 
   @override
   String get scanForMusicDescription =>
-      'Scan for music files on your device and add them to the library';
+      'Przeskanuj swoje urządzenie w poszukiwaniu plików muzycznych i dodaj je do biblioteki';
 }
