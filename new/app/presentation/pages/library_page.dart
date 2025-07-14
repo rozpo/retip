@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/router/retip_router.dart';
 import '../../../core/router/retip_routes.dart';
+import '../../../main.dart';
 import '../widgets/icon_buttons/profile_icon_button_widget.dart';
 
 class LibraryPage extends StatelessWidget {
@@ -85,16 +85,32 @@ class LibraryPage extends StatelessWidget {
                 );
               },
             ),
-            ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Track $index'),
-                  onTap: () => context.pushNamed(
-                    RetipRoutes.track,
-                    pathParameters: {
-                      'id': index.toString(),
+            StreamBuilder(
+              stream: libraryService.watchTracks(),
+              builder: (context, asyncSnapshot) {
+                if (asyncSnapshot.hasData) {
+                  final data = asyncSnapshot.requireData;
+                  return ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      final track = data[index];
+
+                      return ListTile(
+                        title: Text(track.title),
+                        subtitle: Text(track.artist),
+                        onTap: () => context.pushNamed(
+                          RetipRoutes.track,
+                          pathParameters: {
+                            'id': track.trackId.toString(),
+                          },
+                        ),
+                      );
                     },
-                  ),
+                  );
+                }
+
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
               },
             ),
