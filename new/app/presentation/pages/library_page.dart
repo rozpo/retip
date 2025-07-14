@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/retip_routes.dart';
-import '../../../main.dart';
+import '../blocs/library/library_bloc.dart';
 import '../widgets/icon_buttons/profile_icon_button_widget.dart';
 
 class LibraryPage extends StatelessWidget {
@@ -85,35 +86,29 @@ class LibraryPage extends StatelessWidget {
                 );
               },
             ),
-            StreamBuilder(
-              stream: libraryService.watchTracks(),
-              builder: (context, asyncSnapshot) {
-                if (asyncSnapshot.hasData) {
-                  final data = asyncSnapshot.requireData;
-                  return ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      final track = data[index];
+            BlocBuilder<LibraryBloc, LibraryState>(
+              builder: (context, state) {
+                final tracks = state.tracks;
 
-                      return ListTile(
-                        title: Text(track.title),
-                        subtitle: Text(track.artist),
-                        onTap: () => context.pushNamed(
-                          RetipRoutes.track,
-                          pathParameters: {
-                            'id': track.trackId.toString(),
-                          },
-                        ),
-                      );
-                    },
-                  );
-                }
+                return ListView.builder(
+                  itemCount: tracks.length,
+                  itemBuilder: (context, index) {
+                    final track = tracks[index];
 
-                return const Center(
-                  child: CircularProgressIndicator(),
+                    return ListTile(
+                      title: Text(track.title),
+                      subtitle: Text(track.artist),
+                      onTap: () => context.pushNamed(
+                        RetipRoutes.track,
+                        pathParameters: {
+                          'id': track.trackId.toString(),
+                        },
+                      ),
+                    );
+                  },
                 );
               },
-            ),
+            )
           ],
         ),
       ),
