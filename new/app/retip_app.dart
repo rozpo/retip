@@ -3,14 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/router/retip_router.dart';
 import 'presentation/blocs/library/library_bloc.dart';
+import 'presentation/blocs/onboarding/onboarding_bloc.dart';
+import 'presentation/blocs/permissions/permissions_bloc.dart';
 
 class RetipApp extends StatelessWidget {
-  final RetipRouter router;
+  final PermissionsBloc permissionsBloc;
+  final OnboardingBloc onboardingBloc;
   final LibraryBloc libraryBloc;
+  final RetipRouter router;
 
   const RetipApp({
-    required this.router,
+    required this.permissionsBloc,
+    required this.onboardingBloc,
     required this.libraryBloc,
+    required this.router,
     super.key,
   });
 
@@ -18,6 +24,8 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => permissionsBloc),
+        BlocProvider(create: (context) => onboardingBloc),
         BlocProvider(create: (context) => libraryBloc),
       ],
       child: MaterialApp.router(

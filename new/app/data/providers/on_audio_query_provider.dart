@@ -3,12 +3,13 @@ import 'package:on_audio_query/on_audio_query.dart';
 class OnAudioQueryProvider {
   final OnAudioQuery _onAudioQuery;
 
-  const OnAudioQueryProvider(OnAudioQuery onAudioQuery)
-      : _onAudioQuery = onAudioQuery;
+  const OnAudioQueryProvider._(
+    OnAudioQuery onAudioQuery,
+  ) : _onAudioQuery = onAudioQuery;
 
   static Future<OnAudioQueryProvider> init() async {
     final onAudioQuery = OnAudioQuery();
-    return OnAudioQueryProvider(onAudioQuery);
+    return OnAudioQueryProvider._(onAudioQuery);
   }
 
   Future<bool> permissionRequest() async {

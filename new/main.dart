@@ -2,28 +2,73 @@ import 'package:flutter/material.dart';
 
 import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
+import 'app/data/providers/shared_preferences_provider.dart';
+import 'app/data/repositories/config_repository.dart';
+import 'app/data/repositories/permissions_repository.dart';
 import 'app/data/repositories/track_repository.dart';
 import 'app/domain/services/library_service.dart';
+import 'app/domain/services/onboarding_service.dart';
+import 'app/domain/services/permissions_service.dart';
 import 'app/presentation/blocs/library/library_bloc.dart';
+import 'app/presentation/blocs/onboarding/onboarding_bloc.dart';
+import 'app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'app/retip_app.dart';
 import 'core/router/retip_router.dart';
 
 void main() async {
+  // Core
   final router = RetipRouter();
 
-  final objectboxProvider = await ObjectboxProvider.init();
+  // Providers
+  final sharedPreferencesProvider = await SharedPreferencesProvider.init();
   final onAudioQueryProvider = await OnAudioQueryProvider.init();
+  final objectboxProvider = await ObjectboxProvider.init();
+
+  // Repositories
+  final permissionsRepository = PermissionsRepository(
+    onAudioQueryProvider: onAudioQueryProvider,
+  );
+
+  final configRepository = ConfigRepository(
+    sharedPreferencesProvider: sharedPreferencesProvider,
+  );
 
   final trackRepository = TrackRepository(
     onAudioQueryProvider: onAudioQueryProvider,
     objectboxProvider: objectboxProvider,
   );
 
-  final libraryService = LibraryService(trackRepository: trackRepository);
+  // Services
+  final onboardingService = OnboardingService(
+    configRepository: configRepository,
+  );
 
-  final libraryBloc = LibraryBloc(libraryService: libraryService);
+  final permissionsService = PermissionsService(
+    permissionRepository: permissionsRepository,
+    configRepository: configRepository,
+  );
 
+  final libraryService = LibraryService(
+    trackRepository: trackRepository,
+  );
+
+  // Blocs
+  final onboardingBloc = OnboardingBloc(
+    onboardingService: onboardingService,
+  );
+
+  final permissionsBloc = PermissionsBloc(
+    permissionsService: permissionsService,
+  );
+
+  final libraryBloc = LibraryBloc(
+    libraryService: libraryService,
+  );
+
+  // App
   final app = RetipApp(
+    permissionsBloc: permissionsBloc,
+    onboardingBloc: onboardingBloc,
     libraryBloc: libraryBloc,
     router: router,
   );

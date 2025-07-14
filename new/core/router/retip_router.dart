@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/presentation/blocs/onboarding/onboarding_bloc.dart';
+import '../../app/presentation/blocs/permissions/permissions_bloc.dart';
 import '../../app/presentation/pages/album_page.dart';
 import '../../app/presentation/pages/artist_page.dart';
 import '../../app/presentation/pages/developer_page.dart';
@@ -123,9 +126,6 @@ final class RetipRouter extends GoRouter {
     ),
   );
 
-  static bool isOnboardingFinished = false;
-  static bool isPermissionsGranted = false;
-
   RetipRouter()
       : super.routingConfig(
           errorBuilder: (context, state) => const ErrorPage(),
@@ -133,9 +133,12 @@ final class RetipRouter extends GoRouter {
           routingConfig: ValueNotifier(
             RoutingConfig(
               redirect: (context, state) {
-                if (isOnboardingFinished == false) {
+                final onboardingBloc = context.read<OnboardingBloc>();
+                final permissionsBloc = context.read<PermissionsBloc>();
+
+                if (onboardingBloc.state is OnboardingInProgressState) {
                   return RetipRoutes.onboarding;
-                } else if (isPermissionsGranted == false) {
+                } else if (permissionsBloc.state is PermissionsRequiredState) {
                   return RetipRoutes.permissions;
                 } else {
                   return null;
