@@ -1,3 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+
 import '../../../objectbox.g.dart';
 
 class ObjectboxProvider {
@@ -11,8 +17,30 @@ class ObjectboxProvider {
         _admin = admin;
 
   static Future<ObjectboxProvider> init() async {
-    final store = await openStore();
-    final admin = Admin.isAvailable() ? Admin(store) : null;
+    Store? store;
+    Admin? admin;
+
+    final appDir = await getApplicationDocumentsDirectory();
+    final dbPath = appDir.path;
+
+    try {
+      store = await openStore();
+    } catch (e) {
+      // Delete the database if it fails to open
+      final dbFile = File(join(dbPath, 'data.mdb'));
+      final lockFile = File(join(dbPath, 'lock.mdb'));
+
+      if (await dbFile.exists()) {
+        await dbFile.delete();
+      }
+
+      if (await lockFile.exists()) {
+        await lockFile.delete();
+      }
+    }
+
+    store ??= await openStore(directory: dbPath);
+    admin = kReleaseMode == false && Admin.isAvailable() ? Admin(store) : null;
 
     return ObjectboxProvider._(store, admin);
   }

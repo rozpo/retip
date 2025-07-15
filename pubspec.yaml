@@ -30,7 +30,8 @@ dependencies:
       path: packages/on_audio_query
       ref: main
   package_info_plus: ^8.1.2
-  path_provider: ^2.1.4
+  path: ^1.9.1
+  path_provider: ^2.1.5
   shared_preferences: ^2.3.2
   shared_preferences_android: ^2.3.4
   url_launcher: ^6.3.1

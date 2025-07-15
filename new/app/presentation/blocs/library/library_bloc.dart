@@ -18,12 +18,7 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
         super(const LibraryState()) {
     on<LibraryRefreshTracksEvent>(_onRefreshTracks);
 
-    // TODO check for permission before
-    try {
-      //_libraryService.scan();
-    } catch (e) {
-      // continue
-    }
+    _libraryService.scan();
 
     _tracksStream = _libraryService.watchTracks();
 

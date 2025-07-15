@@ -22,12 +22,17 @@ final class TrackModel implements TrackEntity {
   @override
   String artist;
 
+  @Unique()
+  @override
+  String location;
+
   TrackModel({
     this.id = 0,
     required this.trackId,
     required this.title,
     required this.album,
     required this.artist,
+    required this.location,
   });
 
   factory TrackModel.fromOnAudioQuery(SongModel data) {
@@ -36,6 +41,7 @@ final class TrackModel implements TrackEntity {
       title: data.title,
       album: data.album!,
       artist: data.artist!,
+      location: data.uri!,
     );
   }
 }

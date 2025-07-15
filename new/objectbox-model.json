@@ -4,44 +4,51 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:1542359420435812287",
-      "lastPropertyId": "5:1701286581968488067",
+      "id": "1:8863086957870844197",
+      "lastPropertyId": "6:2421576739842808565",
       "name": "TrackModel",
       "properties": [
         {
-          "id": "1:2662587413909738223",
+          "id": "1:8740532021967961271",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:3648080057031157994",
+          "id": "2:361955990004605550",
           "name": "trackId",
           "type": 6,
           "flags": 40,
-          "indexId": "1:2145557587094928764"
+          "indexId": "1:2504072504572033661"
         },
         {
-          "id": "3:2673083268144620101",
+          "id": "3:8603556536622773758",
           "name": "title",
           "type": 9
         },
         {
-          "id": "4:5618078953461402754",
+          "id": "4:1088906903147009827",
           "name": "album",
           "type": 9
         },
         {
-          "id": "5:1701286581968488067",
+          "id": "5:8986368266569191536",
           "name": "artist",
           "type": 9
+        },
+        {
+          "id": "6:2421576739842808565",
+          "name": "location",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "2:3219425344249593886"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:1542359420435812287",
-  "lastIndexId": "1:2145557587094928764",
+  "lastEntityId": "1:8863086957870844197",
+  "lastIndexId": "2:3219425344249593886",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

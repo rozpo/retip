@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/retip_routes.dart';
+import '../blocs/audio/audio_bloc.dart';
 import '../blocs/library/library_bloc.dart';
 import '../widgets/icon_buttons/profile_icon_button_widget.dart';
 
@@ -98,7 +99,14 @@ class LibraryPage extends StatelessWidget {
                     return ListTile(
                       title: Text(track.title),
                       subtitle: Text(track.artist),
-                      onTap: () => context.pushNamed(
+                      onTap: () {
+                        final event = AudioLoadPlaylistEvent(
+                          tracks,
+                          index: index,
+                        );
+                        context.read<AudioBloc>().add(event);
+                      },
+                      onLongPress: () => context.pushNamed(
                         RetipRoutes.track,
                         pathParameters: {
                           'id': track.trackId.toString(),

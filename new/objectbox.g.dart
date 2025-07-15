@@ -20,41 +20,48 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-    id: const obx_int.IdUid(1, 1542359420435812287),
+    id: const obx_int.IdUid(1, 8863086957870844197),
     name: 'TrackModel',
-    lastPropertyId: const obx_int.IdUid(5, 1701286581968488067),
+    lastPropertyId: const obx_int.IdUid(6, 2421576739842808565),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(1, 2662587413909738223),
+        id: const obx_int.IdUid(1, 8740532021967961271),
         name: 'id',
         type: 6,
         flags: 1,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(2, 3648080057031157994),
+        id: const obx_int.IdUid(2, 361955990004605550),
         name: 'trackId',
         type: 6,
         flags: 40,
-        indexId: const obx_int.IdUid(1, 2145557587094928764),
+        indexId: const obx_int.IdUid(1, 2504072504572033661),
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(3, 2673083268144620101),
+        id: const obx_int.IdUid(3, 8603556536622773758),
         name: 'title',
         type: 9,
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(4, 5618078953461402754),
+        id: const obx_int.IdUid(4, 1088906903147009827),
         name: 'album',
         type: 9,
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(5, 1701286581968488067),
+        id: const obx_int.IdUid(5, 8986368266569191536),
         name: 'artist',
         type: 9,
         flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 2421576739842808565),
+        name: 'location',
+        type: 9,
+        flags: 2080,
+        indexId: const obx_int.IdUid(2, 3219425344249593886),
       ),
     ],
     relations: <obx_int.ModelRelation>[],
@@ -100,8 +107,8 @@ Future<obx.Store> openStore({
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
     entities: _entities,
-    lastEntityId: const obx_int.IdUid(1, 1542359420435812287),
-    lastIndexId: const obx_int.IdUid(1, 2145557587094928764),
+    lastEntityId: const obx_int.IdUid(1, 8863086957870844197),
+    lastIndexId: const obx_int.IdUid(2, 3219425344249593886),
     lastRelationId: const obx_int.IdUid(0, 0),
     lastSequenceId: const obx_int.IdUid(0, 0),
     retiredEntityUids: const [],
@@ -126,12 +133,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final titleOffset = fbb.writeString(object.title);
         final albumOffset = fbb.writeString(object.album);
         final artistOffset = fbb.writeString(object.artist);
-        fbb.startTable(6);
+        final locationOffset = fbb.writeString(object.location);
+        fbb.startTable(7);
         fbb.addInt64(0, object.id);
         fbb.addInt64(1, object.trackId);
         fbb.addOffset(2, titleOffset);
         fbb.addOffset(3, albumOffset);
         fbb.addOffset(4, artistOffset);
+        fbb.addOffset(5, locationOffset);
         fbb.finish(fbb.endTable());
         return object.id;
       },
@@ -159,12 +168,16 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final artistParam = const fb.StringReader(
           asciiOptimization: true,
         ).vTableGet(buffer, rootOffset, 12, '');
+        final locationParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 14, '');
         final object = TrackModel(
           id: idParam,
           trackId: trackIdParam,
           title: titleParam,
           album: albumParam,
           artist: artistParam,
+          location: locationParam,
         );
 
         return object;
@@ -200,5 +213,10 @@ class TrackModel_ {
   /// See [TrackModel.artist].
   static final artist = obx.QueryStringProperty<TrackModel>(
     _entities[0].properties[4],
+  );
+
+  /// See [TrackModel.location].
+  static final location = obx.QueryStringProperty<TrackModel>(
+    _entities[0].properties[5],
   );
 }
