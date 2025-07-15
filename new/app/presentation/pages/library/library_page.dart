@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/router/retip_routes.dart';
 import '../../widgets/icon_buttons/profile_icon_button_widget.dart';
 import 'widgets/library_albums_tab_widget.dart';
+import 'widgets/library_artists_tab_widget.dart';
 import 'widgets/library_tracks_tab_widget.dart';
 
 class LibraryPage extends StatelessWidget {
@@ -60,19 +61,7 @@ class LibraryPage extends StatelessWidget {
                 );
               },
             ),
-            ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Artist $index'),
-                  onTap: () => context.pushNamed(
-                    RetipRoutes.artist,
-                    pathParameters: {
-                      'id': index.toString(),
-                    },
-                  ),
-                );
-              },
-            ),
+            const LibraryArtistsTabWidget(),
             const LibraryAlbumsTabWidget(),
             const LibraryTracksTabWidget(),
           ],

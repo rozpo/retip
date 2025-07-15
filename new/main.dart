@@ -5,6 +5,7 @@ import 'app/data/providers/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/providers/shared_preferences_provider.dart';
 import 'app/data/repositories/album_repository.dart';
+import 'app/data/repositories/artist_repository.dart';
 import 'app/data/repositories/audio_repository.dart';
 import 'app/data/repositories/config_repository.dart';
 import 'app/data/repositories/permissions_repository.dart';
@@ -43,6 +44,11 @@ void main() async {
     justAudioProvider: justAudioProvider,
   );
 
+  final artistRepository = ArtistRepository(
+    onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
+  );
+
   final albumRepository = AlbumRepository(
     onAudioQueryProvider: onAudioQueryProvider,
     objectboxProvider: objectboxProvider,
@@ -68,6 +74,7 @@ void main() async {
   );
 
   final libraryService = LibraryService(
+    artistRepository: artistRepository,
     albumRepository: albumRepository,
     trackRepository: trackRepository,
   );

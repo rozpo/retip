@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../domain/entites/album_entity.dart';
+import '../../../domain/entites/artist_entity.dart';
 import '../../../domain/entites/track_entity.dart';
 import '../../../domain/services/library_service.dart';
 import '../../../domain/services/permissions_service.dart';
@@ -22,14 +23,25 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
         _libraryService = libraryService,
         super(const LibraryIdleState()) {
     on<LibraryScanEvent>(_onScanTracks);
+    on<LibraryRefreshArtistsEvent>(_onRefreshArtists);
     on<LibraryRefreshAlbumsEvent>(_onRefreshAlbums);
     on<LibraryRefreshTracksEvent>(_onRefreshTracks);
 
     add(const LibraryScanEvent());
   }
 
+  StreamSubscription? _artistsStream;
   StreamSubscription? _albumsStream;
   StreamSubscription? _tracksStream;
+
+  @override
+  Future<void> close() {
+    _artistsStream?.cancel();
+    _albumsStream?.cancel();
+    _tracksStream?.cancel();
+
+    return super.close();
+  }
 
   void _onScanTracks(
     LibraryScanEvent event,
@@ -39,6 +51,10 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
 
     if (isGranted) {
       _libraryService.scan();
+
+      _artistsStream ??= _libraryService.watchArtists().listen((artists) {
+        add(LibraryRefreshArtistsEvent(artists));
+      });
 
       _albumsStream ??= _libraryService.watchAlbums().listen((albums) {
         add(LibraryRefreshAlbumsEvent(albums));
@@ -50,6 +66,17 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
 
       emit(const LibraryLoadedState());
     }
+  }
+
+  void _onRefreshArtists(
+    LibraryRefreshArtistsEvent event,
+    Emitter<LibraryState> emit,
+  ) {
+    if (state is! LibraryLoadedState) return;
+    final loadedState = state as LibraryLoadedState;
+
+    final newState = loadedState.copyWith(artists: event.artists);
+    emit(newState);
   }
 
   void _onRefreshAlbums(
