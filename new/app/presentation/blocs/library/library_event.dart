@@ -5,6 +5,10 @@ sealed class LibraryEvent {
   const LibraryEvent();
 }
 
+final class LibraryScanEvent extends LibraryEvent {
+  const LibraryScanEvent();
+}
+
 final class LibraryRefreshTracksEvent extends LibraryEvent {
   final List<TrackEntity> tracks;
 

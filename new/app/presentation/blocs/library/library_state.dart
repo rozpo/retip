@@ -1,15 +1,23 @@
 part of 'library_bloc.dart';
 
 @immutable
-class LibraryState {
+sealed class LibraryState {
+  const LibraryState();
+}
+
+class LibraryIdleState extends LibraryState {
+  const LibraryIdleState();
+}
+
+class LibraryLoadedState extends LibraryState {
   final List<TrackEntity> tracks;
 
-  const LibraryState({this.tracks = const []});
+  const LibraryLoadedState({this.tracks = const []});
 
-  LibraryState copyWith({
+  LibraryLoadedState copyWith({
     List<TrackEntity>? tracks,
   }) {
-    return LibraryState(
+    return LibraryLoadedState(
       tracks: tracks ?? this.tracks,
     );
   }

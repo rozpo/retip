@@ -79,6 +79,7 @@ void main() async {
   );
 
   final libraryBloc = LibraryBloc(
+    permissionsService: permissionsService,
     libraryService: libraryService,
   );
 

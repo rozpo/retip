@@ -89,32 +89,45 @@ class LibraryPage extends StatelessWidget {
             ),
             BlocBuilder<LibraryBloc, LibraryState>(
               builder: (context, state) {
-                final tracks = state.tracks;
+                if (state is LibraryLoadedState) {
+                  final tracks = state.tracks;
 
-                return ListView.builder(
-                  itemCount: tracks.length,
-                  itemBuilder: (context, index) {
-                    final track = tracks[index];
+                  return ListView.builder(
+                    itemCount: tracks.length,
+                    itemBuilder: (context, index) {
+                      final track = tracks[index];
 
-                    return ListTile(
-                      title: Text(track.title),
-                      subtitle: Text(track.artist),
-                      onTap: () {
-                        final event = AudioLoadPlaylistEvent(
-                          tracks,
-                          index: index,
-                        );
-                        context.read<AudioBloc>().add(event);
-                      },
-                      onLongPress: () => context.pushNamed(
-                        RetipRoutes.track,
-                        pathParameters: {
-                          'id': track.trackId.toString(),
+                      return ListTile(
+                        title: Text(track.title),
+                        subtitle: Text(track.artist),
+                        onTap: () {
+                          final event = AudioLoadPlaylistEvent(
+                            tracks,
+                            index: index,
+                          );
+                          context.read<AudioBloc>().add(event);
                         },
-                      ),
-                    );
-                  },
-                );
+                        onLongPress: () => context.pushNamed(
+                          RetipRoutes.track,
+                          pathParameters: {
+                            'id': track.trackId.toString(),
+                          },
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: FilledButton(
+                      onPressed: () {
+                        context
+                            .read<LibraryBloc>()
+                            .add(const LibraryScanEvent());
+                      },
+                      child: const Text('Scan Library'),
+                    ),
+                  );
+                }
               },
             )
           ],
