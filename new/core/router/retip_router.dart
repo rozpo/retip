@@ -11,7 +11,7 @@ import '../../app/presentation/pages/error_page.dart';
 import '../../app/presentation/pages/genre_page.dart';
 import '../../app/presentation/pages/history_page.dart';
 import '../../app/presentation/pages/home_page.dart';
-import '../../app/presentation/pages/library_page.dart';
+import '../../app/presentation/pages/library/library_page.dart';
 import '../../app/presentation/pages/logger_page.dart';
 import '../../app/presentation/pages/onboarding_page.dart';
 import '../../app/presentation/pages/permissions_page.dart';

@@ -14,6 +14,12 @@ final class TrackModel implements TrackEntity {
   int trackId;
 
   @override
+  int albumId;
+
+  @override
+  int artistId;
+
+  @override
   String title;
 
   @override
@@ -29,6 +35,8 @@ final class TrackModel implements TrackEntity {
   TrackModel({
     this.id = 0,
     required this.trackId,
+    required this.albumId,
+    required this.artistId,
     required this.title,
     required this.album,
     required this.artist,
@@ -38,6 +46,8 @@ final class TrackModel implements TrackEntity {
   factory TrackModel.fromOnAudioQuery(SongModel data) {
     return TrackModel(
       trackId: data.id,
+      albumId: data.albumId!,
+      artistId: data.artistId!,
       title: data.title,
       album: data.album!,
       artist: data.artist!,

@@ -9,6 +9,12 @@ final class LibraryScanEvent extends LibraryEvent {
   const LibraryScanEvent();
 }
 
+final class LibraryRefreshAlbumsEvent extends LibraryEvent {
+  final List<AlbumEntity> albums;
+
+  const LibraryRefreshAlbumsEvent(this.albums);
+}
+
 final class LibraryRefreshTracksEvent extends LibraryEvent {
   final List<TrackEntity> tracks;
 
