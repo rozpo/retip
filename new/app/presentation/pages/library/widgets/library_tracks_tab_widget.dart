@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../../core/router/retip_routes.dart';
 import '../../../blocs/audio/audio_bloc.dart';
 import '../../../blocs/library/library_bloc.dart';
+import '../../../widgets/list_tiles/track_list_tile_widget.dart';
 
 class LibraryTracksTabWidget extends StatelessWidget {
   const LibraryTracksTabWidget({super.key});
@@ -21,9 +20,8 @@ class LibraryTracksTabWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               final track = tracks[index];
 
-              return ListTile(
-                title: Text(track.title),
-                subtitle: Text(track.artist),
+              return TrackListTileWidget(
+                track: track,
                 onTap: () {
                   final event = AudioLoadPlaylistEvent(
                     tracks,
@@ -31,12 +29,6 @@ class LibraryTracksTabWidget extends StatelessWidget {
                   );
                   context.read<AudioBloc>().add(event);
                 },
-                onLongPress: () => context.pushNamed(
-                  RetipRoutes.track,
-                  pathParameters: {
-                    'id': track.trackId.toString(),
-                  },
-                ),
               );
             },
           );
