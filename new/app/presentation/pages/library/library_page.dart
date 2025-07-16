@@ -5,6 +5,7 @@ import '../../../../core/router/retip_routes.dart';
 import '../../widgets/icon_buttons/profile_icon_button_widget.dart';
 import 'widgets/library_albums_tab_widget.dart';
 import 'widgets/library_artists_tab_widget.dart';
+import 'widgets/library_genres_tab_widget.dart';
 import 'widgets/library_tracks_tab_widget.dart';
 
 class LibraryPage extends StatelessWidget {
@@ -48,19 +49,7 @@ class LibraryPage extends StatelessWidget {
                 );
               },
             ),
-            ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Genre $index'),
-                  onTap: () => context.pushNamed(
-                    RetipRoutes.genre,
-                    pathParameters: {
-                      'id': index.toString(),
-                    },
-                  ),
-                );
-              },
-            ),
+            const LibraryGenresTabWidget(),
             const LibraryArtistsTabWidget(),
             const LibraryAlbumsTabWidget(),
             const LibraryTracksTabWidget(),

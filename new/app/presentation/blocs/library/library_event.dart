@@ -9,6 +9,12 @@ final class LibraryScanEvent extends LibraryEvent {
   const LibraryScanEvent();
 }
 
+final class LibraryRefreshGenresEvent extends LibraryEvent {
+  final List<GenreEntity> genres;
+
+  const LibraryRefreshGenresEvent(this.genres);
+}
+
 final class LibraryRefreshArtistsEvent extends LibraryEvent {
   final List<ArtistEntity> artists;
 
