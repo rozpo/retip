@@ -88,6 +88,7 @@ void main() async {
   );
 
   final albumService = AlbumService(
+    albumRepository: albumRepository,
     trackRepository: trackRepository,
   );
 

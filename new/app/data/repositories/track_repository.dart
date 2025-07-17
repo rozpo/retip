@@ -38,7 +38,7 @@ interface class TrackRepository {
     return _objectboxProvider.watchAll<TrackModel>();
   }
 
-  Stream<List<TrackEntity>> watchAlbumTracks(int albumId) {
+  Stream<List<TrackEntity>> watchByAlbum(int albumId) {
     final condition = TrackModel_.albumId.equals(albumId);
     return _objectboxProvider.watchWhere<TrackModel>(condition);
   }

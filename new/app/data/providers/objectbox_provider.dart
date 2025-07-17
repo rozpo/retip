@@ -71,4 +71,11 @@ class ObjectboxProvider {
 
     return query.watch(triggerImmediately: true).map((q) => q.find());
   }
+
+  Stream<T> watchWhereFirst<T>([Condition<T>? condition]) {
+    final box = _store.box<T>();
+    final query = box.query(condition);
+
+    return query.watch(triggerImmediately: true).map((q) => q.findFirst()!);
+  }
 }
