@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/router/retip_routes.dart';
 import '../../../blocs/library/library_bloc.dart';
+import '../../../widgets/list_tiles/artist_list_tile_widget.dart';
 
 class LibraryArtistsTabWidget extends StatelessWidget {
   const LibraryArtistsTabWidget({super.key});
@@ -18,14 +19,14 @@ class LibraryArtistsTabWidget extends StatelessWidget {
           return ListView.builder(
             itemCount: artists.length,
             itemBuilder: (context, index) {
-              final album = artists[index];
+              final artist = artists[index];
 
-              return ListTile(
-                title: Text(album.name),
+              return ArtistListTileWidget(
+                artist: artist,
                 onTap: () => context.pushNamed(
                   RetipRoutes.artist,
                   pathParameters: {
-                    'id': album.artistId.toString(),
+                    'id': artist.artistId.toString(),
                   },
                 ),
               );
