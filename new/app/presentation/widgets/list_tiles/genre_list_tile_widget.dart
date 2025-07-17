@@ -16,6 +16,7 @@ class GenreListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       title: Text(genre.name),
       leading: const CircleAvatar(
         child: Icon(Icons.category_outlined),

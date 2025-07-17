@@ -16,6 +16,7 @@ class AlbumListTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       title: Text(album.title),
       subtitle: Text(album.artist),
       leading: const CircleAvatar(
