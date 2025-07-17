@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/router/retip_routes.dart';
 import '../../../blocs/library/library_bloc.dart';
+import '../../../widgets/list_tiles/album_list_tile_widget.dart';
 
 class LibraryAlbumsTabWidget extends StatelessWidget {
   const LibraryAlbumsTabWidget({super.key});
@@ -20,9 +21,8 @@ class LibraryAlbumsTabWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               final album = albums[index];
 
-              return ListTile(
-                title: Text(album.title),
-                subtitle: Text(album.artist),
+              return AlbumListTileWidget(
+                album: album,
                 onTap: () => context.pushNamed(
                   RetipRoutes.album,
                   pathParameters: {

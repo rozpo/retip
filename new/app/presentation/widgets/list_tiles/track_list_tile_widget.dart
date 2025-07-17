@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../core/router/retip_routes.dart';
 import '../../../domain/entites/track_entity.dart';
+import '../modal_bottom_sheets/track_modal_bottom_sheet_widget.dart';
 
 class TrackListTileWidget extends StatelessWidget {
   final TrackEntity track;
@@ -20,58 +19,12 @@ class TrackListTileWidget extends StatelessWidget {
       title: Text(track.title),
       subtitle: Text(track.artist),
       leading: const CircleAvatar(
-        child: Icon(Icons.music_note),
+        child: Icon(Icons.music_note_outlined),
       ),
       trailing: IconButton(
         icon: const Icon(Icons.more_vert),
         onPressed: () {
-          showModalBottomSheet(
-            useRootNavigator: true,
-            useSafeArea: true,
-            context: context,
-            builder: (context) {
-              return Column(
-                children: [
-                  ListTile(
-                    title: const Text('Go to artist'),
-                    onTap: () {
-                      context.pop();
-                      context.pushNamed(
-                        RetipRoutes.artist,
-                        pathParameters: {
-                          'id': track.artistId.toString(),
-                        },
-                      );
-                    },
-                  ),
-                  ListTile(
-                    title: const Text('Go to album'),
-                    onTap: () {
-                      context.pop();
-                      context.pushNamed(
-                        RetipRoutes.album,
-                        pathParameters: {
-                          'id': track.albumId.toString(),
-                        },
-                      );
-                    },
-                  ),
-                  ListTile(
-                    title: const Text('Show track info'),
-                    onTap: () {
-                      context.pop();
-                      context.pushNamed(
-                        RetipRoutes.track,
-                        pathParameters: {
-                          'id': track.trackId.toString(),
-                        },
-                      );
-                    },
-                  ),
-                ],
-              );
-            },
-          );
+          TrackModalBottomSheetWidget(track).show(context);
         },
       ),
     );
