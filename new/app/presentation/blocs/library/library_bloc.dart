@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import '../../../domain/entites/album_entity.dart';
 import '../../../domain/entites/artist_entity.dart';
 import '../../../domain/entites/genre_entity.dart';
+import '../../../domain/entites/playlist_entity.dart';
 import '../../../domain/entites/track_entity.dart';
 import '../../../domain/services/library_service.dart';
 import '../../../domain/services/permissions_service.dart';
@@ -24,6 +25,7 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
         _libraryService = libraryService,
         super(const LibraryIdleState()) {
     on<LibraryScanEvent>(_onScanTracks);
+    on<LibraryRefreshPlaylistsEvent>(_onRefreshPlaylists);
     on<LibraryRefreshArtistsEvent>(_onRefreshArtists);
     on<LibraryRefreshAlbumsEvent>(_onRefreshAlbums);
     on<LibraryRefreshGenresEvent>(_onRefreshGenres);
@@ -32,6 +34,7 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
     add(const LibraryScanEvent());
   }
 
+  StreamSubscription? _playlistsStream;
   StreamSubscription? _artistsStream;
   StreamSubscription? _albumsStream;
   StreamSubscription? _genresStream;
@@ -39,6 +42,7 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
 
   @override
   Future<void> close() {
+    _playlistsStream?.cancel();
     _artistsStream?.cancel();
     _albumsStream?.cancel();
     _genresStream?.cancel();
@@ -74,6 +78,17 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
 
       emit(const LibraryLoadedState());
     }
+  }
+
+  void _onRefreshPlaylists(
+    LibraryRefreshPlaylistsEvent event,
+    Emitter<LibraryState> emit,
+  ) {
+    if (state is! LibraryLoadedState) return;
+    final loadedState = state as LibraryLoadedState;
+
+    final newState = loadedState.copyWith(playlists: event.playlists);
+    emit(newState);
   }
 
   void _onRefreshGenres(

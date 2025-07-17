@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../core/router/retip_routes.dart';
 import '../../widgets/icon_buttons/profile_icon_button_widget.dart';
 import 'widgets/library_albums_tab_widget.dart';
 import 'widgets/library_artists_tab_widget.dart';
 import 'widgets/library_genres_tab_widget.dart';
+import 'widgets/library_playlists_tab_widget.dart';
 import 'widgets/library_tracks_tab_widget.dart';
 
 class LibraryPage extends StatelessWidget {
@@ -34,25 +33,13 @@ class LibraryPage extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Playlist $index'),
-                  onTap: () => context.pushNamed(
-                    RetipRoutes.playlist,
-                    pathParameters: {
-                      'id': index.toString(),
-                    },
-                  ),
-                );
-              },
-            ),
-            const LibraryGenresTabWidget(),
-            const LibraryArtistsTabWidget(),
-            const LibraryAlbumsTabWidget(),
-            const LibraryTracksTabWidget(),
+            LibraryPlaylistsTabWidget(),
+            LibraryGenresTabWidget(),
+            LibraryArtistsTabWidget(),
+            LibraryAlbumsTabWidget(),
+            LibraryTracksTabWidget(),
           ],
         ),
       ),
