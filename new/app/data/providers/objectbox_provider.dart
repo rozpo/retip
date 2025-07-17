@@ -60,6 +60,15 @@ class ObjectboxProvider {
 
   Stream<List<T>> watchAll<T>() {
     final box = _store.box<T>();
-    return box.query().watch(triggerImmediately: true).map((q) => q.find());
+    final query = box.query();
+
+    return query.watch(triggerImmediately: true).map((q) => q.find());
+  }
+
+  Stream<List<T>> watchWhere<T>([Condition<T>? condition]) {
+    final box = _store.box<T>();
+    final query = box.query(condition);
+
+    return query.watch(triggerImmediately: true).map((q) => q.find());
   }
 }

@@ -1,5 +1,6 @@
 import 'package:on_audio_query/on_audio_query.dart';
 
+import '../../../objectbox.g.dart';
 import '../../domain/entites/track_entity.dart';
 import '../models/track_model.dart';
 import '../providers/objectbox_provider.dart';
@@ -35,5 +36,10 @@ interface class TrackRepository {
 
   Stream<List<TrackEntity>> watchAll() {
     return _objectboxProvider.watchAll<TrackModel>();
+  }
+
+  Stream<List<TrackEntity>> watchAlbumTracks(int albumId) {
+    final condition = TrackModel_.albumId.equals(albumId);
+    return _objectboxProvider.watchWhere<TrackModel>(condition);
   }
 }

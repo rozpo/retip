@@ -11,6 +11,7 @@ import 'app/data/repositories/config_repository.dart';
 import 'app/data/repositories/genre_repository.dart';
 import 'app/data/repositories/permissions_repository.dart';
 import 'app/data/repositories/track_repository.dart';
+import 'app/domain/services/album_service.dart';
 import 'app/domain/services/audio_service.dart';
 import 'app/domain/services/library_service.dart';
 import 'app/domain/services/onboarding_service.dart';
@@ -86,6 +87,10 @@ void main() async {
     trackRepository: trackRepository,
   );
 
+  final albumService = AlbumService(
+    trackRepository: trackRepository,
+  );
+
   // Blocs
   final onboardingBloc = OnboardingBloc(
     onboardingService: onboardingService,
@@ -108,6 +113,7 @@ void main() async {
   final app = RetipApp(
     permissionsBloc: permissionsBloc,
     onboardingBloc: onboardingBloc,
+    albumService: albumService,
     libraryBloc: libraryBloc,
     audioBloc: audioBloc,
     router: router,
