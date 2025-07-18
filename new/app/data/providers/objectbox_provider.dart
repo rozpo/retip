@@ -24,7 +24,7 @@ class ObjectboxProvider {
     final dbPath = appDir.path;
 
     try {
-      store = await openStore();
+      store = await openStore(directory: dbPath);
     } catch (e) {
       // Delete the database if it fails to open
       final dbFile = File(join(dbPath, 'data.mdb'));
@@ -54,8 +54,20 @@ class ObjectboxProvider {
     return await _store.box<T>().getAllAsync();
   }
 
+  Future<T?> get<T>(int id) async {
+    return await _store.box<T>().getAsync(id);
+  }
+
   Future<int> insert<T>(T entity) async {
     return _store.box<T>().putAsync(entity, mode: PutMode.insert);
+  }
+
+  Future<int> update<T>(T entity) async {
+    return _store.box<T>().putAsync(entity, mode: PutMode.update);
+  }
+
+  Future<bool> delete<T>(int id) async {
+    return _store.box<T>().removeAsync(id);
   }
 
   Future<List<int>> insertMany<T>(List<T> entites) async {
