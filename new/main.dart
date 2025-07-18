@@ -10,12 +10,14 @@ import 'app/data/repositories/audio_repository.dart';
 import 'app/data/repositories/config_repository.dart';
 import 'app/data/repositories/genre_repository.dart';
 import 'app/data/repositories/permissions_repository.dart';
+import 'app/data/repositories/playlist_repository.dart';
 import 'app/data/repositories/track_repository.dart';
 import 'app/domain/services/album_service.dart';
 import 'app/domain/services/audio_service.dart';
 import 'app/domain/services/library_service.dart';
 import 'app/domain/services/onboarding_service.dart';
 import 'app/domain/services/permissions_service.dart';
+import 'app/domain/services/playlist_service.dart';
 import 'app/presentation/blocs/audio/audio_bloc.dart';
 import 'app/presentation/blocs/library/library_bloc.dart';
 import 'app/presentation/blocs/onboarding/onboarding_bloc.dart';
@@ -66,6 +68,10 @@ void main() async {
     objectboxProvider: objectboxProvider,
   );
 
+  final playlistRepository = PlaylistRepository(
+    objectboxProvider: objectboxProvider,
+  );
+
   // Services
   final onboardingService = OnboardingService(
     configRepository: configRepository,
@@ -82,6 +88,7 @@ void main() async {
 
   final libraryService = LibraryService(
     artistRepository: artistRepository,
+    playlistRepository: playlistRepository,
     albumRepository: albumRepository,
     genreRepository: genreRepository,
     trackRepository: trackRepository,
@@ -90,6 +97,10 @@ void main() async {
   final albumService = AlbumService(
     albumRepository: albumRepository,
     trackRepository: trackRepository,
+  );
+
+  final playlistService = PlaylistService(
+    playlistRepository: playlistRepository,
   );
 
   // Blocs
@@ -113,6 +124,7 @@ void main() async {
   // App
   final app = RetipApp(
     permissionsBloc: permissionsBloc,
+    playlistService: playlistService,
     onboardingBloc: onboardingBloc,
     albumService: albumService,
     libraryBloc: libraryBloc,

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/router/retip_router.dart';
 import 'domain/services/album_service.dart';
+import 'domain/services/playlist_service.dart';
 import 'presentation/blocs/audio/audio_bloc.dart';
 import 'presentation/blocs/library/library_bloc.dart';
 import 'presentation/blocs/onboarding/onboarding_bloc.dart';
@@ -10,6 +11,7 @@ import 'presentation/blocs/permissions/permissions_bloc.dart';
 
 class RetipApp extends StatelessWidget {
   final PermissionsBloc permissionsBloc;
+  final PlaylistService playlistService;
   final OnboardingBloc onboardingBloc;
   final AlbumService albumService;
   final LibraryBloc libraryBloc;
@@ -18,6 +20,7 @@ class RetipApp extends StatelessWidget {
 
   const RetipApp({
     required this.permissionsBloc,
+    required this.playlistService,
     required this.onboardingBloc,
     required this.albumService,
     required this.libraryBloc,
@@ -30,6 +33,7 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider(create:(context) => playlistService),
         RepositoryProvider(create:(context) => albumService),
       ],
       child: MultiBlocProvider(

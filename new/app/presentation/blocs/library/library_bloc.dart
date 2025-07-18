@@ -60,6 +60,10 @@ class LibraryBloc extends Bloc<LibraryEvent, LibraryState> {
     if (isGranted) {
       _libraryService.scan();
 
+      _playlistsStream ??= _libraryService.watchPlaylists().listen((playlists) {
+        add(LibraryRefreshPlaylistsEvent(playlists));
+      });
+
       _genresStream ??= _libraryService.watchGenres().listen((genres) {
         add(LibraryRefreshGenresEvent(genres));
       });

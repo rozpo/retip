@@ -54,6 +54,10 @@ class ObjectboxProvider {
     return await _store.box<T>().getAllAsync();
   }
 
+  Future<int> insert<T>(T entity) async {
+    return _store.box<T>().putAsync(entity, mode: PutMode.insert);
+  }
+
   Future<List<int>> insertMany<T>(List<T> entites) async {
     return _store.box<T>().putManyAsync(entites, mode: PutMode.insert);
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../../core/router/retip_routes.dart';
+import '../../../../domain/services/playlist_service.dart';
 import '../../../blocs/library/library_bloc.dart';
 
 class LibraryPlaylistsTabWidget extends StatelessWidget {
@@ -12,7 +14,9 @@ class LibraryPlaylistsTabWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.read<PlaylistService>().create(const Uuid().v4());
+        },
         child: const Icon(Icons.add),
       ),
       body: BlocBuilder<LibraryBloc, LibraryState>(
