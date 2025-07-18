@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 import '../../../../../core/router/retip_routes.dart';
 import '../../../../domain/services/playlist_service.dart';
 import '../../../blocs/library/library_bloc.dart';
+import '../../../widgets/list_tiles/playlist_list_tile_widget.dart';
 
 class LibraryPlaylistsTabWidget extends StatelessWidget {
   const LibraryPlaylistsTabWidget({super.key});
@@ -29,8 +30,8 @@ class LibraryPlaylistsTabWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 final playlist = playlists[index];
 
-                return ListTile(
-                  title: Text(playlist.name),
+                return PlaylistListTileWidget(
+                  playlist: playlist,
                   onTap: () => context.pushNamed(
                     RetipRoutes.playlist,
                     pathParameters: {
