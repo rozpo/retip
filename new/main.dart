@@ -24,10 +24,12 @@ import 'app/presentation/blocs/onboarding/onboarding_bloc.dart';
 import 'app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'app/retip_app.dart';
 import 'core/router/retip_router.dart';
+import 'core/theme/retip_theme.dart';
 
 void main() async {
   // Core
   final router = RetipRouter();
+  final theme = RetipTheme();
 
   // Providers
   final sharedPreferencesProvider = await SharedPreferencesProvider.init();
@@ -130,6 +132,7 @@ void main() async {
     libraryBloc: libraryBloc,
     audioBloc: audioBloc,
     router: router,
+    theme: theme,
   );
 
   runApp(app);

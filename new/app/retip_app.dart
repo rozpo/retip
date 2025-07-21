@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/router/retip_router.dart';
+import '../core/theme/retip_theme.dart';
 import 'domain/services/album_service.dart';
 import 'domain/services/playlist_service.dart';
 import 'presentation/blocs/audio/audio_bloc.dart';
@@ -17,6 +18,7 @@ class RetipApp extends StatelessWidget {
   final LibraryBloc libraryBloc;
   final AudioBloc audioBloc;
   final RetipRouter router;
+  final RetipTheme theme;
 
   const RetipApp({
     required this.permissionsBloc,
@@ -26,6 +28,7 @@ class RetipApp extends StatelessWidget {
     required this.libraryBloc,
     required this.audioBloc,
     required this.router,
+    required this.theme,
     super.key,
   });
 
@@ -45,9 +48,9 @@ class RetipApp extends StatelessWidget {
         ],
         child: MaterialApp.router(
           themeMode: ThemeMode.system,
-          darkTheme: ThemeData.dark(),
-          theme: ThemeData.light(),
+          darkTheme: theme.dark,
           routerConfig: router,
+          theme: theme.light,
         ),
       ),
     );
