@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 
 import 'app/data/providers/just_audio_provider.dart';
 import 'app/data/providers/objectbox_provider.dart';
@@ -23,10 +25,22 @@ import 'app/presentation/blocs/library/library_bloc.dart';
 import 'app/presentation/blocs/onboarding/onboarding_bloc.dart';
 import 'app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'app/retip_app.dart';
+import 'core/logger/retip_logger.dart';
 import 'core/router/retip_router.dart';
 import 'core/theme/retip_theme.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Orientations
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  // Logger
+  final logger = GetIt.instance.registerSingleton(RetipLogger());
+  logger.info('App starting...');
+
   // Core
   final router = RetipRouter();
   final theme = RetipTheme();
