@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.4
+
+- Android auto support
+
 ## v0.3.3
 
 - Sweep artwork on player view for previous/next track
