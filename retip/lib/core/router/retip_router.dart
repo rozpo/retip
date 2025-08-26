@@ -33,18 +33,29 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static final _player = GoRoute(
+    path: '/player',
+    builder: (context, state) {
+      return PlayerPage();
+    },
+  );
+
   RetipRouter()
     : super.routingConfig(
         initialLocation: '/',
         routingConfig: ValueNotifier(
           RoutingConfig(
             routes: [
+              _player,
               _profile,
               ShellRoute(
                 builder: (context, state, child) {
                   return Scaffold(
                     body: child,
-                    bottomNavigationBar: BottomNavigationWidget(),
+                    bottomNavigationBar: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [PlayerWidget(), BottomNavigationWidget()],
+                    ),
                   );
                 },
                 routes: [_home, _search, _library],
