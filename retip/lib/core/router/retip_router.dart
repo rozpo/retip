@@ -26,12 +26,20 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static final _profile = GoRoute(
+    path: '/profile',
+    builder: (context, state) {
+      return ProfilePage();
+    },
+  );
+
   RetipRouter()
     : super.routingConfig(
         initialLocation: '/',
         routingConfig: ValueNotifier(
           RoutingConfig(
             routes: [
+              _profile,
               ShellRoute(
                 builder: (context, state, child) {
                   return Scaffold(

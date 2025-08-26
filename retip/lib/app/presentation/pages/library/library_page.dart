@@ -6,8 +6,11 @@ class LibraryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Library Page')),
-      body: Center(child: Text('Welcome to the Library')),
+      appBar: AppBar(
+        leading: Icon(Icons.library_music),
+        title: Text('Library'),
+      ),
+      body: Center(child: Text('Library content goes here')),
     );
   }
 }
