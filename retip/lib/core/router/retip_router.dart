@@ -12,6 +12,20 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static final _search = GoRoute(
+    path: '/search',
+    builder: (context, state) {
+      return SearchPage();
+    },
+  );
+
+  static final _library = GoRoute(
+    path: '/library',
+    builder: (context, state) {
+      return LibraryPage();
+    },
+  );
+
   RetipRouter()
     : super.routingConfig(
         initialLocation: '/',
@@ -25,7 +39,7 @@ class RetipRouter extends GoRouter {
                     bottomNavigationBar: BottomNavigationWidget(),
                   );
                 },
-                routes: [_home],
+                routes: [_home, _search, _library],
               ),
             ],
           ),

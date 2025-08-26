@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   const BottomNavigationWidget({super.key});
@@ -18,6 +19,15 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         setState(() {
           _index = value;
         });
+
+        final destination = switch (value) {
+          0 => '/',
+          1 => '/search',
+          2 => '/library',
+          _ => '/',
+        };
+
+        context.go(destination);
       },
       type: BottomNavigationBarType.fixed,
       items: [
