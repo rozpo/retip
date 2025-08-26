@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:retip/core/layout/retip_layout.dart';
 
 import '../../app/presentation/pages/pages.dart';
-import '../../app/presentation/widgets/widgets.dart';
 
 class RetipRouter extends GoRouter {
   static final _onboarding = GoRoute(
@@ -87,13 +87,7 @@ class RetipRouter extends GoRouter {
               _settings,
               ShellRoute(
                 builder: (context, state, child) {
-                  return Scaffold(
-                    body: child,
-                    bottomNavigationBar: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [PlayerWidget(), BottomNavigationWidget()],
-                    ),
-                  );
+                  return RetipLayout(body: child);
                 },
                 routes: [_home, _search, _library],
               ),
