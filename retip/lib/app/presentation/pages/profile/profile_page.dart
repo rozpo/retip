@@ -16,6 +16,35 @@ class ProfilePage extends StatelessWidget {
             subtitle: Text('user@example.com'),
           ),
           ListTile(
+            title: Text('App info'),
+            onTap: () {
+              showAboutDialog(
+                applicationName: 'Retip',
+                applicationVersion: 'v1.0.0+1',
+                applicationIcon: FlutterLogo(size: 64),
+                applicationLegalese: '© 2024 Piotr Rozponczyk',
+                barrierDismissible: true,
+                context: context,
+                children: [
+                  Divider(),
+                  Text('Retip is a music player built using Flutter'),
+                ],
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Licenses'),
+            onTap: () {
+              showLicensePage(
+                applicationName: 'Retip',
+                applicationVersion: 'v1.0.0+1',
+                applicationIcon: FlutterLogo(size: 64),
+                applicationLegalese: '© 2024 Piotr Rozponczyk',
+                context: context,
+              );
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.settings),
             title: Text('Settings'),
             onTap: () {
