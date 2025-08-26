@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/presentation/pages/pages.dart';
+import '../../app/presentation/widgets/widgets.dart';
 
 class RetipRouter extends GoRouter {
   static final _home = GoRoute(
@@ -14,6 +15,20 @@ class RetipRouter extends GoRouter {
   RetipRouter()
     : super.routingConfig(
         initialLocation: '/',
-        routingConfig: ValueNotifier(RoutingConfig(routes: [_home])),
+        routingConfig: ValueNotifier(
+          RoutingConfig(
+            routes: [
+              ShellRoute(
+                builder: (context, state, child) {
+                  return Scaffold(
+                    body: child,
+                    bottomNavigationBar: BottomNavigationWidget(),
+                  );
+                },
+                routes: [_home],
+              ),
+            ],
+          ),
+        ),
       );
 }
