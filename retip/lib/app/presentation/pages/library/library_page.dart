@@ -5,12 +5,35 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.library_music),
-        title: Text('Library'),
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Icon(Icons.library_music),
+          title: Text('Library'),
+          bottom: TabBar(
+            tabAlignment: TabAlignment.center,
+            indicatorSize: TabBarIndicatorSize.tab,
+            isScrollable: true,
+            tabs: [
+              Tab(text: 'Playlists'),
+              Tab(text: 'Genres'),
+              Tab(text: 'Artists'),
+              Tab(text: 'Albums'),
+              Tab(text: 'Tracks'),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            Center(child: Text('Playlists content goes here')),
+            Center(child: Text('Genres content goes here')),
+            Center(child: Text('Artists content goes here')),
+            Center(child: Text('Albums content goes here')),
+            Center(child: Text('Tracks content goes here')),
+          ],
+        ),
       ),
-      body: Center(child: Text('Library content goes here')),
     );
   }
 }

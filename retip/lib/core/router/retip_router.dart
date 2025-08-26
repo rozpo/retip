@@ -5,6 +5,20 @@ import '../../app/presentation/pages/pages.dart';
 import '../../app/presentation/widgets/widgets.dart';
 
 class RetipRouter extends GoRouter {
+  static final _onboarding = GoRoute(
+    path: '/onboarding',
+    builder: (context, state) {
+      return OnboardingPage();
+    },
+  );
+
+  static final _permissions = GoRoute(
+    path: '/permissions',
+    builder: (context, state) {
+      return PermissionsPage();
+    },
+  );
+
   static final _home = GoRoute(
     path: '/',
     builder: (context, state) {
@@ -47,12 +61,27 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static bool onboardingDone = false;
+  static bool permissionsGranted = false;
+
   RetipRouter()
     : super.routingConfig(
         initialLocation: '/',
+
         routingConfig: ValueNotifier(
           RoutingConfig(
+            redirect: (context, state) {
+              if (onboardingDone == false) {
+                return '/onboarding';
+              }
+              if (permissionsGranted == false) {
+                return '/permissions';
+              }
+              return null;
+            },
             routes: [
+              _onboarding,
+              _permissions,
               _player,
               _profile,
               _settings,
