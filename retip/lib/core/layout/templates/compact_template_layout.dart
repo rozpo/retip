@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/presentation/widgets/widgets.dart';
 
 class CompactTemplateLayout extends StatelessWidget {
   final Widget body;
@@ -7,6 +8,17 @@ class CompactTemplateLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: body);
+    return Scaffold(
+      drawer: DrawerNavigationWidget(),
+      appBar: AppBar(title: Text('Compact Layout')),
+      body: body,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: AnimatedIcon(
+          icon: AnimatedIcons.play_pause,
+          progress: AlwaysStoppedAnimation(0.0),
+        ),
+      ),
+    );
   }
 }

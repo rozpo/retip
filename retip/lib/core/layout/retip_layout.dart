@@ -5,7 +5,7 @@ import 'templates/landscape_template_layout.dart';
 import 'templates/portrait_template_layout.dart';
 
 class RetipLayout extends StatelessWidget {
-  
+
   final Widget body;
 
   const RetipLayout({required this.body, super.key});
@@ -13,16 +13,15 @@ class RetipLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final aspectRatio = MediaQuery.of(context).size.aspectRatio;
-    final breakpointRatio = 1.25;
 
     return OrientationBuilder(
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
-          return aspectRatio > breakpointRatio
+          return aspectRatio > 0.75
               ? CompactTemplateLayout(body: body)
               : PortraitTemplateLayout(body: body);
         } else {
-          return aspectRatio < breakpointRatio
+          return aspectRatio < 1.25
               ? CompactTemplateLayout(body: body)
               : LandscapeTemplateLayout(body: body);
         }

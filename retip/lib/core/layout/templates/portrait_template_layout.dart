@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/presentation/widgets/widgets.dart';
 
 class PortraitTemplateLayout extends StatelessWidget {
   final Widget body;
@@ -7,6 +8,12 @@ class PortraitTemplateLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: body);
+    return Scaffold(
+      body: body,
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [PlayerWidget(), BottomNavigationWidget()],
+      ),
+    );
   }
 }
