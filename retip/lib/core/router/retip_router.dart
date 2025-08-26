@@ -40,6 +40,13 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static final _settings = GoRoute(
+    path: '/settings',
+    builder: (context, state) {
+      return SettingsPage();
+    },
+  );
+
   RetipRouter()
     : super.routingConfig(
         initialLocation: '/',
@@ -48,6 +55,7 @@ class RetipRouter extends GoRouter {
             routes: [
               _player,
               _profile,
+              _settings,
               ShellRoute(
                 builder: (context, state, child) {
                   return Scaffold(
