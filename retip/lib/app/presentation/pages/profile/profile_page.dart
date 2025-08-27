@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -51,6 +52,16 @@ class ProfilePage extends StatelessWidget {
               context.push('/settings');
             },
           ),
+          if (kReleaseMode == false) ...[
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.developer_board),
+              title: Text('Developer'),
+              onTap: () {
+                context.push('/dev');
+              },
+            ),
+          ],
         ],
       ),
     );

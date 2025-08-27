@@ -8,7 +8,8 @@ import 'core/router/retip_router.dart';
 import 'core/theme/retip_theme.dart';
 
 void main() async {
-  final router = RetipRouter();
+  WidgetsFlutterBinding.ensureInitialized();
+
   final theme = RetipTheme();
 
   final sharedPreferencesProvider = await SharedPreferencesProvider.init();
@@ -20,6 +21,7 @@ void main() async {
   final onboardingBloc = OnboardingBloc(
     onboardingRepository: onboardingRepository,
   );
+  final router = RetipRouter(onboardingBloc);
 
   final app = RetipApp(
     onboardingBloc: onboardingBloc,

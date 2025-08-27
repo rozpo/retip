@@ -1,3 +1,4 @@
+export 'dev/dev_page.dart';
 export 'home/home_page.dart';
 export 'library/library_page.dart';
 export 'onboarding/onboarding_page.dart';

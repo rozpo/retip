@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../domain/repositories/onboarding_repository.dart';
+import 'package:retip/app/presentation/blocs/onboarding/onboarding_bloc.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -15,15 +14,21 @@ class OnboardingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Onboarding content goes here'),
-            ElevatedButton(
-              onPressed: () {
-                final onboardingRepository =
-                    context.read<OnboardingRepository>();
-
-                onboardingRepository.completeOnboarding();
-                context.go('/permissions');
+            BlocListener<OnboardingBloc, OnboardingState>(
+              listener: (context, state) {
+                if (state is OnboardingCompletedState) {
+                  // Navigate to permissions page
+                  context.go('/permissions');
+                }
               },
-              child: const Text('Get Started'),
+              child: ElevatedButton(
+                onPressed: () {
+                  final bloc = context.read<OnboardingBloc>();
+
+                  bloc.add(OnboardingCompleteEvent());
+                },
+                child: const Text('Get Started'),
+              ),
             ),
           ],
         ),

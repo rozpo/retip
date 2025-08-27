@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -63,17 +66,24 @@ class RetipRouter extends GoRouter {
     },
   );
 
+  static final _dev = GoRoute(
+    path: '/dev',
+    builder: (context, state) {
+      return DevPage();
+    },
+  );
+
   static bool permissionsGranted = false;
 
-  RetipRouter()
+  final OnboardingBloc onboardingBloc;
+
+  RetipRouter(this.onboardingBloc)
     : super.routingConfig(
         initialLocation: '/',
-
+        refreshListenable: BlocListenable(onboardingBloc.stream),
         routingConfig: ValueNotifier(
           RoutingConfig(
             redirect: (context, state) async {
-              final onboardingBloc = context.read<OnboardingBloc>();
-
               if (onboardingBloc.state is! OnboardingCompletedState) {
                 return '/onboarding';
               }
@@ -89,6 +99,7 @@ class RetipRouter extends GoRouter {
               _player,
               _profile,
               _settings,
+              _dev,
               ShellRoute(
                 builder: (context, state, child) {
                   return RetipLayout(body: child);
@@ -99,4 +110,19 @@ class RetipRouter extends GoRouter {
           ),
         ),
       );
+}
+
+class BlocListenable extends ChangeNotifier {
+  late final StreamSubscription _subscription;
+
+  BlocListenable(Stream stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen((_) => notifyListeners());
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
 }
