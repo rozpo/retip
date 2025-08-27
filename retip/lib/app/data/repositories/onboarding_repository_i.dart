@@ -26,12 +26,25 @@ final class OnboardingRepositoryI implements OnboardingRepository {
   }
 
   @override
-  Future<Result<bool>> onboardingStatus() async {
+  Result<bool> onboardingStatus() {
     try {
       final result = _sharedPreferencesProvider.getBool(_onboardingKey);
       return ResultSuccess(result);
     } catch (e) {
       return ResultFailure(Exception('Failed to get onboarding status: $e'));
+    }
+  }
+
+  @override
+  Future<Result<bool>> resetOnboarding() async {
+    try {
+      final result = await _sharedPreferencesProvider.setBool(
+        _onboardingKey,
+        false,
+      );
+      return ResultSuccess(result);
+    } catch (e) {
+      return ResultFailure(Exception('Failed to reset onboarding status: $e'));
     }
   }
 }

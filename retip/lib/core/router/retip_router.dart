@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:retip/app/domain/repositories/onboarding_repository.dart';
 import 'package:retip/core/layout/retip_layout.dart';
 
-import '../../app/domain/errors/result.dart';
+import '../../app/presentation/blocs/onboarding/onboarding_bloc.dart';
 import '../../app/presentation/pages/pages.dart';
 
 class RetipRouter extends GoRouter {
@@ -73,13 +72,9 @@ class RetipRouter extends GoRouter {
         routingConfig: ValueNotifier(
           RoutingConfig(
             redirect: (context, state) async {
-              final onboardingRepository = context.read<OnboardingRepository>();
-              final onboardingDone = await onboardingRepository
-                  .onboardingStatus();
+              final onboardingBloc = context.read<OnboardingBloc>();
 
-              if (onboardingDone is ResultFailure ||
-                  onboardingDone is ResultSuccess<bool> &&
-                      onboardingDone.data == false) {
+              if (onboardingBloc.state is! OnboardingCompletedState) {
                 return '/onboarding';
               }
 
