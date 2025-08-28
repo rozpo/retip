@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:retip/app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'package:retip/core/layout/retip_layout.dart';
 
 import '../../app/presentation/blocs/onboarding/onboarding_bloc.dart';
@@ -76,11 +76,15 @@ class RetipRouter extends GoRouter {
   static bool permissionsGranted = false;
 
   final OnboardingBloc onboardingBloc;
+  final PermissionsBloc permissionsBloc;
 
-  RetipRouter(this.onboardingBloc)
+  RetipRouter(this.onboardingBloc, this.permissionsBloc)
     : super.routingConfig(
         initialLocation: '/',
-        refreshListenable: BlocListenable(onboardingBloc.stream),
+        refreshListenable: MultiBlocListenable({
+          "OnboardingBloc": onboardingBloc.stream,
+          "PermissionsBloc": permissionsBloc.stream,
+        }),
         routingConfig: ValueNotifier(
           RoutingConfig(
             redirect: (context, state) async {
@@ -88,9 +92,10 @@ class RetipRouter extends GoRouter {
                 return '/onboarding';
               }
 
-              if (permissionsGranted == false) {
+              if (permissionsBloc.state is! PermissionsGrantedState) {
                 return '/permissions';
               }
+
               return null;
             },
             routes: [
@@ -112,17 +117,25 @@ class RetipRouter extends GoRouter {
       );
 }
 
-class BlocListenable extends ChangeNotifier {
-  late final StreamSubscription _subscription;
+class MultiBlocListenable extends ChangeNotifier {
+  final Map<String, StreamSubscription> _subscriptions = {};
 
-  BlocListenable(Stream stream) {
+  MultiBlocListenable(Map<String, Stream> namedStreams) {
     notifyListeners();
-    _subscription = stream.asBroadcastStream().listen((_) => notifyListeners());
+
+    namedStreams.forEach((name, stream) {
+      _subscriptions[name] = stream.asBroadcastStream().listen((_) {
+        debugPrint('MultiBlocListenable: $name stream emitted');
+        notifyListeners();
+      });
+    });
   }
 
   @override
   void dispose() {
-    _subscription.cancel();
+    for (var subscription in _subscriptions.values) {
+      subscription.cancel();
+    }
     super.dispose();
   }
 }
