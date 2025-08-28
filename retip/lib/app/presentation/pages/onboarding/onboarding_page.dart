@@ -17,8 +17,8 @@ class OnboardingPage extends StatelessWidget {
             BlocListener<OnboardingBloc, OnboardingState>(
               listener: (context, state) {
                 if (state is OnboardingCompletedState) {
-                  // Navigate to permissions page
-                  context.go('/permissions');
+                  // Navigate to home page
+                  context.go('/');
                 }
               },
               child: ElevatedButton(
