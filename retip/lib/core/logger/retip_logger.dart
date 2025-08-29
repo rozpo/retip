@@ -1,4 +1,6 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger_observer.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 mixin RetipLogger {
@@ -6,6 +8,7 @@ mixin RetipLogger {
 
   static void init() {
     _talker = TalkerFlutter.init();
+    Bloc.observer = TalkerBlocObserver(talker: _talker);
   }
 
   static Widget get widget => TalkerScreen(talker: _talker);

@@ -21,6 +21,7 @@ dependencies:
       path: packages/on_audio_query
       ref: main
   shared_preferences: ^2.5.3
+  talker_bloc_logger: ^5.0.0
   talker_flutter: ^5.0.0
 
 dev_dependencies:
