@@ -1,0 +1,49 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2161671807308400359",
+      "lastPropertyId": "4:8037833732572983422",
+      "name": "TrackModel",
+      "properties": [
+        {
+          "id": "1:2193778789188433018",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:295842122658383785",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:6981179420116841423",
+          "name": "artist",
+          "type": 9
+        },
+        {
+          "id": "4:8037833732572983422",
+          "name": "trackId",
+          "type": 6,
+          "flags": 40,
+          "indexId": "1:2536600317392185976"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:2161671807308400359",
+  "lastIndexId": "1:2536600317392185976",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/data/repositories/onboarding_repository_i.dart';
+import 'package:retip/app/presentation/blocs/tracks/tracks_bloc.dart';
 
+import 'app/data/providers/objectbox/objectbox_provider.dart';
 import 'app/data/providers/on_audio_query_provider.dart';
 import 'app/data/providers/shared_preferences_provider.dart';
+import 'app/data/repositories/onboarding_repository_i.dart';
 import 'app/data/repositories/permissions_repository_i.dart';
+import 'app/data/repositories/track_repository_i.dart';
 import 'app/presentation/blocs/onboarding/onboarding_bloc.dart';
 import 'app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'app/retip_app.dart';
@@ -20,6 +23,7 @@ void main() async {
 
   final sharedPreferencesProvider = await SharedPreferencesProvider.init();
   final onAudioQueryProvider = await OnAudioQueryProvider.init();
+  final objectboxProvider = await ObjectboxProvider.init();
 
   final onboardingRepository = OnboardingRepositoryI(
     sharedPreferencesProvider: sharedPreferencesProvider,
@@ -27,6 +31,11 @@ void main() async {
 
   final permissionsRepository = PermissionsRepositoryI(
     onAudioQueryProvider: onAudioQueryProvider,
+  );
+
+  final trackRepository = TrackRepositoryI(
+    onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
   );
 
   final onboardingBloc = OnboardingBloc(
@@ -37,11 +46,16 @@ void main() async {
     permissionsRepository: permissionsRepository,
   );
 
+  final tracksBloc = TracksBloc(
+    trackRepository: trackRepository,
+  );
+
   final router = RetipRouter(onboardingBloc, permissionsBloc);
 
   final app = RetipApp(
     permissionsBloc: permissionsBloc,
     onboardingBloc: onboardingBloc,
+    tracksBloc: tracksBloc,
     router: router,
     theme: theme,
   );

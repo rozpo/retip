@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/tracks/tracks_bloc.dart';
+import '../../widgets/tracks_list_view.dart';
 
 class LibraryPage extends StatelessWidget {
   const LibraryPage({super.key});
@@ -30,7 +34,7 @@ class LibraryPage extends StatelessWidget {
             Center(child: Text('Genres content goes here')),
             Center(child: Text('Artists content goes here')),
             Center(child: Text('Albums content goes here')),
-            Center(child: Text('Tracks content goes here')),
+            TracksListView(tracksBloc: context.read<TracksBloc>()),
           ],
         ),
       ),

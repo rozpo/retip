@@ -24,4 +24,8 @@ class OnAudioQueryProvider {
   Future<bool> checkPermissions() async {
     return await _onAudioQuery.permissionsStatus();
   }
+
+  Future<List<SongModel>> querySongs() async {
+    return await _onAudioQuery.querySongs();
+  }
 }
