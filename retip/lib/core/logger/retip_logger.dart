@@ -10,6 +10,12 @@ mixin RetipLogger {
 
   static Widget get widget => TalkerScreen(talker: _talker);
 
+  static NavigatorObserver navigatorObserver = TalkerRouteObserver(_talker);
+
+  static NavigatorObserver shellNavigatorObserver = TalkerRouteObserver(
+    _talker,
+  );
+
   static void critical(String msg, [Object? error, StackTrace? stackTrace]) {
     _talker.critical(msg, error, stackTrace);
   }

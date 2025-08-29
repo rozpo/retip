@@ -87,6 +87,7 @@ class RetipRouter extends GoRouter {
 
   RetipRouter(this.onboardingBloc, this.permissionsBloc)
     : super.routingConfig(
+        observers: [RetipLogger.navigatorObserver],
         initialLocation: '/',
         refreshListenable: MultiBlocListenable({
           "OnboardingBloc": onboardingBloc.stream,
@@ -99,7 +100,7 @@ class RetipRouter extends GoRouter {
                 return '/onboarding';
               }
 
-              if (permissionsBloc.state is! PermissionsGrantedState) {
+              if (permissionsBloc.state is PermissionsNeededState) {
                 return '/permissions';
               }
 
@@ -114,6 +115,7 @@ class RetipRouter extends GoRouter {
               _dev,
               _logger,
               ShellRoute(
+                observers: [RetipLogger.shellNavigatorObserver],
                 builder: (context, state, child) {
                   return RetipLayout(body: child);
                 },
