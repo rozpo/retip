@@ -61,6 +61,13 @@ class ProfilePage extends StatelessWidget {
                 context.push('/dev');
               },
             ),
+            ListTile(
+              leading: Icon(Icons.monitor_heart),
+              title: Text('Logs'),
+              onTap: () {
+                context.push('/logger');
+              },
+            ),
           ],
         ],
       ),

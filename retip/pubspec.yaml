@@ -19,6 +19,7 @@ dependencies:
       path: packages/on_audio_query
       ref: main
   shared_preferences: ^2.5.3
+  talker_flutter: ^5.0.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0

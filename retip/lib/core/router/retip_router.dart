@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'package:retip/core/layout/retip_layout.dart';
+import 'package:retip/core/logger/retip_logger.dart';
 
 import '../../app/presentation/blocs/onboarding/onboarding_bloc.dart';
 import '../../app/presentation/pages/pages.dart';
@@ -72,6 +73,12 @@ class RetipRouter extends GoRouter {
       return DevPage();
     },
   );
+  static final _logger = GoRoute(
+    path: '/logger',
+    builder: (context, state) {
+      return RetipLogger.widget;
+    },
+  );
 
   static bool permissionsGranted = false;
 
@@ -105,6 +112,7 @@ class RetipRouter extends GoRouter {
               _profile,
               _settings,
               _dev,
+              _logger,
               ShellRoute(
                 builder: (context, state, child) {
                   return RetipLayout(body: child);

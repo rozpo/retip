@@ -7,11 +7,14 @@ import 'app/data/repositories/permissions_repository_i.dart';
 import 'app/presentation/blocs/onboarding/onboarding_bloc.dart';
 import 'app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'app/retip_app.dart';
+import 'core/logger/retip_logger.dart';
 import 'core/router/retip_router.dart';
 import 'core/theme/retip_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  RetipLogger.init();
 
   final theme = RetipTheme();
 
@@ -42,6 +45,8 @@ void main() async {
     router: router,
     theme: theme,
   );
+
+  RetipLogger.info('App started');
 
   runApp(app);
 }
