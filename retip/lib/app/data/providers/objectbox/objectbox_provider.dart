@@ -4,7 +4,6 @@ import 'objectbox.g.dart';
 
 class ObjectboxProvider {
   final Store _store;
-  // ignore: unused_field
   final Admin? _admin;
 
   ObjectboxProvider._(this._store, [this._admin]);
@@ -12,11 +11,17 @@ class ObjectboxProvider {
   static Future<ObjectboxProvider> init() async {
     final store = await openStore();
     Admin? admin;
+
     if (!kReleaseMode && Admin.isAvailable()) {
       admin = Admin(store);
     }
 
     return ObjectboxProvider._(store, admin);
+  }
+
+  void close() {
+    _store.close();
+    _admin?.close();
   }
 
   Stream<List<T>> streamAll<T>() {
