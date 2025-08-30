@@ -11,6 +11,7 @@ part 'tracks_event.dart';
 part 'tracks_state.dart';
 
 class TracksBloc extends Bloc<TracksEvent, TracksState> {
+  StreamSubscription<List<TrackEntity>>? _stream;
   final TrackRepository _trackRepository;
 
   TracksBloc({required TrackRepository trackRepository})
@@ -29,8 +30,6 @@ class TracksBloc extends Bloc<TracksEvent, TracksState> {
 
     add(const TracksScanEvent());
   }
-
-  StreamSubscription? _stream;
 
   @override
   Future<void> close() {

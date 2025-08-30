@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:2161671807308400359",
-      "lastPropertyId": "4:8037833732572983422",
+      "lastPropertyId": "5:7739210875802611740",
       "name": "TrackModel",
       "properties": [
         {
@@ -30,20 +30,63 @@
           "type": 6,
           "flags": 40,
           "indexId": "1:2536600317392185976"
+        },
+        {
+          "id": "5:7739210875802611740",
+          "name": "albumId",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6118774961528983994",
+      "lastPropertyId": "4:2111785886942245912",
+      "name": "AlbumModel",
+      "properties": [
+        {
+          "id": "1:2476487014999892732",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6612809907530308117",
+          "name": "albumId",
+          "type": 6,
+          "flags": 40,
+          "indexId": "3:1199251093540181512"
+        },
+        {
+          "id": "3:9010638221740832179",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "4:2111785886942245912",
+          "name": "artist",
+          "type": 9
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:2161671807308400359",
-  "lastIndexId": "1:2536600317392185976",
+  "lastEntityId": "3:6118774961528983994",
+  "lastIndexId": "3:1199251093540181512",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    2383807460955450220
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    5985783947908702206,
+    724831132867881327,
+    7804203479136991273,
+    7973832987709364854
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

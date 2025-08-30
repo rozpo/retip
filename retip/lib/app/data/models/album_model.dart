@@ -1,18 +1,16 @@
 import 'package:objectbox/objectbox.dart';
-import 'package:retip/app/domain/entities/track_entity.dart';
+
+import '../../domain/entities/album_entity.dart';
 
 @Entity()
-final class TrackModel implements TrackEntity {
+final class AlbumModel implements AlbumEntity {
   @Id()
   @override
   int id;
 
   @Unique()
   @override
-  int trackId;
-
-  @override
-  int? albumId;
+  int albumId;
 
   @override
   String title;
@@ -20,9 +18,8 @@ final class TrackModel implements TrackEntity {
   @override
   String artist;
 
-  TrackModel({
+  AlbumModel({
     this.id = 0,
-    required this.trackId,
     required this.albumId,
     required this.title,
     required this.artist,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/data/repositories/album_repository_i.dart';
+import 'package:retip/app/presentation/blocs/albums/albums_bloc.dart';
 import 'package:retip/app/presentation/blocs/tracks/tracks_bloc.dart';
 
 import 'app/data/providers/objectbox/objectbox_provider.dart';
@@ -38,6 +40,11 @@ void main() async {
     objectboxProvider: objectboxProvider,
   );
 
+  final albumRepository = AlbumRepositoryI(
+    onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
+  );
+
   final onboardingBloc = OnboardingBloc(
     onboardingRepository: onboardingRepository,
   );
@@ -46,15 +53,16 @@ void main() async {
     permissionsRepository: permissionsRepository,
   );
 
-  final tracksBloc = TracksBloc(
-    trackRepository: trackRepository,
-  );
+  final tracksBloc = TracksBloc(trackRepository: trackRepository);
+
+  final albumsBloc = AlbumsBloc(albumRepository: albumRepository);
 
   final router = RetipRouter(onboardingBloc, permissionsBloc);
 
   final app = RetipApp(
     permissionsBloc: permissionsBloc,
     onboardingBloc: onboardingBloc,
+    albumsBloc: albumsBloc,
     tracksBloc: tracksBloc,
     router: router,
     theme: theme,

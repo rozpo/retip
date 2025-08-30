@@ -1,6 +1,5 @@
-import 'package:retip/app/domain/errors/result.dart';
-
 import '../entities/track_entity.dart';
+import '../errors/result.dart';
 
 /// Track repository interface
 abstract interface class TrackRepository {

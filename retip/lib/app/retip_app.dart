@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/blocs/albums/albums_bloc.dart';
 import 'package:retip/app/presentation/blocs/onboarding/onboarding_bloc.dart';
 import 'package:retip/app/presentation/blocs/permissions/permissions_bloc.dart';
 import 'package:retip/app/presentation/blocs/tracks/tracks_bloc.dart';
@@ -10,6 +11,7 @@ import '../core/theme/retip_theme.dart';
 class RetipApp extends StatelessWidget {
   final PermissionsBloc permissionsBloc;
   final OnboardingBloc onboardingBloc;
+  final AlbumsBloc albumsBloc;
   final TracksBloc tracksBloc;
   final RetipRouter router;
   final RetipTheme theme;
@@ -17,6 +19,7 @@ class RetipApp extends StatelessWidget {
   const RetipApp({
     required this.permissionsBloc,
     required this.onboardingBloc,
+    required this.albumsBloc,
     required this.tracksBloc,
     required this.router,
     required this.theme,
@@ -29,6 +32,7 @@ class RetipApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => permissionsBloc),
         BlocProvider(create: (context) => onboardingBloc),
+        BlocProvider(create: (context) => albumsBloc),
         BlocProvider(create: (context) => tracksBloc),
       ],
       child: MaterialApp.router(

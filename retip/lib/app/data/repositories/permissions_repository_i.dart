@@ -1,7 +1,6 @@
+import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/domain/errors/result.dart';
-
-import '../../domain/repositories/permissions_repository.dart';
-import '../providers/on_audio_query_provider.dart';
+import 'package:retip/app/domain/repositories/permissions_repository.dart';
 
 class PermissionsRepositoryI implements PermissionsRepository {
   final OnAudioQueryProvider _onAudioQueryProvider;

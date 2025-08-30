@@ -1,14 +1,12 @@
-abstract class TrackEntity {
+abstract class AlbumEntity {
   final int id;
-  final int trackId;
-  final int? albumId;
+  final int albumId;
 
   final String title;
   final String artist;
 
-  const TrackEntity({
+  const AlbumEntity({
     required this.id,
-    required this.trackId,
     required this.albumId,
     required this.title,
     required this.artist,
