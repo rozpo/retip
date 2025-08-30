@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retip/app/data/repositories/album_repository_i.dart';
+import 'package:retip/app/data/repositories/library_repository_i.dart';
 import 'package:retip/app/presentation/blocs/albums/albums_bloc.dart';
 import 'package:retip/app/presentation/blocs/tracks/tracks_bloc.dart';
 
@@ -33,6 +34,11 @@ void main() async {
 
   final permissionsRepository = PermissionsRepositoryI(
     onAudioQueryProvider: onAudioQueryProvider,
+  );
+
+  final libraryRepository = LibraryRepositoryI(
+    onAudioQueryProvider: onAudioQueryProvider,
+    objectboxProvider: objectboxProvider,
   );
 
   final trackRepository = TrackRepositoryI(
