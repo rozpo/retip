@@ -96,7 +96,7 @@ class RetipRouter extends GoRouter {
         routingConfig: ValueNotifier(
           RoutingConfig(
             redirect: (context, state) async {
-              if (onboardingBloc.state is! OnboardingCompletedState) {
+              if (onboardingBloc.state is OnboardingInProgressState) {
                 return '/onboarding';
               }
 

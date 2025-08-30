@@ -1,8 +1,19 @@
 part of 'permissions_bloc.dart';
 
 @immutable
-sealed class PermissionsEvent {}
+sealed class PermissionsEvent {
+  const PermissionsEvent();
 
-class PermissionsCheckEvent extends PermissionsEvent {}
+  @override
+  String toString() {
+    return runtimeType.toString();
+  }
+}
 
-class PermissionsRequestEvent extends PermissionsEvent {}
+class PermissionsCheckEvent extends PermissionsEvent {
+  const PermissionsCheckEvent();
+}
+
+class PermissionsRequestEvent extends PermissionsEvent {
+  const PermissionsRequestEvent();
+}

@@ -3,6 +3,11 @@ part of 'onboarding_bloc.dart';
 @immutable
 sealed class OnboardingState {
   const OnboardingState();
+
+  @override
+  String toString() {
+    return runtimeType.toString();
+  }
 }
 
 final class OnboardingInitState extends OnboardingState {
