@@ -9,6 +9,9 @@ void main() {
 
   logger.debug('App initialization');
 
+  logger.debug('LOCALE=${const String.fromEnvironment('LOCALE')}');
+  logger.debug('MODE=${const String.fromEnvironment('MODE')}');
+
   final router = RetipRouter();
   final theme = RetipTheme();
 
