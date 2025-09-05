@@ -6,11 +6,36 @@ import '../../app/presentation/widgets/widgets.dart';
 import 'retip_route.dart';
 
 class RetipRouter extends GoRouter {
+  static bool isOnboardingDone = false;
+  static bool isPermissionsGranted = false;
+
   RetipRouter()
     : super.routingConfig(
+        initialLocation: RetipRoute.home,
         routingConfig: ValueNotifier(
           RoutingConfig(
+            redirect: (context, state) {
+              if (isOnboardingDone == false) {
+                return RetipRoute.onboarding;
+              } else if (isPermissionsGranted == false) {
+                return RetipRoute.permissions;
+              }
+
+              return null;
+            },
             routes: [
+              GoRoute(
+                path: RetipRoute.onboarding,
+                builder: (context, state) {
+                  return OnboardingPage();
+                },
+              ),
+              GoRoute(
+                path: RetipRoute.permissions,
+                builder: (context, state) {
+                  return PermissionsPage();
+                },
+              ),
               ShellRoute(
                 builder: (context, state, child) {
                   return Scaffold(
