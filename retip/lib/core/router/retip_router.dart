@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
+
+import '../../app/presentation/pages/pages.dart';
+import '../../app/presentation/widgets/widgets.dart';
+import 'retip_route.dart';
 
 class RetipRouter extends GoRouter {
   RetipRouter()
@@ -8,13 +11,33 @@ class RetipRouter extends GoRouter {
         routingConfig: ValueNotifier(
           RoutingConfig(
             routes: [
-              GoRoute(
-                path: '/',
-                builder: (context, state) {
+              ShellRoute(
+                builder: (context, state, child) {
                   return Scaffold(
-                    body: Center(child: Text(RetipL10n.of(context).helloWorld)),
+                    body: child,
+                    bottomNavigationBar: BottomNavigationWidget(),
                   );
                 },
+                routes: [
+                  GoRoute(
+                    path: RetipRoute.home,
+                    builder: (context, state) {
+                      return HomePage();
+                    },
+                  ),
+                  GoRoute(
+                    path: RetipRoute.search,
+                    builder: (context, state) {
+                      return SearchPage();
+                    },
+                  ),
+                  GoRoute(
+                    path: RetipRoute.library,
+                    builder: (context, state) {
+                      return LibraryPage();
+                    },
+                  ),
+                ],
               ),
             ],
           ),
