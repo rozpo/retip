@@ -1,4 +1,7 @@
 {
     "@@locale": "pl",
-    "helloWorld": "Witaj Świecie!"
+    "helloWorld": "Witaj Świecie!",
+    "home": "Start",
+    "library": "Biblioteka",
+    "search": "Szukaj"
 }

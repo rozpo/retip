@@ -10,4 +10,13 @@ class RetipL10nPl extends RetipL10n {
 
   @override
   String get helloWorld => 'Witaj Świecie!';
+
+  @override
+  String get home => 'Start';
+
+  @override
+  String get library => 'Biblioteka';
+
+  @override
+  String get search => 'Szukaj';
 }

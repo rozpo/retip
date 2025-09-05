@@ -10,4 +10,13 @@ class RetipL10nEn extends RetipL10n {
 
   @override
   String get helloWorld => 'Hello World!';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get library => 'Library';
+
+  @override
+  String get search => 'Search';
 }

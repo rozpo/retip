@@ -9,13 +9,20 @@ void main() {
 
   logger.debug('App initialization');
 
-  logger.debug('LOCALE=${const String.fromEnvironment('LOCALE')}');
-  logger.debug('MODE=${const String.fromEnvironment('MODE')}');
+  const locale = String.fromEnvironment('LOCALE');
+  const mode = String.fromEnvironment('MODE');
+
+  logger.debug('LOCALE=$locale');
+  logger.debug('MODE=$mode');
 
   final router = RetipRouter();
   final theme = RetipTheme();
 
-  final app = RetipApp(router: router, theme: theme);
+  final app = RetipApp(
+    locale: locale.isNotEmpty ? Locale(locale.toLowerCase()) : null,
+    router: router,
+    theme: theme,
+  );
 
   runApp(app);
 

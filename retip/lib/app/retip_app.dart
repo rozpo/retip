@@ -7,7 +7,14 @@ class RetipApp extends StatelessWidget {
   final RetipRouter router;
   final RetipTheme theme;
 
-  const RetipApp({required this.router, required this.theme, super.key});
+  final Locale? locale;
+
+  const RetipApp({
+    required this.router,
+    required this.theme,
+    this.locale,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +25,7 @@ class RetipApp extends StatelessWidget {
       darkTheme: theme.dark,
       routerConfig: router,
       theme: theme.light,
+      locale: locale,
     );
   }
 }

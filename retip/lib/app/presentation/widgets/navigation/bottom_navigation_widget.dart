@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_route.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
@@ -30,11 +31,17 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         context.go(nextLocation);
       },
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: RetipL10n.of(context).home,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: RetipL10n.of(context).search,
+        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.library_music),
-          label: 'Library',
+          label: RetipL10n.of(context).library,
         ),
       ],
     );
