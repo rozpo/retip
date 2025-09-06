@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 
 import '../core/l10n/retip_l10n.dart';
 import '../core/logger/retip_logger.dart';
@@ -10,10 +11,12 @@ class RetipApp extends StatelessWidget {
   final RetipLogger logger;
   final RetipRouter router;
   final RetipTheme theme;
+  final DevCubit devCubit;
 
   final Locale? locale;
 
   const RetipApp({
+    required this.devCubit,
     required this.logger,
     required this.router,
     required this.theme,
@@ -25,14 +28,17 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [RepositoryProvider.value(value: logger)],
-      child: MaterialApp.router(
-        localizationsDelegates: RetipL10n.localizationsDelegates,
-        supportedLocales: RetipL10n.supportedLocales,
-        themeMode: ThemeMode.system,
-        darkTheme: theme.dark,
-        routerConfig: router,
-        theme: theme.light,
-        locale: locale,
+      child: MultiBlocProvider(
+        providers: [BlocProvider.value(value: devCubit)],
+        child: MaterialApp.router(
+          localizationsDelegates: RetipL10n.localizationsDelegates,
+          supportedLocales: RetipL10n.supportedLocales,
+          themeMode: ThemeMode.system,
+          darkTheme: theme.dark,
+          routerConfig: router,
+          theme: theme.light,
+          locale: locale,
+        ),
       ),
     );
   }

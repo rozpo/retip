@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 
 import '../../app/presentation/pages/pages.dart';
 import '../../app/presentation/widgets/widgets.dart';
@@ -39,7 +41,8 @@ class RetipRouter extends GoRouter {
                 path: RetipRoute.settings.location,
                 name: RetipRoute.settings.name,
                 builder: (context, state) {
-                  return SettingsPage();
+                  final devCubit = context.read<DevCubit>();
+                  return SettingsPage(devCubit: devCubit);
                 },
                 routes: [
                   GoRoute(
