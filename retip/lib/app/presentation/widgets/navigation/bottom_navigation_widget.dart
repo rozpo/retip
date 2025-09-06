@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:retip/core/l10n/retip_l10n.dart';
-import 'package:retip/core/router/retip_route.dart';
+
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/router/retip_route.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   const BottomNavigationWidget({super.key});
@@ -28,7 +28,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
           0 || _ => RetipRoute.home,
         };
 
-        context.go(nextLocation);
+        nextLocation.go(context);
       },
       items: [
         BottomNavigationBarItem(

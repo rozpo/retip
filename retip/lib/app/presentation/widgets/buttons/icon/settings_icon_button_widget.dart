@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/router/retip_route.dart';
+
+import '../../../../../core/router/retip_route.dart';
 
 class SettingsIconButtonWidget extends StatelessWidget {
   const SettingsIconButtonWidget({super.key});
@@ -7,7 +8,7 @@ class SettingsIconButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton.filledTonal(
-      onPressed: () => RetipRoute.push(context, RetipRoute.settings),
+      onPressed: () => RetipRoute.settings.push(context),
       icon: Icon(Icons.settings),
     );
   }

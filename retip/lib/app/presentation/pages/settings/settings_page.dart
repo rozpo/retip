@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/config/retip_config.dart';
 import '../../../../core/l10n/retip_l10n.dart';
+import '../../../../core/router/retip_route.dart';
 import '../../widgets/widgets.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -74,12 +75,14 @@ class _SettingsPageState extends State<SettingsPage> {
               subtitle: Text('Open developer menu board'),
               leading: Icon(Icons.developer_board),
               trailing: Icon(Icons.arrow_forward),
+              onTap: () => RetipRoute.dev.push(context),
             ),
             ListTile(
               title: Text('Logger'),
               subtitle: Text('View application logs'),
               leading: Icon(Icons.monitor_heart),
               trailing: Icon(Icons.arrow_forward),
+              onTap: () => RetipRoute.logger.push(context),
             ),
           ],
         ],

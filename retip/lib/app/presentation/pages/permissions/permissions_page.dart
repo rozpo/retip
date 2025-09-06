@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:retip/core/router/retip_route.dart';
-import 'package:retip/core/router/retip_router.dart';
+
+import '../../../../core/router/retip_route.dart';
+import '../../../../core/router/retip_router.dart';
 
 class PermissionsPage extends StatelessWidget {
   const PermissionsPage({super.key});
@@ -13,7 +14,7 @@ class PermissionsPage extends StatelessWidget {
         child: FilledButton(
           onPressed: () {
             RetipRouter.isPermissionsGranted = true;
-            RetipRoute.go(context, RetipRoute.home);
+            RetipRoute.home.go(context);
           },
           child: Text('Grant permissions'),
         ),

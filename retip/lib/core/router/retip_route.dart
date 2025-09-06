@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path/path.dart' as p;
 
-mixin RetipRoute {
-  static const onboarding = '/onboarding';
-  static const permissions = '/permissions';
-  static const home = '/';
-  static const library = '/library';
-  static const search = '/search';
-  static const settings = '/settings';
+enum RetipRoute {
+  onboarding(),
+  permissions(),
+  home(),
+  library(),
+  search(),
+  settings(),
+  dev([RetipRoute.settings]),
+  logger([RetipRoute.settings]);
 
-  static void go(BuildContext context, String location) {
-    context.go(location);
+  final List<RetipRoute> parents;
+
+  const RetipRoute([this.parents = const []]);
+
+  String get location {
+    return p.join('/', p.joinAll(parents.map((e) => e.name)), name);
   }
 
-  static void push(BuildContext context, String location) {
-    context.push(location);
+  void go(BuildContext context) {
+    context.goNamed(name);
+  }
+
+  void push(BuildContext context) {
+    context.pushNamed(name);
   }
 }
