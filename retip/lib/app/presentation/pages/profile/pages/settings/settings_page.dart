@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../core/config/retip_config.dart';
-import '../../../../core/l10n/retip_l10n.dart';
-import '../../../../core/router/retip_route.dart';
-import '../../widgets/widgets.dart';
+import '../../../../../../core/config/retip_config.dart';
+import '../../../../../../core/l10n/retip_l10n.dart';
+import '../../../../../../core/router/retip_route.dart';
+import '../../../../widgets/widgets.dart';
 
 class SettingsPage extends StatefulWidget {
   final DevCubit devCubit;

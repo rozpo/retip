@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retip/app/presentation/widgets/avatars/avatar_plus_widget.dart';
 
 import '../../../../../core/router/retip_route.dart';
 
@@ -7,9 +8,9 @@ class SettingsIconButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton.filledTonal(
-      onPressed: () => RetipRoute.settings.push(context),
-      icon: Icon(Icons.settings),
+    return IconButton(
+      onPressed: () => RetipRoute.profile.push(context),
+      icon: AvatarPlusWidget(),
     );
   }
 }

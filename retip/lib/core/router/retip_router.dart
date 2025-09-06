@@ -38,27 +38,36 @@ class RetipRouter extends GoRouter {
                 },
               ),
               GoRoute(
-                path: RetipRoute.settings.location,
-                name: RetipRoute.settings.name,
+                path: RetipRoute.profile.location,
+                name: RetipRoute.profile.name,
                 builder: (context, state) {
-                  final devCubit = context.read<DevCubit>();
-                  return SettingsPage(devCubit: devCubit);
+                  return ProfilePage();
                 },
                 routes: [
                   GoRoute(
-                    path: RetipRoute.dev.location,
-                    name: RetipRoute.dev.name,
+                    path: RetipRoute.settings.location,
+                    name: RetipRoute.settings.name,
                     builder: (context, state) {
                       final devCubit = context.read<DevCubit>();
-                      return DevPage(devCubit: devCubit);
+                      return SettingsPage(devCubit: devCubit);
                     },
-                  ),
-                  GoRoute(
-                    path: RetipRoute.logger.location,
-                    name: RetipRoute.logger.name,
-                    builder: (context, state) {
-                      return LoggerPage();
-                    },
+                    routes: [
+                      GoRoute(
+                        path: RetipRoute.dev.location,
+                        name: RetipRoute.dev.name,
+                        builder: (context, state) {
+                          final devCubit = context.read<DevCubit>();
+                          return DevPage(devCubit: devCubit);
+                        },
+                      ),
+                      GoRoute(
+                        path: RetipRoute.logger.location,
+                        name: RetipRoute.logger.name,
+                        builder: (context, state) {
+                          return LoggerPage();
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),

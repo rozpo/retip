@@ -8,16 +8,18 @@ enum RetipRoute {
   home(),
   library(),
   search(),
-  settings(),
-  dev([RetipRoute.settings]),
-  logger([RetipRoute.settings]);
+  profile(),
+  settings([RetipRoute.profile]),
+  dev([RetipRoute.profile, RetipRoute.settings]),
+  logger([RetipRoute.profile, RetipRoute.settings]);
 
   final List<RetipRoute> parents;
 
   const RetipRoute([this.parents = const []]);
 
   String get location {
-    return p.join('/', p.joinAll(parents.map((e) => e.name)), name);
+    final string =  p.join('/', p.joinAll(parents.map((e) => e.name)), name);
+    return string;
   }
 
   void go(BuildContext context) {
