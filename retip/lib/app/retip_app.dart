@@ -33,11 +33,12 @@ class RetipApp extends StatelessWidget {
         providers: [BlocProvider.value(value: devCubit)],
         child: BlocBuilder<DevCubit, DevState>(
           builder: (context, state) {
-            debugRepaintRainbowEnabled = state.repaintRainbowEnabled;
             debugInvertOversizedImages = state.invertOversizedImages;
+            debugRepaintRainbowEnabled = state.repaintRainbowEnabled;
 
             return MaterialApp.router(
               localizationsDelegates: RetipL10n.localizationsDelegates,
+              showPerformanceOverlay: state.showPerformanceOverlay,
               supportedLocales: RetipL10n.supportedLocales,
               themeMode: ThemeMode.system,
               darkTheme: theme.dark,
