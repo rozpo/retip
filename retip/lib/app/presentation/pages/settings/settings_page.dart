@@ -18,6 +18,14 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _showDevSection = !kReleaseMode;
   int _taps = 0;
 
+  void _handleTaps() {
+    if (++_taps >= 10) {
+      setState(() {
+        _showDevSection = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = RetipL10n.of(context);
@@ -25,15 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: !_showDevSection
-              ? () {
-                  if (++_taps >= 10) {
-                    setState(() {
-                      _showDevSection = true;
-                    });
-                  }
-                }
-              : null,
+          onTap: !_showDevSection ? _handleTaps : null,
           child: Text(l10n.settings),
         ),
       ),

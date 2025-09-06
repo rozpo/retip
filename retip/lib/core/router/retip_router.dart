@@ -3,15 +3,19 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/presentation/pages/pages.dart';
 import '../../app/presentation/widgets/widgets.dart';
+import '../logger/retip_logger.dart';
 import 'retip_route.dart';
 
 class RetipRouter extends GoRouter {
+  final RetipLogger logger;
+
   static bool isOnboardingDone = false;
   static bool isPermissionsGranted = false;
 
-  RetipRouter()
+  RetipRouter(this.logger)
     : super.routingConfig(
         initialLocation: RetipRoute.home.location,
+        observers: [logger.navigatorObserver],
         routingConfig: ValueNotifier(
           RoutingConfig(
             redirect: (context, state) {
@@ -62,6 +66,7 @@ class RetipRouter extends GoRouter {
                 },
               ),
               ShellRoute(
+                observers: [logger.navigatorObserver],
                 builder: (context, state, child) {
                   return Scaffold(
                     body: child,

@@ -15,11 +15,12 @@ void main() {
   logger.debug('LOCALE=$locale');
   logger.debug('MODE=$mode');
 
-  final router = RetipRouter();
+  final router = RetipRouter(logger);
   final theme = RetipTheme();
 
   final app = RetipApp(
     locale: locale.isNotEmpty ? Locale(locale.toLowerCase()) : null,
+    logger: logger,
     router: router,
     theme: theme,
   );
