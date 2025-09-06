@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/widgets.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -7,7 +9,10 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Settings')),
-      body: Placeholder(),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        children: [ThemeModeSegmentedButtonWidget()],
+      ),
     );
   }
 }
