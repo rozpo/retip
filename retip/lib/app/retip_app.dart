@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 
@@ -30,14 +31,21 @@ class RetipApp extends StatelessWidget {
       providers: [RepositoryProvider.value(value: logger)],
       child: MultiBlocProvider(
         providers: [BlocProvider.value(value: devCubit)],
-        child: MaterialApp.router(
-          localizationsDelegates: RetipL10n.localizationsDelegates,
-          supportedLocales: RetipL10n.supportedLocales,
-          themeMode: ThemeMode.system,
-          darkTheme: theme.dark,
-          routerConfig: router,
-          theme: theme.light,
-          locale: locale,
+        child: BlocBuilder<DevCubit, DevState>(
+          builder: (context, state) {
+            debugRepaintRainbowEnabled = state.repaintRainbowEnabled;
+            debugInvertOversizedImages = state.invertOversizedImages;
+
+            return MaterialApp.router(
+              localizationsDelegates: RetipL10n.localizationsDelegates,
+              supportedLocales: RetipL10n.supportedLocales,
+              themeMode: ThemeMode.system,
+              darkTheme: theme.dark,
+              routerConfig: router,
+              theme: theme.light,
+              locale: locale,
+            );
+          },
         ),
       ),
     );

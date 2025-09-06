@@ -4,14 +4,33 @@ part of 'dev_cubit.dart';
 final class DevState {
   final bool isEnabled;
 
-  const DevState({this.isEnabled = false});
+  final bool invertOversizedImages;
+  final bool repaintRainbowEnabled;
 
-  DevState copyWith({int? stepsToBeDev, bool? isEnabled}) {
-    return DevState(isEnabled: isEnabled ?? this.isEnabled);
+  const DevState({
+    this.invertOversizedImages = false,
+    this.repaintRainbowEnabled = false,
+    this.isEnabled = !kReleaseMode,
+  });
+
+  DevState copyWith({
+    bool? invertOversizedImages,
+    bool? repaintRainbowEnabled,
+    bool? isEnabled,
+  }) {
+    return DevState(
+      isEnabled: isEnabled ?? this.isEnabled,
+      invertOversizedImages:
+          invertOversizedImages ?? this.invertOversizedImages,
+      repaintRainbowEnabled:
+          repaintRainbowEnabled ?? this.repaintRainbowEnabled,
+    );
   }
 
   @override
   String toString() {
-    return 'isEnabled = $isEnabled';
+    return 'isEnabled = $isEnabled\n'
+        'invertOversizedImages = $invertOversizedImages\n'
+        'repaintRainbowEnabled = $repaintRainbowEnabled';
   }
 }

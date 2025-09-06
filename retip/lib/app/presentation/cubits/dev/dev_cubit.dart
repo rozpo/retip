@@ -10,13 +10,32 @@ class DevCubit extends HydratedCubit<DevState> {
 
   void disable() => emit(state.copyWith(isEnabled: false));
 
+  void set({bool? repaintRainbowEnabled, bool? invertOversizedImages}) {
+    if (!state.isEnabled) return;
+
+    emit(
+      state.copyWith(
+        invertOversizedImages: invertOversizedImages,
+        repaintRainbowEnabled: repaintRainbowEnabled,
+      ),
+    );
+  }
+
   @override
   DevState? fromJson(Map<String, dynamic> json) {
-    return DevState(isEnabled: json['isEnabled'] ?? !kReleaseMode);
+    return DevState(
+      isEnabled: json['isEnabled'] ?? !kReleaseMode,
+      invertOversizedImages: json['invertOversizedImages'] ?? false,
+      repaintRainbowEnabled: json['repaintRainbowEnabled'] ?? false,
+    );
   }
 
   @override
   Map<String, dynamic>? toJson(DevState state) {
-    return {'isEnabled': state.isEnabled};
+    return {
+      'isEnabled': state.isEnabled,
+      'invertOversizedImages': state.invertOversizedImages,
+      'repaintRainbowEnabled': state.repaintRainbowEnabled,
+    };
   }
 }

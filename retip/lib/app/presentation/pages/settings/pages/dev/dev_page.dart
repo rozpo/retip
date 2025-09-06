@@ -25,9 +25,24 @@ class DevPage extends StatelessWidget {
               ),
             ],
           ),
-          body: ListView(children: [
-          ],
-        ),
+          body: ListView(
+            children: [
+              SwitchListTile(
+                title: Text('debugRepaintRainbowEnabled'),
+                value: state.repaintRainbowEnabled,
+                onChanged: (value) {
+                  devCubit.set(repaintRainbowEnabled: value);
+                },
+              ),
+              SwitchListTile(
+                title: Text('debugInvertOversizedImages'),
+                value: state.invertOversizedImages,
+                onChanged: (value) {
+                  devCubit.set(invertOversizedImages: value);
+                },
+              ),
+            ],
+          ),
         );
       },
     );
