@@ -8,9 +8,12 @@ class AvatarPlusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: size,
-      child: AvatarPlus('c2c1d593-c480-4f6e-bf33-af54305d02b6'),
+    return Hero(
+      tag: 'avatar',
+      child: CircleAvatar(
+        radius: size,
+        child: AvatarPlus('c2c1d593-c480-4f6e-bf33-af54305d02b6'),
+      ),
     );
   }
 }

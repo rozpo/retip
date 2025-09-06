@@ -28,14 +28,32 @@ class ProfilePage extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Divider(),
-          SectionListTile(l10n.settings),
+          SectionListTile('Personal'),
+          ListTile(
+            leading: Icon(Icons.history),
+            title: Text('History'),
+            subtitle: Text('My playing history'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.storage),
+            title: Text('Storage'),
+            subtitle: Text('Check for app storage usage'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.backup),
+            title: Text('Backup'),
+            subtitle: Text('Import or export a backup files'),
+            onTap: () {},
+          ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text(l10n.settings),
+            subtitle: Text('Manage app settings'),
             onTap: () {
               RetipRoute.settings.push(context);
             },
-            trailing: Icon(Icons.arrow_forward),
           ),
           SectionListTile(l10n.infoAboutApp),
           ListTile(
