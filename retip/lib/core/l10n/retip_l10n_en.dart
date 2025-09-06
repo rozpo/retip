@@ -15,6 +15,12 @@ class RetipL10nEn extends RetipL10n {
   String get apperance => 'Apperance';
 
   @override
+  String get appLegalese => 'Copyright (c) 2024 Piotr Rozpończyk, MIT License';
+
+  @override
+  String get appName => 'Retip';
+
+  @override
   String get dark => 'Dark';
 
   @override

@@ -109,6 +109,18 @@ abstract class RetipL10n {
   /// **'Apperance'**
   String get apperance;
 
+  /// No description provided for @appLegalese.
+  ///
+  /// In en, this message translates to:
+  /// **'Copyright (c) 2024 Piotr Rozpończyk, MIT License'**
+  String get appLegalese;
+
+  /// No description provided for @appName.
+  ///
+  /// In en, this message translates to:
+  /// **'Retip'**
+  String get appName;
+
   /// No description provided for @dark.
   ///
   /// In en, this message translates to:

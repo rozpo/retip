@@ -50,14 +50,26 @@ class _SettingsPageState extends State<SettingsPage> {
                 subtitle: Text('${l10n.version} v1.0.0+1'),
                 leading: Icon(Icons.info),
                 trailing: Icon(Icons.arrow_forward),
-                onTap: () => showAdaptiveAboutDialog(context: context),
+                onTap: () => showAboutDialog(
+                  applicationIcon: FlutterLogo(size: 64),
+                  applicationLegalese: l10n.appLegalese,
+                  applicationName: l10n.appName,
+                  applicationVersion: 'v1.0.0+1',
+                  context: context,
+                ),
               ),
               ListTile(
                 title: Text(l10n.licenses),
                 subtitle: Text(l10n.showThirdPartyLicenses),
                 leading: Icon(Icons.description),
                 trailing: Icon(Icons.arrow_forward),
-                onTap: () => showLicensePage(context: context),
+                onTap: () => showLicensePage(
+                  applicationIcon: FlutterLogo(size: 64),
+                  applicationLegalese: l10n.appLegalese,
+                  applicationName: l10n.appName,
+                  applicationVersion: 'v1.0.0+1',
+                  context: context,
+                ),
               ),
               ListTile(
                 title: Text(l10n.privacyPolicy),
@@ -72,9 +84,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 onTap: () => launchUrl(RetipConfig.termsAndConditionsUrl),
               ),
               if (state.isEnabled) ...[
-                SectionListTile('Developer'),
+                SectionListTile('Debug'),
                 ListTile(
-                  title: Text('Console'),
+                  title: Text('Developer'),
                   subtitle: Text('Open developer menu board'),
                   leading: Icon(Icons.developer_board),
                   trailing: Icon(Icons.arrow_forward),
