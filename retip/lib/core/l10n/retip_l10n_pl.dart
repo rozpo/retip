@@ -12,9 +12,6 @@ class RetipL10nPl extends RetipL10n {
   String get appDetails => 'App details';
 
   @override
-  String get apperance => 'Apperance';
-
-  @override
   String get appLegalese => 'Copyright (c) 2024 Piotr Rozpończyk, MIT License';
 
   @override
@@ -27,7 +24,10 @@ class RetipL10nPl extends RetipL10n {
   String get home => 'Start';
 
   @override
-  String get info => 'Info';
+  String get infoAboutApp => 'Info about app';
+
+  @override
+  String get large => 'Large';
 
   @override
   String get library => 'Biblioteka';
@@ -37,6 +37,9 @@ class RetipL10nPl extends RetipL10n {
 
   @override
   String get light => 'Jasny';
+
+  @override
+  String get medium => 'Medium';
 
   @override
   String get privacyPolicy => 'Privacy policy';
@@ -51,10 +54,16 @@ class RetipL10nPl extends RetipL10n {
   String get showThirdPartyLicenses => 'Show third party licenses';
 
   @override
+  String get small => 'Small';
+
+  @override
   String get system => 'System';
 
   @override
   String get termsAndConditions => 'Terms and conditions';
+
+  @override
+  String get themeModeAndColors => 'Theme mode and colors';
 
   @override
   String get version => 'Version';

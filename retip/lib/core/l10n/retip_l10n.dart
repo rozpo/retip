@@ -103,12 +103,6 @@ abstract class RetipL10n {
   /// **'App details'**
   String get appDetails;
 
-  /// No description provided for @apperance.
-  ///
-  /// In en, this message translates to:
-  /// **'Apperance'**
-  String get apperance;
-
   /// No description provided for @appLegalese.
   ///
   /// In en, this message translates to:
@@ -133,11 +127,17 @@ abstract class RetipL10n {
   /// **'Home'**
   String get home;
 
-  /// No description provided for @info.
+  /// No description provided for @infoAboutApp.
   ///
   /// In en, this message translates to:
-  /// **'Info'**
-  String get info;
+  /// **'Info about app'**
+  String get infoAboutApp;
+
+  /// No description provided for @large.
+  ///
+  /// In en, this message translates to:
+  /// **'Large'**
+  String get large;
 
   /// No description provided for @library.
   ///
@@ -156,6 +156,12 @@ abstract class RetipL10n {
   /// In en, this message translates to:
   /// **'Light'**
   String get light;
+
+  /// No description provided for @medium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get medium;
 
   /// No description provided for @privacyPolicy.
   ///
@@ -181,6 +187,12 @@ abstract class RetipL10n {
   /// **'Show third party licenses'**
   String get showThirdPartyLicenses;
 
+  /// No description provided for @small.
+  ///
+  /// In en, this message translates to:
+  /// **'Small'**
+  String get small;
+
   /// No description provided for @system.
   ///
   /// In en, this message translates to:
@@ -192,6 +204,12 @@ abstract class RetipL10n {
   /// In en, this message translates to:
   /// **'Terms and conditions'**
   String get termsAndConditions;
+
+  /// No description provided for @themeModeAndColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme mode and colors'**
+  String get themeModeAndColors;
 
   /// No description provided for @version.
   ///

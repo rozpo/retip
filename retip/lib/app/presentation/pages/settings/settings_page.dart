@@ -23,6 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void _handleTaps() {
     if (++_taps >= 10) {
       widget.devCubit.enable();
+      _taps = 0;
     }
   }
 
@@ -42,9 +43,13 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           body: ListView(
             children: [
-              SectionListTile(l10n.apperance),
+              SectionListTile(l10n.themeModeAndColors),
+              ColorsListViewWidget(),
+              SizedBox(height: 16),
               ThemeModeSegmentedButtonWidget(),
-              SectionListTile(l10n.info),
+              SectionListTile('Grid size'),
+              GridSizeSegmentedButtonWidget(),
+              SectionListTile(l10n.infoAboutApp),
               ListTile(
                 title: Text(l10n.appDetails),
                 subtitle: Text('${l10n.version} v1.0.0+1'),
@@ -84,7 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onTap: () => launchUrl(RetipConfig.termsAndConditionsUrl),
               ),
               if (state.isEnabled) ...[
-                SectionListTile('Debug'),
+                SectionListTile('Debug tools'),
                 ListTile(
                   title: Text('Developer'),
                   subtitle: Text('Open developer menu board'),
