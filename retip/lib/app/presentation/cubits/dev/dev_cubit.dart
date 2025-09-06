@@ -8,7 +8,7 @@ class DevCubit extends HydratedCubit<DevState> {
 
   void enable() => emit(state.copyWith(isEnabled: true));
 
-  void disable() => emit(state.copyWith(isEnabled: true));
+  void disable() => emit(state.copyWith(isEnabled: false));
 
   @override
   DevState? fromJson(Map<String, dynamic> json) {

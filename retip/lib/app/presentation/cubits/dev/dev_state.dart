@@ -9,4 +9,9 @@ final class DevState {
   DevState copyWith({int? stepsToBeDev, bool? isEnabled}) {
     return DevState(isEnabled: isEnabled ?? this.isEnabled);
   }
+
+  @override
+  String toString() {
+    return 'isEnabled = $isEnabled';
+  }
 }

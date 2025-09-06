@@ -49,7 +49,8 @@ class RetipRouter extends GoRouter {
                     path: RetipRoute.dev.location,
                     name: RetipRoute.dev.name,
                     builder: (context, state) {
-                      return DevPage();
+                      final devCubit = context.read<DevCubit>();
+                      return DevPage(devCubit: devCubit);
                     },
                   ),
                   GoRoute(

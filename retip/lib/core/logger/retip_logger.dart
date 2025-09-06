@@ -3,7 +3,7 @@ import 'dart:developer' show log;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:talker_bloc_logger/talker_bloc_logger_observer.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 class RetipLogger extends Talker {
@@ -11,14 +11,20 @@ class RetipLogger extends Talker {
 
   NavigatorObserver get navigatorObserver => TalkerRouteObserver(this);
 
-  BlocObserver get blocObserver => TalkerBlocObserver(talker: this);
+  BlocObserver get blocObserver => TalkerBlocObserver(
+    talker: this,
+    settings: TalkerBlocLoggerSettings(
+      enabled: true,
+      printChanges: true,
+      printClosings: true,
+      printCreations: true,
+      printEvents: true,
+      printTransitions: true,
+    ),
+  );
 
   Widget get widget {
-    return TalkerScreen(
-      isLogsExpanded: false,
-      appBarTitle: 'Logger',
-      talker: this,
-    );
+    return TalkerScreen(appBarTitle: 'Logger', talker: this);
   }
 
   Widget wrapper({required Widget child}) {
