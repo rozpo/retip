@@ -97,6 +97,18 @@ abstract class RetipL10n {
     Locale('pl'),
   ];
 
+  /// No description provided for @appDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'App details'**
+  String get appDetails;
+
+  /// No description provided for @apperance.
+  ///
+  /// In en, this message translates to:
+  /// **'Apperance'**
+  String get apperance;
+
   /// No description provided for @dark.
   ///
   /// In en, this message translates to:
@@ -109,17 +121,35 @@ abstract class RetipL10n {
   /// **'Home'**
   String get home;
 
+  /// No description provided for @info.
+  ///
+  /// In en, this message translates to:
+  /// **'Info'**
+  String get info;
+
   /// No description provided for @library.
   ///
   /// In en, this message translates to:
   /// **'Library'**
   String get library;
 
+  /// No description provided for @licenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Licenses'**
+  String get licenses;
+
   /// No description provided for @light.
   ///
   /// In en, this message translates to:
   /// **'Light'**
   String get light;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get privacyPolicy;
 
   /// No description provided for @search.
   ///
@@ -133,11 +163,29 @@ abstract class RetipL10n {
   /// **'Settings'**
   String get settings;
 
+  /// No description provided for @showThirdPartyLicenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Show third party licenses'**
+  String get showThirdPartyLicenses;
+
   /// No description provided for @system.
   ///
   /// In en, this message translates to:
   /// **'System'**
   String get system;
+
+  /// No description provided for @termsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and conditions'**
+  String get termsAndConditions;
+
+  /// No description provided for @version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
 }
 
 class _RetipL10nDelegate extends LocalizationsDelegate<RetipL10n> {
