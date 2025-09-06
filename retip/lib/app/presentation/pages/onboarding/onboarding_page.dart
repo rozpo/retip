@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:retip/core/router/retip_route.dart';
 import 'package:retip/core/router/retip_router.dart';
 
@@ -14,7 +13,7 @@ class OnboardingPage extends StatelessWidget {
         child: FilledButton(
           onPressed: () {
             RetipRouter.isOnboardingDone = true;
-            context.go(RetipRoute.home);
+            RetipRoute.go(context, RetipRoute.home);
           },
           child: Text('Get started'),
         ),

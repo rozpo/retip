@@ -31,6 +31,12 @@ class RetipRouter extends GoRouter {
                 },
               ),
               GoRoute(
+                path: RetipRoute.settings,
+                builder: (context, state) {
+                  return SettingsPage();
+                },
+              ),
+              GoRoute(
                 path: RetipRoute.permissions,
                 builder: (context, state) {
                   return PermissionsPage();
