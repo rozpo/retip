@@ -1,7 +1,10 @@
 {
     "@@locale": "pl",
-    "helloWorld": "Witaj Świecie!",
+    "dark": "Ciemny",
     "home": "Start",
     "library": "Biblioteka",
-    "search": "Szukaj"
+    "light": "Jasny",
+    "search": "Szukaj",
+    "settings": "Ustawienia",
+    "system": "System"
 }

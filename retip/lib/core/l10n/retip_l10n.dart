@@ -97,11 +97,11 @@ abstract class RetipL10n {
     Locale('pl'),
   ];
 
-  /// The conventional newborn programmer greeting
+  /// No description provided for @dark.
   ///
   /// In en, this message translates to:
-  /// **'Hello World!'**
-  String get helloWorld;
+  /// **'Dark'**
+  String get dark;
 
   /// No description provided for @home.
   ///
@@ -115,11 +115,29 @@ abstract class RetipL10n {
   /// **'Library'**
   String get library;
 
+  /// No description provided for @light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
+
   /// No description provided for @search.
   ///
   /// In en, this message translates to:
   /// **'Search'**
   String get search;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @system.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get system;
 }
 
 class _RetipL10nDelegate extends LocalizationsDelegate<RetipL10n> {

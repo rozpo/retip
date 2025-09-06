@@ -1,13 +1,17 @@
 {
     "@@locale": "en",
-    "@helloWorld": {
-        "description": "The conventional newborn programmer greeting"
-    },
-    "helloWorld": "Hello World!",
-    "home": "Home",
+    "@dark": {},
     "@home": {},
-    "library": "Library",
     "@library": {},
+    "@light": {},
+    "@search": {},
+    "@settings": {},
+    "@system": {},
+    "dark": "Dark",
+    "home": "Home",
+    "library": "Library",
+    "light": "Light",
     "search": "Search",
-    "@search": {}
+    "settings": "Settings",
+    "system": "System"
 }

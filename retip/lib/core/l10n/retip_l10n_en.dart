@@ -9,7 +9,7 @@ class RetipL10nEn extends RetipL10n {
   RetipL10nEn([String locale = 'en']) : super(locale);
 
   @override
-  String get helloWorld => 'Hello World!';
+  String get dark => 'Dark';
 
   @override
   String get home => 'Home';
@@ -18,5 +18,14 @@ class RetipL10nEn extends RetipL10n {
   String get library => 'Library';
 
   @override
+  String get light => 'Light';
+
+  @override
   String get search => 'Search';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get system => 'System';
 }

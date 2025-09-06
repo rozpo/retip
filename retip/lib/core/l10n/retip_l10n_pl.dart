@@ -9,7 +9,7 @@ class RetipL10nPl extends RetipL10n {
   RetipL10nPl([String locale = 'pl']) : super(locale);
 
   @override
-  String get helloWorld => 'Witaj Świecie!';
+  String get dark => 'Ciemny';
 
   @override
   String get home => 'Start';
@@ -18,5 +18,14 @@ class RetipL10nPl extends RetipL10n {
   String get library => 'Biblioteka';
 
   @override
+  String get light => 'Jasny';
+
+  @override
   String get search => 'Szukaj';
+
+  @override
+  String get settings => 'Ustawienia';
+
+  @override
+  String get system => 'System';
 }
