@@ -17,6 +17,7 @@ dependencies:
   go_router: ^16.2.1
   hydrated_bloc: ^10.1.1
   intl: ^0.20.2
+  meta: ^1.16.0
   path: ^1.9.1
   path_provider: ^2.1.5
   talker_bloc_logger: ^5.0.0

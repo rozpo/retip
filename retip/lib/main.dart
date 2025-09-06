@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
+import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
+import 'package:retip/app/presentation/cubits/permissions/permissions_cubit.dart';
 import 'package:retip/app/retip_app.dart';
 import 'package:retip/core/logger/retip_logger.dart';
 import 'package:retip/core/router/retip_router.dart';
@@ -37,11 +39,15 @@ void main() async {
   final router = RetipRouter(logger);
   final theme = RetipTheme();
 
+  final permissionsCubit = PermissionsCubit();
+  final onboardingCubit = OnboardingCubit();
   final devCubit = DevCubit();
 
   // Assemble final app
   final app = RetipApp(
     locale: locale.isNotEmpty ? Locale(locale.toLowerCase()) : null,
+    permissionsCubit: permissionsCubit,
+    onboardingCubit: onboardingCubit,
     devCubit: devCubit,
     logger: logger,
     router: router,

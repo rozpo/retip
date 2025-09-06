@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
 
 import '../../../../core/router/retip_route.dart';
-import '../../../../core/router/retip_router.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -13,7 +14,7 @@ class OnboardingPage extends StatelessWidget {
       body: Center(
         child: FilledButton(
           onPressed: () {
-            RetipRouter.isOnboardingDone = true;
+            context.read<OnboardingCubit>().finish();
             RetipRoute.home.go(context);
           },
           child: Text('Get started'),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
+import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
+import 'package:retip/app/presentation/cubits/permissions/permissions_cubit.dart';
 
 import '../../app/presentation/pages/pages.dart';
 import '../../app/presentation/widgets/widgets.dart';
@@ -11,9 +13,6 @@ import 'retip_route.dart';
 class RetipRouter extends GoRouter {
   final RetipLogger logger;
 
-  static bool isOnboardingDone = false;
-  static bool isPermissionsGranted = false;
-
   RetipRouter(this.logger)
     : super.routingConfig(
         initialLocation: RetipRoute.home.location,
@@ -21,9 +20,12 @@ class RetipRouter extends GoRouter {
         routingConfig: ValueNotifier(
           RoutingConfig(
             redirect: (context, state) {
-              if (isOnboardingDone == false) {
+              final permissionsCubit = context.read<PermissionsCubit>();
+              final onboardingCubit = context.read<OnboardingCubit>();
+
+              if (onboardingCubit.state.isDone == false) {
                 return RetipRoute.onboarding.location;
-              } else if (isPermissionsGranted == false) {
+              } else if (permissionsCubit.state.isGranted == false) {
                 return RetipRoute.permissions.location;
               }
 
