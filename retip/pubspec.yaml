@@ -15,6 +15,7 @@ dependencies:
   go_router: ^16.2.1
   intl: ^0.20.2
   path: ^1.9.1
+  talker_bloc_logger: ^5.0.0
   talker_flutter: ^5.0.0
   url_launcher: ^6.3.2
 
