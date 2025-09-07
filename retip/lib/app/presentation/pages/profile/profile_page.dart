@@ -3,9 +3,6 @@ import 'package:retip/app/presentation/widgets/avatars/avatar_plus_widget.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 import 'package:retip/core/router/retip_route.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import '../../../../core/config/retip_config.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -62,7 +59,6 @@ class ProfilePage extends StatelessWidget {
               RetipRoute.appinfo.push(context);
             },
           ),
-          
         ],
       ),
     );

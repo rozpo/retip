@@ -8,6 +8,7 @@ import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'package:retip/app/presentation/cubits/permissions/permissions_cubit.dart';
+import 'package:retip/app/presentation/cubits/theme/theme_cubit.dart';
 import 'package:retip/app/retip_app.dart';
 import 'package:retip/core/logger/retip_logger.dart';
 import 'package:retip/core/router/retip_router.dart';
@@ -51,6 +52,7 @@ void main() async {
 
   final permissionsCubit = PermissionsCubit();
   final onboardingCubit = OnboardingCubit();
+  final themeCubit = ThemeCubit();
   final devCubit = DevCubit();
 
   final appInfoCubit = AppInfoCubit(appInfoRepository);
@@ -61,6 +63,7 @@ void main() async {
     permissionsCubit: permissionsCubit,
     onboardingCubit: onboardingCubit,
     appInfoCubit: appInfoCubit,
+    themeCubit: themeCubit,
     devCubit: devCubit,
     logger: logger,
     router: router,

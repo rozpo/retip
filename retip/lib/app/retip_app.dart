@@ -5,6 +5,7 @@ import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'package:retip/app/presentation/cubits/permissions/permissions_cubit.dart';
+import 'package:retip/app/presentation/cubits/theme/theme_cubit.dart';
 
 import '../core/l10n/retip_l10n.dart';
 import '../core/logger/retip_logger.dart';
@@ -15,6 +16,7 @@ class RetipApp extends StatelessWidget {
   final PermissionsCubit permissionsCubit;
   final OnboardingCubit onboardingCubit;
   final AppInfoCubit appInfoCubit;
+  final ThemeCubit themeCubit;
   final RetipLogger logger;
   final RetipRouter router;
   final DevCubit devCubit;
@@ -26,6 +28,7 @@ class RetipApp extends StatelessWidget {
     required this.permissionsCubit,
     required this.onboardingCubit,
     required this.appInfoCubit,
+    required this.themeCubit,
     required this.devCubit,
     required this.logger,
     required this.router,
@@ -43,22 +46,29 @@ class RetipApp extends StatelessWidget {
           BlocProvider.value(value: permissionsCubit),
           BlocProvider.value(value: onboardingCubit),
           BlocProvider.value(value: appInfoCubit),
+          BlocProvider.value(value: themeCubit),
           BlocProvider.value(value: devCubit),
         ],
         child: BlocBuilder<DevCubit, DevState>(
           builder: (context, state) {
+            final showPerformanceOverlay = state.showPerformanceOverlay;
             debugInvertOversizedImages = state.invertOversizedImages;
             debugRepaintRainbowEnabled = state.repaintRainbowEnabled;
 
-            return MaterialApp.router(
-              localizationsDelegates: RetipL10n.localizationsDelegates,
-              showPerformanceOverlay: state.showPerformanceOverlay,
-              supportedLocales: RetipL10n.supportedLocales,
-              themeMode: ThemeMode.system,
-              darkTheme: theme.dark,
-              routerConfig: router,
-              theme: theme.light,
-              locale: locale,
+            return BlocBuilder<ThemeCubit, ThemeState>(
+              bloc: context.read<ThemeCubit>(),
+              builder: (context, state) {
+                return MaterialApp.router(
+                  localizationsDelegates: RetipL10n.localizationsDelegates,
+                  showPerformanceOverlay: showPerformanceOverlay,
+                  supportedLocales: RetipL10n.supportedLocales,
+                  darkTheme: theme.dark(state.seedColor),
+                  theme: theme.light(state.seedColor),
+                  themeMode: state.themeMode,
+                  routerConfig: router,
+                  locale: locale,
+                );
+              },
             );
           },
         ),

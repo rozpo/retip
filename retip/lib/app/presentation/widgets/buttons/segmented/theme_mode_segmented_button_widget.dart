@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/cubits/theme/theme_cubit.dart';
 import 'package:retip/core/l10n/retip_l10n.dart';
 
 class ThemeModeSegmentedButtonWidget extends StatefulWidget {
@@ -23,6 +25,8 @@ class _ThemeModeSegmentedButtonWidgetState
         setState(() {
           _mode = newSelection.first;
         });
+
+        context.read<ThemeCubit>().setThemeMode(_mode);
       },
       segments: [
         ButtonSegment<ThemeMode>(

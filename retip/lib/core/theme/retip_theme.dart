@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class RetipTheme {
-  static const _primaryColor = Colors.lightBlue;
+  static const primaryColor = Colors.lightBlue;
   static const _fontFamily = 'Play';
 
-  final light = ThemeData(
+  ThemeData light([Color? color]) => ThemeData(
     fontFamily: _fontFamily,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: _primaryColor,
+      seedColor: color ?? primaryColor,
       brightness: Brightness.light,
     ),
   );
 
-  final dark = ThemeData(
+  ThemeData dark([Color? color]) => ThemeData(
     fontFamily: _fontFamily,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: _primaryColor,
+      seedColor: color ?? primaryColor,
       brightness: Brightness.dark,
     ),
   );
