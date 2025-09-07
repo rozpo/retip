@@ -47,6 +47,13 @@ class RetipRouter extends GoRouter {
                 },
                 routes: [
                   GoRoute(
+                    path: RetipRoute.appinfo.location,
+                    name: RetipRoute.appinfo.name,
+                    builder: (context, state) {
+                      return AppInfoPage();
+                    },
+                  ),
+                  GoRoute(
                     path: RetipRoute.settings.location,
                     name: RetipRoute.settings.name,
                     builder: (context, state) {

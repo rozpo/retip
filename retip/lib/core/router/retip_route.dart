@@ -10,6 +10,7 @@ enum RetipRoute {
   search(),
   profile(),
   settings([RetipRoute.profile]),
+  appinfo([RetipRoute.profile]),
   dev([RetipRoute.profile, RetipRoute.settings]),
   logger([RetipRoute.profile, RetipRoute.settings]);
 
@@ -18,7 +19,7 @@ enum RetipRoute {
   const RetipRoute([this.parents = const []]);
 
   String get location {
-    final string =  p.join('/', p.joinAll(parents.map((e) => e.name)), name);
+    final string = p.join('/', p.joinAll(parents.map((e) => e.name)), name);
     return string;
   }
 

@@ -7,3 +7,4 @@ export 'profile/pages/settings/pages/dev/dev_page.dart';
 export 'profile/pages/settings/pages/logger/logger_page.dart';
 export 'profile/pages/settings/settings_page.dart';
 export 'profile/profile_page.dart';
+export 'profile/pages/app_info/app_info_page.dart';

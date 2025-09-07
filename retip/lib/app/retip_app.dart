@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'package:retip/app/presentation/cubits/permissions/permissions_cubit.dart';
@@ -13,6 +14,7 @@ import '../core/theme/retip_theme.dart';
 class RetipApp extends StatelessWidget {
   final PermissionsCubit permissionsCubit;
   final OnboardingCubit onboardingCubit;
+  final AppInfoCubit appInfoCubit;
   final RetipLogger logger;
   final RetipRouter router;
   final DevCubit devCubit;
@@ -23,6 +25,7 @@ class RetipApp extends StatelessWidget {
   const RetipApp({
     required this.permissionsCubit,
     required this.onboardingCubit,
+    required this.appInfoCubit,
     required this.devCubit,
     required this.logger,
     required this.router,
@@ -39,6 +42,7 @@ class RetipApp extends StatelessWidget {
         providers: [
           BlocProvider.value(value: permissionsCubit),
           BlocProvider.value(value: onboardingCubit),
+          BlocProvider.value(value: appInfoCubit),
           BlocProvider.value(value: devCubit),
         ],
         child: BlocBuilder<DevCubit, DevState>(

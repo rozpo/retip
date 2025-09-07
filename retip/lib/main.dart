@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:retip/app/data/providers/package_info_provider.dart';
+import 'package:retip/app/data/repositories/app_info_repository_i.dart';
+import 'package:retip/app/domain/repositories/app_info_repository.dart';
+import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'package:retip/app/presentation/cubits/permissions/permissions_cubit.dart';
@@ -36,6 +40,12 @@ void main() async {
   );
 
   // Dependency injection
+  final packageInfoProvider = await PackageInfoProvider.init();
+
+  final AppInfoRepository appInfoRepository = AppInfoRepositoryI(
+    packageInfoProvider,
+  );
+
   final router = RetipRouter(logger);
   final theme = RetipTheme();
 
@@ -43,11 +53,14 @@ void main() async {
   final onboardingCubit = OnboardingCubit();
   final devCubit = DevCubit();
 
+  final appInfoCubit = AppInfoCubit(appInfoRepository);
+
   // Assemble final app
   final app = RetipApp(
     locale: locale.isNotEmpty ? Locale(locale.toLowerCase()) : null,
     permissionsCubit: permissionsCubit,
     onboardingCubit: onboardingCubit,
+    appInfoCubit: appInfoCubit,
     devCubit: devCubit,
     logger: logger,
     router: router,
