@@ -20,7 +20,7 @@ class ColorsListViewWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: Colors.primaries.length,
             itemBuilder: (context, index) {
-              final color = Colors.primaries[index];
+              final color = Color(Colors.primaries[index].toARGB32());
 
               return GestureDetector(
                 onTap: () {

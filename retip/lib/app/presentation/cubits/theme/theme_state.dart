@@ -16,4 +16,10 @@ final class ThemeState {
       themeMode: themeMode ?? this.themeMode,
     );
   }
+
+  @override
+  String toString() {
+    return 'seedColor= $seedColor\n'
+        'themeMode = $themeMode';
+  }
 }
