@@ -9,15 +9,19 @@ class PermissionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Permissions')),
-      body: Center(
-        child: FilledButton(
-          onPressed: () {
-            context.read<PermissionsCubit>().granted();
-            RetipRoute.home.go(context);
-          },
-          child: Text('Grant permissions'),
+    return BlocListener<PermissionsCubit, PermissionsState>(
+      listener: (context, state) {
+        if (state.isGranted) {
+          RetipRoute.home.go(context);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(title: Text('Permissions')),
+        body: Center(
+          child: FilledButton(
+            onPressed: () => context.read<PermissionsCubit>().ask(),
+            child: Text('Grant permissions'),
+          ),
         ),
       ),
     );

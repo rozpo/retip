@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/package_info_provider.dart';
 import 'package:retip/app/data/repositories/app_info_repository_i.dart';
-import 'package:retip/app/domain/repositories/app_info_repository.dart';
+import 'package:retip/app/data/repositories/permissions_repository_i.dart';
+import 'package:retip/app/domain/errors/result.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
@@ -42,15 +44,23 @@ void main() async {
 
   // Dependency injection
   final packageInfoProvider = await PackageInfoProvider.init();
+  final onAudioQueryProvider = await OnAudioQueryProvider.init();
 
-  final AppInfoRepository appInfoRepository = AppInfoRepositoryI(
-    packageInfoProvider,
-  );
+  final appInfoRepository = AppInfoRepositoryI(packageInfoProvider);
+
+  final permissionsRepository = PermissionsRepositoryI(onAudioQueryProvider);
 
   final router = RetipRouter(logger);
   final theme = RetipTheme();
 
-  final permissionsCubit = PermissionsCubit();
+  final result = await permissionsRepository.permissionsCheck();
+  final isGranted = result is ResultSuccess<bool> ? result.data : false;
+
+  final permissionsCubit = PermissionsCubit(
+    permissionsRepository: permissionsRepository,
+    isGranted: isGranted,
+  );
+
   final onboardingCubit = OnboardingCubit();
   final themeCubit = ThemeCubit();
   final devCubit = DevCubit();

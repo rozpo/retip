@@ -1,22 +1,28 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:retip/app/domain/errors/result.dart';
+import 'package:retip/app/domain/repositories/permissions_repository.dart';
 
 part 'permissions_state.dart';
 
-class PermissionsCubit extends HydratedCubit<PermissionsState> {
-  PermissionsCubit() : super(PermissionsState());
+class PermissionsCubit extends Cubit<PermissionsState> {
+  final PermissionsRepository _permissionsRepository;
 
-  void granted() => emit(PermissionsState(true));
+  PermissionsCubit({
+    required PermissionsRepository permissionsRepository,
+    bool isGranted = false,
+  }) : _permissionsRepository = permissionsRepository,
+       super(PermissionsState(isGranted));
 
-  void reset() => emit(PermissionsState(false));
+  Future<void> ask() async {
+    if (state.isGranted) return;
 
-  @override
-  PermissionsState? fromJson(Map<String, dynamic> json) {
-    return PermissionsState(json['isGranted']);
-  }
+    final result = await _permissionsRepository.permissionsRequest();
 
-  @override
-  Map<String, dynamic>? toJson(PermissionsState state) {
-    return {'isGranted': state.isGranted};
+    if (result is ResultSuccess<bool>) {
+      emit(PermissionsState(true));
+    } else {
+      emit(PermissionsState(false));
+    }
   }
 }

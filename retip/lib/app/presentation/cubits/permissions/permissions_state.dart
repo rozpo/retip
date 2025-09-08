@@ -4,5 +4,5 @@ part of 'permissions_cubit.dart';
 final class PermissionsState {
   final bool isGranted;
 
-  const PermissionsState([this.isGranted = false]);
+  const PermissionsState(this.isGranted);
 }

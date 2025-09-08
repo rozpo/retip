@@ -18,6 +18,11 @@ dependencies:
   hydrated_bloc: ^10.1.1
   intl: ^0.20.2
   meta: ^1.16.0
+  on_audio_query:
+    git:
+      url: https://github.com/rozpo/on_audio_query
+      path: packages/on_audio_query
+      ref: main
   package_info_plus: ^8.3.1
   path: ^1.9.1
   path_provider: ^2.1.5
