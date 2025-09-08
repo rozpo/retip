@@ -47,6 +47,26 @@ class _SettingsPageState extends State<SettingsPage> {
               ThemeModeSegmentedButtonWidget(),
               SectionListTile('Grid size'),
               GridSizeSegmentedButtonWidget(),
+              SectionListTile('Playback'),
+              SwitchListTile(
+                title: Text('Keep plaing queue'),
+                subtitle: Text('Resume playback from last track'),
+                value: false,
+                onChanged: (value) {},
+              ),
+              SwitchListTile(
+                title: Text('Autoplay'),
+                subtitle: Text('Start playing on app startup'),
+                value: false,
+                onChanged: (value) {},
+              ),
+              SectionListTile('Power consumption'),
+              SwitchListTile(
+                title: Text('Battery saver'),
+                subtitle: Text('Reduce animations in app'),
+                value: false,
+                onChanged: (value) {},
+              ),
               if (state.isEnabled) ...[
                 SectionListTile('Debug tools'),
                 ListTile(
