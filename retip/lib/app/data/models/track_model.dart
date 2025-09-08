@@ -3,6 +3,8 @@ import 'package:retip/app/domain/enitities/track_entity.dart';
 
 final class TrackModel extends TrackEntity {
   const TrackModel({
+    required super.artistId,
+    required super.albumId,
     required super.trackId,
     required super.artist,
     required super.album,
@@ -11,6 +13,8 @@ final class TrackModel extends TrackEntity {
 
   factory TrackModel.fromOnAudioQueryProvider(SongModel song) {
     return TrackModel(
+      artistId: song.artistId!,
+      albumId: song.albumId!,
       artist: song.artist!,
       album: song.album!,
       title: song.title,
