@@ -12,12 +12,14 @@ import '../core/l10n/retip_l10n.dart';
 import '../core/logger/retip_logger.dart';
 import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
+import 'presentation/blocs/album/album_bloc.dart';
 
 class RetipApp extends StatelessWidget {
   final PermissionsCubit permissionsCubit;
   final OnboardingCubit onboardingCubit;
   final AppInfoCubit appInfoCubit;
   final ThemeCubit themeCubit;
+  final AlbumBloc albumBloc;
   final TrackBloc trackBloc;
   final RetipLogger logger;
   final RetipRouter router;
@@ -31,6 +33,7 @@ class RetipApp extends StatelessWidget {
     required this.onboardingCubit,
     required this.appInfoCubit,
     required this.themeCubit,
+    required this.albumBloc,
     required this.trackBloc,
     required this.devCubit,
     required this.logger,
@@ -50,6 +53,7 @@ class RetipApp extends StatelessWidget {
           BlocProvider.value(value: onboardingCubit),
           BlocProvider.value(value: appInfoCubit),
           BlocProvider.value(value: themeCubit),
+          BlocProvider.value(value: albumBloc),
           BlocProvider.value(value: trackBloc),
           BlocProvider.value(value: devCubit),
         ],

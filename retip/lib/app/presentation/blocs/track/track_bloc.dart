@@ -12,6 +12,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
 
   TrackBloc(this._trackRepository) : super(TrackIdleState()) {
     on<TrackRefreshEvent>(_onRefresh);
+
     _trackRepository.getAll().then((result) {
       if (result is ResultSuccess<List<TrackEntity>>) {
         add(TrackRefreshEvent(result.data));
