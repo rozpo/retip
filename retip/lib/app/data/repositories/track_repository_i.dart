@@ -13,7 +13,7 @@ final class TrackRepositoryI implements TrackRepository {
   @override
   Future<Result<List<TrackEntity>>> getAll() async {
     try {
-      final rawData = await _onAudioQueryProvider.getSongs();
+      final rawData = await _onAudioQueryProvider.getAllSongs();
       final data = rawData.map((e) => TrackModel.fromOnAudioQueryProvider(e));
 
       return ResultSuccess(data.toList());

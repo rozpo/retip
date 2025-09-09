@@ -10,7 +10,7 @@ final class PermissionsRepositoryI implements PermissionsRepository {
   @override
   Future<Result<bool>> permissionsCheck() async {
     try {
-      final result = await _onAudioQueryProvider.permissionsCheck();
+      final result = await _onAudioQueryProvider.permissionsStatus();
 
       return ResultSuccess(result);
     } catch (e) {

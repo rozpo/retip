@@ -8,7 +8,6 @@ import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/widgets/buttons/icon/settings_icon_button_widget.dart';
 import 'package:retip/core/router/retip_route.dart';
-import 'package:retip/core/router/retip_router.dart';
 
 class LibraryPage extends StatelessWidget {
   const LibraryPage({super.key});

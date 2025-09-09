@@ -13,7 +13,7 @@ final class ArtistRepositoryI implements ArtistRepository {
   @override
   Future<Result<List<ArtistEntity>>> getAll() async {
     try {
-      final rawData = await _onAudioQueryProvider.getArtists();
+      final rawData = await _onAudioQueryProvider.getAllArtists();
       final data = rawData.map((e) => ArtistModel.fromOnAudioQueryProvider(e));
 
       return ResultSuccess(data.toList());
