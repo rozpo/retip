@@ -10,6 +10,7 @@ import 'package:retip/app/data/repositories/permissions_repository_i.dart';
 import 'package:retip/app/data/repositories/track_repository_i.dart';
 import 'package:retip/app/domain/errors/result.dart';
 import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
+import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
@@ -76,6 +77,7 @@ void main() async {
   final appInfoCubit = AppInfoCubit(appInfoRepository);
   final trackBloc = TrackBloc(trackRepository);
   final albumBloc = AlbumBloc(albumRepository);
+  final artistBloc = ArtistBloc(artistRepository);
 
   // Assemble final app
   final app = RetipApp(
@@ -84,6 +86,7 @@ void main() async {
     permissionsCubit: permissionsCubit,
     onboardingCubit: onboardingCubit,
     appInfoCubit: appInfoCubit,
+    artistBloc: artistBloc,
     themeCubit: themeCubit,
     albumBloc: albumBloc,
     devCubit: devCubit,

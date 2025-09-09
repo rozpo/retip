@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
@@ -18,6 +19,7 @@ class RetipApp extends StatelessWidget {
   final PermissionsCubit permissionsCubit;
   final OnboardingCubit onboardingCubit;
   final AppInfoCubit appInfoCubit;
+  final ArtistBloc artistBloc;
   final ThemeCubit themeCubit;
   final AlbumBloc albumBloc;
   final TrackBloc trackBloc;
@@ -32,6 +34,7 @@ class RetipApp extends StatelessWidget {
     required this.permissionsCubit,
     required this.onboardingCubit,
     required this.appInfoCubit,
+    required this.artistBloc,
     required this.themeCubit,
     required this.albumBloc,
     required this.trackBloc,
@@ -52,6 +55,7 @@ class RetipApp extends StatelessWidget {
           BlocProvider.value(value: permissionsCubit),
           BlocProvider.value(value: onboardingCubit),
           BlocProvider.value(value: appInfoCubit),
+          BlocProvider.value(value: artistBloc),
           BlocProvider.value(value: themeCubit),
           BlocProvider.value(value: albumBloc),
           BlocProvider.value(value: trackBloc),
