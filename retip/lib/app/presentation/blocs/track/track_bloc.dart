@@ -13,6 +13,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
   TrackBloc(this._trackRepository) : super(TrackInitState()) {
     on<TrackFetchAllEvent>(_onFetchAll);
     on<TrackFetchByAlbumEvent>(_onFetchByAlbum);
+    on<TrackFetchByArtistEvent>(_onFetchByArtist);
   }
 
   void _onFetchAll(TrackFetchAllEvent event, Emitter<TrackState> emit) async {
@@ -28,6 +29,17 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
     Emitter<TrackState> emit,
   ) async {
     final result = await _trackRepository.getByAlbum(event.id);
+
+    if (result is ResultSuccess<List<TrackEntity>>) {
+      emit(TrackIdleState(result.data));
+    }
+  }
+
+  void _onFetchByArtist(
+    TrackFetchByArtistEvent event,
+    Emitter<TrackState> emit,
+  ) async {
+    final result = await _trackRepository.getByArtist(event.id);
 
     if (result is ResultSuccess<List<TrackEntity>>) {
       emit(TrackIdleState(result.data));

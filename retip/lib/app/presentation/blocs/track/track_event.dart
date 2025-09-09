@@ -14,3 +14,9 @@ final class TrackFetchByAlbumEvent extends TrackEvent {
 
   const TrackFetchByAlbumEvent(this.id);
 }
+
+final class TrackFetchByArtistEvent extends TrackEvent {
+  final int id;
+
+  const TrackFetchByArtistEvent(this.id);
+}
