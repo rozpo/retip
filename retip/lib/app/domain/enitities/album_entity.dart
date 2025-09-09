@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+@immutable
 abstract class AlbumEntity {
   final int artistId;
   final int albumId;
