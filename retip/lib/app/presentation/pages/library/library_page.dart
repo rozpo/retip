@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/enitities/album_entity.dart';
+import 'package:retip/app/domain/enitities/artist_entity.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
 import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
+import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/widgets/buttons/icon/settings_icon_button_widget.dart';
 
@@ -55,6 +57,27 @@ class LibraryPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
+            BlocBuilder<ArtistBloc, ArtistState>(
+              builder: (context, state) {
+                final tracks = <ArtistEntity>[];
+
+                if (state is ArtistIdleState) {
+                  tracks.addAll(state.artists);
+                }
+
+                return ListView.builder(
+                  itemCount: tracks.length,
+                  itemBuilder: (context, index) {
+                    final track = tracks[index];
+
+                    return ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text(track.name),
+                    );
+                  },
+                );
+              },
+            ),
             BlocBuilder<AlbumBloc, AlbumState>(
               builder: (context, state) {
                 final tracks = <AlbumEntity>[];
