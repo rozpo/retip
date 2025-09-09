@@ -58,15 +58,13 @@ class OnAudioQueryProvider {
   /// [type] is the type of the media source.
   /// [key] is the field to compare.
   /// [id] is value for search.
-  Future<List<T>> _getQuery<T>({
+  Future<List> _getQuery({
     required WithFiltersType type,
     required String query,
     required dynamic args,
   }) async {
     final data = await _onAudioQuery.queryWithFilters(query, type, args: args);
-    final List<T> result = List.from(data) as List<T>;
-
-    return result;
+    return data;
   }
 
   // === PERMISSIONS =============================================================
@@ -124,11 +122,13 @@ class OnAudioQueryProvider {
       throw Exception('Artist not found');
     }
 
-    final albums = await _getQuery<AlbumModel>(
+    final data = await _getQuery(
       type: WithFiltersType.ALBUMS,
       args: AlbumsArgs.ARTIST,
       query: artist.artist,
     );
+
+    final albums = data.map((e) => AlbumModel(e));
 
     return albums.where((element) => element.artistId == artist.id).toList();
   }
