@@ -9,7 +9,6 @@ import 'package:retip/app/data/repositories/artist_repository_i.dart';
 import 'package:retip/app/data/repositories/permissions_repository_i.dart';
 import 'package:retip/app/data/repositories/track_repository_i.dart';
 import 'package:retip/app/domain/errors/result.dart';
-import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
 import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
@@ -74,7 +73,6 @@ void main() async {
   final devCubit = DevCubit();
 
   final appInfoCubit = AppInfoCubit(appInfoRepository);
-  final albumBloc = AlbumBloc(albumRepository);
   final artistBloc = ArtistBloc(artistRepository);
 
   // Assemble final app
@@ -82,11 +80,11 @@ void main() async {
     locale: locale.isNotEmpty ? Locale(locale.toLowerCase()) : null,
     permissionsCubit: permissionsCubit,
     onboardingCubit: onboardingCubit,
+    albumRepository: albumRepository,
     trackRepository: trackRepository,
     appInfoCubit: appInfoCubit,
     artistBloc: artistBloc,
     themeCubit: themeCubit,
-    albumBloc: albumBloc,
     devCubit: devCubit,
     logger: logger,
     router: router,

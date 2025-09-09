@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/domain/repositories/album_repository.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
 import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
@@ -13,16 +14,15 @@ import '../core/l10n/retip_l10n.dart';
 import '../core/logger/retip_logger.dart';
 import '../core/router/retip_router.dart';
 import '../core/theme/retip_theme.dart';
-import 'presentation/blocs/album/album_bloc.dart';
 
 class RetipApp extends StatelessWidget {
   final PermissionsCubit permissionsCubit;
   final OnboardingCubit onboardingCubit;
+  final AlbumRepository albumRepository;
   final TrackRepository trackRepository;
   final AppInfoCubit appInfoCubit;
   final ArtistBloc artistBloc;
   final ThemeCubit themeCubit;
-  final AlbumBloc albumBloc;
   final RetipLogger logger;
   final RetipRouter router;
   final DevCubit devCubit;
@@ -37,7 +37,7 @@ class RetipApp extends StatelessWidget {
     required this.appInfoCubit,
     required this.artistBloc,
     required this.themeCubit,
-    required this.albumBloc,
+    required this.albumRepository,
     required this.devCubit,
     required this.logger,
     required this.router,
@@ -50,6 +50,7 @@ class RetipApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider.value(value: albumRepository),
         RepositoryProvider.value(value: trackRepository),
         RepositoryProvider.value(value: logger),
       ],
@@ -60,7 +61,6 @@ class RetipApp extends StatelessWidget {
           BlocProvider.value(value: appInfoCubit),
           BlocProvider.value(value: artistBloc),
           BlocProvider.value(value: themeCubit),
-          BlocProvider.value(value: albumBloc),
           BlocProvider.value(value: devCubit),
         ],
         child: BlocBuilder<DevCubit, DevState>(

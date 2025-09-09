@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/enitities/album_entity.dart';
 import 'package:retip/app/domain/enitities/artist_entity.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
+import 'package:retip/app/domain/repositories/album_repository.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
 import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
 import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
@@ -85,6 +86,8 @@ class LibraryPage extends StatelessWidget {
               },
             ),
             BlocBuilder<AlbumBloc, AlbumState>(
+              bloc: AlbumBloc(context.read<AlbumRepository>())
+                ..add(AlbumFetchAllEvent()),
               builder: (context, state) {
                 final albums = <AlbumEntity>[];
 

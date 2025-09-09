@@ -5,8 +5,12 @@ sealed class AlbumEvent {
   const AlbumEvent();
 }
 
-final class AlbumRefreshEvent extends AlbumEvent {
-  final List<AlbumEntity> albums;
+final class AlbumFetchAllEvent extends AlbumEvent {
+  const AlbumFetchAllEvent();
+}
 
-  const AlbumRefreshEvent(this.albums);
+final class AlbumFetchByArtistEvent extends AlbumEvent {
+  final int id;
+
+  const AlbumFetchByArtistEvent(this.id);
 }
