@@ -5,8 +5,12 @@ sealed class TrackEvent {
   const TrackEvent();
 }
 
-final class TrackRefreshEvent extends TrackEvent {
-  final List<TrackEntity> tracks;
+final class TrackFetchAllEvent extends TrackEvent {
+  const TrackFetchAllEvent();
+}
 
-  const TrackRefreshEvent(this.tracks);
+final class TrackFetchByAlbumEvent extends TrackEvent {
+  final int id;
+
+  const TrackFetchByAlbumEvent(this.id);
 }

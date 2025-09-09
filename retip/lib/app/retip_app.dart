@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/domain/repositories/track_repository.dart';
 import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
-import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
@@ -18,11 +18,11 @@ import 'presentation/blocs/album/album_bloc.dart';
 class RetipApp extends StatelessWidget {
   final PermissionsCubit permissionsCubit;
   final OnboardingCubit onboardingCubit;
+  final TrackRepository trackRepository;
   final AppInfoCubit appInfoCubit;
   final ArtistBloc artistBloc;
   final ThemeCubit themeCubit;
   final AlbumBloc albumBloc;
-  final TrackBloc trackBloc;
   final RetipLogger logger;
   final RetipRouter router;
   final DevCubit devCubit;
@@ -33,11 +33,11 @@ class RetipApp extends StatelessWidget {
   const RetipApp({
     required this.permissionsCubit,
     required this.onboardingCubit,
+    required this.trackRepository,
     required this.appInfoCubit,
     required this.artistBloc,
     required this.themeCubit,
     required this.albumBloc,
-    required this.trackBloc,
     required this.devCubit,
     required this.logger,
     required this.router,
@@ -49,7 +49,10 @@ class RetipApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [RepositoryProvider.value(value: logger)],
+      providers: [
+        RepositoryProvider.value(value: trackRepository),
+        RepositoryProvider.value(value: logger),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider.value(value: permissionsCubit),
@@ -58,7 +61,6 @@ class RetipApp extends StatelessWidget {
           BlocProvider.value(value: artistBloc),
           BlocProvider.value(value: themeCubit),
           BlocProvider.value(value: albumBloc),
-          BlocProvider.value(value: trackBloc),
           BlocProvider.value(value: devCubit),
         ],
         child: BlocBuilder<DevCubit, DevState>(

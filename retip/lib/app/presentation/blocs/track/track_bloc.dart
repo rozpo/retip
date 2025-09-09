@@ -10,17 +10,27 @@ part 'track_state.dart';
 class TrackBloc extends Bloc<TrackEvent, TrackState> {
   final TrackRepository _trackRepository;
 
-  TrackBloc(this._trackRepository) : super(TrackIdleState()) {
-    on<TrackRefreshEvent>(_onRefresh);
-
-    _trackRepository.getAll().then((result) {
-      if (result is ResultSuccess<List<TrackEntity>>) {
-        add(TrackRefreshEvent(result.data));
-      }
-    });
+  TrackBloc(this._trackRepository) : super(TrackInitState()) {
+    on<TrackFetchAllEvent>(_onFetchAll);
+    on<TrackFetchByAlbumEvent>(_onFetchByAlbum);
   }
 
-  void _onRefresh(TrackRefreshEvent event, Emitter<TrackState> emit) {
-    emit(TrackIdleState(event.tracks));
+  void _onFetchAll(TrackFetchAllEvent event, Emitter<TrackState> emit) async {
+    final result = await _trackRepository.getAll();
+
+    if (result is ResultSuccess<List<TrackEntity>>) {
+      emit(TrackIdleState(result.data));
+    }
+  }
+
+  void _onFetchByAlbum(
+    TrackFetchByAlbumEvent event,
+    Emitter<TrackState> emit,
+  ) async {
+    final result = await _trackRepository.getByAlbum(event.id);
+
+    if (result is ResultSuccess<List<TrackEntity>>) {
+      emit(TrackIdleState(result.data));
+    }
   }
 }

@@ -5,6 +5,8 @@ sealed class TrackState {
   const TrackState();
 }
 
+final class TrackInitState extends TrackState {}
+
 final class TrackIdleState extends TrackState {
   final List<TrackEntity> tracks;
 
