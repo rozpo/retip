@@ -1,6 +1,7 @@
 export 'home/home_page.dart';
 export 'library/library_page.dart';
 export 'library/pages/album_page.dart';
+export 'library/pages/artist_page.dart';
 export 'onboarding/onboarding_page.dart';
 export 'permissions/permissions_page.dart';
 export 'profile/pages/app_info/app_info_page.dart';

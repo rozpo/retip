@@ -8,6 +8,7 @@ enum RetipRoute {
   home(),
   library(),
   album([RetipRoute.library]),
+  artist([RetipRoute.library]),
   search(),
   profile(),
   settings([RetipRoute.profile]),

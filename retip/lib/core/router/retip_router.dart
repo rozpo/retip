@@ -125,6 +125,14 @@ class RetipRouter extends GoRouter {
                           return AlbumPage(int.parse(id));
                         },
                       ),
+                      GoRoute(
+                        path: '${RetipRoute.artist.location}/:id',
+                        name: RetipRoute.artist.name,
+                        builder: (context, state) {
+                          final id = state.pathParameters['id'] as String;
+                          return ArtistPage(int.parse(id));
+                        },
+                      ),
                     ],
                   ),
                 ],

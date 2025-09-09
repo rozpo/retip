@@ -61,20 +61,24 @@ class LibraryPage extends StatelessWidget {
           children: [
             BlocBuilder<ArtistBloc, ArtistState>(
               builder: (context, state) {
-                final tracks = <ArtistEntity>[];
+                final artists = <ArtistEntity>[];
 
                 if (state is ArtistIdleState) {
-                  tracks.addAll(state.artists);
+                  artists.addAll(state.artists);
                 }
 
                 return ListView.builder(
-                  itemCount: tracks.length,
+                  itemCount: artists.length,
                   itemBuilder: (context, index) {
-                    final track = tracks[index];
+                    final artist = artists[index];
 
                     return ListTile(
                       leading: Icon(Icons.person),
-                      title: Text(track.name),
+                      title: Text(artist.name),
+                      onTap: () => RetipRoute.artist.push(
+                        pathParameters: {'id': artist.artistId.toString()},
+                        context,
+                      ),
                     );
                   },
                 );
@@ -82,23 +86,23 @@ class LibraryPage extends StatelessWidget {
             ),
             BlocBuilder<AlbumBloc, AlbumState>(
               builder: (context, state) {
-                final tracks = <AlbumEntity>[];
+                final albums = <AlbumEntity>[];
 
                 if (state is AlbumIdleState) {
-                  tracks.addAll(state.albums);
+                  albums.addAll(state.albums);
                 }
 
                 return ListView.builder(
-                  itemCount: tracks.length,
+                  itemCount: albums.length,
                   itemBuilder: (context, index) {
-                    final track = tracks[index];
+                    final album = albums[index];
 
                     return ListTile(
                       leading: Icon(Icons.album),
-                      title: Text(track.title),
-                      subtitle: Text(track.artist),
+                      title: Text(album.title),
+                      subtitle: Text(album.artist),
                       onTap: () => RetipRoute.album.push(
-                        pathParameters: {'id': track.albumId.toString()},
+                        pathParameters: {'id': album.albumId.toString()},
                         context,
                       ),
                     );
