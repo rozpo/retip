@@ -33,4 +33,16 @@ final class TrackRepositoryI implements TrackRepository {
       return ResultFailure.fromObject(e);
     }
   }
+
+  @override
+  Future<Result<List<TrackEntity>>> getByArtist(int id) async {
+    try {
+      final rawData = await _onAudioQueryProvider.getArtistSongs(id);
+      final data = rawData.map((e) => TrackModel.fromOnAudioQueryProvider(e));
+
+      return ResultSuccess(data.toList());
+    } catch (e) {
+      return ResultFailure.fromObject(e);
+    }
+  }
 }

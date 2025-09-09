@@ -3,4 +3,6 @@ import 'package:retip/app/domain/errors/result.dart';
 
 abstract interface class AlbumRepository {
   Future<Result<List<AlbumEntity>>> getAll();
+
+  Future<Result<List<AlbumEntity>>> getByArtist(int id);
 }

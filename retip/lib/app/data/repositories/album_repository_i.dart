@@ -21,4 +21,16 @@ final class AlbumRepositoryI implements AlbumRepository {
       return ResultFailure.fromObject(e);
     }
   }
+
+  @override
+  Future<Result<List<AlbumEntity>>> getByArtist(int id) async {
+    try {
+      final rawData = await _onAudioQueryProvider.getArtistAlbums(id);
+      final data = rawData.map((e) => AlbumModel.fromOnAudioQueryProvider(e));
+
+      return ResultSuccess(data.toList());
+    } catch (e) {
+      return ResultFailure.fromObject(e);
+    }
+  }
 }
