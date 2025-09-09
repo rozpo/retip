@@ -7,6 +7,7 @@ enum RetipRoute {
   permissions(),
   home(),
   library(),
+  album([RetipRoute.library]),
   search(),
   profile(),
   settings([RetipRoute.profile]),
@@ -27,7 +28,10 @@ enum RetipRoute {
     context.goNamed(name);
   }
 
-  void push(BuildContext context) {
-    context.pushNamed(name);
+  void push(
+    BuildContext context, {
+    Map<String, String> pathParameters = const {},
+  }) {
+    context.pushNamed(name, pathParameters: pathParameters);
   }
 }

@@ -1,10 +1,11 @@
 export 'home/home_page.dart';
 export 'library/library_page.dart';
+export 'library/pages/album_page.dart';
 export 'onboarding/onboarding_page.dart';
 export 'permissions/permissions_page.dart';
-export 'search/search_page.dart';
+export 'profile/pages/app_info/app_info_page.dart';
 export 'profile/pages/settings/pages/dev/dev_page.dart';
 export 'profile/pages/settings/pages/logger/logger_page.dart';
 export 'profile/pages/settings/settings_page.dart';
 export 'profile/profile_page.dart';
-export 'profile/pages/app_info/app_info_page.dart';
+export 'search/search_page.dart';
