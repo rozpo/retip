@@ -24,4 +24,8 @@ class OnAudioQueryProvider {
   Future<List<AlbumModel>> getAlbums() async {
     return await _onAudioQuery.queryAlbums();
   }
+
+  Future<List<ArtistModel>> getArtists() async {
+    return await _onAudioQuery.queryArtists();
+  }
 }

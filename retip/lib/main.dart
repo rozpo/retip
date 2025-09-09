@@ -5,6 +5,7 @@ import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/package_info_provider.dart';
 import 'package:retip/app/data/repositories/album_repository_i.dart';
 import 'package:retip/app/data/repositories/app_info_repository_i.dart';
+import 'package:retip/app/data/repositories/artist_repository_i.dart';
 import 'package:retip/app/data/repositories/permissions_repository_i.dart';
 import 'package:retip/app/data/repositories/track_repository_i.dart';
 import 'package:retip/app/domain/errors/result.dart';
@@ -55,6 +56,7 @@ void main() async {
   final permissionsRepository = PermissionsRepositoryI(onAudioQueryProvider);
   final trackRepository = TrackRepositoryI(onAudioQueryProvider);
   final albumRepository = AlbumRepositoryI(onAudioQueryProvider);
+  final artistRepository = ArtistRepositoryI(onAudioQueryProvider);
 
   final router = RetipRouter(logger);
   final theme = RetipTheme();
