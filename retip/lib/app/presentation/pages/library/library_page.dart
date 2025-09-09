@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retip/app/domain/enitities/album_entity.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
+import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/widgets/buttons/icon/settings_icon_button_widget.dart';
 
@@ -9,36 +11,96 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            leading: SettingsIconButtonWidget(),
-            title: Text('Library'),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: SettingsIconButtonWidget(),
+          title: Text('Library'),
+          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.person),
+                    SizedBox(width: 8),
+                    Text('Artists'),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.album),
+                    SizedBox(width: 8),
+                    Text('Albums'),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.music_note),
+                    SizedBox(width: 8),
+                    Text('Tracks'),
+                  ],
+                ),
+              ),
+            ],
           ),
-          BlocBuilder<TrackBloc, TrackState>(
-            builder: (context, state) {
-              final tracks = <TrackEntity>[];
+        ),
+        body: TabBarView(
+          children: [
+            BlocBuilder<AlbumBloc, AlbumState>(
+              builder: (context, state) {
+                final tracks = <AlbumEntity>[];
 
-              if (state is TrackIdleState) {
-                tracks.addAll(state.tracks);
-              }
+                if (state is AlbumIdleState) {
+                  tracks.addAll(state.albums);
+                }
 
-              return SliverList.builder(
-                itemCount: tracks.length,
-                itemBuilder: (context, index) {
-                  final track = tracks[index];
+                return ListView.builder(
+                  itemCount: tracks.length,
+                  itemBuilder: (context, index) {
+                    final track = tracks[index];
 
-                  return ListTile(
-                    leading: Icon(Icons.music_note),
-                    title: Text(track.title),
-                    subtitle: Text(track.artist),
-                  );
-                },
-              );
-            },
-          ),
-        ],
+                    return ListTile(
+                      leading: Icon(Icons.album),
+                      title: Text(track.title),
+                      subtitle: Text(track.artist),
+                    );
+                  },
+                );
+              },
+            ),
+            BlocBuilder<TrackBloc, TrackState>(
+              builder: (context, state) {
+                final tracks = <TrackEntity>[];
+
+                if (state is TrackIdleState) {
+                  tracks.addAll(state.tracks);
+                }
+
+                return ListView.builder(
+                  itemCount: tracks.length,
+                  itemBuilder: (context, index) {
+                    final track = tracks[index];
+
+                    return ListTile(
+                      leading: Icon(Icons.music_note),
+                      title: Text(track.title),
+                      subtitle: Text(track.artist),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
