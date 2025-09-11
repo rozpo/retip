@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:retip/app/data/providers/just_audio_provider.dart';
 import 'package:retip/app/data/providers/on_audio_query_provider.dart';
 import 'package:retip/app/data/providers/package_info_provider.dart';
 import 'package:retip/app/data/repositories/album_repository_i.dart';
@@ -8,6 +9,7 @@ import 'package:retip/app/data/repositories/app_info_repository_i.dart';
 import 'package:retip/app/data/repositories/artist_repository_i.dart';
 import 'package:retip/app/data/repositories/permissions_repository_i.dart';
 import 'package:retip/app/data/repositories/track_repository_i.dart';
+import 'package:retip/app/data/services/audio_service_i.dart';
 import 'package:retip/app/domain/errors/result.dart';
 import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
@@ -49,6 +51,7 @@ void main() async {
   // Dependency injection
   final packageInfoProvider = await PackageInfoProvider.init();
   final onAudioQueryProvider = await OnAudioQueryProvider.init();
+  final justAudioProvider = await JustAudioProvider.init();
 
   final appInfoRepository = AppInfoRepositoryI(packageInfoProvider);
 
@@ -56,6 +59,7 @@ void main() async {
   final trackRepository = TrackRepositoryI(onAudioQueryProvider);
   final albumRepository = AlbumRepositoryI(onAudioQueryProvider);
   final artistRepository = ArtistRepositoryI(onAudioQueryProvider);
+  final audioService = AudioServiceI(justAudioProvider);
 
   final router = RetipRouter(logger);
   final theme = RetipTheme();
@@ -83,6 +87,7 @@ void main() async {
     albumRepository: albumRepository,
     trackRepository: trackRepository,
     appInfoCubit: appInfoCubit,
+    audioService: audioService,
     artistBloc: artistBloc,
     themeCubit: themeCubit,
     devCubit: devCubit,

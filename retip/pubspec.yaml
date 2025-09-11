@@ -17,6 +17,7 @@ dependencies:
   go_router: ^16.2.1
   hydrated_bloc: ^10.1.1
   intl: ^0.20.2
+  just_audio: ^0.10.5
   meta: ^1.16.0
   on_audio_query:
     git:

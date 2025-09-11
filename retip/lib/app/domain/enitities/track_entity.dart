@@ -9,9 +9,11 @@ abstract class TrackEntity {
   final String title;
   final String album;
   final String artist;
+  final Uri location;
 
   const TrackEntity({
     required this.artistId,
+    required this.location,
     required this.albumId,
     required this.trackId,
     required this.artist,

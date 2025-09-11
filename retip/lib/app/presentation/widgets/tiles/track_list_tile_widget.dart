@@ -4,8 +4,9 @@ import 'package:retip/app/presentation/widgets/widgets.dart';
 
 class TrackListTileWidget extends StatelessWidget {
   final TrackEntity track;
+  final VoidCallback? onTap;
 
-  const TrackListTileWidget(this.track, {super.key});
+  const TrackListTileWidget(this.track, {this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class TrackListTileWidget extends StatelessWidget {
         child: SizedBox.square(dimension: 40, child: Icon(Icons.music_note)),
       ),
       trailing: IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+      onTap: onTap,
     );
   }
 }

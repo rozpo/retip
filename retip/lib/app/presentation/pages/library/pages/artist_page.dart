@@ -4,6 +4,7 @@ import 'package:retip/app/domain/enitities/album_entity.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
 import 'package:retip/app/domain/repositories/album_repository.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
+import 'package:retip/app/domain/services/audio_service.dart';
 import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
@@ -58,7 +59,12 @@ class ArtistPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final track = tracks[index];
 
-                    return TrackListTileWidget(track);
+                    return TrackListTileWidget(
+                      track,
+                      onTap: () {
+                        context.read<AudioService>().load(tracks, index: index);
+                      },
+                    );
                   },
                 );
               },

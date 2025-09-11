@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
+import 'package:retip/app/domain/services/audio_service.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
 import 'package:retip/app/presentation/widgets/tiles/track_list_tile_widget.dart';
 
@@ -29,7 +30,12 @@ class AlbumPage extends StatelessWidget {
             itemBuilder: (context, index) {
               final track = tracks[index];
 
-              return TrackListTileWidget(track);
+              return TrackListTileWidget(
+                track,
+                onTap: () {
+                  context.read<AudioService>().load(tracks, index: index);
+                },
+              );
             },
           );
         },
