@@ -3,4 +3,8 @@ export 'buttons/segmented/grid_size_segmented_button_widget.dart';
 export 'buttons/segmented/theme_mode_segmented_button_widget.dart';
 export 'lists/colors_list_view_widget.dart';
 export 'navigation/bottom_navigation_widget.dart';
+export 'texts/single_line_text_widget.dart';
+export 'tiles/album_list_tile_widget.dart';
+export 'tiles/artist_list_tile_widget.dart';
 export 'tiles/section_list_tile.dart';
+export 'tiles/track_list_tile_widget.dart';

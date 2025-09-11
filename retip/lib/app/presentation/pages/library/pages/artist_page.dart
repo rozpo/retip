@@ -6,7 +6,7 @@ import 'package:retip/app/domain/repositories/album_repository.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
 import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
-import 'package:retip/core/router/retip_route.dart';
+import 'package:retip/app/presentation/widgets/widgets.dart';
 
 class ArtistPage extends StatelessWidget {
   final int id;
@@ -35,15 +35,7 @@ class ArtistPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final album = albums[index];
 
-                    return ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text(album.title),
-                      subtitle: Text(album.artist),
-                      onTap: () => RetipRoute.album.push(
-                        pathParameters: {'id': album.albumId.toString()},
-                        context,
-                      ),
-                    );
+                    return AlbumListTileWidget(album);
                   },
                 );
               },
@@ -66,11 +58,7 @@ class ArtistPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final track = tracks[index];
 
-                    return ListTile(
-                      leading: Icon(Icons.music_note),
-                      title: Text(track.title),
-                      subtitle: Text(track.artist),
-                    );
+                    return TrackListTileWidget(track);
                   },
                 );
               },

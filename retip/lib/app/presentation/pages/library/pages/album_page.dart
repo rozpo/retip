@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
+import 'package:retip/app/presentation/widgets/tiles/track_list_tile_widget.dart';
 
 class AlbumPage extends StatelessWidget {
   final int id;
@@ -28,11 +29,7 @@ class AlbumPage extends StatelessWidget {
             itemBuilder: (context, index) {
               final track = tracks[index];
 
-              return ListTile(
-                leading: Icon(Icons.music_note),
-                title: Text(track.title),
-                subtitle: Text(track.artist),
-              );
+              return TrackListTileWidget(track);
             },
           );
         },
