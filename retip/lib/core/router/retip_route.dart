@@ -35,4 +35,11 @@ enum RetipRoute {
   }) {
     context.pushNamed(name, pathParameters: pathParameters);
   }
+
+  void pushReplace(
+    BuildContext context, {
+    Map<String, String> pathParameters = const {},
+  }) {
+    context.pushReplacementNamed(name, pathParameters: pathParameters);
+  }
 }

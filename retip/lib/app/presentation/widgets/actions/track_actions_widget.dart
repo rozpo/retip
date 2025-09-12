@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
 import 'package:retip/app/presentation/mixins/show_modal_bottom_sheet_mixin.dart';
 import 'package:retip/app/presentation/widgets/cards/leading_list_tile_card_widget.dart';
+import 'package:retip/app/presentation/widgets/tiles/goto_album_list_tile_widget.dart';
+import 'package:retip/app/presentation/widgets/tiles/goto_artist_list_tile_widget.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 
 class TrackActionsWidget extends StatelessWidget
@@ -30,16 +32,8 @@ class TrackActionsWidget extends StatelessWidget
           leading: LeadingListTileCardWidget(Icons.playlist_add),
         ),
         Divider(),
-        ListTile(
-          title: SingleLineTextWidget('Go to Artist'),
-          leading: LeadingListTileCardWidget(Icons.person),
-          trailing: Icon(Icons.arrow_forward),
-        ),
-        ListTile(
-          title: SingleLineTextWidget('Go to Album'),
-          leading: LeadingListTileCardWidget(Icons.album),
-          trailing: Icon(Icons.arrow_forward),
-        ),
+        GotoArtistListTileWidget(track.artistId),
+        GotoAlbumListTileWidget(track.albumId),
       ],
     );
   }
