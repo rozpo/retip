@@ -11,14 +11,8 @@ class TrackListTileWidget extends StatelessWidget {
 
   const TrackListTileWidget(this.track, {this.onTap, this.action, super.key});
 
-  factory TrackListTileWidget.favourite(
-    TrackEntity track, {
-    VoidCallback? onTap,
-  }) {
-    return TrackListTileWidget(
-      action: IconButton(onPressed: () {}, icon: Icon(Icons.favorite_outline)),
-      track,
-    );
+  factory TrackListTileWidget.none(TrackEntity track, {VoidCallback? onTap}) {
+    return TrackListTileWidget(action: SizedBox(), track);
   }
 
   @override

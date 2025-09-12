@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:retip/app/domain/enitities/track_entity.dart';
+import 'package:retip/app/domain/enitities/album_entity.dart';
 import 'package:retip/app/presentation/mixins/show_modal_bottom_sheet_mixin.dart';
-import 'package:retip/app/presentation/widgets/tiles/add_to_queue_list_tile_widget.dart';
 import 'package:retip/app/presentation/widgets/tiles/goto_album_list_tile_widget.dart';
 import 'package:retip/app/presentation/widgets/tiles/goto_artist_list_tile_widget.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 
-class TrackActionsWidget extends StatelessWidget
+class AlbumActionsWidget extends StatelessWidget
     with ShowModalBottomSheetMixin {
-  final TrackEntity track;
+  final AlbumEntity album;
 
-  const TrackActionsWidget(this.track, {super.key});
+  const AlbumActionsWidget(this.album, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        TrackListTileWidget.none(track),
-        Divider(),
+        AlbumListTileWidget.none(album),
+        // Divider(),
         // ListTile(
         //   title: SingleLineTextWidget('Play next'),
         //   leading: LeadingListTileCardWidget(Icons.playlist_play),
         // ),
-        AddToQueueListTileWidget(track),
+        // AddToQueueListTileWidget(album),
         // ListTile(
         //   title: SingleLineTextWidget('Add to playlist'),
         //   leading: LeadingListTileCardWidget(Icons.playlist_add),
         // ),
         Divider(),
-        GotoArtistListTileWidget(track.artistId),
-        GotoAlbumListTileWidget(track.albumId),
+        GotoArtistListTileWidget(album.artistId),
+        GotoAlbumListTileWidget(album.albumId),
       ],
     );
   }
