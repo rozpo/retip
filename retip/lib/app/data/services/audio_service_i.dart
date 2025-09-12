@@ -9,10 +9,21 @@ final class AudioServiceI implements AudioService {
   const AudioServiceI(this._justAudioProvider);
 
   @override
-  Future<Result<void>> load(List<TrackEntity> tracks, {int? index}) async {
+  Future<Result<void>> setQueue(List<TrackEntity> tracks, {int? index}) async {
     try {
-      await _justAudioProvider.load(tracks, index: index);
+      await _justAudioProvider.setAudioSources(tracks, index: index);
       _justAudioProvider.play();
+
+      return ResultSuccess<void>(null);
+    } catch (e) {
+      return ResultFailure.fromObject(e);
+    }
+  }
+
+  @override
+  Future<Result<void>> addToQueue(List<TrackEntity> tracks) async {
+    try {
+      await _justAudioProvider.addAudioSources(tracks);
 
       return ResultSuccess<void>(null);
     } catch (e) {

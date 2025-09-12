@@ -62,7 +62,10 @@ class ArtistPage extends StatelessWidget {
                     return TrackListTileWidget(
                       track,
                       onTap: () {
-                        context.read<AudioService>().load(tracks, index: index);
+                        context.read<AudioService>().setQueue(
+                          tracks,
+                          index: index,
+                        );
                       },
                     );
                   },

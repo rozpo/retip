@@ -17,21 +17,30 @@ final class JustAudioProvider {
     return JustAudioProvider._(AudioPlayer());
   }
 
-  Future<void> load(List<TrackEntity> tracks, {int? index}) async {
-    final sources = tracks
-        .map(
-          (e) => AudioSource.uri(
-            e.location,
-            tag: MediaItem(
-              id: e.trackId.toString(),
-              title: e.title,
-              artist: e.artist,
-            ),
-          ),
-        )
-        .toList();
+  List<AudioSource> _mapToAudioSource(List<TrackEntity> tracks) {
+    final sources = tracks.map(
+      (e) => AudioSource.uri(
+        e.location,
+        tag: MediaItem(
+          id: e.trackId.toString(),
+          title: e.title,
+          artist: e.artist,
+        ),
+      ),
+    );
+
+    return sources.toList();
+  }
+
+  Future<void> setAudioSources(List<TrackEntity> tracks, {int? index}) async {
+    final sources = _mapToAudioSource(tracks);
 
     await _audioPlayer.setAudioSources(sources, initialIndex: index);
+  }
+
+  Future<void> addAudioSources(List<TrackEntity> tracks) async {
+    final sources = _mapToAudioSource(tracks);
+    await _audioPlayer.addAudioSources(sources);
   }
 
   void play() => _audioPlayer.play();
