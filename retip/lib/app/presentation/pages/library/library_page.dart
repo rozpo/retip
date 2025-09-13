@@ -5,10 +5,10 @@ import 'package:retip/app/domain/enitities/artist_entity.dart';
 import 'package:retip/app/domain/enitities/track_entity.dart';
 import 'package:retip/app/domain/repositories/album_repository.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
-import 'package:retip/app/domain/services/audio_service.dart';
 import 'package:retip/app/presentation/blocs/album/album_bloc.dart';
 import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
 import 'package:retip/app/presentation/blocs/track/track_bloc.dart';
+import 'package:retip/app/presentation/views/tracks_view.dart';
 import 'package:retip/app/presentation/widgets/widgets.dart';
 
 class LibraryPage extends StatelessWidget {
@@ -22,7 +22,6 @@ class LibraryPage extends StatelessWidget {
         appBar: AppBar(
           leading: SettingsIconButtonWidget(),
           title: Text('Library'),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
           bottom: TabBar(
             tabs: [
               Tab(
@@ -108,22 +107,7 @@ class LibraryPage extends StatelessWidget {
                   tracks.addAll(state.tracks);
                 }
 
-                return ListView.builder(
-                  itemCount: tracks.length,
-                  itemBuilder: (context, index) {
-                    final track = tracks[index];
-
-                    return TrackListTileWidget(
-                      track,
-                      onTap: () {
-                        context.read<AudioService>().setQueue(
-                          tracks,
-                          index: index,
-                        );
-                      },
-                    );
-                  },
-                );
+                return TracksView(tracks);
               },
             ),
           ],
