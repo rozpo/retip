@@ -48,4 +48,9 @@ final class AudioServiceI implements AudioService {
       return ResultFailure.fromObject(e);
     }
   }
+
+  @override
+  Stream<int?> indexStream() {
+    return _justAudioProvider.currentIndexStream;
+  }
 }

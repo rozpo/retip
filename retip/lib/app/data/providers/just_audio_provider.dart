@@ -46,4 +46,6 @@ final class JustAudioProvider {
   void play() => _audioPlayer.play();
 
   void pause() => _audioPlayer.pause();
+
+  Stream<int?> get currentIndexStream => _audioPlayer.currentIndexStream;
 }

@@ -5,6 +5,7 @@ import 'package:retip/app/domain/repositories/album_repository.dart';
 import 'package:retip/app/domain/repositories/track_repository.dart';
 import 'package:retip/app/domain/services/audio_service.dart';
 import 'package:retip/app/presentation/blocs/artist/artist_bloc.dart';
+import 'package:retip/app/presentation/blocs/audio/audio_bloc.dart';
 import 'package:retip/app/presentation/cubits/app_info/app_info_cubit.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
@@ -60,6 +61,11 @@ class RetipApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            lazy: false,
+            create: (context) =>
+                AudioBloc(audioService)..add(AudioInitializeEvent()),
+          ),
           BlocProvider.value(value: permissionsCubit),
           BlocProvider.value(value: onboardingCubit),
           BlocProvider.value(value: appInfoCubit),

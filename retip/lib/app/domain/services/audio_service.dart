@@ -9,4 +9,6 @@ abstract interface class AudioService {
   Result<void> play();
 
   Result<void> pause();
+
+  Stream<int?> indexStream();
 }
