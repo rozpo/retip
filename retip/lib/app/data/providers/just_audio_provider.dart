@@ -48,4 +48,8 @@ final class JustAudioProvider {
   void pause() => _audioPlayer.pause();
 
   Stream<int?> get currentIndexStream => _audioPlayer.currentIndexStream;
+
+  Stream<Duration> get positionStream => _audioPlayer.positionStream;
+
+  Stream<Duration?> get durationStream => _audioPlayer.durationStream;
 }

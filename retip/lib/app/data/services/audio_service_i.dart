@@ -53,4 +53,14 @@ final class AudioServiceI implements AudioService {
   Stream<int?> indexStream() {
     return _justAudioProvider.currentIndexStream;
   }
+
+  @override
+  Stream<Duration> durationStream() {
+    return _justAudioProvider.durationStream.map((e) => e ?? Duration.zero);
+  }
+
+  @override
+  Stream<Duration> positionStream() {
+    return _justAudioProvider.positionStream;
+  }
 }

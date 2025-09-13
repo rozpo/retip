@@ -11,4 +11,8 @@ abstract interface class AudioService {
   Result<void> pause();
 
   Stream<int?> indexStream();
+
+  Stream<Duration> positionStream();
+
+  Stream<Duration> durationStream();
 }
