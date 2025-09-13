@@ -4,6 +4,7 @@ mixin ShowModalBottomSheetMixin on Widget {
   Future<T?> show<T>(BuildContext context) async {
     return await showModalBottomSheet<T>(
       builder: (context) => SafeArea(child: this),
+      shape: RoundedRectangleBorder(),
       useRootNavigator: true,
       showDragHandle: false,
       useSafeArea: true,

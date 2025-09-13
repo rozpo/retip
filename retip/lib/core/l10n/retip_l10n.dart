@@ -97,6 +97,18 @@ abstract class RetipL10n {
     Locale('pl'),
   ];
 
+  /// No description provided for @addedToQueue.
+  ///
+  /// In en, this message translates to:
+  /// **'added to queue'**
+  String get addedToQueue;
+
+  /// No description provided for @addToQueue.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to queue'**
+  String get addToQueue;
+
   /// No description provided for @appDetails.
   ///
   /// In en, this message translates to:

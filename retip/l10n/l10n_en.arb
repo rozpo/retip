@@ -1,5 +1,7 @@
 {
     "@@locale": "en",
+    "@addedToQueue": {},
+    "@addToQueue": {},
     "@appDetails": {},
     "@appLegalese": {},
     "@appName": {},
@@ -20,6 +22,8 @@
     "@termsAndConditions": {},
     "@themeModeAndColors": {},
     "@version": {},
+    "addedToQueue": "added to queue",
+    "addToQueue": "Add to queue",
     "appDetails": "App details",
     "appLegalese": "Copyright (c) 2024 Piotr Rozpończyk, MIT License",
     "appName": "Retip",

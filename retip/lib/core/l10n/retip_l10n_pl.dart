@@ -9,6 +9,12 @@ class RetipL10nPl extends RetipL10n {
   RetipL10nPl([String locale = 'pl']) : super(locale);
 
   @override
+  String get addedToQueue => 'added to queue';
+
+  @override
+  String get addToQueue => 'Add to queue';
+
+  @override
   String get appDetails => 'App details';
 
   @override

@@ -9,6 +9,12 @@ class RetipL10nEn extends RetipL10n {
   RetipL10nEn([String locale = 'en']) : super(locale);
 
   @override
+  String get addedToQueue => 'added to queue';
+
+  @override
+  String get addToQueue => 'Add to queue';
+
+  @override
   String get appDetails => 'App details';
 
   @override

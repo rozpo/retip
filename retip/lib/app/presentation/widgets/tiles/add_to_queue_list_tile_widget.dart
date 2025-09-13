@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retip/app/domain/enitities/track_entity.dart';
-import 'package:retip/app/domain/services/audio_service.dart';
-import 'package:retip/app/presentation/widgets/cards/leading_list_tile_card_widget.dart';
-import 'package:retip/app/presentation/widgets/texts/single_line_text_widget.dart';
+
+import '../../../../core/l10n/retip_l10n.dart';
+import '../../../domain/enitities/track_entity.dart';
+import '../../../domain/services/audio_service.dart';
+import '../cards/leading_list_tile_card_widget.dart';
 
 class AddToQueueListTileWidget extends StatelessWidget {
   final TrackEntity track;
@@ -12,15 +13,17 @@ class AddToQueueListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = RetipL10n.of(context);
+
     return ListTile(
-      title: SingleLineTextWidget('Add to queue'),
+      title: Text(l10n.addToQueue),
       leading: LeadingListTileCardWidget(Icons.queue_music),
       onTap: () {
         Navigator.pop(context);
         context.read<AudioService>().addToQueue([track]);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('"${track.title}" added to queue')),
+          SnackBar(content: Text('"${track.title}" ${l10n.addedToQueue}')),
         );
       },
     );
