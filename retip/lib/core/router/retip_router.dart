@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:retip/app/presentation/cubits/dev/dev_cubit.dart';
 import 'package:retip/app/presentation/cubits/onboarding/onboarding_cubit.dart';
 import 'package:retip/app/presentation/cubits/permissions/permissions_cubit.dart';
+import 'package:retip/app/presentation/pages/player/player_page.dart';
+import 'package:retip/app/presentation/pages/player/player_widget.dart';
 
 import '../../app/presentation/pages/pages.dart';
 import '../../app/presentation/widgets/widgets.dart';
@@ -40,47 +42,6 @@ class RetipRouter extends GoRouter {
                 },
               ),
               GoRoute(
-                path: RetipRoute.profile.location,
-                name: RetipRoute.profile.name,
-                builder: (context, state) {
-                  return ProfilePage();
-                },
-                routes: [
-                  GoRoute(
-                    path: RetipRoute.appinfo.location,
-                    name: RetipRoute.appinfo.name,
-                    builder: (context, state) {
-                      return AppInfoPage();
-                    },
-                  ),
-                  GoRoute(
-                    path: RetipRoute.settings.location,
-                    name: RetipRoute.settings.name,
-                    builder: (context, state) {
-                      final devCubit = context.read<DevCubit>();
-                      return SettingsPage(devCubit: devCubit);
-                    },
-                    routes: [
-                      GoRoute(
-                        path: RetipRoute.dev.location,
-                        name: RetipRoute.dev.name,
-                        builder: (context, state) {
-                          final devCubit = context.read<DevCubit>();
-                          return DevPage(devCubit: devCubit);
-                        },
-                      ),
-                      GoRoute(
-                        path: RetipRoute.logger.location,
-                        name: RetipRoute.logger.name,
-                        builder: (context, state) {
-                          return LoggerPage();
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              GoRoute(
                 path: RetipRoute.permissions.location,
                 name: RetipRoute.permissions.name,
                 builder: (context, state) {
@@ -92,7 +53,10 @@ class RetipRouter extends GoRouter {
                 builder: (context, state, child) {
                   return Scaffold(
                     body: child,
-                    bottomNavigationBar: BottomNavigationWidget(),
+                    bottomNavigationBar: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [PlayerWidget(), BottomNavigationWidget()],
+                    ),
                   );
                 },
                 routes: [
@@ -131,6 +95,54 @@ class RetipRouter extends GoRouter {
                         builder: (context, state) {
                           final id = state.pathParameters['id'] as String;
                           return ArtistPage(int.parse(id));
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: RetipRoute.player.location,
+                name: RetipRoute.player.name,
+                builder: (context, state) {
+                  return PlayerPage();
+                },
+              ),
+              GoRoute(
+                path: RetipRoute.profile.location,
+                name: RetipRoute.profile.name,
+                builder: (context, state) {
+                  return ProfilePage();
+                },
+                routes: [
+                  GoRoute(
+                    path: RetipRoute.appinfo.location,
+                    name: RetipRoute.appinfo.name,
+                    builder: (context, state) {
+                      return AppInfoPage();
+                    },
+                  ),
+                  GoRoute(
+                    path: RetipRoute.settings.location,
+                    name: RetipRoute.settings.name,
+                    builder: (context, state) {
+                      final devCubit = context.read<DevCubit>();
+                      return SettingsPage(devCubit: devCubit);
+                    },
+                    routes: [
+                      GoRoute(
+                        path: RetipRoute.dev.location,
+                        name: RetipRoute.dev.name,
+                        builder: (context, state) {
+                          final devCubit = context.read<DevCubit>();
+                          return DevPage(devCubit: devCubit);
+                        },
+                      ),
+                      GoRoute(
+                        path: RetipRoute.logger.location,
+                        name: RetipRoute.logger.name,
+                        builder: (context, state) {
+                          return LoggerPage();
                         },
                       ),
                     ],
